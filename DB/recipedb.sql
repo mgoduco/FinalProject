@@ -298,6 +298,27 @@ COMMIT;
 
 
 -- -----------------------------------------------------
+-- Data for table `comment`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `recipedb`;
+INSERT INTO `comment` (`id`, `title`, `comment`, `created`, `updated`, `user_id`, `recipe_id`, `active`, `in_reply_to`) VALUES (1, 'Mmmm....Delicious!', 'This is the best PB&J I have ever tasted!', '2022-06-22', NULL, 2, 1, 1, NULL);
+INSERT INTO `comment` (`id`, `title`, `comment`, `created`, `updated`, `user_id`, `recipe_id`, `active`, `in_reply_to`) VALUES (2, 'Get out of my kitchen.', 'I like cardboard white bread. If it ain\'t broke, don\'t fix it.', '2022-06-22', NULL, 1, 1, 1, 1);
+
+COMMIT;
+
+
+-- -----------------------------------------------------
+-- Data for table `favorite`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `recipedb`;
+INSERT INTO `favorite` (`user_id`, `recipe_id`) VALUES (2, 1);
+
+COMMIT;
+
+
+-- -----------------------------------------------------
 -- Data for table `made_this`
 -- -----------------------------------------------------
 START TRANSACTION;
@@ -319,6 +340,21 @@ INSERT INTO `keyword` (`id`, `name`, `description`, `image_url`) VALUES (3, 'jel
 INSERT INTO `keyword` (`id`, `name`, `description`, `image_url`) VALUES (4, 'bread', 'Bread', NULL);
 INSERT INTO `keyword` (`id`, `name`, `description`, `image_url`) VALUES (5, 'fried', 'Fried', NULL);
 INSERT INTO `keyword` (`id`, `name`, `description`, `image_url`) VALUES (6, 'frying', 'Frying', NULL);
+
+COMMIT;
+
+
+-- -----------------------------------------------------
+-- Data for table `tag`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `recipedb`;
+INSERT INTO `tag` (`recipe_id`, `keyword_id`) VALUES (1, 1);
+INSERT INTO `tag` (`recipe_id`, `keyword_id`) VALUES (1, 2);
+INSERT INTO `tag` (`recipe_id`, `keyword_id`) VALUES (1, 3);
+INSERT INTO `tag` (`recipe_id`, `keyword_id`) VALUES (1, 4);
+INSERT INTO `tag` (`recipe_id`, `keyword_id`) VALUES (1, 5);
+INSERT INTO `tag` (`recipe_id`, `keyword_id`) VALUES (1, 6);
 
 COMMIT;
 
