@@ -40,7 +40,7 @@ public class Ingredient {
 	@OneToMany(mappedBy = "ingredient")
 	@JsonIgnore
 	private List<RecipeIngredient> recipeIngredients;
-	
+
 	public Ingredient() {
 		super();
 	}
@@ -49,13 +49,14 @@ public class Ingredient {
 	public void addRecipeIngredient(RecipeIngredient recipeIngredient) {
 		if (recipeIngredients == null) {
 			recipeIngredients = new ArrayList<>();
-			
+
 		}
 		if (!recipeIngredients.contains(recipeIngredient)) {
 			recipeIngredients.add(recipeIngredient);
 			recipeIngredient.setIngredient(this);
 		}
 	}
+
 	public void removeRecipeIngredient(RecipeIngredient recipeIngredient) {
 		if (recipeIngredients != null && recipeIngredients.contains(recipeIngredient)) {
 			recipeIngredients.remove(recipeIngredient);
@@ -63,9 +64,17 @@ public class Ingredient {
 		}
 	}
 //	===========================================
-	
+
 	public int getId() {
 		return id;
+	}
+
+	public List<RecipeIngredient> getRecipeIngredients() {
+		return recipeIngredients;
+	}
+
+	public void setRecipeIngredients(List<RecipeIngredient> recipeIngredients) {
+		this.recipeIngredients = recipeIngredients;
 	}
 
 	public void setId(int id) {

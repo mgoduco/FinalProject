@@ -71,8 +71,7 @@ public class User {
 	@OneToMany(mappedBy = "user")
 	@JsonIgnore
 	private List<Comment> comments;
-	
-	
+
 	public User() {
 		super();
 	}
@@ -88,40 +87,43 @@ public class User {
 			madeThis.setUser(this);
 		}
 	}
+
 	public void removeMadeThis(MadeThis madeThis) {
 		if (madeThisList != null && madeThisList.contains(madeThis)) {
 			madeThisList.remove(madeThis);
 			madeThis.setUser(null);
 		}
 	}
-	
+
 	public void addRecipe(Recipe recipe) {
 		if (recipes == null) {
 			recipes = new ArrayList<>();
-			
+
 		}
 		if (!recipes.contains(recipe)) {
 			recipes.add(recipe);
 			recipe.setUser(this);
 		}
 	}
+
 	public void removeRecipe(Recipe recipe) {
 		if (recipes != null && recipes.contains(recipe)) {
 			recipes.remove(recipe);
 			recipe.setUser(null);
 		}
 	}
-	
+
 	public void addComment(Comment comment) {
 		if (comments == null) {
 			comments = new ArrayList<>();
-			
+
 		}
 		if (!comments.contains(comment)) {
 			comments.add(comment);
 			comment.setUser(this);
 		}
 	}
+
 	public void removeComment(Comment comment) {
 		if (comments != null && comments.contains(comment)) {
 			comments.remove(comment);
@@ -132,6 +134,22 @@ public class User {
 
 	public int getId() {
 		return id;
+	}
+
+	public List<Recipe> getRecipes() {
+		return recipes;
+	}
+
+	public void setRecipes(List<Recipe> recipes) {
+		this.recipes = recipes;
+	}
+
+	public List<Comment> getComments() {
+		return comments;
+	}
+
+	public void setComments(List<Comment> comments) {
+		this.comments = comments;
 	}
 
 	public List<MadeThis> getMadeThisList() {

@@ -45,6 +45,7 @@ class CommentTest {
 	@DisplayName("Testing basic mappings")
 	void test1() {
 		assertNull(comment);
+//		assertEquals(comment);
 	}
 
 }

@@ -152,6 +152,30 @@ public class Recipe {
 		return user;
 	}
 
+	public List<Comment> getComments() {
+		return comments;
+	}
+	public void setComments(List<Comment> comments) {
+		this.comments = comments;
+	}
+	public List<RecipePhoto> getPhotos() {
+		return photos;
+	}
+	public void setPhotos(List<RecipePhoto> photos) {
+		this.photos = photos;
+	}
+	public List<MadeThis> getMadeThisList() {
+		return madeThisList;
+	}
+	public void setMadeThisList(List<MadeThis> madeThisList) {
+		this.madeThisList = madeThisList;
+	}
+	public List<RecipeIngredient> getRecipeIngredients() {
+		return recipeIngredients;
+	}
+	public void setRecipeIngredients(List<RecipeIngredient> recipeIngredients) {
+		this.recipeIngredients = recipeIngredients;
+	}
 	public void setUser(User user) {
 		this.user = user;
 	}
