@@ -1,6 +1,7 @@
 package com.skilldistillery.refresh.entities;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Objects;
 
 import javax.persistence.Entity;
@@ -9,9 +10,12 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Comment {
@@ -39,6 +43,14 @@ public class Comment {
 	@ManyToOne
 	@JoinColumn(name = "recipe_id")
 	private Recipe recipe;
+	
+	@ManyToOne
+	@JoinColumn(name = "in_reply_to")
+	private Comment inReplyTo;
+	
+	@JsonIgnore
+	@OneToMany(mappedBy = "inReplyTo")
+	private List<Comment> replies;
 
 	public Comment() {
 		super();

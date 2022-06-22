@@ -63,16 +63,16 @@ public class Recipe {
 	@OneToMany(mappedBy = "recipe")
 	private List<RecipePhoto> photos;
 
+//	@Cascade(CascadeType.PERSIST)
+//	@LazyCollection(LazyCollectionOption.FALSE)
 	@OneToMany(mappedBy = "recipe")
-	@Cascade(CascadeType.PERSIST)
 	@JsonIgnore
-	@LazyCollection(LazyCollectionOption.FALSE)
 	private List<MadeThis> madeThisList;
 
+//	@Cascade(CascadeType.PERSIST)
+//	@LazyCollection(LazyCollectionOption.FALSE)
 	@OneToMany(mappedBy = "recipe")
-	@Cascade(CascadeType.PERSIST)
 	@JsonIgnore
-	@LazyCollection(LazyCollectionOption.FALSE)
 	private List<RecipeIngredient> recipeIngredients;
 	
 	public Recipe() {

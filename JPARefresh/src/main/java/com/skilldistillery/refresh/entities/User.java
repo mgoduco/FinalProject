@@ -53,22 +53,23 @@ public class User {
 
 	private String biography;
 
+//	@Cascade(CascadeType.PERSIST)
+//	@LazyCollection(LazyCollectionOption.FALSE)
+//	@JsonIgnoreProperties({"user"})
 	@OneToMany(mappedBy = "user")
-	@Cascade(CascadeType.PERSIST)
 	@JsonIgnore
-	@LazyCollection(LazyCollectionOption.FALSE)
 	private List<MadeThis> madeThisList;
 
-	@OneToMany(mappedBy = "user")
 //	@Cascade(CascadeType.PERSIST)
+//	@LazyCollection(LazyCollectionOption.FALSE)
+	@OneToMany(mappedBy = "user")
 	@JsonIgnore
-	@LazyCollection(LazyCollectionOption.FALSE)
 	private List<Recipe> recipes;
 
-	@OneToMany(mappedBy = "user")
 //	@Cascade(CascadeType.PERSIST)
+//	@LazyCollection(LazyCollectionOption.FALSE)
+	@OneToMany(mappedBy = "user")
 	@JsonIgnore
-	@LazyCollection(LazyCollectionOption.FALSE)
 	private List<Comment> comments;
 	
 	

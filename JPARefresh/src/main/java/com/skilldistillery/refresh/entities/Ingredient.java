@@ -35,10 +35,10 @@ public class Ingredient {
 	@Column(name = "kcals_per_serving")
 	private Integer kcals;
 
+//	@Cascade(CascadeType.PERSIST)
+//	@LazyCollection(LazyCollectionOption.FALSE)
 	@OneToMany(mappedBy = "ingredient")
-	@Cascade(CascadeType.PERSIST)
 	@JsonIgnore
-	@LazyCollection(LazyCollectionOption.FALSE)
 	private List<RecipeIngredient> recipeIngredients;
 	
 	public Ingredient() {
