@@ -1,5 +1,7 @@
 package com.skilldistillery.refresh.services;
 
-public interface UserService {
+import com.skilldistillery.refresh.entities.User;
 
+public interface UserService {
+	User getUserById(int userId);
 }
