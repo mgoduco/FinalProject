@@ -11,7 +11,7 @@ public interface RecipeRepository extends JpaRepository<Recipe, Integer> {
 
 	List<Recipe> findByUser_Username(String username);
 
-	Recipe findByIdAndUser_Username(String username, int recipeId);
+	Recipe findByIdAndUser_Username(int recipeId, String username);
 
 	Recipe findByid(int id);
 

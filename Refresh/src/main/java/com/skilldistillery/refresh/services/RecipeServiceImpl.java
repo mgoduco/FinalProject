@@ -31,7 +31,7 @@ public class RecipeServiceImpl implements RecipeService {
 
 	@Override
 	public Recipe show(String username, int recipeId) {
-		return recipeRepo.findByIdAndUser_Username(username, recipeId);
+		return recipeRepo.findByIdAndUser_Username(recipeId, username);
 	}
 
 	@Override
@@ -46,7 +46,7 @@ public class RecipeServiceImpl implements RecipeService {
 
 	@Override
 	public Recipe update(String username, Recipe recipe, int recipeId) {
-		Recipe existing = recipeRepo.findByIdAndUser_Username(username, recipeId);
+		Recipe existing = recipeRepo.findByIdAndUser_Username(recipeId, username);
 		if (existing != null) {
 			existing.setName(recipe.getName());
 			existing.setDescription(recipe.getDescription());
@@ -67,7 +67,7 @@ public class RecipeServiceImpl implements RecipeService {
 	@Override
 	public boolean delete(String username, int recipeId) {
 		boolean deleted = false;
-		Recipe existing = recipeRepo.findByIdAndUser_Username(username, recipeId);
+		Recipe existing = recipeRepo.findByIdAndUser_Username(recipeId, username);
 		if (existing != null) {
 			recipeRepo.delete(existing);
 			deleted = true;

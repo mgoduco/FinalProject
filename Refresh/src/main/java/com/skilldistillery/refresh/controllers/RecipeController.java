@@ -38,7 +38,10 @@ public class RecipeController {
 	}
 
 	@GetMapping("recipe/{id}")
-	public Recipe show(HttpServletRequest req, HttpServletResponse res, @PathVariable int id, Principal principal) {
+	public Recipe show(HttpServletRequest req, HttpServletResponse res, Principal principal, @PathVariable int id) {
+		System.out.println("=======================================================");
+		System.out.println(principal.getName());
+		System.out.println("=======================================================");
 		Recipe recipe = recipeService.show(principal.getName(), id);
 		if (recipe == null) {
 			res.setStatus(404);
