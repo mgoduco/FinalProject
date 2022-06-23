@@ -46,5 +46,12 @@ class RecipePhotoTest {
 		assertNotNull(recipePhoto);
 		assertEquals("https://www.thespruceeats.com/thmb/SVQ74a8W5PcgeZRsKN3sNozZJRw=/580x0/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/gourmet-peanut-butter-and-jelly-recipe-305473-step-01-5426378fe0a84f508e40081292fe5289.jpg", recipePhoto.getImageUrl());
 	}
+	@Test
+	@DisplayName("Testing recipe MTO mapping")
+	void test2() {
+		assertNotNull(recipePhoto.getRecipe());
+		assertEquals(1, recipePhoto.getRecipe().getId());
+		assertEquals("Gourmet Peanut Butter and Jelly", recipePhoto.getRecipe().getName());
+	}
 
 }

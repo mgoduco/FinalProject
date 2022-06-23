@@ -11,14 +11,12 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
-import org.hibernate.annotations.Cascade;
-import org.hibernate.annotations.CascadeType;
 import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.LazyCollection;
-import org.hibernate.annotations.LazyCollectionOption;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -54,11 +52,11 @@ public class Recipe {
 	@ManyToOne
 	@JoinColumn(name = "user_id")
 	private User user;
-	
+
 	@JsonIgnore
 	@OneToMany(mappedBy = "recipe")
 	private List<Comment> comments;
-	
+
 	@JsonIgnore
 	@OneToMany(mappedBy = "recipe")
 	private List<RecipePhoto> photos;
@@ -74,28 +72,78 @@ public class Recipe {
 	@OneToMany(mappedBy = "recipe")
 	@JsonIgnore
 	private List<RecipeIngredient> recipeIngredients;
-	
+
+	@ManyToMany
+	@JsonIgnore
+	@JoinTable(name = "favorite", joinColumns = @JoinColumn(name = "recipe_id"), inverseJoinColumns = @JoinColumn(name = "user_id"))
+	private List<User> userFavorites;
+
+	@ManyToMany
+	@JsonIgnore
+	@JoinTable(name = "tag", joinColumns = @JoinColumn(name = "recipe_id"), inverseJoinColumns = @JoinColumn(name = "keyword_id"))
+	private List<Keyword> keywords;
+
 	public Recipe() {
 		super();
 	}
+
 //	===========================================
+	//TODO might be messed up
+	public void addTaggedKeyword(Keyword keyword) {
+		if (keywords == null) {
+			keywords = new ArrayList<>();
+
+		}
+		if (!keywords.contains(keyword)) {
+			keywords.add(keyword);
+			keyword.addTaggedRecipe(this);
+		}
+	}
+
+	public void removeTaggedKeyword(Keyword keyword) {
+		if (keywords != null && keywords.contains(keyword)) {
+			keywords.remove(keyword);
+			keyword.removeTaggedRecipe(this);
+		}
+	}
+	
 	public void addRecipeIngredient(RecipeIngredient recipeIngredient) {
 		if (recipeIngredients == null) {
 			recipeIngredients = new ArrayList<>();
-			
+
 		}
 		if (!recipeIngredients.contains(recipeIngredient)) {
 			recipeIngredients.add(recipeIngredient);
 			recipeIngredient.setRecipe(this);
 		}
 	}
+
 	public void removeRecipeIngredient(RecipeIngredient recipeIngredient) {
 		if (recipeIngredients != null && recipeIngredients.contains(recipeIngredient)) {
 			recipeIngredients.remove(recipeIngredient);
-			recipeIngredient.setRecipe(null);
+			recipeIngredient.setRecipe(this);
 		}
 	}
-	
+
+	// TODO This may be broken
+	public void addFavoriteRecipe(User user) {
+		if (userFavorites == null) {
+			userFavorites = new ArrayList<>();
+
+		}
+		if (!userFavorites.contains(user)) {
+			userFavorites.add(user);
+			user.addFavoriteRecipe(this);
+		}
+	}
+
+	public void removeFavoriteRecipe(User user) {
+		if (userFavorites != null && userFavorites.contains(user)) {
+			userFavorites.remove(user);
+			user.removeFavoriteRecipe(this);
+		}
+	}
+
 	public void addMadeThis(MadeThis madeThis) {
 		if (madeThisList == null) {
 			madeThisList = new ArrayList<>();
@@ -106,50 +154,101 @@ public class Recipe {
 			madeThis.setRecipe(this);
 		}
 	}
+
 	public void removeMadeThis(MadeThis madeThis) {
 		if (madeThisList != null && madeThisList.contains(madeThis)) {
 			madeThisList.remove(madeThis);
-			madeThis.setRecipe(null);
+			madeThis.setRecipe(this);
 		}
 	}
-	
+
 	public void addPhoto(RecipePhoto recipePhoto) {
 		if (photos == null) {
 			photos = new ArrayList<>();
-			
+
 		}
 		if (!photos.contains(recipePhoto)) {
 			photos.add(recipePhoto);
 			recipePhoto.setRecipe(this);
 		}
 	}
+
 	public void removePhoto(RecipePhoto recipePhoto) {
 		if (photos != null && photos.contains(recipePhoto)) {
 			photos.remove(recipePhoto);
-			recipePhoto.setRecipe(null);
+			recipePhoto.setRecipe(this);
 		}
 	}
-	
+
 	public void addComment(Comment comment) {
 		if (comments == null) {
 			comments = new ArrayList<>();
-			
+
 		}
 		if (!comments.contains(comment)) {
 			comments.add(comment);
 			comment.setRecipe(this);
 		}
 	}
+
 	public void removeComment(Comment comment) {
 		if (comments != null && comments.contains(comment)) {
 			comments.remove(comment);
-			comment.setRecipe(null);
+			comment.setRecipe(this);
 		}
 	}
 //	===========================================	
-	
+
 	public User getUser() {
 		return user;
+	}
+
+	public List<User> getUserFavorites() {
+		return userFavorites;
+	}
+
+	public void setUserFavorites(List<User> userFavorites) {
+		this.userFavorites = userFavorites;
+	}
+
+	public List<Keyword> getKeywords() {
+		return keywords;
+	}
+
+	public void setKeywords(List<Keyword> keywords) {
+		this.keywords = keywords;
+	}
+
+	public List<Comment> getComments() {
+		return comments;
+	}
+
+	public void setComments(List<Comment> comments) {
+		this.comments = comments;
+	}
+
+	public List<RecipePhoto> getPhotos() {
+		return photos;
+	}
+
+	public void setPhotos(List<RecipePhoto> photos) {
+		this.photos = photos;
+	}
+
+	public List<MadeThis> getMadeThisList() {
+		return madeThisList;
+	}
+
+	public void setMadeThisList(List<MadeThis> madeThisList) {
+		this.madeThisList = madeThisList;
+	}
+
+	public List<RecipeIngredient> getRecipeIngredients() {
+		return recipeIngredients;
+	}
+
+	public void setRecipeIngredients(List<RecipeIngredient> recipeIngredients) {
+		this.recipeIngredients = recipeIngredients;
 	}
 
 	public void setUser(User user) {

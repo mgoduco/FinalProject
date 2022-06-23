@@ -16,7 +16,8 @@ import org.junit.jupiter.api.Test;
 class RecipeIngredientTest {
 	private static EntityManagerFactory emf;
 	private EntityManager em;
-	private RecipeIngredient recipeIngredient;
+	private Recipe recipe;
+	private Ingredient ingredient;
 
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception {
@@ -31,19 +32,34 @@ class RecipeIngredientTest {
 	@BeforeEach
 	void setUp() throws Exception {
 		em = emf.createEntityManager();
-		recipeIngredient = em.find(RecipeIngredient.class, 1);
+		recipe = em.find(Recipe.class, 1);
+		ingredient = em.find(Ingredient.class, 1);
 	}
 
 	@AfterEach
 	void tearDown() throws Exception {
 		em.close();
-		recipeIngredient = null;
+		recipe = null;
+		ingredient = null;
 	}
 
 	@Test
 	@DisplayName("Testing basic mapping")
 	void test1() {
-		assertNull(recipeIngredient);
+		assertNotNull(recipe);
+		assertEquals("Peanut Butter", recipe.getRecipeIngredients().get(0).getIngredient().getName());
+	}
+	@Test
+	@DisplayName("Testing recipe MTO mapping")
+	void test2() {
+		assertNotNull(recipe);
+		assertEquals("Peanut Butter", recipe.getRecipeIngredients().get(0).getIngredient().getName());
+	}
+	@Test
+	@DisplayName("Testing ingredient MTO mapping")
+	void test3() {
+		assertNotNull(ingredient);
+		assertEquals("Peanut Butter", ingredient.getRecipeIngredients().get(0).getIngredient().getName());
 	}
 
 }

@@ -39,21 +39,37 @@ public class Comment {
 	@ManyToOne
 	@JoinColumn(name = "user_id")
 	private User user;
-	
+
 	@ManyToOne
 	@JoinColumn(name = "recipe_id")
 	private Recipe recipe;
-	
+
 	@ManyToOne
 	@JoinColumn(name = "in_reply_to")
 	private Comment inReplyTo;
-	
+
 	@JsonIgnore
 	@OneToMany(mappedBy = "inReplyTo")
 	private List<Comment> replies;
 
 	public Comment() {
 		super();
+	}
+
+	public Comment getInReplyTo() {
+		return inReplyTo;
+	}
+
+	public void setInReplyTo(Comment inReplyTo) {
+		this.inReplyTo = inReplyTo;
+	}
+
+	public List<Comment> getReplies() {
+		return replies;
+	}
+
+	public void setReplies(List<Comment> replies) {
+		this.replies = replies;
 	}
 
 	public Recipe getRecipe() {

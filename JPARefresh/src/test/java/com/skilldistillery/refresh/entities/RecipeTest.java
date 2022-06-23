@@ -47,5 +47,41 @@ class RecipeTest {
 		assertNotNull(recipe);
 		assertEquals("Gourmet Peanut Butter and Jelly", recipe.getName());
 	}
+	@Test
+	@DisplayName("Testing user MTO mapping")
+	void test2() {
+		assertNotNull(recipe.getUser());
+		assertEquals("amateur", recipe.getUser().getUsername());
+	}
+	@Test
+	@DisplayName("Testing comment OTM mapping")
+	void test3() {
+		assertNotNull(recipe);
+		assertTrue(recipe.getComments().size() > 0);
+	}
+	@Test
+	@DisplayName("Testing recipe photo OTM mapping")
+	void test4() {
+		assertNotNull(recipe);
+		assertTrue(recipe.getPhotos().size() > 0);
+	}
+	@Test
+	@DisplayName("Testing madethis OTM mapping")
+	void test5() {
+		assertNotNull(recipe);
+		assertTrue(recipe.getMadeThisList().size() > 0);
+	}
+	@Test
+	@DisplayName("Testing ingredients OTM mapping")
+	void test6() {
+		assertNotNull(recipe);
+		assertEquals("Peanut Butter", recipe.getRecipeIngredients().get(0).getIngredient().getName());
+	}
+	@Test
+	@DisplayName("Testing favorite MTM mapping")
+	void test7() {
+		assertNotNull(recipe);
+		assertEquals("Gourmet Peanut Butter and Jelly", recipe.getUserFavorites().get(0).getFavoriteRecipes().get(0).getName());
+	}
 
 }

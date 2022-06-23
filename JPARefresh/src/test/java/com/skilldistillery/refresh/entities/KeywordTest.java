@@ -47,5 +47,11 @@ class KeywordTest {
 		assertNotNull(keyword);
 		assertEquals("pbnj", keyword.getName());
 	}
+	@Test
+	@DisplayName("Testing tag MTM mapping")
+	void test2() {
+		assertNotNull(keyword);
+		assertTrue(keyword.getTaggedRecipes().size() > 0);
+	}
 
 }

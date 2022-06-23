@@ -44,7 +44,35 @@ class CommentTest {
 	@Test
 	@DisplayName("Testing basic mappings")
 	void test1() {
-		assertNull(comment);
+		assertNotNull(comment);
+		assertEquals("Mmmm....Delicious!" ,comment.getTitle());
+		assertEquals("This is the best PB&J I have ever tasted!" ,comment.getComment());
+	}
+	@Test
+	@DisplayName("Testing user mappings")
+	void test2() {
+		assertNotNull(comment.getUser());
+		assertEquals("amateur" ,comment.getUser().getUsername());
+	}
+	@Test
+	@DisplayName("Testing recipe mappings")
+	void test3() {
+		assertNotNull(comment.getRecipe());
+		assertEquals("Gourmet Peanut Butter and Jelly" ,comment.getRecipe().getName());
+	}
+	
+	//TODO COME BACK TO REPLY!!!!!!!!!!
+	@Test
+	@DisplayName("Testing reply mappings")
+	void test4() {
+//		assertNotNull(comment.getInReplyTo());
+//		assertEquals("Mmmm....Delicious!" ,comment.getInReplyTo().getTitle());
+	}
+	@Test
+	@DisplayName("Testing reply mappings")
+	void test5() {
+//		assertNotNull(comment.getInReplyTo());
+//		assertTrue(comment.getReplies().size() > 0);
 	}
 
 }
