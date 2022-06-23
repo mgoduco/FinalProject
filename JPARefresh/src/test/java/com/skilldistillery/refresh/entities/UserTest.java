@@ -61,7 +61,7 @@ class UserTest {
 	void test3() {
 		assertNotNull(user.getRecipes());
 		//TODO ADD TO DB 
-		assertFalse(user.getRecipes().size() > 0);
+		assertTrue(user.getRecipes().size() > 0);
 	}
 	@Test
 	@DisplayName("Testing favorites MTM Mapping")

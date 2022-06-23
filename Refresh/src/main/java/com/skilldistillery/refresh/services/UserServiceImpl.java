@@ -10,7 +10,7 @@ import com.skilldistillery.refresh.repositories.UserRepository;
 
 @Service
 public class UserServiceImpl implements UserService {
-	
+
 	@Autowired
 	private UserRepository userRepo;
 
@@ -20,6 +20,16 @@ public class UserServiceImpl implements UserService {
 		User user = null;
 		if (userOpt.isPresent()) {
 			user = userOpt.get();
+		}
+		return user;
+	}
+
+	@Override
+	public User getUserByUsername(String username) {
+		User userOpt = userRepo.findByUsername(username);
+		User user = null;
+		if (userOpt != null) {
+			user = userOpt;
 		}
 		return user;
 	}

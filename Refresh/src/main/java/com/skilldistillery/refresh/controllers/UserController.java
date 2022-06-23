@@ -1,5 +1,7 @@
 package com.skilldistillery.refresh.controllers;
 
+import java.security.Principal;
+
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,16 +23,37 @@ public class UserController {
 	  private UserService userService;
 	
 	// SMOKE TEST ONLY, DELETE/COMMENT OUT LATER
-	@GetMapping("test/users/{userId}")
-	public User getUserForTest(
-	  @PathVariable Integer userId,
-	  HttpServletResponse res
-	) {
-	  User user = userService.getUserById(userId);
-	  if (user == null) {
-	    res.setStatus(404);
-	  }
-	  return user;
+//	@GetMapping("test/users/{userId}")
+//	public User getUserForTest(
+//	  @PathVariable Integer userId,
+//	  HttpServletResponse res
+//	) {
+//	  User user = userService.getUserById(userId);
+//	  if (user == null) {
+//	    res.setStatus(404);
+//	  }
+//	  return user;
+//	}
+	
+	@GetMapping("u/{id}")
+	public User getUserById(@PathVariable int id, HttpServletResponse res, Principal principal) {
+		User user = userService.getUserById(id);
+		if(user == null) {
+			res.setStatus(404);
+		}
+		return user;
 	}
+	
+	@GetMapping("u/{id}")
+	public User getUserByUsername(@PathVariable int id, HttpServletResponse res, Principal principal) {
+		User user = userService.getUserById(id);
+		if(user == null) {
+			res.setStatus(404);
+		}
+		return user;
+	}
+	
+	
+	
 	
 }

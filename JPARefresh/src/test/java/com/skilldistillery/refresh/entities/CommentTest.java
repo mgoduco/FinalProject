@@ -65,14 +65,15 @@ class CommentTest {
 	@Test
 	@DisplayName("Testing reply mappings")
 	void test4() {
-//		assertNotNull(comment.getInReplyTo());
-//		assertEquals("Mmmm....Delicious!" ,comment.getInReplyTo().getTitle());
+		comment = em.find(Comment.class, 2);
+		assertNotNull(comment.getInReplyTo());
+		assertEquals("Mmmm....Delicious!", comment.getInReplyTo().getTitle());
 	}
 	@Test
 	@DisplayName("Testing reply mappings")
 	void test5() {
-//		assertNotNull(comment.getInReplyTo());
-//		assertTrue(comment.getReplies().size() > 0);
+		assertNotNull(comment.getReplies());
+		assertTrue(comment.getReplies().size() > 0);
 	}
 
 }
