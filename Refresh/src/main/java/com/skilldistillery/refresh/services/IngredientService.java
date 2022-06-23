@@ -16,7 +16,7 @@ public interface IngredientService {
 
 	public Ingredient updateIngredient(String username, int ingredientId, Ingredient ingredient);
 
-	public boolean hideIngredient(String username, int ingredientId);
+	public boolean deleteIngredient(String username, int ingredientId);
 
 
 	
