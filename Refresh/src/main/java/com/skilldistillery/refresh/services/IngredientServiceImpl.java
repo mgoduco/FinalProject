@@ -46,13 +46,9 @@ public class IngredientServiceImpl implements IngredientService {
 
 	@Override
 	public Ingredient createIngredient(String name, Ingredient ingredient) {
-//		// TODO Auto-generated method stub
-//		Recipe recipe = recipeRepo.findByName(name);
-//		if (user != null) {
-//			todo.setUser(user);
-//			return todoRepo.saveAndFlush(todo);
-//		}
-//		return null;
+		if (ingredientRepo.findByName(ingredient.getName()) != null) {
+			
+		}
 		return null;
 	}
 
@@ -65,45 +61,32 @@ public class IngredientServiceImpl implements IngredientService {
 //		}
 //		return null;
 //	}
-	
+
 	@Override
 	public Ingredient updateIngredient(String username, int ingredientId, Ingredient ingredient) {
-		// TODO Auto-generated method stub
+		Ingredient existing = ingredientRepo.findIngredientById(ingredientId);
+		if (existing != null) {
+			existing.setName(ingredient.getName());
+			existing.setDescription(ingredient.getDescription());
+			existing.setImageUrl(ingredient.getImageUrl());
+			existing.setKcals(ingredient.getKcals());
+			ingredientRepo.saveAndFlush(existing);
+			return existing;
+		}
 		return null;
 	}
 
-//	@Override
-//	public Todo update(String username, int tid, Todo todo) {
-//		Todo existing = todoRepo.findByIdAndUser_Username(tid, username);
-//		if (existing != null) {
-//			existing.setCompleted(todo.isCompleted());
-//			existing.setCompleteDate(todo.getCompleteDate());
-//			existing.setDescription(todo.getDescription());
-//			existing.setDueDate(todo.getDueDate());
-//			existing.setTask(todo.getTask());
-//			todoRepo.saveAndFlush(existing);
-//			return existing;
-//		}
-//		return null;
-//	}
-//	
+	// TODO: THIS METHOD MAY REQUIRE THAT THE INGREDIENT BE SET TO 'ACTIVE = 0'
+	// INSTEAD OF DELETED
 	@Override
-	public boolean hideIngredient(String username, int ingredientId) {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean deleteIngredient(String username, int ingredientId) {
+		boolean deleted = false;
+		Ingredient toDelete = ingredientRepo.findIngredientById(ingredientId);
+		if (toDelete != null) {
+			ingredientRepo.delete(toDelete);
+			deleted = true;
+		}
+		return deleted;
 	}
-
-//	@Override
-//	public boolean destroy(String username, int tid) {
-//		boolean deleted = false;
-//		Todo toDelete = todoRepo.findByIdAndUser_Username(tid, username);
-//		if (toDelete != null) {
-//			todoRepo.delete(toDelete);
-//			deleted = true;
-//		}
-//		return deleted;
-//	}
-
-	
 
 }
