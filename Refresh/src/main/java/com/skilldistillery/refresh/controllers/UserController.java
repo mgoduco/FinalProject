@@ -44,15 +44,15 @@ public class UserController {
 		return user;
 	}
 	
-	@GetMapping("u/{id}")
-	public User getUserByUsername(@PathVariable int id, HttpServletResponse res, Principal principal) {
-		User user = userService.getUserById(id);
-		if(user == null) {
-			res.setStatus(404);
-		}
-		return user;
-	}
-	
+//	@GetMapping("u/{id}")
+//	public User getUserByUsername(@PathVariable int id, HttpServletResponse res, Principal principal) {
+//		User user = userService.getUserById(id);
+//		if(user == null) {
+//			res.setStatus(404);
+//		}
+//		return user;
+//	}
+//	
 	
 	
 	

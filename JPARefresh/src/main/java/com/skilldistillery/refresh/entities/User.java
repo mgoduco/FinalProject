@@ -46,9 +46,9 @@ public class User {
 	@Column(name = "image_url")
 	private String imageUrl;
 
-	private String firstName;
+	private String firstname;
 
-	private String lastName;
+	private String lastname;
 
 	private String biography;
 
@@ -260,19 +260,19 @@ public class User {
 	}
 
 	public String getFirstName() {
-		return firstName;
+		return firstname;
 	}
 
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
+	public void setFirstName(String firstname) {
+		this.firstname = firstname;
 	}
 
 	public String getLastName() {
-		return lastName;
+		return lastname;
 	}
 
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
+	public void setLastName(String lastname) {
+		this.lastname = lastname;
 	}
 
 	public String getBiography() {
@@ -304,7 +304,7 @@ public class User {
 	public String toString() {
 		return "User [id=" + id + ", username=" + username + ", password=" + password + ", email=" + email + ", role="
 				+ role + ", enabled=" + enabled + ", created=" + created + ", updated=" + updated + ", imageUrl="
-				+ imageUrl + ", firstName=" + firstName + ", lastName=" + lastName + ", biography=" + biography + "]";
+				+ imageUrl + ", firstname=" + firstname + ", lastname=" + lastname + ", biography=" + biography + "]";
 	}
 
 }
