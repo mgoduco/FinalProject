@@ -271,8 +271,8 @@ SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `recipedb`;
-INSERT INTO `user` (`id`, `username`, `password`, `email`, `role`, `enabled`, `created`, `updated`, `image_url`, `firstname`, `lastname`, `biography`) VALUES (1, 'chef', 'ch3fch3fch3f', 'chef@example.com', 'ROLE_ADMIN', 1, '2022-06-22', NULL, NULL, 'Chef', 'Supreme', 'I make Gordon Ramsey look compassionate. Get out of my kitchen.');
-INSERT INTO `user` (`id`, `username`, `password`, `email`, `role`, `enabled`, `created`, `updated`, `image_url`, `firstname`, `lastname`, `biography`) VALUES (2, 'amateur', '@m@teur', 'amateur@example.com', 'ROLE_USER', 1, '2022-06-22', NULL, NULL, 'Amateur', 'Cook', 'I grew up smelling the amazing foods my grandmother used to make in the kitchen. Since then, I\'ve been seeking the best peanut butter and jelly recipe the world has to offer.');
+INSERT INTO `user` (`id`, `username`, `password`, `email`, `role`, `enabled`, `created`, `updated`, `image_url`, `firstname`, `lastname`, `biography`) VALUES (1, 'chef', 'Y2hlZjpjaDNmY2gzZmNoM2Y=', 'chef@example.com', 'ROLE_ADMIN', 1, '2022-06-22', NULL, NULL, 'Chef', 'Supreme', 'I make Gordon Ramsey look compassionate. Get out of my kitchen.');
+INSERT INTO `user` (`id`, `username`, `password`, `email`, `role`, `enabled`, `created`, `updated`, `image_url`, `firstname`, `lastname`, `biography`) VALUES (2, 'amateur', 'YW1hdGV1cjpAbUB0ZXVy', 'amateur@example.com', 'ROLE_USER', 1, '2022-06-22', NULL, NULL, 'Amateur', 'Cook', 'I grew up smelling the amazing foods my grandmother used to make in the kitchen. Since then, I\'ve been seeking the best peanut butter and jelly recipe the world has to offer.');
 INSERT INTO `user` (`id`, `username`, `password`, `email`, `role`, `enabled`, `created`, `updated`, `image_url`, `firstname`, `lastname`, `biography`) VALUES (3, 'TEMP', '$2a$10$nuZxWkvxgY797dKfJ0Kwle5Ukqw1BEDULB2NVv9DCbpez12zOKv3m', 'TEMP@example.com', 'ROLE_USER', 1, '2022-06-22', NULL, NULL, 'Tempus', 'Fugit', 'Time is fleeting, get to cooking.');
 
 COMMIT;
