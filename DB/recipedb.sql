@@ -153,6 +153,7 @@ CREATE TABLE IF NOT EXISTS `made_this` (
   `rating` INT NULL,
   `comment` VARCHAR(2000) NULL,
   `image_url` VARCHAR(200) NULL,
+  `active` TINYINT NULL,
   PRIMARY KEY (`user_id`, `recipe_id`),
   INDEX `fk_user_has_recipe_recipe2_idx` (`recipe_id` ASC),
   INDEX `fk_user_has_recipe_user2_idx` (`user_id` ASC),
@@ -335,9 +336,9 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `recipedb`;
-INSERT INTO `made_this` (`user_id`, `recipe_id`, `makedate`, `rating`, `comment`, `image_url`) VALUES (2, 1, '2022-03-14', 5, 'What a sandwich!', 'https://cdn.pixabay.com/photo/2021/01/26/16/54/food-5952237_960_720.jpg');
-INSERT INTO `made_this` (`user_id`, `recipe_id`, `makedate`, `rating`, `comment`, `image_url`) VALUES (1, 1, '2022-06-22', 1, 'Get out of my kitchen.', 'https://cdn.pixabay.com/photo/2021/01/26/16/54/food-5952237_960_720.jpg');
-INSERT INTO `made_this` (`user_id`, `recipe_id`, `makedate`, `rating`, `comment`, `image_url`) VALUES (1, 2, '2022-06-22', 5, 'The only time food tastes good is when it costs $1000 per plate.', 'https://www.eataly.com/wp/wp-content/uploads/2019/01/Untitled-design-11.jpg');
+INSERT INTO `made_this` (`user_id`, `recipe_id`, `makedate`, `rating`, `comment`, `image_url`, `active`) VALUES (2, 1, '2022-03-14', 5, 'What a sandwich!', 'https://cdn.pixabay.com/photo/2021/01/26/16/54/food-5952237_960_720.jpg', 1);
+INSERT INTO `made_this` (`user_id`, `recipe_id`, `makedate`, `rating`, `comment`, `image_url`, `active`) VALUES (1, 1, '2022-06-22', 1, 'Get out of my kitchen.', 'https://cdn.pixabay.com/photo/2021/01/26/16/54/food-5952237_960_720.jpg', 1);
+INSERT INTO `made_this` (`user_id`, `recipe_id`, `makedate`, `rating`, `comment`, `image_url`, `active`) VALUES (1, 2, '2022-06-22', 5, 'The only time food tastes good is when it costs $1000 per plate.', 'https://www.eataly.com/wp/wp-content/uploads/2019/01/Untitled-design-11.jpg', 0);
 
 COMMIT;
 
