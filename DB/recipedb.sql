@@ -44,7 +44,7 @@ ENGINE = InnoDB;
 DROP TABLE IF EXISTS `ingredient` ;
 
 CREATE TABLE IF NOT EXISTS `ingredient` (
-  `id` INT NOT NULL,
+  `id` INT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(45) NULL,
   `description` TEXT NULL,
   `image_url` VARCHAR(200) NULL,
@@ -59,7 +59,7 @@ ENGINE = InnoDB;
 DROP TABLE IF EXISTS `recipe` ;
 
 CREATE TABLE IF NOT EXISTS `recipe` (
-  `id` INT NOT NULL,
+  `id` INT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(100) NULL,
   `description` TEXT NULL,
   `directions` TEXT NULL,
@@ -86,7 +86,7 @@ ENGINE = InnoDB;
 DROP TABLE IF EXISTS `comment` ;
 
 CREATE TABLE IF NOT EXISTS `comment` (
-  `id` INT NOT NULL,
+  `id` INT NOT NULL AUTO_INCREMENT,
   `title` VARCHAR(100) NULL,
   `comment` TEXT NULL,
   `created` DATETIME NULL,
@@ -176,7 +176,7 @@ ENGINE = InnoDB;
 DROP TABLE IF EXISTS `keyword` ;
 
 CREATE TABLE IF NOT EXISTS `keyword` (
-  `id` INT NOT NULL,
+  `id` INT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(45) NULL,
   `description` VARCHAR(45) NULL,
   `image_url` VARCHAR(2000) NULL,

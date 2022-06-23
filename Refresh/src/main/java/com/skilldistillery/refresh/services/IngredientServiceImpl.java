@@ -44,10 +44,13 @@ public class IngredientServiceImpl implements IngredientService {
 		return ingredients;
 	}
 
+	// TODO: THIS METHOD WAS MODIFIED FROM THE TODO METHOD BELOW. IT IS SUPPOSED TO
+	// CREATE AN INGREDIENT IF ITS NAME DOES NOT ALREADY EXIST IN THE DB.
+	// ALSO, MIGHT NEED TO DEAL WITH CAPITALIZATION ISSUES TO PREVENT DUPLICATE ENTRIES
 	@Override
 	public Ingredient createIngredient(String name, Ingredient ingredient) {
-		if (ingredientRepo.findByName(ingredient.getName()) != null) {
-			
+		if (ingredientRepo.findByName(ingredient.getName()) == null) {
+			return ingredientRepo.saveAndFlush(ingredient);
 		}
 		return null;
 	}
