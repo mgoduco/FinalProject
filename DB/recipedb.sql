@@ -315,6 +315,7 @@ USE `recipedb`;
 INSERT INTO `comment` (`id`, `title`, `comment`, `created`, `updated`, `user_id`, `recipe_id`, `active`, `in_reply_to`) VALUES (1, 'Mmmm....Delicious!', 'This is the best PB&J I have ever tasted!', '2022-06-22', NULL, 2, 1, 1, NULL);
 INSERT INTO `comment` (`id`, `title`, `comment`, `created`, `updated`, `user_id`, `recipe_id`, `active`, `in_reply_to`) VALUES (2, 'Get out of my kitchen.', 'I like cardboard white bread. If it ain\'t broke, don\'t fix it.', '2022-06-22', NULL, 1, 1, 1, 1);
 INSERT INTO `comment` (`id`, `title`, `comment`, `created`, `updated`, `user_id`, `recipe_id`, `active`, `in_reply_to`) VALUES (3, 'Food quality rises with price.', 'The more expensive a meal, the better a meal tastes. My favorite dish includes these expensive and rare white truffles.', '2022-06-22', NULL, 1, 2, 1, NULL);
+INSERT INTO `comment` (`id`, `title`, `comment`, `created`, `updated`, `user_id`, `recipe_id`, `active`, `in_reply_to`) VALUES (4, 'Why must it be expensive?', 'Good food can be cheap food.', '2022-06-23', NULL, 2, 2, 1, 3);
 
 COMMIT;
 
