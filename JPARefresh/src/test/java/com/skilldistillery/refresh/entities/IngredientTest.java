@@ -47,5 +47,11 @@ class IngredientTest {
 		assertNotNull(ingredient);
 		assertEquals("Peanut Butter", ingredient.getName());
 	}
+	@Test
+	@DisplayName("Testing recipe ingredients mapping")
+	void test2() {
+		assertNotNull(ingredient);
+		assertTrue(ingredient.getRecipeIngredients().size() > 0);
+	}
 
 }

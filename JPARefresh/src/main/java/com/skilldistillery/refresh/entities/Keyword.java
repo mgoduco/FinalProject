@@ -1,5 +1,7 @@
 package com.skilldistillery.refresh.entities;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 import javax.persistence.Column;
@@ -7,6 +9,11 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Keyword {
@@ -22,8 +29,41 @@ public class Keyword {
 	@Column(name = "image_url")
 	private String imageUrl;
 
+	@ManyToMany
+	@JsonIgnore
+	@JoinTable(name = "tag", joinColumns = @JoinColumn(name = "keyword_id"), inverseJoinColumns = @JoinColumn(name = "recipe_id"))
+	private List<Recipe> taggedRecipes;
+
+//	================================================
+	public void addTaggedRecipe(Recipe recipe) {
+		if (taggedRecipes == null) {
+			taggedRecipes = new ArrayList<>();
+
+		}
+		if (!taggedRecipes.contains(recipe)) {
+			taggedRecipes.add(recipe);
+			recipe.addTaggedKeyword(this);
+		}
+	}
+
+	public void removeTaggedRecipe(Recipe recipe) {
+		if (taggedRecipes != null && taggedRecipes.contains(recipe)) {
+			taggedRecipes.remove(recipe);
+			recipe.removeTaggedKeyword(this);
+		}
+	}
+//	================================================
+
 	public Keyword() {
 		super();
+	}
+
+	public List<Recipe> getTaggedRecipes() {
+		return taggedRecipes;
+	}
+
+	public void setTaggedRecipes(List<Recipe> taggedRecipes) {
+		this.taggedRecipes = taggedRecipes;
 	}
 
 	public int getId() {

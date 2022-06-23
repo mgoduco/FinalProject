@@ -17,6 +17,7 @@ class RecipeIngredientTest {
 	private static EntityManagerFactory emf;
 	private EntityManager em;
 	private Recipe recipe;
+	private Ingredient ingredient;
 
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception {
@@ -32,12 +33,14 @@ class RecipeIngredientTest {
 	void setUp() throws Exception {
 		em = emf.createEntityManager();
 		recipe = em.find(Recipe.class, 1);
+		ingredient = em.find(Ingredient.class, 1);
 	}
 
 	@AfterEach
 	void tearDown() throws Exception {
 		em.close();
 		recipe = null;
+		ingredient = null;
 	}
 
 	@Test
@@ -45,6 +48,18 @@ class RecipeIngredientTest {
 	void test1() {
 		assertNotNull(recipe);
 		assertEquals("Peanut Butter", recipe.getRecipeIngredients().get(0).getIngredient().getName());
+	}
+	@Test
+	@DisplayName("Testing recipe MTO mapping")
+	void test2() {
+		assertNotNull(recipe);
+		assertEquals("Peanut Butter", recipe.getRecipeIngredients().get(0).getIngredient().getName());
+	}
+	@Test
+	@DisplayName("Testing ingredient MTO mapping")
+	void test3() {
+		assertNotNull(ingredient);
+		assertEquals("Peanut Butter", ingredient.getRecipeIngredients().get(0).getIngredient().getName());
 	}
 
 }

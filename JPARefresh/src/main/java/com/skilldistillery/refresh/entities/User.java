@@ -10,13 +10,12 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
-import org.hibernate.annotations.Cascade;
-import org.hibernate.annotations.CascadeType;
 import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.LazyCollection;
-import org.hibernate.annotations.LazyCollectionOption;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -66,6 +65,11 @@ public class User {
 	@JsonIgnore
 	private List<Recipe> recipes;
 
+	@ManyToMany
+	@JsonIgnore
+	@JoinTable(name = "favorite", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "recipe_id"))
+	private List<Recipe> favoriteRecipes;
+
 //	@Cascade(CascadeType.PERSIST)
 //	@LazyCollection(LazyCollectionOption.FALSE)
 	@OneToMany(mappedBy = "user")
@@ -77,6 +81,7 @@ public class User {
 	}
 
 // =============================================
+
 	public void addMadeThis(MadeThis madeThis) {
 		if (madeThisList == null) {
 			madeThisList = new ArrayList<>();
@@ -91,7 +96,7 @@ public class User {
 	public void removeMadeThis(MadeThis madeThis) {
 		if (madeThisList != null && madeThisList.contains(madeThis)) {
 			madeThisList.remove(madeThis);
-			madeThis.setUser(null);
+			madeThis.setUser(this);
 		}
 	}
 
@@ -109,7 +114,25 @@ public class User {
 	public void removeRecipe(Recipe recipe) {
 		if (recipes != null && recipes.contains(recipe)) {
 			recipes.remove(recipe);
-			recipe.setUser(null);
+			recipe.setUser(this);
+		}
+	}
+	// TODO CHECK ADDS AND REMOVES
+	public void addFavoriteRecipe(Recipe recipe) {
+		if (favoriteRecipes == null) {
+			favoriteRecipes = new ArrayList<>();
+
+		}
+		if (!favoriteRecipes.contains(recipe)) {
+			favoriteRecipes.add(recipe);
+			recipe.setUser(this);
+		}
+	}
+
+	public void removeFavoriteRecipe(Recipe recipe) {
+		if (favoriteRecipes != null && favoriteRecipes.contains(recipe)) {
+			favoriteRecipes.remove(recipe);
+			recipe.setUser(this);
 		}
 	}
 
@@ -127,13 +150,21 @@ public class User {
 	public void removeComment(Comment comment) {
 		if (comments != null && comments.contains(comment)) {
 			comments.remove(comment);
-			comment.setUser(null);
+			comment.setUser(this);
 		}
 	}
 // =============================================
 
 	public int getId() {
 		return id;
+	}
+
+	public List<Recipe> getFavoriteRecipes() {
+		return favoriteRecipes;
+	}
+
+	public void setFavoriteRecipes(List<Recipe> favoriteRecipes) {
+		this.favoriteRecipes = favoriteRecipes;
 	}
 
 	public List<Recipe> getRecipes() {
