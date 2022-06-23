@@ -1,6 +1,7 @@
 package com.skilldistillery.refresh.entities;
 
 import java.time.LocalDateTime;
+import java.util.Objects;
 
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
@@ -39,8 +40,18 @@ public class MadeThis {
 	@MapsId(value = "recipeId")
 	private Recipe recipe;
 
+	private boolean active;
+
 	public MadeThis() {
 		super();
+	}
+
+	public boolean isActive() {
+		return active;
+	}
+
+	public void setActive(boolean active) {
+		this.active = active;
 	}
 
 	public MadeThisId getId() {
@@ -100,10 +111,26 @@ public class MadeThis {
 	}
 
 	@Override
+	public int hashCode() {
+		return Objects.hash(id);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		MadeThis other = (MadeThis) obj;
+		return Objects.equals(id, other.id);
+	}
+
+	@Override
 	public String toString() {
-		return "MadeThis [makeDate=" + makeDate + ", rating=" + rating + ", comment=" + comment + ", imageUrl="
-				+ imageUrl + "]";
+		return "MadeThis [id=" + id + ", makeDate=" + makeDate + ", rating=" + rating + ", comment=" + comment
+				+ ", imageUrl=" + imageUrl + ", user=" + user + ", recipe=" + recipe + ", active=" + active + "]";
 	}
 
 }
-
