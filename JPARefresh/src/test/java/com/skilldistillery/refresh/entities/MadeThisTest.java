@@ -1,6 +1,9 @@
 package com.skilldistillery.refresh.entities;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -61,6 +64,18 @@ class MadeThisTest {
 	void test3() {
 		assertNotNull(recipe);
 		assertEquals("Get out of my kitchen.", recipe.getMadeThisList().get(0).getComment());
+	}
+	@Test
+	@DisplayName("Testing active mapping")
+	void test4() {
+		assertNotNull(recipe.getMadeThisList());
+		assertTrue(recipe.getMadeThisList().get(0).isActive());
+	}
+	@Test
+	@DisplayName("Testing active mapping")
+	void test5() {
+		assertNotNull(recipe.getMadeThisList());
+		assertFalse(user.getMadeThisList().get(1).isActive());
 	}
 
 }

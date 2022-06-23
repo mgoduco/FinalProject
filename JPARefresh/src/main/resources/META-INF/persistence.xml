@@ -7,6 +7,15 @@
 
 		<!-- entities -->
 		<class>com.skilldistillery.refresh.entities.User</class>
+		<class>com.skilldistillery.refresh.entities.Ingredient</class>
+		<class>com.skilldistillery.refresh.entities.Keyword</class>
+		<class>com.skilldistillery.refresh.entities.MadeThis</class>
+		<class>com.skilldistillery.refresh.entities.MadeThisId</class>
+		<class>com.skilldistillery.refresh.entities.Recipe</class>
+		<class>com.skilldistillery.refresh.entities.RecipePhoto</class>
+		<class>com.skilldistillery.refresh.entities.RecipeIngredient</class>
+		<class>com.skilldistillery.refresh.entities.RecipeIngredientId</class>
+		<class>com.skilldistillery.refresh.entities.Comment</class>
 		<!-- end entities -->
 
 		<properties>
