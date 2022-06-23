@@ -42,9 +42,9 @@ public class Recipe {
 
 	private boolean active;
 
-	private int prepMinutes;
+	private int prepminutes;
 
-	private int cookMinutes;
+	private int cookminutes;
 
 	@Column(name = "image_url")
 	private String imageUrl;
@@ -88,7 +88,7 @@ public class Recipe {
 	}
 
 //	===========================================
-	//TODO might be messed up
+	// TODO might be messed up
 	public void addTaggedKeyword(Keyword keyword) {
 		if (keywords == null) {
 			keywords = new ArrayList<>();
@@ -106,7 +106,7 @@ public class Recipe {
 			keyword.removeTaggedRecipe(this);
 		}
 	}
-	
+
 	public void addRecipeIngredient(RecipeIngredient recipeIngredient) {
 		if (recipeIngredients == null) {
 			recipeIngredients = new ArrayList<>();
@@ -311,20 +311,20 @@ public class Recipe {
 		this.active = active;
 	}
 
-	public int getPrepMinutes() {
-		return prepMinutes;
+	public int getPrepminutes() {
+		return prepminutes;
 	}
 
-	public void setPrepMinutes(int prepMinutes) {
-		this.prepMinutes = prepMinutes;
+	public void setPrepminutes(int prepminutes) {
+		this.prepminutes = prepminutes;
 	}
 
-	public int getCookMinutes() {
-		return cookMinutes;
+	public int getCookminutes() {
+		return cookminutes;
 	}
 
-	public void setCookMinutes(int cookMinutes) {
-		this.cookMinutes = cookMinutes;
+	public void setCookminutes(int cookminutes) {
+		this.cookminutes = cookminutes;
 	}
 
 	public String getImageUrl() {
@@ -355,8 +355,11 @@ public class Recipe {
 	@Override
 	public String toString() {
 		return "Recipe [id=" + id + ", name=" + name + ", description=" + description + ", directions=" + directions
-				+ ", created=" + created + ", updated=" + updated + ", active=" + active + ", prepMinutes="
-				+ prepMinutes + ", cookMinutes=" + cookMinutes + ", imageUrl=" + imageUrl + "]";
+				+ ", created=" + created + ", updated=" + updated + ", active=" + active + ", prepminutes="
+				+ prepminutes + ", cookminutes=" + cookminutes + ", imageUrl=" + imageUrl + ", user=" + user
+				+ ", comments=" + comments + ", photos=" + photos + ", madeThisList=" + madeThisList
+				+ ", recipeIngredients=" + recipeIngredients + ", userFavorites=" + userFavorites + ", keywords="
+				+ keywords + "]";
 	}
 
 }
