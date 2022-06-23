@@ -283,6 +283,15 @@ COMMIT;
 START TRANSACTION;
 USE `recipedb`;
 INSERT INTO `ingredient` (`id`, `name`, `description`, `image_url`, `kcals_per_serving`) VALUES (1, 'Peanut Butter', 'Peanut butter is a food paste or spread made from ground, dry-roasted peanuts. It commonly contains additional ingredients that modify the taste or texture, such as salt, sweeteners, or emulsifiers.', 'https://upload.wikimedia.org/wikipedia/commons/thumb/b/bc/PeanutButter.jpg/1024px-PeanutButter.jpg', NULL);
+INSERT INTO `ingredient` (`id`, `name`, `description`, `image_url`, `kcals_per_serving`) VALUES (2, 'Jelly', NULL, NULL, NULL);
+INSERT INTO `ingredient` (`id`, `name`, `description`, `image_url`, `kcals_per_serving`) VALUES (3, 'Bread', NULL, NULL, NULL);
+INSERT INTO `ingredient` (`id`, `name`, `description`, `image_url`, `kcals_per_serving`) VALUES (4, 'White Truffle', NULL, NULL, NULL);
+INSERT INTO `ingredient` (`id`, `name`, `description`, `image_url`, `kcals_per_serving`) VALUES (5, 'Tagliolini', NULL, NULL, NULL);
+INSERT INTO `ingredient` (`id`, `name`, `description`, `image_url`, `kcals_per_serving`) VALUES (6, 'Heavy Cream', NULL, NULL, NULL);
+INSERT INTO `ingredient` (`id`, `name`, `description`, `image_url`, `kcals_per_serving`) VALUES (7, 'Butter', NULL, NULL, NULL);
+INSERT INTO `ingredient` (`id`, `name`, `description`, `image_url`, `kcals_per_serving`) VALUES (8, 'Black Pepper', NULL, NULL, NULL);
+INSERT INTO `ingredient` (`id`, `name`, `description`, `image_url`, `kcals_per_serving`) VALUES (9, 'Parmesan Cheese', NULL, NULL, NULL);
+INSERT INTO `ingredient` (`id`, `name`, `description`, `image_url`, `kcals_per_serving`) VALUES (10, 'Salt', NULL, NULL, NULL);
 
 COMMIT;
 
@@ -292,7 +301,8 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `recipedb`;
-INSERT INTO `recipe` (`id`, `name`, `description`, `directions`, `created`, `updated`, `user_id`, `active`, `prepminutes`, `cookminutes`, `image_url`) VALUES (1, 'Gourmet Peanut Butter and Jelly', 'Could you ever imagine a peanut butter and jelly sandwich as decadent? Try this gourmet PB&J, and you\'ll reassess everything you\'ve previously understood about this classic.', '1. Gather the ingredients. 2. Prepare peanut butter sandwich using desired jelly or jam. Make sure it isn\'t too runny because the sandwich will be heated and jam could leak out. 3. Heat a frying pan to melt 1 tablespoon of butter. Tilt pan so butter covers pan evenly. This is key to get a perfectly crispy crust on the bread. 3. Heat a frying pan to melt 1 tablespoon of butter. Tilt pan so butter covers pan evenly. This is key to get a perfectly crispy crust on the bread.\n4. Butter one side of sandwich. Place buttered-side down in the pan. If possible, place a steak weight or bacon press on sandwich so it cooks evenly. When one side is golden brown, butter other side. Turn sandwich over and place weight back on sandwich. The second side will cook faster because sandwich is already heated.\n5. Remove sandwich from pan, cut diagonally and serve immediately.\n Looking for other ways to perk up your beloved PB&J? Here are some other ways to enjoy this common childhood favorite:\n\nTry spreading it on French toast that\'s fresh off the griddle.\n\nFor a fun twist, try a sandwich with waffles instead of bread. Just slather some peanut butter and jelly onto waffles. You will not necessarily need syrup in this case, but you can, of course, add it if you\'d like.\n\nInstead of bulky bread, try putting the peanut butter and jelly on a healthy wrap. It may be slimmer in volume, but the taste will shine.', '2022-06-22', NULL, 2, true, 15, 0, 'https://www.thespruceeats.com/thmb/FmaSdft8pDaACmAOOQYihT10bmY=/580x0/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/gourmet-peanut-butter-and-jelly-recipe-305473-step-05-c0dfd1a8315b4762907829c6dd10358c.jpg');
+INSERT INTO `recipe` (`id`, `name`, `description`, `directions`, `created`, `updated`, `user_id`, `active`, `prepminutes`, `cookminutes`, `image_url`) VALUES (1, 'Gourmet Peanut Butter and Jelly', 'Could you ever imagine a peanut butter and jelly sandwich as decadent? Try this gourmet PB&J, and you\'ll reassess everything you\'ve previously understood about this classic.', '1. Gather the ingredients. 2. Prepare peanut butter sandwich using desired jelly or jam. Make sure it isn\'t too runny because the sandwich will be heated and jam could leak out. 3. Heat a frying pan to melt 1 tablespoon of butter. Tilt pan so butter covers pan evenly. This is key to get a perfectly crispy crust on the bread. 3. Heat a frying pan to melt 1 tablespoon of butter. Tilt pan so butter covers pan evenly. This is key to get a perfectly crispy crust on the bread.\n4. Butter one side of sandwich. Place buttered-side down in the pan. If possible, place a steak weight or bacon press on sandwich so it cooks evenly. When one side is golden brown, butter other side. Turn sandwich over and place weight back on sandwich. The second side will cook faster because sandwich is already heated.\n5. Remove sandwich from pan, cut diagonally and serve immediately.\n Looking for other ways to perk up your beloved PB&J? Here are some other ways to enjoy this common childhood favorite:\n\nTry spreading it on French toast that\'s fresh off the griddle.\n\nFor a fun twist, try a sandwich with waffles instead of bread. Just slather some peanut butter and jelly onto waffles. You will not necessarily need syrup in this case, but you can, of course, add it if you\'d like.\n\nInstead of bulky bread, try putting the peanut butter and jelly on a healthy wrap. It may be slimmer in volume, but the taste will shine.', '2022-06-22', NULL, 2, 1, 15, 0, 'https://www.thespruceeats.com/thmb/FmaSdft8pDaACmAOOQYihT10bmY=/580x0/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/gourmet-peanut-butter-and-jelly-recipe-305473-step-05-c0dfd1a8315b4762907829c6dd10358c.jpg');
+INSERT INTO `recipe` (`id`, `name`, `description`, `directions`, `created`, `updated`, `user_id`, `active`, `prepminutes`, `cookminutes`, `image_url`) VALUES (2, 'Tagliolini with White Truffle', 'It’s truffle season here in Northern Italy and tagliolini are among the most popular pastas eaten with this king of the Italian kitchen. Truffles are most definitely an acquired taste and not everybody likes them. However, those who do will tell you there’s almost nothing better in the world of mother nature’s culinary delicacies.', '1. Put a pan of water on to boil. Add salt when it starts to boil and bring to the boil again. Cook the tagliolini as per the instructions on the packet until they are \'al dente\'. Save some of the cooking water before draining. 2. In the meantime wipe the truffle with a damp cloth to remove any soil particles and grate half of it. 3. Melt the butter in a large frying pan until it foams. 4. Add the grated truffle to the butter and 1 or 2 tablespoons of the pasta cooking water. 5. Add the cooked pasta to the butter, sprinkle with some grated Parmesan and cook over a gentle heat for a minute whilst stirring the pasta to coat it with the sauce. 6. Divide the pasta among 4 warmed plates, sprinkle a little more Parmesan onto the pasta and finally shave the remaining truffle over the top of the dish. 7. Serve immediately. Buon appetito!', '2022-06-22', NULL, 1, 1, 10, 20, 'https://www.the-pasta-project.com/wp-content/uploads/2016/11/tagliolini-with-white-truffle-2-590x433.jpg');
 
 COMMIT;
 
@@ -304,6 +314,7 @@ START TRANSACTION;
 USE `recipedb`;
 INSERT INTO `comment` (`id`, `title`, `comment`, `created`, `updated`, `user_id`, `recipe_id`, `active`, `in_reply_to`) VALUES (1, 'Mmmm....Delicious!', 'This is the best PB&J I have ever tasted!', '2022-06-22', NULL, 2, 1, 1, NULL);
 INSERT INTO `comment` (`id`, `title`, `comment`, `created`, `updated`, `user_id`, `recipe_id`, `active`, `in_reply_to`) VALUES (2, 'Get out of my kitchen.', 'I like cardboard white bread. If it ain\'t broke, don\'t fix it.', '2022-06-22', NULL, 1, 1, 1, 1);
+INSERT INTO `comment` (`id`, `title`, `comment`, `created`, `updated`, `user_id`, `recipe_id`, `active`, `in_reply_to`) VALUES (3, 'Food quality rises with price.', 'The more expensive a meal, the better a meal tastes. My favorite dish includes these expensive and rare white truffles.', '2022-06-22', NULL, 1, 2, 1, NULL);
 
 COMMIT;
 
@@ -325,6 +336,7 @@ START TRANSACTION;
 USE `recipedb`;
 INSERT INTO `made_this` (`user_id`, `recipe_id`, `makedate`, `rating`, `comment`, `image_url`) VALUES (2, 1, '2022-03-14', 5, 'What a sandwich!', 'https://cdn.pixabay.com/photo/2021/01/26/16/54/food-5952237_960_720.jpg');
 INSERT INTO `made_this` (`user_id`, `recipe_id`, `makedate`, `rating`, `comment`, `image_url`) VALUES (1, 1, '2022-06-22', 1, 'Get out of my kitchen.', 'https://cdn.pixabay.com/photo/2021/01/26/16/54/food-5952237_960_720.jpg');
+INSERT INTO `made_this` (`user_id`, `recipe_id`, `makedate`, `rating`, `comment`, `image_url`) VALUES (1, 2, '2022-06-22', 5, 'The only time food tastes good is when it costs $1000 per plate.', 'https://www.eataly.com/wp/wp-content/uploads/2019/01/Untitled-design-11.jpg');
 
 COMMIT;
 
@@ -340,6 +352,9 @@ INSERT INTO `keyword` (`id`, `name`, `description`, `image_url`) VALUES (3, 'jel
 INSERT INTO `keyword` (`id`, `name`, `description`, `image_url`) VALUES (4, 'bread', 'Bread', NULL);
 INSERT INTO `keyword` (`id`, `name`, `description`, `image_url`) VALUES (5, 'fried', 'Fried', NULL);
 INSERT INTO `keyword` (`id`, `name`, `description`, `image_url`) VALUES (6, 'frying', 'Frying', NULL);
+INSERT INTO `keyword` (`id`, `name`, `description`, `image_url`) VALUES (7, 'pasta', 'Pasta', NULL);
+INSERT INTO `keyword` (`id`, `name`, `description`, `image_url`) VALUES (8, 'tagliolini', 'Tagliolini pasta', NULL);
+INSERT INTO `keyword` (`id`, `name`, `description`, `image_url`) VALUES (9, 'truffles', 'Truffles', NULL);
 
 COMMIT;
 
@@ -369,6 +384,7 @@ INSERT INTO `recipe_photo` (`id`, `image_url`, `sequence_number`, `caption`, `re
 INSERT INTO `recipe_photo` (`id`, `image_url`, `sequence_number`, `caption`, `recipe_id`) VALUES (3, 'https://www.thespruceeats.com/thmb/fzru-y5YeqrYv8CRCMFjBISz6lc=/580x0/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/gourmet-peanut-butter-and-jelly-recipe-305473-step-03-e24807863964437fa2b1b930c2e59af5.jpg', 3, 'Heat a skillet with some butter in the pan.', 1);
 INSERT INTO `recipe_photo` (`id`, `image_url`, `sequence_number`, `caption`, `recipe_id`) VALUES (4, 'https://www.thespruceeats.com/thmb/RP7FsoHH72349Uz_BCN8e8lOSDI=/580x0/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/gourmet-peanut-butter-and-jelly-recipe-305473-step-04-03-247a1df5b3d4484ca4cf6fc4dcef598f.jpg', 4, 'Fry your sandwich.', 1);
 INSERT INTO `recipe_photo` (`id`, `image_url`, `sequence_number`, `caption`, `recipe_id`) VALUES (5, 'https://www.thespruceeats.com/thmb/FmaSdft8pDaACmAOOQYihT10bmY=/580x0/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/gourmet-peanut-butter-and-jelly-recipe-305473-step-05-c0dfd1a8315b4762907829c6dd10358c.jpg', 5, 'Remove your sandwich from the pan, cut diagonally, and serve immediately.', 1);
+INSERT INTO `recipe_photo` (`id`, `image_url`, `sequence_number`, `caption`, `recipe_id`) VALUES (6, 'https://www.the-pasta-project.com/wp-content/uploads/2016/11/white-truffle-1.jpg', 1, 'White truffles from Italy', 2);
 
 COMMIT;
 
@@ -379,6 +395,12 @@ COMMIT;
 START TRANSACTION;
 USE `recipedb`;
 INSERT INTO `recipe_ingredient` (`recipe_id`, `ingredient_id`, `amount`, `measure`, `preparation`) VALUES (1, 1, 2, 'tbsp', NULL);
+INSERT INTO `recipe_ingredient` (`recipe_id`, `ingredient_id`, `amount`, `measure`, `preparation`) VALUES (2, 5, 350, 'g', 'boiled');
+INSERT INTO `recipe_ingredient` (`recipe_id`, `ingredient_id`, `amount`, `measure`, `preparation`) VALUES (2, 9, 60, 'g', 'grated');
+INSERT INTO `recipe_ingredient` (`recipe_id`, `ingredient_id`, `amount`, `measure`, `preparation`) VALUES (2, 7, 80, 'g', 'melted');
+INSERT INTO `recipe_ingredient` (`recipe_id`, `ingredient_id`, `amount`, `measure`, `preparation`) VALUES (2, 4, 1, 'each', 'sliced/shaved');
+INSERT INTO `recipe_ingredient` (`recipe_id`, `ingredient_id`, `amount`, `measure`, `preparation`) VALUES (2, 10, 1, 'pinch', 'for boiled water');
+INSERT INTO `recipe_ingredient` (`recipe_id`, `ingredient_id`, `amount`, `measure`, `preparation`) VALUES (2, 8, 1, 'dash', 'to taste');
 
 COMMIT;
 
