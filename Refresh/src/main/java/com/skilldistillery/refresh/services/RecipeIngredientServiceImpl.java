@@ -13,7 +13,7 @@ import com.skilldistillery.refresh.repositories.UserRepository;
 //THIS NEEDS TA ADVICE BEFORE CONTINUING WITH COMPOUND-KEY TABLE
 
 @Service
-public class RecipeIngredientServiceImpl implements RecipeService {
+public class RecipeIngredientServiceImpl implements RecipeIngredientService {
 
 	@Autowired
 	private RecipeRepository recipeRepo;

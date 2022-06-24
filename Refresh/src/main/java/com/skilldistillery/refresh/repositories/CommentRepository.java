@@ -12,7 +12,7 @@ public interface CommentRepository extends JpaRepository<Comment, Integer> {
 	
 	List<Comment> findByUser_Id(int userId);
 	
-	Comment findByInReplyTo(String comment, int id);
+//	Comment findByInReplyTo(String comment, int id);
 	
 	List<Comment> findByRecipe_Id(int recipeId);
 	
