@@ -53,6 +53,14 @@ public class CommentController {
 		}
 		return comment;
 	}
+	@GetMapping("comments/user/{username}")
+	public List<Comment> showUserComments(HttpServletRequest req, HttpServletResponse res, Principal principal, @PathVariable String username) {
+		List<Comment> comments = commentService.getCommentsByUserName(principal.getName());
+		if (comments == null) {
+			res.setStatus(404);
+		}
+		return comments;
+	}
 
 	@PostMapping("recipes/{id}/comments")
 	public Comment create(HttpServletRequest req, HttpServletResponse res, @RequestBody Comment comment,
@@ -71,22 +79,23 @@ public class CommentController {
 
 	}
 	//TODO CREATE REPLY
-//	@PostMapping("recipes/{id}/comments")
-//	public Comment create(HttpServletRequest req, HttpServletResponse res, @RequestBody Comment comment,
-//			Principal principal, @PathVariable int id) {
-//		Recipe recipe = recipeService.getRecipeById(id);
-//		comment = commentService.create(id, comment, principal.getName());
-//		if (recipe == null) {
-//			res.setStatus(404);
-//		} else {
-//			res.setStatus(201);
-//			StringBuffer url = req.getRequestURL();
-//			url.append("/").append(comment.getId());
-//			res.setHeader("Location", url.toString());
-//		}
-//		return comment;
-//		
-//	}
+	@PostMapping("recipes/{rid}/comments/{cid}")
+	public Comment createReply(HttpServletRequest req, HttpServletResponse res, @RequestBody Comment inReplyTo,
+			Principal principal, @PathVariable int rid, @PathVariable int cid) {
+		Comment original = commentService.getCommentById(cid);
+		Recipe recipe = recipeService.getRecipeById(rid);
+		inReplyTo = commentService.createReply(cid, inReplyTo, original, principal.getName());
+		if (recipe == null) {
+			res.setStatus(404);
+		} else {
+			res.setStatus(201);
+			StringBuffer url = req.getRequestURL();
+			url.append("/").append(inReplyTo.getId());
+			res.setHeader("Location", url.toString());
+		}
+		return inReplyTo;
+		
+	}
 	
 	@PutMapping("recipes/{rid}/comments/{id}")
 	public Comment update(HttpServletRequest req, HttpServletResponse res, @PathVariable int rid, @PathVariable int id,
@@ -122,6 +131,8 @@ public class CommentController {
 		}
 		return disabled;
 	}
+	
+	
 	
 	
 

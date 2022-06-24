@@ -65,6 +65,7 @@ public class CommentServiceImpl implements CommentService {
 		return false;
 	}
 
+	//TODO COMMENTREPO FOR REPLY FINDBYCOMMENTANDUSER?
 	@Override
 	public Comment createReply(int id, Comment inReplyTo, Comment comment, String username) {
 		Comment existing = commentRepo.queryById(id);
@@ -90,6 +91,11 @@ public class CommentServiceImpl implements CommentService {
 	public List<Comment> index() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public List<Comment> getCommentsByUserName(String username) {
+		return commentRepo.findByUser_Username(username);
 	}
 
 }

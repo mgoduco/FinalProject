@@ -23,4 +23,6 @@ public interface RecipeRepository extends JpaRepository<Recipe, Integer> {
 
 	List<Recipe> findByRecipeIngredients_Ingredient_NameLike(String ingredient);
 
+	
+	
 }

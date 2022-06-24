@@ -14,11 +14,12 @@ public interface CommentService {
 	
 	boolean disable(int userId, int id, String username);
 	
-	
 	List<Comment> getByRecipe(int recipeId); 
 	
 	List<Comment> index();
 
-	Comment createReply(int id, Comment inReplyTo, Comment comment, String username); 
+	Comment createReply(int id, Comment inReplyTo, Comment comment, String username);
+
+	List<Comment> getCommentsByUserName(String username); 
 	
 }
