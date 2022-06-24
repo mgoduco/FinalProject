@@ -20,11 +20,10 @@ public class CommentServiceImpl implements CommentService {
 
 	@Autowired
 	private UserRepository userRepo;
-	
+
 	@Autowired
 	private RecipeRepository recipeRepo;
 
-	@SuppressWarnings("deprecation")
 	@Override
 	public Comment getCommentById(int id) {
 		return commentRepo.findById(id);
@@ -38,7 +37,7 @@ public class CommentServiceImpl implements CommentService {
 			comment.setRecipe(recipe);
 			comment.setUser(user);
 			return commentRepo.saveAndFlush(comment);
-			
+
 		}
 		return null;
 	}
@@ -57,7 +56,12 @@ public class CommentServiceImpl implements CommentService {
 
 	@Override
 	public boolean disable(int userId, int id, String username) {
-		// TODO Auto-generated method stub
+		boolean disabled = false;
+		Comment comment = commentRepo.findById(id);
+		if (comment != null) {
+			comment.setActive(disabled);
+			return true;
+		}
 		return false;
 	}
 
@@ -69,8 +73,7 @@ public class CommentServiceImpl implements CommentService {
 
 	@Override
 	public List<Comment> getByRecipe(int recipeId) {
-		// TODO Auto-generated method stub
-		return null;
+		return commentRepo.findByRecipe_Id(recipeId);
 	}
 
 	@Override
