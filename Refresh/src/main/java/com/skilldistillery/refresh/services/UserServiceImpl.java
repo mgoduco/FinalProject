@@ -73,9 +73,13 @@ public class UserServiceImpl implements UserService {
 		boolean deleted = false;
 		User user = userRepo.findUserById(id);
 		if(user !=null) {
+			System.out.println(user.isEnabled());
 		user.setEnabled(false);
+		userRepo.saveAndFlush(user);
 		deleted = true;
 		}
+		System.out.println(user.isEnabled());
+		System.out.println(deleted);
 		return deleted;
 	}
 }
