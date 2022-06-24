@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 
 import com.skilldistillery.refresh.entities.Recipe;
 import com.skilldistillery.refresh.entities.User;
-import com.skilldistillery.refresh.repositories.RecipeIngredientRepository;
 import com.skilldistillery.refresh.repositories.RecipeRepository;
 import com.skilldistillery.refresh.repositories.UserRepository;
 
@@ -16,18 +15,15 @@ public class RecipeServiceImpl implements RecipeService {
 
 	@Autowired
 	private RecipeRepository recipeRepo;
-	
+
 	@Autowired
 	private UserRepository userRepo;
-	
-	@Autowired
-	private RecipeIngredientRepository recipeIngredientRepo;
 
 	@Override
 	public List<Recipe> index() {
 		return recipeRepo.findAll();
 	}
-	
+
 	@Override
 	public List<Recipe> getRecipeByName(String keyword) {
 		keyword = "%" + keyword + "%";
@@ -67,8 +63,8 @@ public class RecipeServiceImpl implements RecipeService {
 			existing.setPrepminutes(recipe.getPrepminutes());
 			existing.setCookminutes(recipe.getCookminutes());
 			existing.setImageUrl(recipe.getImageUrl());
-			//TODO Add other stuff?
-			
+			// TODO Add other stuff?
+
 			return recipeRepo.saveAndFlush(existing);
 		}
 		return null;
@@ -109,10 +105,8 @@ public class RecipeServiceImpl implements RecipeService {
 		return null;
 	}
 
-//	RECIPE: Find recipe by RecipeIngredients/Ingredient
-	
 //	RECIPE: Find recipe by String/Keyword
+
 //	RECIPE: Add Recipe to User’s Recipe List (???)
-	
 
 }
