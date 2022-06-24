@@ -92,6 +92,13 @@ public class RecipeServiceImpl implements RecipeService {
 		ingredient = "%" + ingredient + "%";
 		return recipeRepo.findByRecipeIngredients_Ingredient_NameLike(ingredient);
 	}
+	
+	@Override
+	public List<Recipe> getRecipeByNameAndIngredients(String keyword, String ingredient) {
+		keyword = "%" + keyword + "%";
+		ingredient = "%" + ingredient + "%";
+		return recipeRepo.findByNameLikeOrRecipeIngredients_Ingredient_NameLike(keyword, ingredient);
+	}
 
 	@Override
 	public List<Recipe> getRecipeByKeyword() {

@@ -38,7 +38,6 @@ public class Ingredient {
 //	@Cascade(CascadeType.PERSIST)
 //	@LazyCollection(LazyCollectionOption.FALSE)
 	@OneToMany(mappedBy = "ingredient")
-	@JsonIgnore
 	private List<RecipeIngredient> recipeIngredients;
 
 	public Ingredient() {
