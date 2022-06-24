@@ -14,4 +14,6 @@ public interface IngredientRepository extends JpaRepository<Ingredient, Integer>
 	
 	Set<Ingredient> findByRecipeIngredients_RecipeId(int recipeId);
 	
+	Ingredient queryById(int ingredientId);
+	
 }

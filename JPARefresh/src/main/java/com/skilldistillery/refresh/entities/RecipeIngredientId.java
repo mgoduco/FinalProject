@@ -21,6 +21,14 @@ public class RecipeIngredientId implements Serializable {
 		super();
 	}
 
+	
+	public RecipeIngredientId(int ingredientId, int recipeId) {
+		super();
+		this.ingredientId = ingredientId;
+		this.recipeId = recipeId;
+	}
+
+
 	public int getIngredientId() {
 		return ingredientId;
 	}

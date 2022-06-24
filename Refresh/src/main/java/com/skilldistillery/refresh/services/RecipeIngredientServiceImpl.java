@@ -5,8 +5,12 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.skilldistillery.refresh.entities.Ingredient;
 import com.skilldistillery.refresh.entities.Recipe;
-import com.skilldistillery.refresh.entities.User;
+import com.skilldistillery.refresh.entities.RecipeIngredient;
+import com.skilldistillery.refresh.entities.RecipeIngredientId;
+import com.skilldistillery.refresh.repositories.IngredientRepository;
+import com.skilldistillery.refresh.repositories.RecipeIngredientRepository;
 import com.skilldistillery.refresh.repositories.RecipeRepository;
 import com.skilldistillery.refresh.repositories.UserRepository;
 
@@ -17,91 +21,43 @@ public class RecipeIngredientServiceImpl implements RecipeIngredientService {
 
 	@Autowired
 	private RecipeRepository recipeRepo;
-	
+
 	@Autowired
 	private UserRepository userRepo;
 
+	@Autowired
+	private IngredientRepository ingredientRepo;
+
+	@Autowired
+	private RecipeIngredientRepository recipeIngredientRepo;
+
 	@Override
-	public List<Recipe> index() {
-		return recipeRepo.findAll();
+	public RecipeIngredient createForRecipe(String username, int recipeId, int ingredientId, RecipeIngredient recipeIngredient) {
+		Recipe recipe = recipeRepo.findByIdAndUser_Username(recipeId, username);
+		Ingredient ingredient = ingredientRepo.queryById(ingredientId);
+		if (recipe != null && ingredient != null) {
+			RecipeIngredientId recipeIngredientId = new RecipeIngredientId(ingredientId, recipeId);
+			recipeIngredient.setId(recipeIngredientId);
+			recipeIngredient.setRecipe(recipe);
+			recipeIngredient.setIngredient(ingredient);
+			recipeIngredientRepo.saveAndFlush(recipeIngredient);
+			return recipeIngredient;
+		}
+		return null;
 	}
 	
 	@Override
-	public List<Recipe> getRecipesByUser(String username) {
-//		return recipeRepo.findByUser_Username(username);
-		return null;
-	}
-
-	@Override
-	public Recipe show(String username, int recipeId) {
-		return recipeRepo.findByIdAndUser_Username(recipeId, username);
-	}
-
-	@Override
-	public Recipe create(String username, Recipe recipe) {
-		User user = userRepo.findByUsername(username);
-		if (user != null) {
-			recipe.setUser(user);
-			return recipeRepo.saveAndFlush(recipe);
+	public List<RecipeIngredient> getRecipeIngredients (int recipeId) {
+		if (recipeRepo.existsById(recipeId)) {
+			return recipeIngredientRepo.findByRecipe_Id(recipeId);
 		}
 		return null;
 	}
 
 	@Override
-	public Recipe update(String username, Recipe recipe, int recipeId) {
-		Recipe existing = recipeRepo.findByIdAndUser_Username(recipeId, username);
-		if (existing != null) {
-			existing.setName(recipe.getName());
-			existing.setDescription(recipe.getDescription());
-			existing.setDirections(recipe.getDirections());
-//			existing.setCreated(recipe.getCreated());
-//			existing.setUpdated(recipe.getUpdated());
-			existing.setActive(recipe.isActive());
-			existing.setPrepminutes(recipe.getPrepminutes());
-			existing.setCookminutes(recipe.getCookminutes());
-			existing.setImageUrl(recipe.getImageUrl());
-			//TODO Add other stuff?
-			
-			return recipeRepo.saveAndFlush(existing);
-		}
-		return null;
+	public RecipeIngredient getByRecipeIdAndIngredientId (int recipeId, int ingredientId) {
+		
+		return recipeIngredientRepo.findByRecipe_IdAndIngredient_Id(recipeId, ingredientId);
 	}
-
-	@Override
-	public boolean delete(String username, int recipeId) {
-		boolean deleted = false;
-		Recipe existing = recipeRepo.findByIdAndUser_Username(recipeId, username);
-		if (existing != null) {
-			recipeRepo.delete(existing);
-			deleted = true;
-			return deleted;
-		}
-		return false;
-	}
-
-	@Override
-	public Recipe getRecipeById(int id) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public List<Recipe> getRecipeByIngredients() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public List<Recipe> getRecipeByKeyword() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public List<Recipe> getRecipeBySomething() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
 
 }
