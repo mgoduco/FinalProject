@@ -20,6 +20,9 @@ import org.springframework.web.bind.annotation.RestController;
 import com.skilldistillery.refresh.entities.Recipe;
 import com.skilldistillery.refresh.services.RecipeService;
 
+//THIS NEEDS TA ADVICE BEFORE CONTINUING WITH COMPOUND-KEY TABLE
+
+
 @RestController
 @RequestMapping("api")
 @CrossOrigin({ "*", "http://localhost:4200" })
