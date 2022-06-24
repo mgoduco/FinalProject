@@ -6,6 +6,9 @@ import java.util.List;
 
 import com.skilldistillery.refresh.entities.Recipe;
 
+
+//THIS NEEDS TA ADVICE BEFORE CONTINUING WITH COMPOUND-KEY TABLE
+
 public interface RecipeIngredientService {
 	
 	public List<Recipe> index();

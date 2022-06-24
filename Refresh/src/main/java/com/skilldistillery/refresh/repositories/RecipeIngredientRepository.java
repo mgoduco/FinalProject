@@ -7,6 +7,9 @@ import org.springframework.data.repository.query.Param;
 
 import com.skilldistillery.refresh.entities.Recipe;
 
+
+//THIS NEEDS TA ADVICE BEFORE CONTINUING WITH COMPOUND-KEY TABLE
+
 public interface RecipeIngredientRepository extends JpaRepository<Recipe, Integer> {
 
 	List<Recipe> findByUser_Username(String username);
