@@ -32,7 +32,7 @@ public class CommentServiceImpl implements CommentService {
 
 	@Override
 	public Comment create(int recipeId, Comment comment, String username) {
-		Recipe recipe = recipeRepo.findById(recipeId);
+		Recipe recipe = recipeRepo.queryById(recipeId);
 		User user = userRepo.findByUsername(username);
 		if (recipe != null && user != null) {
 			comment.setRecipe(recipe);
@@ -74,7 +74,11 @@ public class CommentServiceImpl implements CommentService {
 
 	@Override
 	public List<Comment> getByRecipe(int recipeId) {
-		return commentRepo.findByRecipe_Id(recipeId);
+		List<Comment> comments = commentRepo.findByRecipe_Id(recipeId);
+		System.out.println("=======================================================");
+		System.out.println(comments);
+		System.out.println("=======================================================");
+		return comments;
 	}
 
 	@Override

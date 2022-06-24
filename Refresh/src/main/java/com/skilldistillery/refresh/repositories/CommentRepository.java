@@ -15,5 +15,7 @@ public interface CommentRepository extends JpaRepository<Comment, Integer> {
 //	Comment findByInReplyTo(String comment, int id);
 	
 	List<Comment> findByRecipe_Id(int recipeId);
+
+	List<Comment> queryByRecipe_Id(int recipeId);
 	
 }

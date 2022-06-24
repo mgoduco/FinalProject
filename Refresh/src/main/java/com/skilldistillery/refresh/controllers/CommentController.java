@@ -35,9 +35,9 @@ public class CommentController {
 	private UserService userService;
 
 	//TODO THIS DOESNT WORK ??????
-	@GetMapping("comments")
-	public List<Comment> getByRecipe(HttpServletResponse res, Principal principal, int recipeId) {
-		List<Comment> comments = commentService.getByRecipe(recipeId);
+	@GetMapping("recipes/{rid}/comments")
+	public List<Comment> getByRecipe(HttpServletResponse res,@PathVariable int rid) {
+		List<Comment> comments = commentService.getByRecipe(rid);
 		if (comments == null) {
 			res.setStatus(404);
 		}
