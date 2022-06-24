@@ -57,17 +57,17 @@ public class CommentServiceImpl implements CommentService {
 
 	@Override
 	public boolean disable(int userId, int id, String username) {
-		boolean disabled = false;
 		Comment comment = commentRepo.findById(id);
 		if (comment != null) {
-			comment.setActive(disabled);
+			comment.setActive(false);
+			commentRepo.saveAndFlush(comment);
 			return true;
 		}
 		return false;
 	}
 
 	@Override
-	public Comment createReply(int id, Comment comment, String username) {
+	public Comment createReply(int id, Comment inReplyTo, Comment comment, String username) {
 		// TODO Auto-generated method stub
 		return null;
 	}
