@@ -23,6 +23,7 @@ public interface RecipeRepository extends JpaRepository<Recipe, Integer> {
 
 	List<Recipe> findByRecipeIngredients_Ingredient_NameLike(String ingredient);
 
+	List<Recipe> findByNameLikeOrRecipeIngredients_Ingredient_NameLike(@Param("keyword") String name ,@Param("keyword")String ingredient);
 	
 	
 }
