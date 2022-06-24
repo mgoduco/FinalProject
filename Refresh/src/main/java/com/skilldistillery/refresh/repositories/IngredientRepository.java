@@ -15,10 +15,3 @@ public interface IngredientRepository extends JpaRepository<Ingredient, Integer>
 	Set<Ingredient> findByRecipeIngredients_RecipeId(int recipeId);
 	
 }
-
-//* INGREDIENT: Find ingredient by ID
-//* INGREDIENT: Find ALL ingredients by Recipe ID
-//* INGREDIENT: Find ALL recipes by Ingredient Name
-//* INGREDIENT: Create Ingredient
-//* INGREDIENT: Edit Ingredient
-//* INGREDIENT: Delete Ingredient 
