@@ -67,8 +67,14 @@ public class CommentServiceImpl implements CommentService {
 
 	@Override
 	public Comment createReply(int id, Comment inReplyTo, Comment comment, String username) {
-		// TODO Auto-generated method stub
-		return null;
+		Comment existing = commentRepo.queryById(id);
+		if (existing != null) {
+			existing.setTitle(comment.getTitle());
+			existing.setComment(comment.getComment());
+			existing.setActive(comment.isActive());
+			return commentRepo.saveAndFlush(existing);
+		}
+		return null;		
 	}
 
 	@Override

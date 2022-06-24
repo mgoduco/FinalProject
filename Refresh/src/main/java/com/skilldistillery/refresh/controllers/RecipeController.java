@@ -37,9 +37,18 @@ public class RecipeController {
 		return recipes;
 	}
 
-	@GetMapping("recipes/search/{name}")
+	@GetMapping("recipes/search/name/{name}")
 	public List<Recipe> getRecipesByName(HttpServletRequest req, HttpServletResponse res, @PathVariable String name) {
 		List<Recipe> recipes = recipeService.getRecipeByName(name);
+		if (recipes == null) {
+			res.setStatus(404);
+		} 
+		return recipes;
+	}
+	
+	@GetMapping("recipes/search/ingredient/{name}")
+	public List<Recipe> getRecipesByIngredientName(HttpServletRequest req, HttpServletResponse res, @PathVariable String name) {
+		List<Recipe> recipes = recipeService.getRecipeByIngredients(name);
 		if (recipes == null) {
 			res.setStatus(404);
 		} 

@@ -70,7 +70,24 @@ public class CommentController {
 		return comment;
 
 	}
-
+	//TODO CREATE REPLY
+//	@PostMapping("recipes/{id}/comments")
+//	public Comment create(HttpServletRequest req, HttpServletResponse res, @RequestBody Comment comment,
+//			Principal principal, @PathVariable int id) {
+//		Recipe recipe = recipeService.getRecipeById(id);
+//		comment = commentService.create(id, comment, principal.getName());
+//		if (recipe == null) {
+//			res.setStatus(404);
+//		} else {
+//			res.setStatus(201);
+//			StringBuffer url = req.getRequestURL();
+//			url.append("/").append(comment.getId());
+//			res.setHeader("Location", url.toString());
+//		}
+//		return comment;
+//		
+//	}
+	
 	@PutMapping("recipes/{rid}/comments/{id}")
 	public Comment update(HttpServletRequest req, HttpServletResponse res, @PathVariable int rid, @PathVariable int id,
 			@RequestBody Comment comment, Principal principal) {

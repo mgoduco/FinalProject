@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.skilldistillery.refresh.entities.Recipe;
 import com.skilldistillery.refresh.entities.User;
+import com.skilldistillery.refresh.repositories.RecipeIngredientRepository;
 import com.skilldistillery.refresh.repositories.RecipeRepository;
 import com.skilldistillery.refresh.repositories.UserRepository;
 
@@ -18,6 +19,9 @@ public class RecipeServiceImpl implements RecipeService {
 	
 	@Autowired
 	private UserRepository userRepo;
+	
+	@Autowired
+	private RecipeIngredientRepository recipeIngredientRepo;
 
 	@Override
 	public List<Recipe> index() {
@@ -88,8 +92,9 @@ public class RecipeServiceImpl implements RecipeService {
 	}
 
 	@Override
-	public List<Recipe> getRecipeByIngredients() {
-		return null;
+	public List<Recipe> getRecipeByIngredients(String ingredient) {
+		ingredient = "%" + ingredient + "%";
+		return recipeRepo.findByRecipeIngredients_Ingredient_NameLike(ingredient);
 	}
 
 	@Override
