@@ -35,9 +35,9 @@ public class CommentController {
 	@Autowired
 	private UserService userService;
 
-	//TODO THIS DOESNT WORK ??????
+	// TODO THIS DOESNT WORK ??????
 	@GetMapping("recipes/{rid}/comments")
-	public List<Comment> getByRecipe(HttpServletResponse res,@PathVariable int rid) {
+	public List<Comment> getByRecipe(HttpServletResponse res, @PathVariable int rid) {
 		List<Comment> comments = commentService.getByRecipe(rid);
 		if (comments == null) {
 			res.setStatus(404);
@@ -52,6 +52,26 @@ public class CommentController {
 			res.setStatus(404);
 		}
 		return comment;
+	}
+
+	@GetMapping("test/recipe/{rid}/comment/{cid}")
+	public Comment getCommentByRecipeAndUsername(HttpServletRequest req, HttpServletResponse res, Principal principal,
+			@PathVariable int rid, @PathVariable int cid) {
+		Comment comment = commentService.getCommentByIdAndRecipeId(cid, rid);
+		if (comment == null) {
+			res.setStatus(404);
+		}
+		return comment;
+	}
+
+	@GetMapping("comments/user/{username}")
+	public List<Comment> showUserComments(HttpServletRequest req, HttpServletResponse res, Principal principal,
+			@PathVariable String username) {
+		List<Comment> comments = commentService.getCommentsByUserName(principal.getName());
+		if (comments == null) {
+			res.setStatus(404);
+		}
+		return comments;
 	}
 
 	@PostMapping("recipes/{id}/comments")
@@ -70,23 +90,59 @@ public class CommentController {
 		return comment;
 
 	}
-	//TODO CREATE REPLY
-//	@PostMapping("recipes/{id}/comments")
-//	public Comment create(HttpServletRequest req, HttpServletResponse res, @RequestBody Comment comment,
-//			Principal principal, @PathVariable int id) {
-//		Recipe recipe = recipeService.getRecipeById(id);
-//		comment = commentService.create(id, comment, principal.getName());
-//		if (recipe == null) {
-//			res.setStatus(404);
-//		} else {
-//			res.setStatus(201);
-//			StringBuffer url = req.getRequestURL();
-//			url.append("/").append(comment.getId());
-//			res.setHeader("Location", url.toString());
-//		}
-//		return comment;
-//		
-//	}
+
+	@PostMapping("recipes/{rid}/comments/{cid}")
+	public Comment createReply(HttpServletRequest req, HttpServletResponse res, @RequestBody Comment reply,
+			Principal principal, @PathVariable int rid, @PathVariable int cid) {
+		Comment original = commentService.getCommentById(cid);
+		Recipe recipe = recipeService.getRecipeById(rid);
+		reply = commentService.createReply(cid, rid, reply, principal.getName());
+		if (recipe == null || original == null) {
+			res.setStatus(404);
+		} else {
+			res.setStatus(201);
+			StringBuffer url = req.getRequestURL();
+			url.append("/replies/").append(reply.getId());
+			res.setHeader("Location", url.toString());
+		}
+		return reply;
+
+	}
+	@PutMapping("recipes/{rid}/comments/{cid}/replies")
+	public Comment editReply(HttpServletRequest req, HttpServletResponse res, @RequestBody Comment reply,
+			Principal principal, @PathVariable int rid, @PathVariable int cid) {
+		Comment original = commentService.getCommentById(cid);
+		Recipe recipe = recipeService.getRecipeById(rid);
+		reply = commentService.updateReply(cid, reply, principal.getName());
+		if (recipe == null || original == null) {
+			res.setStatus(404);
+		} else {
+			res.setStatus(201);
+			StringBuffer url = req.getRequestURL();
+			url.append("/").append(reply.getId());
+			res.setHeader("Location", url.toString());
+		}
+		return reply;
+		
+	}
+
+	@DeleteMapping("recipes/{userId}/comments/{commentId}/replies")
+	public boolean disableReply(HttpServletRequest req, HttpServletResponse res, @PathVariable int userId,
+			@PathVariable int commentId, Principal principal) {
+		boolean disabled = false;
+		try {
+			disabled = commentService.disable(userId, commentId, principal.getName());
+			res.setStatus(200);
+			if (disabled == true) {
+				res.setStatus(200);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			res.setStatus(400);
+			return disabled;
+		}
+		return disabled;
+	}
 	
 	@PutMapping("recipes/{rid}/comments/{id}")
 	public Comment update(HttpServletRequest req, HttpServletResponse res, @PathVariable int rid, @PathVariable int id,
@@ -104,13 +160,16 @@ public class CommentController {
 		}
 		return comment;
 	}
-	
+
 	@DeleteMapping("recipes/{userId}/comments/{commentId}")
-	public boolean disable(HttpServletRequest req, HttpServletResponse res, @PathVariable int userId, @PathVariable int commentId,
-			 Principal principal) {
+	public boolean disable(HttpServletRequest req, HttpServletResponse res, @PathVariable int userId,
+			@PathVariable int commentId, Principal principal) {
 		boolean disabled = false;
 		try {
 			disabled = commentService.disable(userId, commentId, principal.getName());
+			System.out.println("===================================");
+			System.out.println(disabled);
+			System.out.println("===================================");
 			res.setStatus(200);
 			if (disabled == true) {
 				res.setStatus(200);
@@ -122,7 +181,5 @@ public class CommentController {
 		}
 		return disabled;
 	}
-	
-	
 
 }

@@ -18,4 +18,12 @@ public interface CommentRepository extends JpaRepository<Comment, Integer> {
 
 	List<Comment> queryByRecipe_Id(int recipeId);
 	
+	List<Comment> findByUser_Username(String username);
+	
+	Comment findByRecipe_IdAndUser_Username(int recipedId, String username);
+	
+	Comment findByIdAndRecipe_Id(int cid, int recipedId);
+	
+//	Comment findByRecipe_IdAndUser_Id(int recipedId, int userId);
+
 }
