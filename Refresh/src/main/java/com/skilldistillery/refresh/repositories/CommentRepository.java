@@ -8,7 +8,7 @@ import com.skilldistillery.refresh.entities.Comment;
 
 public interface CommentRepository extends JpaRepository<Comment, Integer> {
 
-	Comment findById(int id);
+	Comment queryById(int id);
 	
 	List<Comment> findByUser_Id(int userId);
 	

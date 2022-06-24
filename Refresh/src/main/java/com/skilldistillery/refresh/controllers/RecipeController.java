@@ -29,11 +29,29 @@ public class RecipeController {
 	private RecipeService recipeService;
 
 	@GetMapping("recipes")
-	public List<Recipe> getByUsername(HttpServletResponse res, Principal principal) {
+	public List<Recipe> getAllRecipes(HttpServletResponse res, Principal principal) {
 		List<Recipe> recipes = recipeService.index();
 		if (recipes == null) {
 			res.setStatus(404);
 		}
+		return recipes;
+	}
+
+	@GetMapping("recipes/search/name/{name}")
+	public List<Recipe> getRecipesByName(HttpServletRequest req, HttpServletResponse res, @PathVariable String name) {
+		List<Recipe> recipes = recipeService.getRecipeByName(name);
+		if (recipes == null) {
+			res.setStatus(404);
+		} 
+		return recipes;
+	}
+	
+	@GetMapping("recipes/search/ingredient/{name}")
+	public List<Recipe> getRecipesByIngredientName(HttpServletRequest req, HttpServletResponse res, @PathVariable String name) {
+		List<Recipe> recipes = recipeService.getRecipeByIngredients(name);
+		if (recipes == null) {
+			res.setStatus(404);
+		} 
 		return recipes;
 	}
 
@@ -49,7 +67,7 @@ public class RecipeController {
 		return recipe;
 	}
 
-	@GetMapping("recipes/{username}")
+	@GetMapping("recipes/u/{username}")
 	public List<Recipe> index(@PathVariable String username, HttpServletResponse res, Principal principal) {
 		List<Recipe> recipes = recipeService.getRecipesByUser(username);
 		if (recipes == null) {
@@ -99,4 +117,5 @@ public class RecipeController {
 			res.setStatus(404);
 		}
 	}
+
 }

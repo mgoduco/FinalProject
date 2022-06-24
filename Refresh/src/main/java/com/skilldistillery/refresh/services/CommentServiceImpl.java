@@ -1,7 +1,6 @@
 package com.skilldistillery.refresh.services;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -27,7 +26,7 @@ public class CommentServiceImpl implements CommentService {
 
 	@Override
 	public Comment getCommentById(int id) {
-		return commentRepo.findById(id);
+		return commentRepo.queryById(id);
 	}
 
 	@Override
@@ -45,7 +44,7 @@ public class CommentServiceImpl implements CommentService {
 
 	@Override
 	public Comment update(int id, Comment comment, String username) {
-		Comment existing = commentRepo.findById(id);
+		Comment existing = commentRepo.queryById(id);
 		if (existing != null) {
 			existing.setTitle(comment.getTitle());
 			existing.setComment(comment.getComment());
@@ -57,7 +56,7 @@ public class CommentServiceImpl implements CommentService {
 
 	@Override
 	public boolean disable(int userId, int id, String username) {
-		Comment comment = commentRepo.findById(id);
+		Comment comment = commentRepo.queryById(id);
 		if (comment != null) {
 			comment.setActive(false);
 			commentRepo.saveAndFlush(comment);
@@ -68,8 +67,14 @@ public class CommentServiceImpl implements CommentService {
 
 	@Override
 	public Comment createReply(int id, Comment inReplyTo, Comment comment, String username) {
-		// TODO Auto-generated method stub
-		return null;
+		Comment existing = commentRepo.queryById(id);
+		if (existing != null) {
+			existing.setTitle(comment.getTitle());
+			existing.setComment(comment.getComment());
+			existing.setActive(comment.isActive());
+			return commentRepo.saveAndFlush(existing);
+		}
+		return null;		
 	}
 
 	@Override
