@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -67,21 +68,19 @@ public class UserController {
 		return user;
 	}
 	
-//	@PutMapping("i/{ingredientId}")
-//	public Ingredient update(HttpServletRequest req, HttpServletResponse res, @PathVariable int ingredientId,
-//			@RequestBody Ingredient ingredient, Principal principal) {
-//		try {
-//			ingredient = ingredientService.updateIngredient(principal.getName(), ingredientId, ingredient);
-//			if (ingredient == null) {
-//				res.setStatus(404);
-//			}
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//			res.setStatus(400);
-//			ingredient = null;
-//		}
-//		return ingredient;
-//	}
+	@DeleteMapping("u/{id}")
+	public void destroy(HttpServletRequest req, HttpServletResponse res, @PathVariable int id, Principal principal) {
+		try {
+			if (userService.deleteUser(principal.getName(), id)) {
+				res.setStatus(204);
+			} else {
+				res.setStatus(404);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			res.setStatus(400);
+		}
+	}
 	
 	
 	
