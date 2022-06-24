@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -86,5 +87,25 @@ public class CommentController {
 		}
 		return comment;
 	}
+	
+	@DeleteMapping("recipes/{userId}/comments/{commentId}")
+	public boolean disable(HttpServletRequest req, HttpServletResponse res, @PathVariable int userId, @PathVariable int commentId,
+			 Principal principal) {
+		boolean disabled = false;
+		try {
+			disabled = commentService.disable(userId, commentId, principal.getName());
+			res.setStatus(200);
+			if (disabled == true) {
+				res.setStatus(200);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			res.setStatus(400);
+			return disabled;
+		}
+		return disabled;
+	}
+	
+	
 
 }
