@@ -14,7 +14,7 @@ import javax.persistence.Table;
 public class RecipeIngredient {
 
 	@EmbeddedId
-	private RecipeIngredientId id = new RecipeIngredientId();
+	private RecipeIngredientId id; //ROB SAYS NOT NEEDED: = new RecipeIngredientId();
 
 	@ManyToOne
 	@JoinColumn(name = "ingredient_id")

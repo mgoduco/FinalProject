@@ -23,5 +23,6 @@ public interface RecipeRepository extends JpaRepository<Recipe, Integer> {
 	
 	List<Recipe> findRecipeByUserFavorites(String username);
 	
+	Recipe queryById(int recipeId);
 	
 }
