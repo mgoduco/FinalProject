@@ -1,8 +1,11 @@
 package com.skilldistillery.refresh.services;
 
+import java.util.Iterator;
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.skilldistillery.refresh.entities.User;
@@ -13,6 +16,12 @@ public class UserServiceImpl implements UserService {
 
 	@Autowired
 	private UserRepository userRepo;
+
+	@Autowired
+	private AuthService auth;
+
+	@Autowired
+	private PasswordEncoder encoder;
 
 	@Override
 	public User getUserById(int userId) {
@@ -34,4 +43,39 @@ public class UserServiceImpl implements UserService {
 		return user;
 	}
 
+	@Override
+	public User updateUser(String username, int userId, User user) {
+		User editUser = userRepo.findUserById(userId);
+		if (editUser != null) {
+			if (user.getPassword().length() < 40) {
+				if (!encoder.matches(user.getPassword(), editUser.getPassword())) {
+					editUser.setPassword(encoder.encode(user.getPassword()));
+				}
+			}
+			editUser.setUsername(user.getUsername());
+			editUser.setEmail(user.getEmail());
+			editUser.setRole(user.getRole());
+			editUser.setUpdated(user.getUpdated());
+			editUser.setCreated(user.getCreated());
+			editUser.setImageUrl(user.getImageUrl());
+			editUser.setFirstName(user.getFirstName());
+			editUser.setLastName(user.getLastName());
+			editUser.setBiography(user.getBiography());
+
+			userRepo.saveAndFlush(editUser);
+			return editUser;
+		}
+		return null;
+	}
+	
+	@Override
+	public boolean deleteUser(String username, int id) {
+		boolean deleted = false;
+		User user = userRepo.findUserById(id);
+		if(user !=null) {
+		user.setEnabled(false);
+		deleted = true;
+		}
+		return deleted;
+	}
 }
