@@ -25,6 +25,12 @@ public class RecipeServiceImpl implements RecipeService {
 	}
 	
 	@Override
+	public List<Recipe> getRecipeByName(String keyword) {
+		keyword = "%" + keyword + "%";
+		return recipeRepo.findByNameLike(keyword);
+	}
+
+	@Override
 	public List<Recipe> getRecipesByUser(String username) {
 		return recipeRepo.findByUser_Username(username);
 	}
@@ -78,13 +84,11 @@ public class RecipeServiceImpl implements RecipeService {
 
 	@Override
 	public Recipe getRecipeById(int id) {
-		// TODO Auto-generated method stub
-		return null;
+		return recipeRepo.queryById(id);
 	}
 
 	@Override
 	public List<Recipe> getRecipeByIngredients() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
@@ -100,5 +104,10 @@ public class RecipeServiceImpl implements RecipeService {
 		return null;
 	}
 
+//	RECIPE: Find recipe by RecipeIngredients/Ingredient
+	
+//	RECIPE: Find recipe by String/Keyword
+//	RECIPE: Add Recipe to User’s Recipe List (???)
+	
 
 }

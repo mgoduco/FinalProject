@@ -20,6 +20,8 @@ public interface RecipeService {
 	
 	public Recipe getRecipeById(int id);
 	
+	public List<Recipe> getRecipeByName(String keyword);
+	
 	public List<Recipe> getRecipeByIngredients();
 	
 	public List<Recipe> getRecipeByKeyword();
