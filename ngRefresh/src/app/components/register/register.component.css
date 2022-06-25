@@ -1,6 +1,8 @@
-.logo {
-  position: right;
-  padding: 10px
+
+
+  #logo {
+    width:200%;
+     height: 60%;
   }
 
   .signIn {

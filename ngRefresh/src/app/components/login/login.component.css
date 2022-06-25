@@ -1,7 +1,7 @@
-.logo {
-  position: left;
-  padding: 10px;
-  }
+#logo {
+  width:200%;
+   height: 60%;
+}
 
   .body {
     font-family: Poppins;
