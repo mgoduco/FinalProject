@@ -68,7 +68,7 @@ export class CommentService {
   }
 
   create(comment: Comment, recipe: Recipe): Observable<Comment> {
-    return this.http.post<Comment>(`${this.url}/recipes/${recipe.id}/comments`,comment, this.getHttpOptions()).pipe(
+    return this.http.post<Comment>(`${this.url}/recipes/${recipe.id}/comments`, comment, this.getHttpOptions()).pipe(
       catchError((err: any) => {
         console.error(err);
         return throwError(
@@ -90,8 +90,10 @@ export class CommentService {
     );
   }
 
-  delete(id: number): Observable<Comment> {
-    return this.http.delete<Comment>(`${this.url}/${id}`, this.getHttpOptions()).pipe(
+
+  // id number + cid number or recipe Recipe comment Comment
+  delete(comment: Comment, recipe: Recipe): Observable<Comment> {
+    return this.http.delete<Comment>(`${this.url}/recipes/${recipe.id}/comments/${comment.id}`, this.getHttpOptions()).pipe(
       catchError((err: any) => {
         console.error(err);
         return throwError(
@@ -102,7 +104,7 @@ export class CommentService {
   }
 
   createReply(comment: Comment, recipe: Recipe): Observable<Comment> {
-    return this.http.post<Comment>(`${this.url}/recipes/${recipe.id}/comments`,comment, this.getHttpOptions()).pipe(
+    return this.http.post<Comment>(`${this.url}/recipes/${recipe.id}/comments${comment.id}`,comment, this.getHttpOptions()).pipe(
       catchError((err: any) => {
         console.error(err);
         return throwError(
@@ -112,8 +114,8 @@ export class CommentService {
     );
   }
 
-  updateReply(recipe: Comment): Observable<Comment> {
-    return this.http.put<Comment>(this.url + '/' + recipe.id, recipe, this.getHttpOptions()).pipe(
+  updateReply(comment: Comment, recipe: Recipe): Observable<Comment> {
+    return this.http.put<Comment>(`${this.url}/recipes/${recipe.id}/comments${comment.id}`,comment, this.getHttpOptions()).pipe(
       // return this.http.put<Todo>(`{this.url}/${todo.id}`, todo).pipe(
       catchError((err: any) => {
         console.error(err);
@@ -124,8 +126,8 @@ export class CommentService {
     );
   }
 
-  deleteReply(id: number): Observable<Comment> {
-    return this.http.delete<Comment>(`${this.url}/${id}`, this.getHttpOptions()).pipe(
+  deleteReply(comment: Comment, recipe: Recipe): Observable<Comment> {
+    return this.http.delete<Comment>(`${this.url}/recipes/${recipe.id}/comments${comment.id}`, this.getHttpOptions()).pipe(
       catchError((err: any) => {
         console.error(err);
         return throwError(
