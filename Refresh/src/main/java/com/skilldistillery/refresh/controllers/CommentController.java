@@ -54,7 +54,7 @@ public class CommentController {
 		return comment;
 	}
 
-	@GetMapping("test/recipe/{rid}/comment/{cid}")
+	@GetMapping("recipes/{rid}/comment/{cid}")
 	public Comment getCommentByRecipeAndUsername(HttpServletRequest req, HttpServletResponse res, Principal principal,
 			@PathVariable int rid, @PathVariable int cid) {
 		Comment comment = commentService.getCommentByIdAndRecipeId(cid, rid);
