@@ -92,7 +92,7 @@ export class RecipeService {
       catchError((err: any) => {
         console.error(err);
         return throwError(
-          () => new Error('RecipeService.create(): error deleting Recipe: ' + err)
+          () => new Error('RecipeService.delete(): error deleting Recipe: ' + err)
         );
       })
     );
