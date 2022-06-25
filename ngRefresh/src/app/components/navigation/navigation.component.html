@@ -1,13 +1,31 @@
 
-<nav class="navbar" style="background-color: #e3fde3;">
-  <a class="nav-link"[routerLink]="['/home']" >
-    <img src="/assets/refreshicon.png" id="logo" alt="Refresh Logo"  >
-   </a>
-  <a  class="nav-link" > About </a>
-  <a  class="nav-link"> Contact </a>
-  <a  class="nav-link"> Recipes </a>
-  <a  class="nav-link"> Search </a>
+<nav class="navbar" style="background-color: #C4C4C4;">
+
+    <a class="nav-link"[routerLink]="['/home']" >
+      <img src="/assets/refreshicon.png" id="logo" alt="Refresh Logo"  >
+    </a>
+    <a  class="nav-link" > About </a>
+    <a  class="nav-link"> Contact </a>
+    <a  class="nav-link"> Recipes </a>
+    <a  class="nav-link"> Search </a>
+
+    <ng-template #content let-offcanvas>
+      <div class="offcanvas-header">
+        <h4 class="offcanvas-title">User Name</h4>
+        <button type="button" class="btn-close" aria-label="Close" (click)="offcanvas.dismiss('Cross click')"></button>
+      </div>
+      <div class="offcanvas-body">
+        <p>Profile&hellip;</p>
+        <p>Account Settings&hellip;</p>
+        <p>Logout&hellip;</p>
+        <input type="text" placeholder="User Search...">
+
+      </div>
+    </ng-template>
+
+    <a class="menuBar" (click)="openEnd(content)">
+      <img src="/assets/userIcon.png" id="userIcon" alt="User Icon" >
+    </a>
+
 </nav>
-
-
 
