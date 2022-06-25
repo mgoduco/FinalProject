@@ -32,7 +32,22 @@ public class RecipeIngredientServiceImpl implements RecipeIngredientService {
 	private RecipeIngredientRepository recipeIngredientRepo;
 
 	@Override
-	public RecipeIngredient createForRecipe(String username, int recipeId, int ingredientId, RecipeIngredient recipeIngredient) {
+	public List<RecipeIngredient> getRecipeIngredients(int recipeId) {
+		if (recipeRepo.existsById(recipeId)) {
+			return recipeIngredientRepo.findByRecipe_Id(recipeId);
+		}
+		return null;
+	}
+
+	@Override
+	public RecipeIngredient getByRecipeIdAndIngredientId(int recipeId, int ingredientId) {
+
+		return recipeIngredientRepo.findByRecipe_IdAndIngredient_Id(recipeId, ingredientId);
+	}
+
+	@Override
+	public RecipeIngredient createForRecipe(String username, int recipeId, int ingredientId,
+			RecipeIngredient recipeIngredient) {
 		Recipe recipe = recipeRepo.findByIdAndUser_Username(recipeId, username);
 		Ingredient ingredient = ingredientRepo.queryById(ingredientId);
 		if (recipe != null && ingredient != null) {
@@ -45,19 +60,32 @@ public class RecipeIngredientServiceImpl implements RecipeIngredientService {
 		}
 		return null;
 	}
-	
+
 	@Override
-	public List<RecipeIngredient> getRecipeIngredients (int recipeId) {
-		if (recipeRepo.existsById(recipeId)) {
-			return recipeIngredientRepo.findByRecipe_Id(recipeId);
+	public RecipeIngredient editRecipeIngredient(String username, int iid, int rid, RecipeIngredient recipeIngredient) {
+		RecipeIngredient editRecipeIngredient = recipeIngredientRepo.findByRecipe_IdAndIngredient_Id(rid, iid);
+		if (editRecipeIngredient != null) {
+			editRecipeIngredient.setIngredient(recipeIngredient.getIngredient());
+			editRecipeIngredient.setRecipe(recipeIngredient.getRecipe());
+			editRecipeIngredient.setIngredient(recipeIngredient.getIngredient());
+			editRecipeIngredient.setAmount(recipeIngredient.getAmount());
+			editRecipeIngredient.setMeasure(recipeIngredient.getMeasure());
+			editRecipeIngredient.setPreparation(recipeIngredient.getPreparation());
+			recipeIngredientRepo.saveAndFlush(editRecipeIngredient);
+			return editRecipeIngredient;
 		}
 		return null;
 	}
 
 	@Override
-	public RecipeIngredient getByRecipeIdAndIngredientId (int recipeId, int ingredientId) {
-		
-		return recipeIngredientRepo.findByRecipe_IdAndIngredient_Id(recipeId, ingredientId);
+	public boolean deleteRecipeIngredient(String username, int rid, int iid) {
+		boolean deleted = false;
+		RecipeIngredient toDelete = recipeIngredientRepo.findByRecipe_IdAndIngredient_Id(rid, iid);
+		if (toDelete != null) {
+			recipeIngredientRepo.delete(toDelete);
+			deleted = true;
+		}
+		return deleted;
 	}
 
 }

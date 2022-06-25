@@ -21,10 +21,16 @@ public class MadeThisId implements Serializable {
 		super();
 	}
 
+	public MadeThisId(int userId, int recipeId) {
+		super();
+		this.userId = userId;
+		this.recipeId = recipeId;
+	}
+
 	public int getUserId() {
 		return userId;
 	}
-
+	
 	public void setUserId(int userId) {
 		this.userId = userId;
 	}

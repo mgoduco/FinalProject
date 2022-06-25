@@ -3,9 +3,7 @@ package com.skilldistillery.refresh.repositories;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.repository.query.Param;
 
-import com.skilldistillery.refresh.entities.Recipe;
 import com.skilldistillery.refresh.entities.RecipeIngredient;
 import com.skilldistillery.refresh.entities.RecipeIngredientId;
 
@@ -17,6 +15,8 @@ public interface RecipeIngredientRepository extends JpaRepository<RecipeIngredie
 	List<RecipeIngredient> findByRecipe_User_Username(String username);
 
 	List<RecipeIngredient> findByRecipe_Id(int recipeId);
+	
+	List<RecipeIngredient> findByIngredient_Id(int ingredientId);
 
 	RecipeIngredient findByRecipe_IdAndIngredient_Id (int recipeId, int ingredientId);
 	
