@@ -35,6 +35,15 @@ public class RecipeIngredient {
 	public RecipeIngredient() {
 		super();
 	}
+	
+	public RecipeIngredient(Ingredient ingredient, Recipe recipe, int amount, String measure, String preparation) {
+		super();
+		this.ingredient = ingredient;
+		this.recipe = recipe;
+		this.amount = amount;
+		this.measure = measure;
+		this.preparation = preparation;
+	}
 
 	public RecipeIngredientId getId() {
 		return id;

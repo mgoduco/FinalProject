@@ -8,9 +8,11 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -38,19 +40,19 @@ public class RecipeIngredientController {
 		return recipeIngredients;
 	}
 
-	@GetMapping("recipes/{rid}/ingredients/{ingredientId}")
-	public RecipeIngredient getIngredientForRecipe(HttpServletResponse res, @PathVariable int rid, @PathVariable int ingredientId) {
-		RecipeIngredient recipeIngredient = recipeIngredientService.getByRecipeIdAndIngredientId(rid, ingredientId);
+	@GetMapping("recipes/{rid}/ingredients/{iid}")
+	public RecipeIngredient getIngredientForRecipe(HttpServletResponse res, @PathVariable int rid, @PathVariable int iid) {
+		RecipeIngredient recipeIngredient = recipeIngredientService.getByRecipeIdAndIngredientId(rid, iid);
 		if (recipeIngredient == null) {
 			res.setStatus(404);
 		}
 		return recipeIngredient;
 	}
 	
-	@PostMapping("recipes/{rid}/ingredients/{ingredientId}")
+	@PostMapping("recipes/{rid}/ingredients/{iid}")
 	public RecipeIngredient create(HttpServletRequest req, HttpServletResponse res, @RequestBody RecipeIngredient recipeIngredient,
-			Principal principal, @PathVariable int rid, @PathVariable int ingredientId) {
-		recipeIngredient = recipeIngredientService.createForRecipe(principal.getName(), rid, ingredientId, recipeIngredient);
+			Principal principal, @PathVariable int rid, @PathVariable int iid) {
+		recipeIngredient = recipeIngredientService.createForRecipe(principal.getName(), rid, iid, recipeIngredient);
 		if (recipeIngredient == null) {
 			res.setStatus(404);
 		} else {
@@ -62,4 +64,36 @@ public class RecipeIngredientController {
 
 	}
 
+//  PUT todos/{tid}
+	@PutMapping("recipes/{rid}/ingredients/{iid}")
+	public RecipeIngredient update(HttpServletRequest req, HttpServletResponse res, @RequestBody RecipeIngredient recipeIngredient, Principal principal,
+			@PathVariable int rid, @PathVariable int iid) {
+		try {
+			recipeIngredient = recipeIngredientService.editRecipeIngredient(principal.getName(), iid, rid, recipeIngredient);
+			if (recipeIngredient == null) {
+				res.setStatus(404);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			res.setStatus(400);
+			recipeIngredient = null;
+		}
+		return recipeIngredient;
+	}
+	
+	@DeleteMapping("recipes/{rid}/ingredients/{iid}")
+	public void destroy(HttpServletRequest req, HttpServletResponse res, @PathVariable int rid, @PathVariable int iid, Principal principal) {
+		try {
+			if (recipeIngredientService.deleteRecipeIngredient(principal.getName(), rid, iid)) {
+				res.setStatus(204);
+			} else {
+				res.setStatus(404);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			res.setStatus(400);
+		}
+	}
+
+	
 }

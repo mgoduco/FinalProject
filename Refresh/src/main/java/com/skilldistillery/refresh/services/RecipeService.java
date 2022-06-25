@@ -28,4 +28,7 @@ public interface RecipeService {
 
 	List<Recipe> getRecipeByIngredients(String ingredient);
 	
+	List<Recipe> getRecipeByNameAndIngredients(String keyword, String ingredient);
+	
+	
 }

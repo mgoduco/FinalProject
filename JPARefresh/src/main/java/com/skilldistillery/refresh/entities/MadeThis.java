@@ -21,12 +21,12 @@ public class MadeThis {
 	private MadeThisId id = new MadeThisId();
 
 	@CreationTimestamp
-	private LocalDateTime makeDate;
+	private LocalDateTime makedate;
 
 	private int rating;
 
 	private String comment;
-
+	
 	@Column(name = "image_url")
 	private String imageUrl;
 
@@ -44,6 +44,16 @@ public class MadeThis {
 
 	public MadeThis() {
 		super();
+	}
+
+	public MadeThis(int rating, String comment, String imageUrl, User user, Recipe recipe, boolean active) {
+		super();
+		this.rating = rating;
+		this.comment = comment;
+		this.imageUrl = imageUrl;
+		this.user = user;
+		this.recipe = recipe;
+		this.active = active;
 	}
 
 	public boolean isActive() {
@@ -79,11 +89,11 @@ public class MadeThis {
 	}
 
 	public LocalDateTime getMakeDate() {
-		return makeDate;
+		return makedate;
 	}
 
 	public void setMakeDate(LocalDateTime makeDate) {
-		this.makeDate = makeDate;
+		this.makedate = makeDate;
 	}
 
 	public int getRating() {
@@ -129,7 +139,7 @@ public class MadeThis {
 
 	@Override
 	public String toString() {
-		return "MadeThis [id=" + id + ", makeDate=" + makeDate + ", rating=" + rating + ", comment=" + comment
+		return "MadeThis [id=" + id + ", makeDate=" + makedate + ", rating=" + rating + ", comment=" + comment
 				+ ", imageUrl=" + imageUrl + ", user=" + user + ", recipe=" + recipe + ", active=" + active + "]";
 	}
 
