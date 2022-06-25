@@ -31,7 +31,7 @@ public class RecipeIngredientController {
 	@Autowired
 	private RecipeIngredientService recipeIngredientService;
 
-	@GetMapping("recipes/{rid}")
+	@GetMapping("recipes/{rid}/ingredients")
 	public List<RecipeIngredient> getForRecipe(HttpServletResponse res, @PathVariable int rid) {
 		List<RecipeIngredient> recipeIngredients = recipeIngredientService.getRecipeIngredients(rid);
 		if (recipeIngredients == null) {
@@ -49,7 +49,7 @@ public class RecipeIngredientController {
 		return recipeIngredient;
 	}
 	
-	@PostMapping("recipes/{rid}/ingredients/{iid}")
+	@PostMapping("recipes/{rid}/ingredients/")
 	public RecipeIngredient create(HttpServletRequest req, HttpServletResponse res, @RequestBody RecipeIngredient recipeIngredient,
 			Principal principal, @PathVariable int rid, @PathVariable int iid) {
 		recipeIngredient = recipeIngredientService.createForRecipe(principal.getName(), rid, iid, recipeIngredient);
