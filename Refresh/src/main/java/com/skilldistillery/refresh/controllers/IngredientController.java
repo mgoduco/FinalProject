@@ -1,6 +1,7 @@
 package com.skilldistillery.refresh.controllers;
 
 import java.security.Principal;
+import java.util.List;
 import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
@@ -28,6 +29,12 @@ public class IngredientController {
 	@Autowired
 	private IngredientService ingredientService;
 
+	@GetMapping("i/index")
+	public List<Ingredient> index(HttpServletResponse res) {
+		List<Ingredient> ingredients = ingredientService.index();
+		return ingredients;
+	}
+	
 	@GetMapping("i/{id}")
 	public Ingredient getIngredientById(@PathVariable int id, HttpServletResponse res, Principal principal) {
 		Ingredient ingredient = ingredientService.getIngredientById(id);
