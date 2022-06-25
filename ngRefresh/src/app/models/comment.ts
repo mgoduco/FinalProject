@@ -1,29 +1,36 @@
+import { Recipe } from 'src/app/models/recipe';
+import { User } from './user';
 export class Comment {
   id: number | null;
   title: string | null;
   comment: string | null;
   // created:
   // updated:
-  user_id: number | null;
-  recipe_id: number | null;
+  user: User;
+  recipe: Recipe;
   active: boolean | false;
-  in_reply_to: number | null;
+  inReplyTo: number | null;
+  replies: Comment[] | any;
 
   constructor(
     id: number | null = 0,
     title: string | null = '',
     comment: string | null = '',
-    user_id: number | null = 0,
-    recipe_id: number | null = 0,
+    user: User,
+    recipe: Recipe,
     active: boolean = false,
-    in_reply_to: number | null = 0
+    inReplyTo: number | null = 0,
+    replies: Comment[] = [],
+
   ) {
     this.id = id;
     this.title = title;
     this.comment = comment;
-    this.user_id = user_id;
-    this.recipe_id = recipe_id;
+    this.user = user;
+    this.recipe = recipe;
     this.active = active;
-    this.in_reply_to = in_reply_to;
+    this.inReplyTo = inReplyTo;
+    this.replies = replies;
+
   }
 }
