@@ -11,7 +11,6 @@
   <div class="container">
   <div class="row align-items-center">
     <div class="col">
-
 </div>
 <div class="col">
   <h2>Welcome</h2>
@@ -22,33 +21,16 @@
 </div>
 
   <div class="row">
-    <div class="col-sm-4">
-  <div class="card1" style="width: 18rem;">
-    <img src="https://assets.bonappetit.com/photos/58cacaddb8fa6f12a11e616c/1:1/w_2580%2Cc_limit/red-sauce-for-pizza.jpg" class="card-img-top" alt="Pizza">
+    <div *ngFor="let recipe of recipes" class="col-sm-4">
+  <div class="card border-success mb-3" id="cards" style="width: 18rem;">
+  <img [src]="recipe.imageUrl" class="card-img-top" [alt]="recipe.name">
     <div class="card-body">
-      <h5 class="card-title">Handmade Pizza</h5>
-      <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+      <h5 class="card-title" >{{recipe.name}}</h5>
+      <p class="card-text" >{{recipe.description}}</p>
     </div>
   </div>
 </div>
-    <div class="col-sm-4">
-  <div class="card2" style="width: 18rem;">
-    <img src="https://assets.bonappetit.com/photos/57dac9314caff61056fa7be2/1:1/w_2580%2Cc_limit/sausauge-greens-and-beans-pasta.jpg" class="card-img-top" alt="Pasta">
-    <div class="card-body">
-      <h5 class="card-title">Sausage, Greens, and Beans Pasta</h5>
-      <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-    </div>
-  </div>
-</div>
-    <div class="col-sm-4">
-  <div class="card3" style="width: 18rem;">
-    <img src="https://assets.bonappetit.com/photos/5bbbbccb16e6ca7c274d6cbe/1:1/w_2580%2Cc_limit/ba-roasted-salmon-lead.jpg" class="card-img-top" alt="Salmon">
-    <div class="card-body">
-      <h5 class="card-title">Salmon</h5>
-      <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-    </div>
-  </div>
-</div>
+
 </div>
 </div>
 </body>

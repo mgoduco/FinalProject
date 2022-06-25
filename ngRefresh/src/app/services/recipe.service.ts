@@ -32,7 +32,7 @@ export class RecipeService {
   }
 
   index(): Observable<Recipe[]> {
-    return this.http.get<Recipe[]>(this.url, this.getHttpOptions()).pipe(
+    return this.http.get<Recipe[]>(this.url).pipe(
       catchError((err: any) => {
         console.log(err);
         return throwError(
@@ -76,7 +76,7 @@ export class RecipeService {
     );
   }
   update(recipe: Recipe): Observable<Recipe> {
-    return this.http.put<Recipe>(this.url + '/' + recipe.id, recipe, this.getHttpOptions()).pipe(
+    return this.http.put<Recipe>(`${this.url}/${recipe.id}`, recipe, this.getHttpOptions()).pipe(
       // return this.http.put<Todo>(`{this.url}/${todo.id}`, todo).pipe(
       catchError((err: any) => {
         console.error(err);
@@ -94,6 +94,17 @@ export class RecipeService {
         return throwError(
           () => new Error('RecipeService.delete(): error deleting Recipe: ' + err)
         );
+      })
+    );
+  }
+
+  show(id: number): Observable<Recipe> {
+    return this.http.get<Recipe>(`${this.url}/${id}`, this.getHttpOptions()).pipe(
+      catchError((err: any) => {
+      console.log(err);
+      return throwError(
+        () => new Error('RecipeService.show(): error retrieving todo: ' + err)
+      );
       })
     );
   }
