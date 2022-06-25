@@ -8,11 +8,12 @@
 
 .card-title {
   width: 250px;
-  height: 25px;
+  height: 24px;
   white-space: wrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
+
 
 .card-title:hover {
   width: auto;

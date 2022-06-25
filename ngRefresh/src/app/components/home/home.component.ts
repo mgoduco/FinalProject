@@ -13,7 +13,7 @@ import { UserService } from 'src/app/services/user.service';
 })
 export class HomeComponent implements OnInit {
 
-  recipe: null | Recipe = null;
+  // recipe: null | Recipe = null;
   recipes: Recipe [] = [];
   selected: null | Recipe = null;
 
@@ -49,8 +49,9 @@ export class HomeComponent implements OnInit {
     })
   }
 
-  displayTodo(recipe: Recipe) {
+  displayRecipe(recipe: Recipe) {
     this.selected = recipe;
+    console.log(recipe);
   }
 
   displayTable() {

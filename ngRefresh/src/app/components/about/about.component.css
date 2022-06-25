@@ -1,0 +1,48 @@
+#logo {
+  width: 200%;
+  height: 60%;
+}
+
+body {
+  background-color: #e5e5e5;
+  height: 100vh;
+  padding: 10px;
+}
+
+.about-content {
+  padding: 10px;
+  font-family: "M PLUS Rounded 1c", sans-serif;
+}
+
+.re {
+  color:black;
+  font-weight: bolder;
+  font-family: "M PLUS Rounded 1c", sans-serif;
+}
+.fresh {
+  color:#046424;
+  font-weight: bolder;
+  font-family: "M PLUS Rounded 1c", sans-serif;
+}
+
+/* If you want the content centered horizontally and vertically */
+.centered {
+  position: static;
+  top: 50%;
+  left: 50%;
+  /* transform: translate(-50%, -50%); */
+  text-align: center;
+  padding-right: 95px;
+  padding-left: 95px;
+}
+
+/* .logo_section {
+  position: relative;
+}
+
+.logo {
+  position: absolute;
+  position: relative;
+  width: 200px;
+  height: auto;
+} */
