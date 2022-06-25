@@ -44,7 +44,7 @@
   /* Control the right side */
   .right {
     right: 0;
-    background-color: rgba(240, 241, 245, 1);
+    background-color: #E5E5E5;
   }
 
   /* If you want the content centered horizontally and vertically */
@@ -54,12 +54,14 @@
     left: 50%;
     /* transform: translate(-50%, -50%); */
     text-align: center;
-  }
-
-  .registerForm {
-   padding-right: 95px;
+    padding-right: 95px;
     padding-left: 95px;
   }
+
+  /* .registerForm {
+   padding-right: 95px;
+    padding-left: 95px;
+  } */
 
   /* Style the image inside the centered container, if needed */
   /* .centered img {
