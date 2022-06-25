@@ -1,4 +1,6 @@
 export class RecipePhoto {
+
+  // TODO FIX RECIPE PHOTO LIKE OTHER MODELS
   id: number | null;
   image_url: string | null;
   sequence_number: number | null;
