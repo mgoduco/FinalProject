@@ -1,0 +1,66 @@
+.logo {
+  position: right;
+  padding: 10px
+  }
+
+  .signIn {
+
+
+  }
+
+  .body {
+    font-family: Poppins;
+    font-weight: Regular;
+  }
+
+  /* Split the screen in half */
+  .split {
+    height: 100%;
+    width: 60%;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    overflow-x: hidden;
+    padding-top: 20px;
+  }
+
+  .signIn{
+    text-align: right;
+    padding-right: 10px;
+  }
+  /* Control the left side */
+  .left {
+    left: 0;
+    background-image: url(https://www.feastingathome.com/wp-content/uploads/2014/03/shortrib-tacos-131.jpg);
+    background-repeat: no-repeat;
+
+    background-size: 67% 100%;
+
+
+  }
+
+  /* Control the right side */
+  .right {
+    right: 0;
+    background-color: rgba(240, 241, 245, 1);
+  }
+
+  /* If you want the content centered horizontally and vertically */
+  .centered {
+    position: static;
+    top: 50%;
+    left: 50%;
+    /* transform: translate(-50%, -50%); */
+    text-align: center;
+  }
+
+  .registerForm {
+   padding-right: 95px;
+    padding-left: 95px;
+  }
+
+  /* Style the image inside the centered container, if needed */
+  /* .centered img {
+    width: 150px;
+    border-radius: 50%;
+  } */

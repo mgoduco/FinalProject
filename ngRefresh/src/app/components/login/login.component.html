@@ -1,1 +1,55 @@
-<p>login works!</p>
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <title>Login</title>
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.1/css/all.css" crossorigin="anonymous">
+  <link href="https://fonts.googleapis.com/css?family=Poppins&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css?family=Inter&display=swap" rel="stylesheet" />
+</head>
+
+<body>
+  <div class="body">
+    <div class="split right">
+    </div>
+    <div class="split left">
+    <div class="row">
+
+
+    <div class="col-4">
+      <div class="logo">
+        <a class="nav-link" [routerLink]="['/home']">
+        <img src="https://seeklogo.com/images/R/refresh-foods-logo-9BE75058BA-seeklogo.com.png" alt="Refresh Logo" width="100x" height="50px">
+      </a>
+      </div>
+    </div>
+    <div class="col-2"></div>
+    <div class="col-6">
+      <div class="signUp">
+        <span>Don't have an Account?</span>
+        <a class="nav-link" [routerLink]="['/register']">Sign Up!</a>
+      </div>
+    </div>
+    </div>
+
+      <div class="centered">
+        <h1>Welcome Back</h1>
+        <h6>Sign in to your Refresh Account</h6>
+        <hr>
+        <div class="form-floating mb-3">
+          <input type="email" class="form-control"  id="email" placeholder="Email">
+          <label for="email">Email</label>
+        </div>
+          <div class="form-floating mb-3">
+          <input type="password"  class="form-control" id="password" placeholder="Password">
+          <label for="password">Password</label>
+        </div>
+          <button type="button" class="btn btn-success" name="button">Sign In</button>
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>
+
