@@ -1,25 +1,28 @@
+import { Recipe } from "./recipe";
+import { User } from "./user";
+
 export class MadeThis {
-  user_id: number | null;
-  recipe_id: number | null;
+  user: User;
+  recipe: Recipe;
   // makedate
   rating: number | null;
   comment: string | null;
-  image_url: string | null;
+  imageUrl: string | null;
   active: boolean | false;
 
   constructor(
-    user_id: number | null = 0,
-    recipe_id: number | null = 0,
+    user: User = new User,
+    recipe: Recipe = new Recipe,
     rating: number | null = 0,
     comment: string | null = '',
-    image_url: string | null = '',
+    imageUrl: string | null = '',
     active: boolean = false
   ) {
-    this.user_id = user_id;
-    this.recipe_id = recipe_id;
+    this.user = user;
+    this.recipe = recipe;
     this.rating = rating;
     this.comment = comment;
-    this.image_url = image_url;
+    this.imageUrl = imageUrl;
     this.active = active;
   }
 }
