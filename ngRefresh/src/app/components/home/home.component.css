@@ -9,7 +9,7 @@
 .card-title {
   width: 250px;
   height: 24px;
-  white-space: wrap;
+  white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
@@ -20,18 +20,14 @@
   height: auto;
   white-space: wrap;
   overflow:visible;
-  /* text-overflow: ellipsis; */
 }
 
-cards:hover{
-background-color: lightgreen;
-}
+/* #cards:hover{
+background-color: rgb(207, 255, 207);
+} */
 
 body {
   background-color: #E5E5E5;
 }
 
-/* img {
 
-  height: 250px;
-} */
