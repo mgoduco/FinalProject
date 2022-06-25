@@ -4,10 +4,10 @@
     <a class="nav-link"[routerLink]="['/home']" >
       <img src="/assets/refreshicon.png" id="logo" alt="Refresh Logo"  >
     </a>
-    <a  class="nav-link" > About </a>
-    <a  class="nav-link"> Contact </a>
-    <a  class="nav-link"> Recipes </a>
-    <a  class="nav-link"> Search </a>
+    <a  class="nav-link"[routerLink]="['/about']" > About </a>
+    <a  class="nav-link"[routerLink]="['/contact']"> Contact </a>
+    <a  class="nav-link"[routerLink]="['/recipe']"> Recipes </a>
+    <a  class="nav-link"[routerLink]="['/search']"> Search </a>
 
     <ng-template #content let-offcanvas>
       <div class="offcanvas-header">
