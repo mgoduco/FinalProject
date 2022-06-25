@@ -14,7 +14,6 @@ export class UserService {
   constructor(
     private http: HttpClient,
     private auth: AuthService,
-    private user: UserService
   ) {}
 
   getHttpOptions() {

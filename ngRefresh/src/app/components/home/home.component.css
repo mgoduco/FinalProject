@@ -1,7 +1,36 @@
+.card-text {
+    width: 250px;
+    height: 75px;
+    white-space: wrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
 
+.card-title {
+  width: 250px;
+  height: 25px;
+  white-space: wrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
 
+.card-title:hover {
+  width: auto;
+  height: auto;
+  white-space: wrap;
+  overflow:visible;
+  /* text-overflow: ellipsis; */
+}
 
+cards:hover{
+background-color: lightgreen;
+}
 
 body {
   background-color: #E5E5E5;
 }
+
+/* img {
+
+  height: 250px;
+} */

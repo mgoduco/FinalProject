@@ -9,7 +9,7 @@ export class Recipe {
   active: boolean | false;
   prepminutes: number | null;
   cookminutes: number | null;
-  image_url: string | null;
+  imageUrl: string;
 
   constructor(
     id: number | null = 0,
@@ -20,7 +20,7 @@ export class Recipe {
     active: boolean = false,
     prepminutes: number | null = 0,
     cookminutes: number | null = 0,
-    image_url: string | null = ''
+    imageUrl: string = ''
   ) {
     this.id = id;
     this.name = name;
@@ -30,6 +30,6 @@ export class Recipe {
     this.active = active;
     this.prepminutes = prepminutes;
     this.cookminutes = cookminutes;
-    this.image_url = image_url;
+    this.imageUrl = imageUrl;
   }
 }
