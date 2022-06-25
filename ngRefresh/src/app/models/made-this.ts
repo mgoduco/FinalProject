@@ -11,8 +11,8 @@ export class MadeThis {
   active: boolean | false;
 
   constructor(
-    user: User = new User,
-    recipe: Recipe = new Recipe,
+    user: User,
+    recipe: Recipe,
     rating: number | null = 0,
     comment: string | null = '',
     imageUrl: string | null = '',
