@@ -1,5 +1,6 @@
 package com.skilldistillery.refresh.services;
 
+import java.util.List;
 import java.util.Set;
 
 import com.skilldistillery.refresh.entities.Ingredient;
@@ -17,6 +18,8 @@ public interface IngredientService {
 	public Ingredient updateIngredient(String username, int ingredientId, Ingredient ingredient);
 
 	public boolean deleteIngredient(String username, int ingredientId);
+	
+	List<Ingredient> index();
 
 
 	
