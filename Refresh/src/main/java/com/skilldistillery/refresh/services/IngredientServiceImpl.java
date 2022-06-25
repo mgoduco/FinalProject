@@ -1,5 +1,6 @@
 package com.skilldistillery.refresh.services;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
@@ -17,6 +18,13 @@ public class IngredientServiceImpl implements IngredientService {
 	private IngredientRepository ingredientRepo;
 	@Autowired
 	private RecipeRepository recipeRepo;
+
+	
+	
+	@Override
+	public List<Ingredient> index() {
+		return ingredientRepo.findAll();
+	}
 
 	@Override
 	public Ingredient getIngredientById(int id) {
