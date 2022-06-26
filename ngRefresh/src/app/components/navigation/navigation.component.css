@@ -2,11 +2,24 @@
   width: 40%;
    height: 40%;
    display: flex;
-
+  /* position: static; */
 }
 
 #userIcon {
   width: 25%;
    height: 25%;
    border-radius: 50%;
+   position: static;
+        top: 0px;
+        right: 0px;
 }
+
+.navbar {
+  width: auto;
+  height: fit-content;
+}
+
+/* .nav-link {
+  width: auto;
+  height: fit-auto;
+} */
