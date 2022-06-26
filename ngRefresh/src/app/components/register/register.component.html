@@ -1,73 +1,107 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8" />
+    <title>Register</title>
 
-<head>
-  <meta charset="utf-8">
-  <title>Register</title>
+    <link
+      href="https://fonts.googleapis.com/css?family=Poppins&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css?family=Inter&display=swap"
+      rel="stylesheet"
+    />
+  </head>
 
-  <link href="https://fonts.googleapis.com/css?family=Poppins&display=swap" rel="stylesheet" />
-  <link href="https://fonts.googleapis.com/css?family=Inter&display=swap" rel="stylesheet" />
-</head>
-
-<body>
-  <div class="body">
-    <div class="split right">
-      <div class="row">
-        <div class="col-4">
-          <div class="logo">
-            <a class="nav-link" [routerLink]="['/home']">
-              <img src="/assets/refresh_logo.png" alt="Refresh Logo" id="logo" >
-          </a>
+  <body>
+    <div class="body">
+      <div class="split right">
+        <div class="row">
+          <div class="col-4">
+            <div class="logo">
+              <a class="nav-link" [routerLink]="['/home']">
+                <img
+                  src="/assets/refresh_logo.png"
+                  alt="Refresh Logo"
+                  id="logo"
+                />
+              </a>
+            </div>
+          </div>
+          <div class="col-2"></div>
+          <div class="col-6">
+            <div class="signIn">
+              <span>Already have an account?</span>
+              <a class="nav-link" [routerLink]="['/login']">Sign In!</a>
+            </div>
           </div>
         </div>
-        <div class="col-2"></div>
-        <div class="col-6">
-      <div class="signIn">
-        <span>Already have an account?</span>
-        <a class="nav-link" [routerLink]="['/login']">Sign In!</a>
+
+        <div class="container-fluid">
+          <div class="centered">
+            <h4>Get started with Refresh</h4>
+            <h6>Free your Fridge!</h6>
+            <hr />
+            <form class="registerForm" action="index.html" method="post">
+              <div class="form-floating mb-1">
+                <input
+                  type="text"
+                  class="form-control"
+                  id="username"
+                  placeholder="Username"
+                  [(ngModel)]="newUser.username"
+                />
+                <label for="username">Username</label>
+              </div>
+              <div class="form-floating mb-1">
+                <input
+                  type="text"
+                  class="form-control"
+                  id="firstname"
+                  placeholder="First Name"
+                  [(ngModel)]="newUser.firstname"
+                />
+                <label for="firstname">First Name</label>
+              </div>
+              <div class="form-floating mb-1">
+                <input
+                  type="text"
+                  class="form-control"
+                  id="lastname"
+                  placeholder="Last Name"
+                  [(ngModel)]="newUser.lastname"
+                />
+                <label for="lastname">Last Name</label>
+              </div>
+              <div class="form-floating mb-1">
+                <input
+                  type="email"
+                  class="form-control"
+                  id="email"
+                  placeholder="Email"
+                  [(ngModel)]="newUser.email"
+                />
+                <label for="email">Email</label>
+              </div>
+              <div class="form-floating mb-1">
+                <input
+                  type="password"
+                  class="form-control"
+                  id="password"
+                  placeholder="Password"
+                  [(ngModel)]="newUser.password"
+                />
+                <label for="password">Password</label>
+              </div>
+              <button type="button" class="btn btn-success" id="button" (click)="register(newUser)">
+                Create Account
+              </button>
+            </form>
+          </div>
+        </div>
       </div>
+      <div class="split left"></div>
     </div>
-    </div>
-
-
-    <div class="container-fluid">
-      <div class="centered">
-        <h4>Get started with Refresh</h4>
-        <h6>Free your Fridge!</h6>
-        <hr>
-        <form class="registerForm" action="index.html" method="post">
-          <div class="form-floating mb-1">
-          <input type="text" class="form-control" id="firstname" placeholder="First Name">
-          <label for="firstname">First Name</label>
-        </div>
-          <div class="form-floating mb-1">
-          <input type="text" class="form-control" id="lastname" placeholder="Last Name">
-          <label for="lastname">Last Name</label>
-        </div>
-          <div class="form-floating mb-1">
-          <input type="email" class="form-control" id="email" placeholder="Email">
-          <label for="email">Email</label>
-        </div>
-          <div class="form-floating mb-1">
-          <input type="password" class="form-control" id="password" placeholder="Password">
-          <label for="password">Password</label>
-        </div>
-          <div class="form-floating mb-1">
-          <input type="password" class="form-control" id="confirmPassword" placeholder="Confirm Password">
-          <label for="confirmPassword">Confirm Password</label>
-        </div>
-          <button type="button" class="btn btn-success" id="button">Create Account</button>
-        </form>
-      </div>
-    </div>
-
-  </div>
-    <div class="split left">
-
-    </div>
-
-  </div>
-
-</body>
-
+  </body>
 </html>
