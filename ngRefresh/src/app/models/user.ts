@@ -1,5 +1,5 @@
-import { MadeThis } from './made-this';
-import { Recipe } from './recipe';
+// import { MadeThis } from './made-this';
+// import { Recipe } from './recipe';
 
 export class User {
   id: number | null;
@@ -14,10 +14,10 @@ export class User {
   firstname: string | null;
   lastname: string | null;
   biography: string | null;
-  madeThisList: MadeThis[] | any;
-  recipes: Recipe[] | any;
-  favoriteRecipes: Recipe[] | any;
-  comments: Comment[] | any;
+  // madeThisList: MadeThis[] | any;
+  // recipes: Recipe[] | any;
+  // favoriteRecipes: Recipe[] | any;
+  // comments: Comment[] | any;
 
   constructor(
     id: number | null = 0,
@@ -32,10 +32,10 @@ export class User {
     firstname: string | null = '',
     lastname: string | null = '',
     biography: string | null = '',
-    madeThisList: MadeThis[] | [],
-    recipes: Recipe[] | [],
-    favoriteRecipes: Recipe[] | [],
-    comments: Comment[] | []
+    // madeThisList: MadeThis[] | [],
+    // recipes: Recipe[] | [],
+    // favoriteRecipes: Recipe[] | [],
+    // comments: Comment[] | []
   ) {
     this.id = id;
     this.username = username;
@@ -47,9 +47,9 @@ export class User {
     this.firstname = firstname;
     this.lastname = lastname;
     this.biography = biography;
-    this.madeThisList = madeThisList;
-    this.recipes = recipes;
-    this.favoriteRecipes = favoriteRecipes;
-    this.comments = comments;
+    // this.madeThisList = madeThisList;
+    // this.recipes = recipes;
+    // this.favoriteRecipes = favoriteRecipes;
+    // this.comments = comments;
   }
 }

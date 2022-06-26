@@ -16,6 +16,7 @@ import { NotFoundComponent } from './components/not-found/not-found.component';
 import { RecipeComponent } from './components/recipe/recipe.component';
 import { SearchComponent } from './components/search/search.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome'
+import { AuthService } from './services/auth.service';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,9 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome'
     NgbModule,
     FontAwesomeModule
   ],
-  providers: [],
+  providers: [
+    AuthService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
