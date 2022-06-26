@@ -7,8 +7,9 @@
     <a  class="nav-link"[routerLink]="['/about']" > About </a>
     <a  class="nav-link"[routerLink]="['/contact']"> Contact </a>
     <a  class="nav-link"[routerLink]="['/recipe']"> Recipes </a>
-    <input type="text" placeholder="Search Recipes...">
-    <button class="btn btn-success"><fa-icon [icon]="randomIcon()"></fa-icon></button>
+    <!-- <input type="text" class="searchTerm" [(ngModel)]="keyword"  placeholder="Search Recipes..."> -->
+    <a  class="nav-link"[routerLink]="['/search']"> Search </a>
+    <!-- <button class="btn btn-success"><fa-icon [icon]="randomIcon()" (click)="search(keyword)" [routerLink]="['/search']"></fa-icon></button> -->
     <a  class="nav-link"[routerLink]="['/login']"> Login </a>
     <a  class="nav-link"[routerLink]="['/register']"> Register </a>
 
