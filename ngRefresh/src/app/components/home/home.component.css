@@ -26,12 +26,13 @@ body {
     display: -webkit-box;
     -webkit-line-clamp: 3;
     -webkit-box-orient: vertical;
+    font-size: 60%;
   }
 
   .recipeImg{
     height: auto;
     width: 50vw;
-    border-radius: 8%;
+    border-radius: 3%;
   }
 
   #description {
@@ -52,6 +53,10 @@ body {
   }
 
   #title {
+    text-align: center;
+  }
+
+  h2 {
     text-align: center;
   }
 
