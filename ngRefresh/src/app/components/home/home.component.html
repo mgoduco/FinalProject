@@ -8,8 +8,8 @@
 </head>
 
 <body>
-  <div *ngIf="!selected">
-  <div class="container">
+  <div>
+  <div class="container-fluid" *ngIf="!selected">
   <div class="row align-items-center">
     <div class="col">
 </div>
@@ -23,7 +23,7 @@
 
   <div class="row" >
     <div *ngFor="let recipe of recipes" class="col-sm-4" >
-  <div class="card border-success mb-3" id="cards" style="width: 18rem;" (click)="displayRecipe(recipe)">
+  <div class="card border-success mb-3" id="cards" (click)="displayRecipe(recipe)">
   <img [src]="recipe.imageUrl" class="card-img-top" [alt]="recipe.name" >
     <div class="card-body">
       <h5 class="card-title" >{{recipe.name}}</h5>
@@ -34,22 +34,20 @@
 </div>
 </div>
 
-<!-- This section is broken
-<div class="container" *ngIf="selected && !displayTable" id="recipeDetails">
-  <h4>{{ selected?.name }}</h4>
-  <p>{{ recipe?.imageUrl }}</p>
-  <p>{{ recipe?.prepminutes }}</p>
-  <p>{{ recipe?.cookminutes }}</p>
-  <p>{{ recipe?.recipeIngredients }}</p>
-  <p>{{ recipe?.description }}</p>
 
-  <button class="btn btn-danger" (click)="displayTable()">
-    Back <i class="fa fa-flip-vertical">
-   <i class="fa fa-undo fa-spin" aria-hidden="true"></i>
-  </i>
-  </button>
+<div class="centered" *ngIf="selected" id="recipeDetails">
+  <a class="" (click)="displayTable()">
+  <fa-icon [icon]="faArrowLeft"></fa-icon>
+  </a>
+  <h4 id="title">{{ selected.name }}</h4>
+  <p><img [src]="selected.imageUrl" class="recipeImg" [alt]="selected.name" ></p>
+  <p><b>Prep Time: </b>{{ selected.prepminutes }}</p>
+  <p><b>Cook Time: </b>{{ selected.cookminutes }}</p>
+  <p id="description">{{ selected.description }}</p>
+  <p id="directions">{{ selected.directions }}</p>
 
-</div> -->
+
+</div>
 
 
 </div>

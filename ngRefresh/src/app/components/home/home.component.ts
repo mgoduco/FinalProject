@@ -5,6 +5,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Recipe } from 'src/app/models/recipe';
 import { RecipeService } from 'src/app/services/recipe.service';
 import { UserService } from 'src/app/services/user.service';
+import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-home',
@@ -18,7 +19,14 @@ export class HomeComponent implements OnInit {
   selected: null | Recipe = null;
   isSelected: boolean = false;
 
-  constructor(private recipeServ: RecipeService, private userServ: UserService, private route: ActivatedRoute,
+
+  // Icons
+  faArrowLeft = faArrowLeft;
+
+  constructor(
+    private recipeServ: RecipeService,
+    private userServ: UserService,
+    private route: ActivatedRoute,
     private router: Router) { }
 
     // ngOnInit(): void {
