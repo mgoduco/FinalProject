@@ -1,1 +1,49 @@
-<p>recipe works!</p>
+
+<div class="container-fluid" >
+ <div class="row align-items-center">
+
+
+
+<div class="centered" *ngIf="!selected" id="recipeDetails">
+  <a class="" (click)="displayTable()">
+  <fa-icon [icon]="faArrowLeft"></fa-icon>
+  </a>
+
+  <form class="newRecipeForm">
+
+    <img src="/assets/default_image" alt="Insert Picture" >
+    <label class="form-label" for="imageUrl">Image</label>
+    <input class="form-control" type="text" name="task" [(ngModel)]="newRecipe.imageUrl" /> <br />
+
+    <label class="form-label" for="imageUrl">Image</label>
+    <input class="form-control" type="text" name="task" [(ngModel)]="newRecipe.name" /> <br />
+
+    <label class="form-label" for="description">Description</label>
+    <input class="form-control" type="text" name="description" [(ngModel)]="newRecipe.description" /> <br>
+
+    <label class="form-label" for="directions">Completed</label>
+    <input class="form-control" type="text" name="directions" [(ngModel)]="newRecipe.prepminutes" /> <br>
+
+    <label class="form-label" for="directions">Completed</label>
+    <input class="form-control" type="text" name="directions" [(ngModel)]="newRecipe.cookminutes" /> <br>
+
+    <!-- <label class="form-label" for="directions">Completed</label>
+    <input class="form-control" type="text" name="directions" [(ngModel)]="newRecipe.directions" /> <br> -->
+
+    <button class="btn btn-danger" (click)="null">Cancel</button>
+    <button class="btn btn-primary" (click)="createRecipe(newRecipe)">Save</button>
+  </form>
+  <!-- <h4 id="title">{{ selected.name }}</h4>
+  <p><img [src]="selected.imageUrl" class="recipeImg" [alt]="selected.name" ></p>
+  <p><b>Prep Time: </b>{{ selected.prepminutes }}</p>
+  <p><b>Cook Time: </b>{{ selected.cookminutes }}</p>
+  <p id="description">{{ selected.description }}</p>
+  <p id="directions">{{ selected.directions }}</p> -->
+
+
+</div>
+
+
+
+
+</div>
