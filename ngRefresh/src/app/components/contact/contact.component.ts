@@ -13,6 +13,7 @@ export class ContactComponent implements OnInit {
 
   constructor() { }
 
+  //FontAwesome icons for HTML
   faEnvelope = faEnvelope;
   faTwitter = faTwitter;
   faFacebook = faFacebook;
