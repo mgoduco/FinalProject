@@ -60,7 +60,7 @@ export class RecipeService {
 
   recipesByNameandIngredient(keyword: string): Observable<Recipe[]> {
     return this.http
-      .get<Recipe[]>(this.url + '/search/' + keyword, this.getHttpOptions())
+      .get<Recipe[]>(this.url + '/search/' + keyword)
       .pipe(
         catchError((err: any) => {
           console.log(err);
