@@ -17,7 +17,11 @@ export class RecipeComponent implements OnInit {
   recipes: Recipe[] = [];
   newRecipe: Recipe = new Recipe();
   selected: null | Recipe = null;
+  editSelected: boolean = false;
   isSelected: boolean = false;
+  isCreateSelected: boolean = false;
+  isCreateTableSelected: boolean = false;
+  recipeSelected: boolean = false;
   user: User = new User();
 
   // Icons
@@ -73,8 +77,8 @@ export class RecipeComponent implements OnInit {
   //   });
   // }
 
-  displayTable() {
-    this.isSelected = false;
+  displayCreateTable() {
+    this.isCreateTableSelected = true;
   }
   displayCreate() {
     this.isSelected = true;
@@ -91,6 +95,19 @@ export class RecipeComponent implements OnInit {
         console.error(fail);
       },
     });
+  }
+  displayRecipe(recipe: Recipe) {
+    this.selected = recipe;
+    this.recipeSelected = true;
+    console.log(recipe);
+    console.log(this.selected);
+  }
+
+  displayTable() {
+    this.selected = null;
+    this.isSelected = false;
+    this.isCreateSelected = false;
+    this.isCreateTableSelected = false;
   }
 
   updateRecipe(recipe: Recipe) {
