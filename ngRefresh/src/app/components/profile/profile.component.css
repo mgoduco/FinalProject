@@ -12,6 +12,10 @@
   text-align: left;
 }
 
+#biography {
+  resize: vertical;
+  height: 15vh;
+}
 
 body {
   background-color: #E5E5E5;

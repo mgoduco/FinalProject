@@ -24,6 +24,8 @@ export class HomeComponent implements OnInit {
   isSelected: boolean = false;
   comments: Comment [] = [];
   ingredients: Ingredient [] = [];
+  comment: null | Comment = null;
+  newComment: Comment = new Comment();
 
 
   // Icons
@@ -106,8 +108,32 @@ export class HomeComponent implements OnInit {
     })
   }
 
+  getRecipeById(id: number){
+    console.log(id);
+    this.recipeServ.show(id).subscribe({
+      next: (data) => {this.recipe = data; console.log(data)},
+      error: (fail: any) => {
+        console.error('HomeComponent.reload: error');
+        console.error(fail);
+      }
+    })
+  }
 
 
+
+
+
+  createComment(comment: Comment, id: Number){
+    console.log(comment);
+    console.log(id);
+    this.commentServ.create(comment, id).subscribe({
+      next: (data) => {this.comment = data; console.log(data)},
+      error: (fail: any) => {
+        console.error('HomeComponent.reload: error');
+        console.error(fail);
+      }
+    })
+  }
 
 }
 

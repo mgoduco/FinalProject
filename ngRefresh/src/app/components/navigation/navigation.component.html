@@ -5,9 +5,9 @@
     <a class="navbar-brand" [routerLink]="['/home']" >
       <img src="/assets/refreshicon.png" id="logo" alt="Refresh Logo"  >
     </a>
-    <a  class="nav-link"[routerLink]="['/about']" > About </a>
-    <a  class="nav-link"[routerLink]="['/contact']"> Contact </a>
-    <a  class="nav-link"[routerLink]="['/recipe']"> Recipes </a>
+    <a class="nav-link"[routerLink]="['/about']" > About </a>
+    <a class="nav-link"[routerLink]="['/contact']"> Contact </a>
+    <a *ngIf="loggedIn()" class="nav-link"[routerLink]="['/recipe']"> Recipes </a>
     <input type="text" id="searchIput" class="searchTerm" [(ngModel)]="keyword"  placeholder="Search Recipes...">
       <button type="submit" class="btn btn-success"><fa-icon [icon]="randomIcon()" [routerLink]="['/search/' + keyword]"></fa-icon></button>
     <a *ngIf="!loggedIn()" class="nav-link"[routerLink]="['/login']"> Login </a>
@@ -21,14 +21,14 @@
         </div>
         <div class="offcanvas-body">
           <a  class="nav-link"[routerLink]="['/u']" (click)="offcanvas.dismiss('Cross click')"> Profile </a>
-          <p>Account Settings&hellip;</p>
+          <p>Favorites &hellip;</p>
           <input type="text" placeholder="User Search..."><br>
           <p><button id="logout" class="btn btn-secondary" (click)="logOut()" (click)="offcanvas.dismiss('Cross click')"><fa-icon [icon]="faArrowRightFromBracket"></fa-icon> Logout </button></p>
 
         </div>
       </ng-template>
       <a class="menuBar" (click)="openEnd(content)">
-        <img src="/assets/userIcon.png" id="userIcon" alt="User Icon" >
+        <img src={{user.imageUrl}} id="userIcon" alt="User Icon" >
       </a>
     </span>
   </div>

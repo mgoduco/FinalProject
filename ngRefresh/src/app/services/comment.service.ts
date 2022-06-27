@@ -66,8 +66,8 @@ export class CommentService {
     );
   }
 
-  create(comment: Comment, recipe: Recipe): Observable<Comment> {
-    return this.http.post<Comment>(`${this.url}/recipes/${recipe.id}/comments`, comment, this.getHttpOptions()).pipe(
+  create(comment: Comment, id: Number): Observable<Comment> {
+    return this.http.post<Comment>(`${this.url}/recipes/${id}/comments`, comment, this.getHttpOptions()).pipe(
       catchError((err: any) => {
         console.error(err);
         return throwError(
