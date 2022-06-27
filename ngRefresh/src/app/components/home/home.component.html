@@ -46,19 +46,19 @@
   <h5>Ingredients</h5>
   <ul class="ingredients" *ngFor="let ingredient of ingredients">
     <li>{{ingredient.name}}</li>
-</ul>
+  </ul>
   <p id="description">{{ selected.description }}</p>
   <p id="directions">{{ selected.directions }}</p>
 
-
-      <ul class="comments" *ngFor="let comment of comments">
+    <h4>Comments</h4>
+    <div class="form-floating mb" id="addComments">
+    <input class="form-control" type="text" id="commentTitle" placeholder="Title" [(ngModel)]="newComment.title"><br>
+    <textarea class="form-control" name="addComments" placeholder="Comment" [(ngModel)]="newComment.comment"></textarea><br>
+    <button class="btn btn-secondary" (click)="createComment(newComment, selected.id)">Comment</button>
+  </div>
+    <ul class="comments" *ngFor="let comment of comments">
           <li><strong>{{comment.title}}</strong><br>{{comment.comment}}</li>
       </ul>
-
-
-
-
-
 </div>
 
 

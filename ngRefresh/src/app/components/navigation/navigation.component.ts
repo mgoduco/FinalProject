@@ -6,6 +6,7 @@ import { RecipeService } from 'src/app/services/recipe.service';
 import { Recipe } from 'src/app/models/recipe';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
+import { User } from 'src/app/models/user';
 
 
 @Component({
@@ -18,7 +19,7 @@ export class NavigationComponent implements OnInit {
   // @ViewChild(SearchComponent) searchComp: any
 
 
-
+  user: User = new User();
   keyword: string = '';
   recipes: Recipe [] = [];
 
@@ -62,6 +63,7 @@ export class NavigationComponent implements OnInit {
     private auth: AuthService) { }
 
   ngOnInit(): void {
+    this.getUser();
   }
 
   openEnd(content: TemplateRef<any>) {
@@ -82,22 +84,18 @@ export class NavigationComponent implements OnInit {
   }
 
 
-  //   console.log(keyword);
-  //   this.router.navigate([`./search`]);
-  // // let searchTerm = keyword;
-  // //   return searchTerm;
-  //   this.recipeServ.recipesByNameandIngredient(keyword).subscribe({
-  //     next: (dbRecipes) => {this.recipes = dbRecipes; console.log(dbRecipes)},
-  //     error: (fail: any) => {
-  //       console.error('NavigationComponent.reload: error');
-  //       console.error(fail);
-  //     }
-  //   })
+  getUser(){
+    this.auth.getLoggedInUser().subscribe({
+      next: (data) => {
+        this.user = data;
+      }
+    })
+    console.log(this.user);
 
 
   }
 
-
+}
 
 
 

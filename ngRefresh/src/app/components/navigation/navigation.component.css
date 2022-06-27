@@ -17,7 +17,9 @@
 .navbar {
   width: 100vw;
   height: fit-content;
-
+}
+.container-fluid {
+  overflow: hidden;
 }
 
 #logout {
