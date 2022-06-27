@@ -127,4 +127,14 @@ export class RecipeComponent implements OnInit {
       },
     });
   }
+
+  deleteRecipe(id: number): void {
+    this.recipeServ.delete(id).subscribe({
+      next: () => {
+        this.reload();
+        this.reload();
+        this.displayTable();
+      },
+    });
+  }
 }

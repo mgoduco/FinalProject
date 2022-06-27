@@ -78,6 +78,7 @@
       <p class="card-text">{{recipe.description}}</p>
     </div>
     <button class="btn btn-success" (click)="displayUpdateTable(recipe)">Update Recipe</button>
+    <button class="btn btn-danger" (click)="deleteRecipe(recipe.id)">Delete Recipe</button>
   </div>
 </div>
 </div>
@@ -98,7 +99,7 @@
 </div>
 
 
-<div id="createRecipe">
+<div id="updateRecipe">
 <div class="centered" *ngIf="editSelected " id="recipeDetails">
 
   <a class="" (click)="displayTable()">
