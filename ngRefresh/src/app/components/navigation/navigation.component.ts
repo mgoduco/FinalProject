@@ -1,10 +1,11 @@
 import { SearchComponent } from './../search/search.component';
 import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { NgbOffcanvas } from '@ng-bootstrap/ng-bootstrap';
-import { faArrowLeft, faBacon, faBowlFood, faBowlRice, faBreadSlice, faBurger, faCarrot, faDrumstickBite, faEgg, faFish, faPieChart, faPizzaSlice, faTachographDigital, faUtensils, IconDefinition } from '@fortawesome/free-solid-svg-icons';
+import { faArrowLeft, faArrowRightFromBracket, faBacon, faBowlFood, faBowlRice, faBreadSlice, faBurger, faCarrot, faDrumstickBite, faEgg, faFish, faPieChart, faPizzaSlice, faTachographDigital, faUtensils, IconDefinition } from '@fortawesome/free-solid-svg-icons';
 import { RecipeService } from 'src/app/services/recipe.service';
 import { Recipe } from 'src/app/models/recipe';
 import { ActivatedRoute, Router } from '@angular/router';
+import { AuthService } from 'src/app/services/auth.service';
 
 
 @Component({
@@ -34,6 +35,7 @@ export class NavigationComponent implements OnInit {
    faBowlFood = faBowlFood;
    faBowlRice = faBowlRice;
    faBreadSlice = faBreadSlice;
+   faArrowRightFromBracket = faArrowRightFromBracket;
 
 
   icons: IconDefinition [] =  [
@@ -54,7 +56,8 @@ export class NavigationComponent implements OnInit {
   constructor(private offcanvasService: NgbOffcanvas,
     private recipeServ: RecipeService,
     private route: ActivatedRoute,
-    private router: Router) { }
+    private router: Router,
+    private auth: AuthService) { }
 
   ngOnInit(): void {
   }
@@ -67,6 +70,14 @@ export class NavigationComponent implements OnInit {
     return this.icons[Math.floor(Math.random() * this.icons.length)];
   }
 
+  loggedIn(){
+    return this.auth.checkLogin();
+  }
+
+  logOut(){
+    this.auth.logout();
+    this.router.navigateByUrl('/home');
+  }
   // search(keyword: string){
   //   console.log(keyword);
   //   this.router.navigate([`./search`]);

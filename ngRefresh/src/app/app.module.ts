@@ -17,6 +17,7 @@ import { RecipeComponent } from './components/recipe/recipe.component';
 import { SearchComponent } from './components/search/search.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome'
 import { AuthService } from './services/auth.service';
+import { LogoutComponent } from './components/logout/logout.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { AuthService } from './services/auth.service';
     AboutComponent,
     NotFoundComponent,
     RecipeComponent,
-    SearchComponent
+    SearchComponent,
+    LogoutComponent
   ],
   imports: [
     BrowserModule,
