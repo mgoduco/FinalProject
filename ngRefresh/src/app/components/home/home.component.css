@@ -60,6 +60,15 @@ body {
     text-align: center;
   }
 
+  #addComments{
+    width: fit-content;
+    height: auto;
+  }
+
+  #commentTitle{
+
+  }
+
 
 
 
