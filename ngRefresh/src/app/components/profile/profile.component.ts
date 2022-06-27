@@ -27,31 +27,31 @@ export class ProfileComponent implements OnInit {
 
 
   ngOnInit(): void {
-    // this.getUser();
+    this.getUser();
 
 
-    let idStr = this.route.snapshot.paramMap.get('id');
-    console.log(this.editUser);
-    console.log(idStr);
-    if (idStr) {
-      this.idNum = Number.parseInt(idStr);
-      console.log('idNum: ' + this.idNum);
-      if (!isNaN(this.idNum)) {
+    // let idStr = this.route.snapshot.paramMap.get('id');
+    // console.log(this.editUser);
+    // console.log(idStr);
+    // if (idStr) {
+    //   this.idNum = Number.parseInt(idStr);
+    //   console.log('idNum: ' + this.idNum);
+    //   if (!isNaN(this.idNum)) {
 
-        this.userServ.getUserById(this.idNum).subscribe({
-          next: (theUser) => {
-            this.user = theUser;
-          },
-          error: (fail) => {
-            this.router.navigateByUrl('/userNotFound');
-          },
-        });
-      }
-      else {
-        this.router.navigateByUrl('/invalidUserId');
-      }
-    }
-    this.displayProfile();
+    //     this.userServ.getUserById(this.idNum).subscribe({
+    //       next: (theUser) => {
+    //         this.user = theUser;
+    //       },
+    //       error: (fail) => {
+    //         this.router.navigateByUrl('/userNotFound');
+    //       },
+    //     });
+    //   }
+    //   else {
+    //     this.router.navigateByUrl('/invalidUserId');
+    //   }
+    // }
+    // this.displayProfile();
   }
 
   // getUser(){
@@ -106,6 +106,15 @@ export class ProfileComponent implements OnInit {
 
   displayProfile() {
     this.editUser = null;
+  }
+
+  getUser(){
+    this.auth.getLoggedInUser().subscribe({
+      next: (data) => {
+        this.user = data;
+      }
+    })
+    console.log(this.user);
   }
 
 }

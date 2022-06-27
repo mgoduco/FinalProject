@@ -10,6 +10,8 @@
     <a  class="nav-link"[routerLink]="['/recipe']"> Recipes </a>
     <!-- <input type="text" class="searchTerm" [(ngModel)]="keyword"  placeholder="Search Recipes..."> -->
     <a  class="nav-link"[routerLink]="['/search']"> Search </a>
+    <input type="text" id="searchIput" class="searchTerm" [(ngModel)]="keyword"  placeholder="Search Recipes...">
+      <button type="submit" class="btn btn-success"><fa-icon [icon]="randomIcon()" [routerLink]="['/search/' + keyword]"></fa-icon></button>
     <!-- <button class="btn btn-success"><fa-icon [icon]="randomIcon()" (click)="search(keyword)" [routerLink]="['/search']"></fa-icon></button> -->
     <a *ngIf="!loggedIn()" class="nav-link"[routerLink]="['/login']"> Login </a>
     <a *ngIf="!loggedIn()" class="nav-link"[routerLink]="['/register']"> Register </a>
@@ -21,7 +23,7 @@
           <button type="button" class="btn-close" aria-label="Close" (click)="offcanvas.dismiss('Cross click')"></button>
         </div>
         <div class="offcanvas-body">
-          <a  class="nav-link"[routerLink]="['/u']"> Profile </a>
+          <a  class="nav-link"[routerLink]="['/u']" (click)="offcanvas.dismiss('Cross click')"> Profile </a>
           <p>Account Settings&hellip;</p>
           <input type="text" placeholder="User Search..."><br>
           <p><button id="logout" class="btn btn-secondary" (click)="logOut()" (click)="offcanvas.dismiss('Cross click')"><fa-icon [icon]="faArrowRightFromBracket"></fa-icon> Logout </button></p>

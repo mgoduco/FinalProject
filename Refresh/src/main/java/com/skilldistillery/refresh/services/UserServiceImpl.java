@@ -58,8 +58,8 @@ public class UserServiceImpl implements UserService {
 			editUser.setUpdated(user.getUpdated());
 			editUser.setCreated(user.getCreated());
 			editUser.setImageUrl(user.getImageUrl());
-			editUser.setFirstName(user.getFirstName());
-			editUser.setLastName(user.getLastName());
+			editUser.setFirstname(user.getFirstname());
+			editUser.setLastname(user.getLastname());
 			editUser.setBiography(user.getBiography());
 
 			userRepo.saveAndFlush(editUser);

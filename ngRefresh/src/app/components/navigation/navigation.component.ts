@@ -1,5 +1,5 @@
 import { SearchComponent } from './../search/search.component';
-import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output, TemplateRef, ViewChild } from '@angular/core';
 import { NgbOffcanvas } from '@ng-bootstrap/ng-bootstrap';
 import { faArrowLeft, faArrowRightFromBracket, faBacon, faBowlFood, faBowlRice, faBreadSlice, faBurger, faCarrot, faDrumstickBite, faEgg, faFish, faPieChart, faPizzaSlice, faTachographDigital, faUtensils, IconDefinition } from '@fortawesome/free-solid-svg-icons';
 import { RecipeService } from 'src/app/services/recipe.service';
@@ -21,6 +21,8 @@ export class NavigationComponent implements OnInit {
 
   keyword: string = '';
   recipes: Recipe [] = [];
+
+
 
   // Icons
   faArrowLeft = faArrowLeft;
@@ -78,7 +80,8 @@ export class NavigationComponent implements OnInit {
     this.auth.logout();
     this.router.navigateByUrl('/home');
   }
-  // search(keyword: string){
+
+
   //   console.log(keyword);
   //   this.router.navigate([`./search`]);
   // // let searchTerm = keyword;
@@ -90,7 +93,7 @@ export class NavigationComponent implements OnInit {
   //       console.error(fail);
   //     }
   //   })
-  // }
+
 
   }
 
