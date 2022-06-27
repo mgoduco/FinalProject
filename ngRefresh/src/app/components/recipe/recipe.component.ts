@@ -76,6 +76,9 @@ export class RecipeComponent implements OnInit {
   //     },
   //   });
   // }
+  displayUpdateTable() {
+    this.editSelected = true;
+  }
 
   displayCreateTable() {
     this.isCreateTableSelected = true;
@@ -89,6 +92,7 @@ export class RecipeComponent implements OnInit {
       next: (newRecipe) => {
         this.newRecipe = new Recipe();
         this.reload();
+        this.displayTable();
       },
       error: (fail) => {
         console.error('RecipeComponent.addTodo: error creating recipe');
@@ -99,8 +103,6 @@ export class RecipeComponent implements OnInit {
   displayRecipe(recipe: Recipe) {
     this.selected = recipe;
     this.recipeSelected = true;
-    console.log(recipe);
-    console.log(this.selected);
   }
 
   displayTable() {
