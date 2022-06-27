@@ -15,6 +15,20 @@ body {
 #editForm{
   text-align: left;
 }
+
+#textarea {
+  height: 150px;
+}
+
+#createRecipe {
+border-style: solid;
+border-color: grey;
+border-width: 2px;
+
+background-color: whitesmoke;
+
+}
+
 .card-img-top{
   width: auto;
   height: 40vh;
