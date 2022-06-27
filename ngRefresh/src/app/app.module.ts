@@ -18,6 +18,7 @@ import { SearchComponent } from './components/search/search.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome'
 import { AuthService } from './services/auth.service';
 import { ProfileComponent } from './components/profile/profile.component';
+import { FavoriteComponent } from './components/favorite/favorite.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { ProfileComponent } from './components/profile/profile.component';
     NotFoundComponent,
     RecipeComponent,
     SearchComponent,
-    ProfileComponent
+    ProfileComponent,
+    FavoriteComponent
   ],
   imports: [
     BrowserModule,
