@@ -1,4 +1,4 @@
-import { DatePipe } from '@angular/common';
+
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, Observable, throwError } from 'rxjs';
@@ -14,7 +14,6 @@ export class IngredientService {
 
   constructor(
     private http: HttpClient,
-    private datePipe: DatePipe,
     private auth: AuthService
   ) {}
 
@@ -46,7 +45,7 @@ export class IngredientService {
 
   indexByName(name: String): Observable<Ingredient[]> {
     return this.http
-      .get<Ingredient[]>(this.url + '/search/' + {name}, this.getHttpOptions())
+      .get<Ingredient[]>(this.url + '/search/' + name, this.getHttpOptions())
       .pipe(
         catchError((err: any) => {
           console.log(err);
@@ -62,8 +61,7 @@ export class IngredientService {
   }
 
   indexByRecipe(id: number): Observable<Ingredient[]> {
-    return this.http
-      .get<Ingredient[]>(this.url + '/recipe/' + {id}, this.getHttpOptions())
+    return this.http.get<Ingredient[]>(this.url + '/recipe/' + id)
       .pipe(
         catchError((err: any) => {
           console.log(err);

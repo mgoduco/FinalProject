@@ -1,13 +1,15 @@
+import { Ingredient } from './../../models/ingredient';
 import { CommentService } from './../../services/comment.service';
 
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { NgbCarousel, NgbSlideEvent, NgbSlideEventSource } from '@ng-bootstrap/ng-bootstrap';
+import { NgbCarousel, NgbCollapse, NgbSlideEvent, NgbSlideEventSource } from '@ng-bootstrap/ng-bootstrap';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Recipe } from 'src/app/models/recipe';
 import { RecipeService } from 'src/app/services/recipe.service';
 import { UserService } from 'src/app/services/user.service';
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 import { Comment } from 'src/app/models/comment';
+import { IngredientService } from 'src/app/services/ingredient.service';
 
 @Component({
   selector: 'app-home',
@@ -21,6 +23,7 @@ export class HomeComponent implements OnInit {
   selected: null | Recipe = null;
   isSelected: boolean = false;
   comments: Comment [] = [];
+  ingredients: Ingredient [] = [];
 
 
   // Icons
@@ -28,29 +31,10 @@ export class HomeComponent implements OnInit {
 
   constructor(
     private recipeServ: RecipeService,
-    private userServ: UserService,
     private route: ActivatedRoute,
     private commentServ: CommentService,
+    private ingredientServ: IngredientService,
     private router: Router) { }
-
-    // ngOnInit(): void {
-    //   let idStr = this.route.snapshot.paramMap.get('id');
-    //   if (!this.selected && idStr) {
-    //     try{
-    //     let idNum = Number.parseInt(idStr);
-    //   this.recipeServ.show(idNum).subscribe({
-    //     next: (theRecipe) => {
-    //     this.selected = theRecipe;
-    //     },
-    //     error: (fail) =>{
-    //       this.router.navigateByUrl('/todoNotFound')
-    //     }
-    //   });
-    //     }catch (error){
-    //     }
-    //   }
-    //   this.reload();
-    // }
 
     ngOnInit(): void {
       let idStr = this.route.snapshot.paramMap.get('id');
@@ -61,7 +45,7 @@ export class HomeComponent implements OnInit {
             next: (theRecipe) => {
               this.selected = theRecipe;
             },
-            error: (fail) => {
+            error: () => {
               this.router.navigateByUrl('/recipeNotFound');
             },
           });
@@ -88,6 +72,11 @@ export class HomeComponent implements OnInit {
     this.isSelected = true;
     console.log(recipe);
     console.log(this.selected);
+    let id = this.selected.id;
+    if(id != null){
+      this.getIngredientsByrecipe(id);
+      this.getRecipeComments(id);
+    }
   }
 
   displayTable() {
@@ -95,15 +84,28 @@ export class HomeComponent implements OnInit {
   }
 
 
-  getRecipeComments(recipe: Recipe){
-    this.commentServ.getAllCommentsByRecipe(recipe).subscribe({
-      next: (data) => {this.comments = data;},
+  getRecipeComments(id: number){
+    console.log(id);
+    this.commentServ.getAllCommentsByRecipe(id).subscribe({
+      next: (data) => {this.comments = data; console.log(data)},
       error: (fail: any) => {
         console.error('HomeComponent.reload: error');
         console.error(fail);
       }
     })
   }
+
+  getIngredientsByrecipe(id: number){
+    console.log(id);
+    this.ingredientServ.indexByRecipe(id).subscribe({
+      next: (data) => {this.ingredients = data; console.log(data)},
+      error: (fail: any) => {
+        console.error('HomeComponent.reload: error');
+        console.error(fail);
+      }
+    })
+  }
+
 
 
 
