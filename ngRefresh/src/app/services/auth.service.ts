@@ -81,11 +81,44 @@ export class AuthService {
     return localStorage.getItem('credentials');
   }
 
-  // getUser() {
-  //   console.log(this.getCredentials());
-  //   let user1 = this.getCredentials();
-  //   localStorage.
-  //   let user = JSON.parse(this.getCredentials() || '{}')
-  //   return user;
-  // }
+  getUserById(id: number): Observable<User> {
+    return this.http.get<User>(`${this.url}/${id}`).pipe(
+      catchError((err: any) => {
+        console.log(err);
+        return throwError(
+          () =>
+            new Error(
+              'UserService.getUserById(): error retrieving user: ' + err
+            )
+        );
+      })
+    );
+  }
+
+  getLoggedInUser(): Observable<User> {
+    if (! this.checkLogin()) {
+      return throwError(
+        () => { new Error('Not logged in.')}
+      )
+    }
+    let httpOptions = {
+      headers: {
+        Authorization: 'Basic ' + this.getCredentials(),
+        'X-Requested-with': 'XMLHttpRequest'
+      }
+    };
+    return this.http.get<User>(environment.baseUrl+'authenticate', httpOptions).pipe(
+      catchError((err: any) => {
+        console.log(err);
+        return throwError(
+          () =>
+            new Error(
+              'UserService.getUserById(): error retrieving user: ' + err
+            )
+        );
+      })
+    );
+  }
+
+
 }

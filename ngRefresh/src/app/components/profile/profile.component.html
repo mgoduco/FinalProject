@@ -37,9 +37,9 @@
       <input type="text" class="form-control" name="email" id="email" placeholder="Email" value="{{editUser.email}}" [(ngModel)]="editUser.email">
       <label for="email"><strong>Email:</strong></label>
     </div>
-    <div *ngIf="!editUser">
+    <!-- <div *ngIf="!editUser">
       <strong>Password:</strong> {{user.password}}
-    </div>
+    </div> -->
     <div class="form-floating mb-1" *ngIf="editUser">
       <input type="password" class="form-control" name="password" id="password" placeholder="Password" value="{{editUser.password}}" [(ngModel)]="editUser.password">
       <label for="password"><strong>Password:</strong></label>

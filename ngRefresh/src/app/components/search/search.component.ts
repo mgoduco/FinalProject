@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit, SimpleChanges } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgbOffcanvas } from '@ng-bootstrap/ng-bootstrap';
 import { Recipe } from 'src/app/models/recipe';
@@ -20,6 +20,7 @@ export class SearchComponent implements OnInit {
   selected: null | Recipe = null;
   isSelected: boolean = false;
   recipe: null | Recipe = null;
+
 
 
   // Icons
@@ -57,7 +58,14 @@ export class SearchComponent implements OnInit {
     private router: Router) { }
 
   ngOnInit(): void {
+    this.router.routeReuseStrategy.shouldReuseRoute = () => false;
     console.log("INIT");
+    let searchTerm = this.route.snapshot.paramMap.get('keyword');
+    if (searchTerm != null){
+      this.keyword = searchTerm;
+    }
+    this.search(this.keyword);
+
   }
 
 
@@ -75,6 +83,10 @@ export class SearchComponent implements OnInit {
 
   displayTable() {
     this.selected = null;
+  }
+
+  ngOnChanges(changes: SimpleChanges){
+    this.search(this.keyword);
   }
 
   search(keyword: string){

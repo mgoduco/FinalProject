@@ -1,11 +1,4 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <title>Search</title>
-  </head>
 
-  <body>
     <div class="searchBar">
       <input type="text" id="searchIput" class="searchTerm" [(ngModel)]="keyword"  placeholder="Search Recipes...">
       <button type="submit" class="btn btn-success"><fa-icon [icon]="randomIcon()" (click)="search(keyword)" [routerLink]="['/search']"></fa-icon></button>
@@ -53,5 +46,4 @@
 
 
     </div>
-  </body>
-</html>
+
