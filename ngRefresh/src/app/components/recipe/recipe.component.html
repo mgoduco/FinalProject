@@ -2,46 +2,52 @@
 <div class="container-fluid" >
  <div class="row align-items-center">
 
-
-
-<div class="centered" *ngIf="!selected" id="recipeDetails">
+  <br><br>
+  <div class="topmiddle">
+   <button *ngIf="!isSelected" class="btn btn-success" (click)="displayCreate()">Create New Recipe</button>
+  </div>
+   <br><br>
+<div class="centered" *ngIf="isSelected" id="createRecipe">
   <a class="" (click)="displayTable()">
   <fa-icon [icon]="faArrowLeft"></fa-icon>
   </a>
-
-  <form class="newRecipeForm">
-
-    <img src="/assets/default_image" alt="Insert Picture" >
+  <form centered="form-floating mb-3">
+    <img ng src="/assets/default_recipe.png" class="recipeImg"><br>
+    <div class="container-fluid">
+      <div class="centered">
     <label class="form-label" for="imageUrl">Image</label>
-    <input class="form-control" type="text" name="task" [(ngModel)]="newRecipe.imageUrl" /> <br />
-
-    <label class="form-label" for="imageUrl">Image</label>
-    <input class="form-control" type="text" name="task" [(ngModel)]="newRecipe.name" /> <br />
-
-    <label class="form-label" for="description">Description</label>
-    <input class="form-control" type="text" name="description" [(ngModel)]="newRecipe.description" /> <br>
-
-    <label class="form-label" for="directions">Completed</label>
-    <input class="form-control" type="text" name="directions" [(ngModel)]="newRecipe.prepminutes" /> <br>
-
-    <label class="form-label" for="directions">Completed</label>
-    <input class="form-control" type="text" name="directions" [(ngModel)]="newRecipe.cookminutes" /> <br>
-
+    <input class="form-floating mb-1" type="text" name="task" [(ngModel)]="newRecipe.imageUrl" /> <br />
+    <label class="form-label" for="imageUrl">Recipe Name:</label>
+    <input class="form-floating mb-1" type="text" name="task" [(ngModel)]="newRecipe.name" /> <br />
+    <label class="form-label" for="description">Recipe Description:</label>
+    <input class="form-floating mb-1" type="text" name="description" [(ngModel)]="newRecipe.description" /> <br>
+    <label class="form-label" for="directions">Recipe Prep Time:</label>
+    <input class="form-floating mb-1" type="number" name="prepminutes" [(ngModel)]="newRecipe.prepminutes" /> <br>
+    <label class="form-label" for="directions">Recipe Cool Time:</label>
+    <input class="form-floating mb-1" type="number" name="cookminutes" [(ngModel)]="newRecipe.cookminutes" /> <br>
     <!-- <label class="form-label" for="directions">Completed</label>
     <input class="form-control" type="text" name="directions" [(ngModel)]="newRecipe.directions" /> <br> -->
-
     <button class="btn btn-danger" (click)="null">Cancel</button>
     <button class="btn btn-primary" (click)="createRecipe(newRecipe)">Save</button>
+    </div></div>
   </form>
-  <!-- <h4 id="title">{{ selected.name }}</h4>
-  <p><img [src]="selected.imageUrl" class="recipeImg" [alt]="selected.name" ></p>
-  <p><b>Prep Time: </b>{{ selected.prepminutes }}</p>
-  <p><b>Cook Time: </b>{{ selected.cookminutes }}</p>
-  <p id="description">{{ selected.description }}</p>
-  <p id="directions">{{ selected.directions }}</p> -->
-
 
 </div>
+
+<div *ngFor="let recipe of recipes">
+<ngb-carousel >
+  <ng-template ngbSlide>
+    <div class="picsum-img-wrapper">
+      <img [src]="recipe.imageUrl" alt="">
+    </div>
+    <div class="carousel-caption">
+      <h3>{{ recipe.name }}</h3>
+      <p>{{ recipe.description }}</p>
+    </div>
+  </ng-template>
+</ngb-carousel>
+</div>
+
 
 
 

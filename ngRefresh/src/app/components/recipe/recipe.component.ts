@@ -58,7 +58,10 @@ export class RecipeComponent implements OnInit {
     });
   }
   displayTable() {
-    this.selected = null;
+    this.isSelected = false;
+  }
+  displayCreate() {
+    this.isSelected = true;
   }
 
   createRecipe(recipe: Recipe) {
