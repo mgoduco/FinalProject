@@ -68,6 +68,15 @@ export class AuthService {
     return btoa(`${username}:${password}`);
   }
 
+  // *** THIS IS BECAUSE I DON'T KNOW HOW TO FETCH A USER FOR THE PROFILE PAGE ***
+  // getUsername (auth: string): string {
+  //   let username = '';
+  //   let authString = atob(auth);
+  //   let colonIndex = authString.indexOf(':', 0);
+  //   username = authString.slice(0,colonIndex);
+  //   return username;
+  // }
+
   getCredentials(): string | null {
     return localStorage.getItem('credentials');
   }

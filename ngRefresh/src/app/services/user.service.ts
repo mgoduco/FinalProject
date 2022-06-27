@@ -27,8 +27,19 @@ export class UserService {
     return options;
   }
 
-  getUserById(user: User): Observable<User> {
-    return this.http.get<User>(`${this.url}/${user.id}`, this.getHttpOptions()).pipe(
+  getUserById(uid: number): Observable<User> {
+    return this.http.get<User>(`${this.url}/${uid}`, this.getHttpOptions()).pipe(
+        catchError((err: any) => {
+          console.log(err);
+          return throwError(
+            () => new Error('UserService.index(): error retrieving User: ' + err)
+          );
+        })
+      );
+  }
+
+  getUserById(uid: number): Observable<User> {
+    return this.http.get<User>(`${this.url}/${uid}`, this.getHttpOptions()).pipe(
         catchError((err: any) => {
           console.log(err);
           return throwError(
