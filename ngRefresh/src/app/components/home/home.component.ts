@@ -1,3 +1,4 @@
+import { CommentService } from './../../services/comment.service';
 
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgbCarousel, NgbSlideEvent, NgbSlideEventSource } from '@ng-bootstrap/ng-bootstrap';
@@ -6,6 +7,7 @@ import { Recipe } from 'src/app/models/recipe';
 import { RecipeService } from 'src/app/services/recipe.service';
 import { UserService } from 'src/app/services/user.service';
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
+import { Comment } from 'src/app/models/comment';
 
 @Component({
   selector: 'app-home',
@@ -18,6 +20,7 @@ export class HomeComponent implements OnInit {
   recipes: Recipe [] = [];
   selected: null | Recipe = null;
   isSelected: boolean = false;
+  comments: Comment [] = [];
 
 
   // Icons
@@ -27,6 +30,7 @@ export class HomeComponent implements OnInit {
     private recipeServ: RecipeService,
     private userServ: UserService,
     private route: ActivatedRoute,
+    private commentServ: CommentService,
     private router: Router) { }
 
     // ngOnInit(): void {
@@ -88,6 +92,17 @@ export class HomeComponent implements OnInit {
 
   displayTable() {
     this.selected = null;
+  }
+
+
+  getRecipeComments(recipe: Recipe){
+    this.commentServ.getAllCommentsByRecipe(recipe).subscribe({
+      next: (data) => {this.comments = data;},
+      error: (fail: any) => {
+        console.error('HomeComponent.reload: error');
+        console.error(fail);
+      }
+    })
   }
 
 

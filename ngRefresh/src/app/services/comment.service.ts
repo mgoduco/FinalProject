@@ -17,9 +17,8 @@ export class CommentService {
   constructor(
     private http: HttpClient,
     private auth: AuthService,
-    private user: UserService,
-    private comment: CommentService
-  ) {}
+    private user: UserService
+    ) {}
 
   getHttpOptions() {
     let options = {
