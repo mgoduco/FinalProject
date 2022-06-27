@@ -17,7 +17,7 @@ export class RecipeComponent implements OnInit {
   recipes: Recipe[] = [];
   newRecipe: Recipe = new Recipe();
   selected: null | Recipe = null;
-  editSelected: boolean = false;
+  editSelected: null | Recipe = null;
   isSelected: boolean = false;
   isCreateSelected: boolean = false;
   isCreateTableSelected: boolean = false;
@@ -76,10 +76,9 @@ export class RecipeComponent implements OnInit {
   //     },
   //   });
   // }
-  displayUpdateTable() {
-    this.editSelected = true;
+  displayUpdateTable(recipe: Recipe) {
+    this.editSelected = recipe;
   }
-
   displayCreateTable() {
     this.isCreateTableSelected = true;
   }
@@ -90,6 +89,8 @@ export class RecipeComponent implements OnInit {
   createRecipe(recipe: Recipe) {
     this.recipeServ.create(recipe).subscribe({
       next: (newRecipe) => {
+        this.selected = recipe;
+        this.recipeSelected = true;
         this.newRecipe = new Recipe();
         this.reload();
         this.displayTable();
@@ -110,6 +111,7 @@ export class RecipeComponent implements OnInit {
     this.isSelected = false;
     this.isCreateSelected = false;
     this.isCreateTableSelected = false;
+    this.editSelected = null;
   }
 
   updateRecipe(recipe: Recipe) {

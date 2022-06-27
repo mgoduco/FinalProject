@@ -20,6 +20,16 @@ body {
   height: 150px;
 }
 
+#updatetextarea {
+  height: 400px;
+}
+#updatetextdesc {
+  height: 200px;
+}
+#updatetexturl {
+  height: 150px;
+}
+
 #createRecipe {
 border-style: solid;
 border-color: grey;
