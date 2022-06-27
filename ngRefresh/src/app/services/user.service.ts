@@ -27,8 +27,8 @@ export class UserService {
     return options;
   }
 
-  getUserById(user: User): Observable<User> {
-    return this.http.get<User>(`${this.url}/${user.id}`, this.getHttpOptions()).pipe(
+  getUserById(uid: number): Observable<User> {
+    return this.http.get<User>(`${this.url}/${uid}`, this.getHttpOptions()).pipe(
         catchError((err: any) => {
           console.log(err);
           return throwError(
@@ -37,6 +37,18 @@ export class UserService {
         })
       );
   }
+
+  // *** THIS IS BECAUSE I DON'T KNOW HOW TO FETCH A USER FOR THE PROFILE PAGE ***
+  // getUserByUsername(username: string): Observable<User> {
+  //   return this.http.get<User>(`${this.url}/${username}`, this.getHttpOptions()).pipe(
+  //       catchError((err: any) => {
+  //         console.log(err);
+  //         return throwError(
+  //           () => new Error('UserService.index(): error retrieving User: ' + err)
+  //         );
+  //       })
+  //     );
+  // }
 
   update(user: User): Observable<User> {
     return this.http.put<User>(`${this.url}/${user.id}`, user, this.getHttpOptions()).pipe(
