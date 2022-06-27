@@ -50,6 +50,34 @@
 
 
 
+<div class="centered" *ngIf="" id="editRecipe">
+  <a class="" (click)="displayTable()">
+  <fa-icon [icon]="faArrowLeft"></fa-icon>
+  </a>
+  <form centered="form-floating mb-3">
+    <img ng src="/assets/default_recipe.png" class="recipeImg"><br>
+    <div class="container-fluid">
+      <div class="centered">
+    <label class="form-label" for="imageUrl">Image</label>
+    <input class="form-floating mb-1" type="text" name="task" [(ngModel)]="newRecipe.imageUrl" /> <br />
+    <label class="form-label" for="imageUrl">Recipe Name:</label>
+    <input class="form-floating mb-1" type="text" name="task" [(ngModel)]="newRecipe.name" /> <br />
+    <label class="form-label" for="description">Recipe Description:</label>
+    <input class="form-floating mb-1" type="text" name="description" [(ngModel)]="newRecipe.description" /> <br>
+    <label class="form-label" for="directions">Recipe Prep Time:</label>
+    <input class="form-floating mb-1" type="number" name="prepminutes" [(ngModel)]="newRecipe.prepminutes" /> <br>
+    <label class="form-label" for="directions">Recipe Cool Time:</label>
+    <input class="form-floating mb-1" type="number" name="cookminutes" [(ngModel)]="newRecipe.cookminutes" /> <br>
+    <!-- <label class="form-label" for="directions">Completed</label>
+    <input class="form-control" type="text" name="directions" [(ngModel)]="newRecipe.directions" /> <br> -->
+    <button class="btn btn-danger" (click)="null">Cancel</button>
+    <button class="btn btn-primary" (click)="updateRecipe(newRecipe)">Save</button>
+    </div>
+  </div>
+  </form>
 
+</div>
+
+</div>
 
 </div>

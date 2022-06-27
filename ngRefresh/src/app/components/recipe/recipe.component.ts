@@ -76,4 +76,17 @@ export class RecipeComponent implements OnInit {
       },
     });
   }
+
+  updateRecipe(recipe: Recipe) {
+    this.recipeServ.update(recipe).subscribe({
+      next: (newRecipe) => {
+        this.newRecipe = new Recipe();
+        this.reload();
+      },
+      error: (fail) => {
+        console.error('RecipeComponent.addTodo: error creating recipe');
+        console.error(fail);
+      },
+    });
+  }
 }
