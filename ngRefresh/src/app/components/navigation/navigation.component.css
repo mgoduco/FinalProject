@@ -15,9 +15,22 @@
 }
 
 .navbar {
-  width: auto;
+  width: 100vw;
   height: fit-content;
+
 }
+
+#logout {
+  margin: 30vh;
+  margin: 10vw;
+}
+
+
+.navLinks {
+  padding-right: 10%;
+}
+
+
 
 /* .nav-link {
   width: auto;
