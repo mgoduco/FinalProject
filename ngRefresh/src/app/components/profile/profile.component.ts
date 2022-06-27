@@ -27,6 +27,9 @@ export class ProfileComponent implements OnInit {
 
 
   ngOnInit(): void {
+    // this.getUser();
+
+
     let idStr = this.route.snapshot.paramMap.get('id');
     console.log(this.editUser);
     console.log(idStr);
@@ -50,6 +53,11 @@ export class ProfileComponent implements OnInit {
     }
     this.displayProfile();
   }
+
+  // getUser(){
+  //   console.log(this.auth.getUser());
+
+  // }
 
   // *** THIS IS BECAUSE I DON'T KNOW HOW TO FETCH A USER FOR THE PROFILE PAGE ***
   // *** NOT FINISHED ***
