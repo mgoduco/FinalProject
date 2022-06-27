@@ -23,9 +23,9 @@
 
   <div class="row" >
     <div *ngFor="let recipe of recipes" class="col-sm-4" >
-  <div class="card border-success mb-3" id="cards" (click)="displayRecipe(recipe)">
+  <div class="card mb-3" id="cards" (click)="displayRecipe(recipe)">
   <img [src]="recipe.imageUrl" class="card-img-top" [alt]="recipe.name" >
-    <div class="card-body">
+    <div class="card-body border-secondary">
       <h5 class="card-title" >{{recipe.name}}</h5>
       <p class="card-text">{{recipe.description}}</p>
     </div>
