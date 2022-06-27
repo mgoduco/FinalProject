@@ -42,9 +42,9 @@ export class RecipeService {
   }
 
   //?????????????????????????????????
-  recipesByUsername(user: User): Observable<Recipe[]> {
+  recipesByUsername(username: string): Observable<Recipe[]> {
     return this.http
-      .get<Recipe[]>(this.url + '/u/' + user.username, this.getHttpOptions())
+      .get<Recipe[]>(this.url + '/u/' + username, this.getHttpOptions())
       .pipe(
         catchError((err: any) => {
           console.log(err);

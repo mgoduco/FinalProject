@@ -14,8 +14,8 @@ import { User } from 'src/app/models/user';
 })
 export class RecipeComponent implements OnInit {
   recipe: null | Recipe = null;
-  newRecipe: Recipe = new Recipe();
   recipes: Recipe[] = [];
+  newRecipe: Recipe = new Recipe();
   selected: null | Recipe = null;
   isSelected: boolean = false;
   user: User = new User();
@@ -33,40 +33,45 @@ export class RecipeComponent implements OnInit {
   ngOnInit(): void {
     this.getUser();
   }
-  getUser(){
 
+  getUser(){
     this.auth.getLoggedInUser().subscribe({
       next: (data) => {
         this.user = data;
+        this.reload();
       }
     })
     console.log(this.user);
   }
-  reload(): void {
-    this.recipeServ.index().subscribe({
-      next: (dbRecipes) => {
-        this.recipes = dbRecipes;
-        console.log(dbRecipes);
-      },
-      error: (fail: any) => {
-        console.error('RecipeComp.reload: error');
-        console.error(fail);
-      },
-    });
+
+  reload() {
+    console.log(this.user.username);
+    let username = this.user.username;
+    if (username != null) {
+      this.recipeServ.recipesByUsername(username).subscribe({
+        next: (recipes) => {
+          this.recipes = recipes;
+          console.log(recipes);
+        },
+        error: (fail: any) => {
+          console.error('RecipeComp.reload: error');
+          console.error(fail);
+        },
+      });
+    }
   }
-  displayUserRecipes() {
-    // this.getUser();
-    // this.recipeServ.recipesByUsername().subscribe({
-    //   next: (data) => {
-    //     this.recipes = data;
-    //     console.log(data);
-    //   },
-    //   error: (fail: any) => {
-    //     console.error('RecipeComp.reload: error');
-    //     console.error(fail);
-    //   },
-    // });
-  }
+  // displayUserRecipes() {
+  //   this.recipeServ.recipesByUsername(this.user).subscribe({
+  //     next: (recipes) => {
+  //       this.recipes = recipes;
+  //       console.log(recipes);
+  //     },
+  //     error: (fail: any) => {
+  //       console.error('RecipeComp.reload: error');
+  //       console.error(fail);
+  //     },
+  //   });
+  // }
 
   displayTable() {
     this.isSelected = false;
