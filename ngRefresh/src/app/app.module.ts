@@ -17,7 +17,11 @@ import { RecipeComponent } from './components/recipe/recipe.component';
 import { SearchComponent } from './components/search/search.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome'
 import { AuthService } from './services/auth.service';
+<<<<<<< HEAD
 import { LogoutComponent } from './components/logout/logout.component';
+=======
+import { ProfileComponent } from './components/profile/profile.component';
+>>>>>>> a0f7aed8beae5c434aaada72e5307398a60dce35
 
 @NgModule({
   declarations: [
@@ -31,7 +35,11 @@ import { LogoutComponent } from './components/logout/logout.component';
     NotFoundComponent,
     RecipeComponent,
     SearchComponent,
+<<<<<<< HEAD
     LogoutComponent
+=======
+    ProfileComponent
+>>>>>>> a0f7aed8beae5c434aaada72e5307398a60dce35
   ],
   imports: [
     BrowserModule,

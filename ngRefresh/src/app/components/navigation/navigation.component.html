@@ -14,6 +14,7 @@
     <a *ngIf="!loggedIn()" class="nav-link"[routerLink]="['/login']"> Login </a>
     <a *ngIf="!loggedIn()" class="nav-link"[routerLink]="['/register']"> Register </a>
 
+<<<<<<< HEAD
     <span id="offCanvasMenu" *ngIf="loggedIn()">
       <ng-template #content let-offcanvas>
         <div class="offcanvas-header">
@@ -25,6 +26,18 @@
           <p>Account Settings&hellip;</p>
           <input type="text" placeholder="User Search..."><br>
           <p><button id="logout" class="btn btn-secondary" (click)="logOut()" (click)="offcanvas.dismiss('Cross click')"><fa-icon [icon]="faArrowRightFromBracket"></fa-icon> Logout </button></p>
+=======
+    <ng-template #content let-offcanvas>
+      <div class="offcanvas-header">
+        <h4 class="offcanvas-title">User Name</h4>
+        <button type="button" class="btn-close" aria-label="Close" (click)="offcanvas.dismiss('Cross click')"></button>
+      </div>
+      <div class="offcanvas-body">
+        <p><a [routerLink]="['/u']">Profile&hellip;</a></p>
+        <p>Account Settings&hellip;</p>
+        <p>Logout&hellip;</p>
+        <input type="text" placeholder="User Search...">
+>>>>>>> a0f7aed8beae5c434aaada72e5307398a60dce35
 
         </div>
       </ng-template>
