@@ -67,18 +67,6 @@ export class RecipeComponent implements OnInit {
       });
     }
   }
-  // displayUserRecipes() {
-  //   this.recipeServ.recipesByUsername(this.user).subscribe({
-  //     next: (recipes) => {
-  //       this.recipes = recipes;
-  //       console.log(recipes);
-  //     },
-  //     error: (fail: any) => {
-  //       console.error('RecipeComp.reload: error');
-  //       console.error(fail);
-  //     },
-  //   });
-  // }
   displayUpdateTable(recipe: Recipe) {
     this.editSelected = recipe;
   }
@@ -87,6 +75,30 @@ export class RecipeComponent implements OnInit {
   }
   displayCreate() {
     this.isSelected = true;
+  }
+
+  displayRecipe(recipe: Recipe) {
+    this.selected = recipe;
+    this.recipeSelected = true;
+    this.getIngredientsByrecipe(recipe.id);
+  }
+
+  displayTable() {
+    this.selected = null;
+    this.isSelected = false;
+    this.isCreateTableSelected = false;
+    this.editSelected = null;
+  }
+
+  getIngredientsByrecipe(id: number){
+    console.log(id);
+    this.ingredientServ.indexByRecipe(id).subscribe({
+      next: (data) => {this.ingredients = data; console.log(data)},
+      error: (fail: any) => {
+        console.error('getIngredients: error');
+        console.error(fail);
+      }
+    })
   }
 
   createRecipe(recipe: Recipe) {
@@ -103,17 +115,6 @@ export class RecipeComponent implements OnInit {
         console.error(fail);
       },
     });
-  }
-  displayRecipe(recipe: Recipe) {
-    this.selected = recipe;
-    this.recipeSelected = true;
-  }
-
-  displayTable() {
-    this.selected = null;
-    this.isSelected = false;
-    this.isCreateTableSelected = false;
-    this.editSelected = null;
   }
 
   updateRecipe(recipe: Recipe) {
@@ -139,4 +140,19 @@ export class RecipeComponent implements OnInit {
       },
     });
   }
+
+
 }
+
+// displayUserRecipes() {
+//   this.recipeServ.recipesByUsername(this.user).subscribe({
+//     next: (recipes) => {
+//       this.recipes = recipes;
+//       console.log(recipes);
+//     },
+//     error: (fail: any) => {
+//       console.error('RecipeComp.reload: error');
+//       console.error(fail);
+//     },
+//   });
+// }
