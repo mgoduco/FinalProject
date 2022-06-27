@@ -1,9 +1,11 @@
+import { AuthService } from 'src/app/services/auth.service';
 import { Recipe } from 'src/app/models/recipe';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { RecipeService } from 'src/app/services/recipe.service';
 import { UserService } from 'src/app/services/user.service';
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
+import { User } from 'src/app/models/user';
 
 @Component({
   selector: 'app-recipe',
@@ -16,6 +18,7 @@ export class RecipeComponent implements OnInit {
   recipes: Recipe[] = [];
   selected: null | Recipe = null;
   isSelected: boolean = false;
+  user: User = new User();
 
   // Icons
   faArrowLeft = faArrowLeft;
@@ -23,27 +26,21 @@ export class RecipeComponent implements OnInit {
     private recipeServ: RecipeService,
     private userServ: UserService,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private auth: AuthService
   ) {}
 
   ngOnInit(): void {
-    let idStr = this.route.snapshot.paramMap.get('id');
-    if (!this.selected && idStr) {
-      let idNum = Number.parseInt(idStr);
-      if (!isNaN(idNum)) {
-        this.recipeServ.show(idNum).subscribe({
-          next: (theRecipe) => {
-            this.selected = theRecipe;
-          },
-          error: (fail) => {
-            this.router.navigateByUrl('/recipeNotFound');
-          },
-        });
-      } else {
-        this.router.navigateByUrl('/invalidRecipeId');
+    this.getUser();
+  }
+  getUser(){
+
+    this.auth.getLoggedInUser().subscribe({
+      next: (data) => {
+        this.user = data;
       }
-    }
-    this.reload();
+    })
+    console.log(this.user);
   }
   reload(): void {
     this.recipeServ.index().subscribe({
@@ -57,6 +54,20 @@ export class RecipeComponent implements OnInit {
       },
     });
   }
+  displayUserRecipes() {
+    // this.getUser();
+    // this.recipeServ.recipesByUsername().subscribe({
+    //   next: (data) => {
+    //     this.recipes = data;
+    //     console.log(data);
+    //   },
+    //   error: (fail: any) => {
+    //     console.error('RecipeComp.reload: error');
+    //     console.error(fail);
+    //   },
+    // });
+  }
+
   displayTable() {
     this.isSelected = false;
   }
