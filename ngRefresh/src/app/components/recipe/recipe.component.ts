@@ -1,3 +1,5 @@
+import { IngredientService } from 'src/app/services/ingredient.service';
+import { Ingredient } from './../../models/ingredient';
 import { AuthService } from 'src/app/services/auth.service';
 import { Recipe } from 'src/app/models/recipe';
 import { Component, OnInit } from '@angular/core';
@@ -19,14 +21,15 @@ export class RecipeComponent implements OnInit {
   selected: null | Recipe = null;
   editSelected: null | Recipe = null;
   isSelected: boolean = false;
-  isCreateSelected: boolean = false;
   isCreateTableSelected: boolean = false;
   recipeSelected: boolean = false;
   user: User = new User();
+  ingredients: Ingredient [] = [];
 
   // Icons
   faArrowLeft = faArrowLeft;
   constructor(
+    private ingredientServ: IngredientService,
     private recipeServ: RecipeService,
     private userServ: UserService,
     private route: ActivatedRoute,
@@ -109,7 +112,6 @@ export class RecipeComponent implements OnInit {
   displayTable() {
     this.selected = null;
     this.isSelected = false;
-    this.isCreateSelected = false;
     this.isCreateTableSelected = false;
     this.editSelected = null;
   }
