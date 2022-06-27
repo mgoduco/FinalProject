@@ -1,33 +1,38 @@
 
 <nav class="navbar" style="background-color: #C4C4C4;">
+<div class="container-fluid">
 
-    <a class="nav-link"[routerLink]="['/home']" >
+    <a class="navbar-brand" [routerLink]="['/home']" >
       <img src="/assets/refreshicon.png" id="logo" alt="Refresh Logo"  >
     </a>
     <a  class="nav-link"[routerLink]="['/about']" > About </a>
     <a  class="nav-link"[routerLink]="['/contact']"> Contact </a>
     <a  class="nav-link"[routerLink]="['/recipe']"> Recipes </a>
-    <a  class="nav-link"[routerLink]="['/search']"> Search </a>
-    <a  class="nav-link"[routerLink]="['/login']"> Login </a>
-    <a  class="nav-link"[routerLink]="['/register']"> Register </a>
+    <input type="text" id="searchIput" class="searchTerm" [(ngModel)]="keyword"  placeholder="Search Recipes...">
+      <button type="submit" class="btn btn-success"><fa-icon [icon]="randomIcon()" [routerLink]="['/search/' + keyword]"></fa-icon></button>
+    <a *ngIf="!loggedIn()" class="nav-link"[routerLink]="['/login']"> Login </a>
+    <a *ngIf="!loggedIn()" class="nav-link"[routerLink]="['/register']"> Register </a>
 
-    <ng-template #content let-offcanvas>
-      <div class="offcanvas-header">
-        <h4 class="offcanvas-title">User Name</h4>
-        <button type="button" class="btn-close" aria-label="Close" (click)="offcanvas.dismiss('Cross click')"></button>
-      </div>
-      <div class="offcanvas-body">
-        <p><a [routerLink]="['/u']">Profile&hellip;</a></p>
-        <p>Account Settings&hellip;</p>
-        <p>Logout&hellip;</p>
-        <input type="text" placeholder="User Search...">
+    <span id="offCanvasMenu" *ngIf="loggedIn()">
+      <ng-template #content let-offcanvas>
+        <div class="offcanvas-header">
+          <h4 class="offcanvas-title">User Name</h4>
+          <button type="button" class="btn-close" aria-label="Close" (click)="offcanvas.dismiss('Cross click')"></button>
+        </div>
+        <div class="offcanvas-body">
+          <a  class="nav-link"[routerLink]="['/u']" (click)="offcanvas.dismiss('Cross click')"> Profile </a>
+          <p>Account Settings&hellip;</p>
+          <input type="text" placeholder="User Search..."><br>
+          <p><button id="logout" class="btn btn-secondary" (click)="logOut()" (click)="offcanvas.dismiss('Cross click')"><fa-icon [icon]="faArrowRightFromBracket"></fa-icon> Logout </button></p>
 
-      </div>
-    </ng-template>
+        </div>
+      </ng-template>
+      <a class="menuBar" (click)="openEnd(content)">
+        <img src="/assets/userIcon.png" id="userIcon" alt="User Icon" >
+      </a>
+    </span>
+  </div>
 
-    <a class="menuBar" (click)="openEnd(content)">
-      <img src="/assets/userIcon.png" id="userIcon" alt="User Icon" >
-    </a>
 
 </nav>
 

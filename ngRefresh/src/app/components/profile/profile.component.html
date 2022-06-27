@@ -1,58 +1,73 @@
+<html>
+<head>
+  <title>Profile</title>
+</head>
+
+<body>
+
+<div class="container">
 <h1>
   {{ user.username }}
-  <a class="menuBar" [routerLink]="['/home']" > <!-- FIX THE CLICK METHOD -->
-    <img ng src="/assets/userIcon.png" id="userIcon" alt="User Icon" >
-  </a>
+  <!-- FIX THE CLICK METHOD -->
 </h1>
 
-<form>
+<div class="row">
+  <div class="col-3"></div>
+  <div class="col-6">
+  <img ng src="/assets/userIcon.png" id="userIcon" alt="User Icon" >
+  <form id="editForm">
+    <div *ngIf="!editUser">
+      <strong>First Name:</strong> {{user.firstname}}
+    </div>
+    <div class="form-floating mb-1" *ngIf="editUser">
+      <input type="text" class="form-control" name="firstname" id="firstname" placeholder="First Name" value="{{editUser.firstname}}" [(ngModel)]="editUser.firstname">
+      <label for="firstname"><strong>First Name:</strong></label>
+    </div>
+    <div *ngIf="!editUser">
+      <strong>Last Name:</strong> {{user.lastname}}
+    </div>
+    <div class="form-floating mb-1" *ngIf="editUser">
+      <input type="text" class="form-control" name="lastname" id="lastname" placeholder="Last Name" value="{{editUser.lastname}}" [(ngModel)]="editUser.lastname">
+      <label for="lastname"><strong>Last Name:</strong></label>
+    </div>
+    <div *ngIf="!editUser">
+      <strong>Email:</strong> {{user.email}}
+    </div>
+    <div class="form-floating mb-1" *ngIf="editUser">
+      <input type="text" class="form-control" name="email" id="email" placeholder="Email" value="{{editUser.email}}" [(ngModel)]="editUser.email">
+      <label for="email"><strong>Email:</strong></label>
+    </div>
+    <!-- <div *ngIf="!editUser">
+      <strong>Password:</strong> {{user.password}}
+    </div> -->
+    <div class="form-floating mb-1" *ngIf="editUser">
+      <input type="password" class="form-control" name="password" id="password" placeholder="Password" value="{{editUser.password}}" [(ngModel)]="editUser.password">
+      <label for="password"><strong>Password:</strong></label>
+    </div>
+    <div *ngIf="!editUser">
+      <strong>Image URL:</strong> {{user.imageUrl}}
+    </div>
+    <div class="form-floating mb-1" *ngIf="editUser">
+      <input type="text" class="form-control" name="imageUrl" id="imageUrl" placeholder="Image Url" value="{{editUser.imageUrl}}" [(ngModel)]="editUser.imageUrl">
+      <label for="imageUrl"><strong>Image URL:</strong></label>
+    </div>
+    <div *ngIf="!editUser">
+      <strong>Biography:</strong> {{user.biography}}
+    </div>
+    <div class="form-floating mb-1" *ngIf="editUser">
+      <textarea name="biography" class="form-control" placeholder="Biography" id="biography" cols="30" rows="10" [(ngModel)]="editUser.biography">{{editUser.biography}}</textarea>
+      <label for="biography"><strong>Biography:</strong></label><br>
+    </div>
+    <div>
+      <button *ngIf="!editUser" class="btn btn-primary" (click)="setEditProfile()">Edit</button>
+      <button *ngIf="editUser" class="btn btn-outline-primary" (click)="updateProfile(editUser)">Save</button>
+      <button *ngIf="editUser" class="btn btn-outline-danger" (click)="displayProfile()">Cancel</button>
+    </div>
 
-<div *ngIf="!editUser">
-  <strong>First Name:</strong> {{user.firstname}}
+  </form>
 </div>
-<div *ngIf="editUser">
-  <label for="firstname"><strong>First Name:</strong></label>
-  <input type="text" name="firstname" id="firstname" value="{{editUser.firstname}}" [(ngModel)]="editUser.firstname">
+<div class="col-3"></div>
 </div>
-<div *ngIf="!editUser">
-  <strong>Last Name:</strong> {{user.lastname}}
 </div>
-<div *ngIf="editUser">
-  <label for="lastname"><strong>Last Name:</strong></label>
-  <input type="text" name="lastname" id="lastname" value="{{editUser.lastname}}" [(ngModel)]="editUser.lastname">
-</div>
-<div *ngIf="!editUser">
-  <strong>Email:</strong> {{user.email}}
-</div>
-<div *ngIf="editUser">
-  <label for="email"><strong>Email:</strong></label>
-  <input type="text" name="email" id="email" value="{{editUser.email}}" [(ngModel)]="editUser.email">
-</div>
-<div *ngIf="!editUser">
-  <strong>Password:</strong> {{user.password}}
-</div>
-<div *ngIf="editUser">
-  <label for="password"><strong>Password:</strong></label>
-  <input type="text" name="password" id="password" value="{{editUser.password}}" [(ngModel)]="editUser.password">
-</div>
-<div *ngIf="!editUser">
-  <strong>Image URL:</strong> {{user.imageUrl}}
-</div>
-<div *ngIf="editUser">
-  <label for="imageUrl"><strong>Image URL:</strong></label>
-  <input type="text" name="imageUrl" id="imageUrl" value="{{editUser.imageUrl}}" [(ngModel)]="editUser.imageUrl">
-</div>
-<div *ngIf="!editUser">
-  <strong>Biography:</strong> {{user.biography}}
-</div>
-<div *ngIf="editUser">
-  <label for="biography"><strong>Biography:</strong></label>
-  <textarea name="biography" id="biography" cols="30" rows="10" [(ngModel)]="editUser.biography">{{editUser.biography}}</textarea>
-</div>
-<div>
-  <button *ngIf="!editUser" class="btn btn-primary" (click)="setEditProfile()">Edit</button>
-  <button *ngIf="editUser" class="btn btn-outline-primary" (click)="updateProfile(editUser)">Save</button>
-  <button *ngIf="editUser" class="btn btn-outline-danger" (click)="displayProfile()">Cancel</button>
-</div>
-
-</form>
+</body>
+</html>

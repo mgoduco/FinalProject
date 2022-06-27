@@ -12,14 +12,13 @@ import { Comment } from '../models/comment';
   providedIn: 'root',
 })
 export class CommentService {
-  private url = environment.baseUrl + 'api/';
+  private url = environment.baseUrl + 'api';
 
   constructor(
     private http: HttpClient,
     private auth: AuthService,
-    private user: UserService,
-    private comment: CommentService
-  ) {}
+    private user: UserService
+    ) {}
 
   getHttpOptions() {
     let options = {
@@ -31,13 +30,13 @@ export class CommentService {
     return options;
   }
 
-  getAllCommentsByRecipe(recipe: Recipe): Observable<Comment[]> {
-    return this.http.get<Comment[]>(`${this.url}/recipes/${recipe.id}/comments`).pipe(
+  getAllCommentsByRecipe(id: number): Observable<Comment[]> {
+    return this.http.get<Comment[]>(`${this.url}/recipes/${id}/comments`).pipe(
       catchError((err: any) => {
         console.log(err);
         return throwError(
           () =>
-            new Error('CommentService.index(): error retrieving Comment: ' + err)
+            new Error('CommentService.getAllCommentsByRecipe(): error retrieving Comment: ' + err)
         );
       })
     );

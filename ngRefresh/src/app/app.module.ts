@@ -17,6 +17,7 @@ import { RecipeComponent } from './components/recipe/recipe.component';
 import { SearchComponent } from './components/search/search.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome'
 import { AuthService } from './services/auth.service';
+import { LogoutComponent } from './components/logout/logout.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { FavoriteComponent } from './components/favorite/favorite.component';
 
@@ -32,8 +33,9 @@ import { FavoriteComponent } from './components/favorite/favorite.component';
     NotFoundComponent,
     RecipeComponent,
     SearchComponent,
-    ProfileComponent,
     FavoriteComponent
+    LogoutComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,

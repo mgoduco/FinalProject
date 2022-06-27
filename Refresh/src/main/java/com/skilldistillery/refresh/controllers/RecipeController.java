@@ -2,6 +2,8 @@ package com.skilldistillery.refresh.controllers;
 
 import java.security.Principal;
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -38,12 +40,13 @@ public class RecipeController {
 	}
 
 	@GetMapping("recipes/search/{name}")
-	public List<Recipe> getRecipesByNameAndIngredient(HttpServletRequest req, HttpServletResponse res, @PathVariable String name) {
+	public Set<Recipe> getRecipesByNameAndIngredient(HttpServletRequest req, HttpServletResponse res, @PathVariable String name) {
 		List<Recipe> recipes = recipeService.getRecipeByNameAndIngredients(name, name);
-		if (recipes == null) {
+		Set<Recipe> uniqueRecipes = recipes.stream().distinct().collect(Collectors.toSet()); 
+		if (uniqueRecipes == null) {
 			res.setStatus(404);
 		} 
-		return recipes;
+		return uniqueRecipes;
 	}
 	
 	@GetMapping("recipes/search/name/{name}")

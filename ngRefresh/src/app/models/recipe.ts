@@ -4,54 +4,54 @@ import { RecipePhoto } from "./recipe-photo";
 import { User } from "./user";
 
 export class Recipe {
-  id: number | null;
-  name: string | null;
-  description: string | null;
-  directions: string | null;
+  id: number;
+  name: string;
+  description: string;
+  directions: string;
   // created
   // updated
-  user: User;
-  active: boolean | false;
-  prepminutes: number | null;
-  cookminutes: number | null;
+  // user: User;
+  active: boolean;
+  prepminutes: number;
+  cookminutes: number;
   imageUrl: string;
-  comments: Comment[] | any;
-  photos: RecipePhoto[] | any;
-  madeThisList: MadeThis[] | any;
-  recipeIngredients: RecipeIngredient[] | any;
-  userFavorites: User[] | any;
+  // comments: Comment[];
+  // photos: RecipePhoto[];
+  // madeThisList: MadeThis[];
+  // recipeIngredients: RecipeIngredient[];
+  // userFavorites: User[];
   //keywords
 
   constructor(
-    id: number | null = 0,
-    name: string | null = '',
-    description: string | null = '',
-    directions: string | null = '',
-    user: User,
+    id: number = 0,
+    name: string = '',
+    description: string = '',
+    directions: string  = '',
+    // user: User,
     active: boolean = false,
-    prepminutes: number | null = 0,
-    cookminutes: number | null = 0,
+    prepminutes: number = 0,
+    cookminutes: number  = 0,
     imageUrl: string = '',
-    comments: Comment[] | [],
-    photos: RecipePhoto[] | [],
-    madeThisList: MadeThis[] | [],
-    recipeIngredients: RecipeIngredient[] | [],
-    userFavorites: User[] | [],
+    // comments: Comment[] | [],
+    // photos: RecipePhoto[] | [],
+    // madeThisList: MadeThis[] | [],
+    // recipeIngredients: RecipeIngredient[] | [],
+    // userFavorites: User[] | [],
   ) {
     this.id = id;
     this.name = name;
     this.description = description;
     this.directions = directions;
-    this.user = user;
+    // this.user = user;
     this.active = active;
     this.prepminutes = prepminutes;
     this.cookminutes = cookminutes;
     this.imageUrl = imageUrl;
-    this.comments = comments;
-    this.photos = photos;
-    this.madeThisList = madeThisList;
-    this.recipeIngredients = recipeIngredients;
-    this.userFavorites = userFavorites;
+    // this.comments = comments;
+    // this.photos = photos;
+    // this.madeThisList = madeThisList;
+    // this.recipeIngredients = recipeIngredients;
+    // this.userFavorites = userFavorites;
 
   }
 }

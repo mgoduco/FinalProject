@@ -1,1 +1,96 @@
-<p>recipe works!</p>
+
+<div class="container-fluid" >
+
+  <br><br>
+  <div class="row">
+  <div>
+   <button id="create" *ngIf="!isCreateTableSelected && !selected" class="btn btn-success" (click)="displayCreateTable()">Create New Recipe</button>
+  </div></div>
+   <br><br>
+<div class="centered" *ngIf="isCreateTableSelected" id="createRecipe">
+  <a class="" (click)="displayTable()">
+  <fa-icon [icon]="faArrowLeft"></fa-icon>
+  </a>
+  <form id="editform" centered="form-floating mb-3">
+    <img ng src="/assets/default_recipe.png" class="recipeImg"><br>
+    <div class="container-fluid">
+      <div class="centered">
+    <label class="form-label" for="imageUrl">Image</label>
+    <input class="form-floating mb-1" type="text" name="task" [(ngModel)]="newRecipe.imageUrl" /> <br />
+    <label class="form-label" for="imageUrl">Recipe Name:</label>
+    <input class="form-floating mb-1" type="text" name="task" [(ngModel)]="newRecipe.name" /> <br />
+    <label class="form-label" for="description">Recipe Description:</label>
+    <input class="form-floating mb-1" type="text" name="description" [(ngModel)]="newRecipe.description" /> <br>
+    <label class="form-label" for="directions">Recipe Prep Time:</label>
+    <input class="form-floating mb-1" type="number" name="prepminutes" [(ngModel)]="newRecipe.prepminutes" /> <br>
+    <label class="form-label" for="directions">Recipe Cool Time:</label>
+    <input class="form-floating mb-1" type="number" name="cookminutes" [(ngModel)]="newRecipe.cookminutes" /> <br>
+    <!-- <label class="form-label" for="directions">Completed</label>
+    <input class="form-control" type="text" name="directions" [(ngModel)]="newRecipe.directions" /> <br> -->
+    <button class="btn btn-danger" (click)="displayTable()">Cancel</button>
+    <button class="btn btn-primary" (click)="createRecipe(newRecipe)">Save</button>
+    </div></div>
+  </form>
+
+</div>
+
+<div class="container-fluid" *ngIf="!selected && !isCreateTableSelected">
+  <div class="row align-items-center">
+    <div class="col">
+</div>
+<div class="col">
+  <h2>Welcome</h2>
+</div>
+<div class="col">
+
+</div>
+</div>
+
+  <div class="row" >
+    <div *ngFor="let recipe of recipes" class="col-sm-4" >
+  <div class="card mb-3" id="cards" (click)="displayRecipe(recipe)">
+  <img [src]="recipe.imageUrl" class="card-img-top" [alt]="recipe.name" >
+    <div class="card-body border-secondary">
+      <h5 class="card-title" >{{recipe.name}}</h5>
+      <p class="card-text">{{recipe.description}}</p>
+    </div>
+  </div>
+</div>
+</div>
+</div>
+
+<div class="centered" *ngIf="selected" id="recipeDetails">
+  <a class="" (click)="displayTable()">
+  <fa-icon [icon]="faArrowLeft"></fa-icon>
+  </a>
+  <h4 id="title">{{ selected.name }}</h4>
+  <p><img [src]="selected.imageUrl" class="recipeImg" [alt]="selected.name" ></p>
+  <p><b>Prep Time: </b>{{ selected.prepminutes }}</p>
+  <p><b>Cook Time: </b>{{ selected.cookminutes }}</p>
+  <p id="description">{{ selected.description }}</p>
+  <p id="directions">{{ selected.directions }}</p>
+  <p id="comments"></p>
+
+
+</div>
+
+<div class="centered" *ngIf="editSelected && selected" id="recipeDetails">
+  <a class="" (click)="displayTable()">
+  <fa-icon [icon]="faArrowLeft"></fa-icon>
+  </a>
+  <h4 id="title">{{ selected.name }}</h4>
+  <p><img [src]="selected.imageUrl" class="recipeImg" [alt]="selected.name" ></p>
+  <p><b>Prep Time: </b>{{ selected.prepminutes }}</p>
+  <p><b>Cook Time: </b>{{ selected.cookminutes }}</p>
+  <p id="description">{{ selected.description }}</p>
+  <p id="directions">{{ selected.directions }}</p>
+  <p id="comments"></p>
+  <button class="btn btn-danger" (click)="displayTable()">Cancel</button>
+  <button class="btn btn-primary" (click)="updateRecipe(newRecipe)">Save</button>
+
+</div>
+
+
+
+</div>
+

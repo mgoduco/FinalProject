@@ -1,0 +1,68 @@
+body {
+  background-color: #E5E5E5;
+}
+
+#cards {
+  width: auto;
+  height: auto;
+}
+
+.card-img-top{
+  width: auto;
+  height: 40vh;
+}
+
+.card-title {
+  width: auto;
+  height: 24px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.card-text {
+    width:auto;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    font-size: 60%;
+  }
+
+  .recipeImg{
+    height: auto;
+    width: 50vw;
+    border-radius: 3%;
+  }
+
+  #description {
+    width: 50vw;
+  height: auto;
+  white-space: wrap;
+  }
+
+  #directions {
+    width: 50vw;
+  height: auto;
+  white-space: wrap;
+  }
+
+  .centered {
+    margin: auto;
+    width: 50vw;
+  }
+
+  #title {
+    text-align: center;
+  }
+
+  h2 {
+    text-align: center;
+  }
+
+
+
+
+
+
+
