@@ -1,4 +1,3 @@
-
 <div class="container-fluid" >
 
   <br><br>
@@ -6,30 +5,55 @@
   <div>
    <button id="create" *ngIf="!isCreateTableSelected && !selected" class="btn btn-success" (click)="displayCreateTable()">Create New Recipe</button>
   </div></div>
-   <br><br>
-<div class="centered" *ngIf="isCreateTableSelected" id="createRecipe">
+
+
+<br><br>
+
+<div class="centeredBorder" *ngIf="isCreateTableSelected" id="createRecipe">
   <a class="" (click)="displayTable()">
   <fa-icon [icon]="faArrowLeft"></fa-icon>
   </a>
-  <form id="editform" centered="form-floating mb-3">
-    <img ng src="/assets/default_recipe.png" class="recipeImg"><br>
+
+  <form class="centered" id="editform" centered="form-floating mb-3">
+    <img ng src="/assets/default_recipe.png" class="recipeImg"><br><br>
     <div class="container-fluid">
-      <div class="centered">
-    <label class="form-label" for="imageUrl">Image</label>
-    <input class="form-floating mb-1" type="text" name="task" [(ngModel)]="newRecipe.imageUrl" /> <br />
-    <label class="form-label" for="imageUrl">Recipe Name:</label>
-    <input class="form-floating mb-1" type="text" name="task" [(ngModel)]="newRecipe.name" /> <br />
-    <label class="form-label" for="description">Recipe Description:</label>
-    <input class="form-floating mb-1" type="text" name="description" [(ngModel)]="newRecipe.description" /> <br>
-    <label class="form-label" for="directions">Recipe Prep Time:</label>
-    <input class="form-floating mb-1" type="number" name="prepminutes" [(ngModel)]="newRecipe.prepminutes" /> <br>
-    <label class="form-label" for="directions">Recipe Cool Time:</label>
-    <input class="form-floating mb-1" type="number" name="cookminutes" [(ngModel)]="newRecipe.cookminutes" /> <br>
+
+
+    <div class="form-floating mb-1">
+    <input  class="form-control" type="text" name="task" placeholder="Image Url" [(ngModel)]="newRecipe.imageUrl" /> <br />
+    <label for="imageUrl"><strong>Image Url:</strong></label>
+    </div>
+
+    <div class="form-floating mb-1">
+    <input class="form-control" type="text" name="task" placeholder="Recipe Name" [(ngModel)]="newRecipe.name" /> <br />
+    <label for="name"><strong>Recipe Name:</strong></label>
+  </div>
+
+    <div class="form-floating mb-1">
+    <textarea id="textarea" class="form-control" type="text" name="description" placeholder="Recipe Description" [(ngModel)]="newRecipe.description" ></textarea> <br>
+    <label for="description"><strong>Recipe Description:</strong></label>
+  </div>
+
+    <div class="form-floating mb-1">
+    <textarea id="textarea" class="form-control" type="text" name="directions"  placeholder="Recipe Directions" [(ngModel)]="newRecipe.directions" ></textarea> <br>
+    <label for="directions"><strong>Directions:</strong></label>
+  </div>
+
+
+    <div class="form-floating mb-1">
+      <input class="form-control" type="number" name="prepminutes" placeholder="Prep Minutes" [(ngModel)]="newRecipe.prepminutes" /> <br>
+      <label for="prepminutes"><strong>Prep Minutes:</strong></label>
+    </div>
+
+    <div class="form-floating mb-1">
+      <input class="form-control" type="number" name="cookminutes" placeholder="Cook Minutes" [(ngModel)]="newRecipe.cookminutes" /> <br>
+      <label for="cookminutes"><strong>Cook Minutes:</strong></label>
+  </div>
     <!-- <label class="form-label" for="directions">Completed</label>
     <input class="form-control" type="text" name="directions" [(ngModel)]="newRecipe.directions" /> <br> -->
-    <button class="btn btn-danger" (click)="displayTable()">Cancel</button>
-    <button class="btn btn-primary" (click)="createRecipe(newRecipe)">Save</button>
-    </div></div>
+    <button class="btn btn-danger buttonpad" (click)="displayTable()">Cancel</button>
+    <button class="btn btn-success buttonpad"  (click)="createRecipe(newRecipe)">Create New Recipe</button>
+    </div>
   </form>
 
 </div>
@@ -39,7 +63,6 @@
     <div class="col">
 </div>
 <div class="col">
-  <h2>Welcome</h2>
 </div>
 <div class="col">
 
@@ -54,12 +77,14 @@
       <h5 class="card-title" >{{recipe.name}}</h5>
       <p class="card-text">{{recipe.description}}</p>
     </div>
+    <button class="btn btn-success" (click)="displayUpdateTable(recipe)">Update Recipe</button>
+    <button class="btn btn-danger" (click)="deleteRecipe(recipe.id)">Delete Recipe</button>
   </div>
 </div>
 </div>
 </div>
 
-<div class="centered" *ngIf="selected" id="recipeDetails">
+<div class="centered" *ngIf="selected && !editSelected" id="recipeDetails">
   <a class="" (click)="displayTable()">
   <fa-icon [icon]="faArrowLeft"></fa-icon>
   </a>
@@ -71,26 +96,60 @@
   <p id="directions">{{ selected.directions }}</p>
   <p id="comments"></p>
 
-
 </div>
 
-<div class="centered" *ngIf="editSelected && selected" id="recipeDetails">
+
+<div id="updateRecipe">
+<div class="centered" *ngIf="editSelected " id="recipeDetails">
+
   <a class="" (click)="displayTable()">
   <fa-icon [icon]="faArrowLeft"></fa-icon>
   </a>
-  <h4 id="title">{{ selected.name }}</h4>
-  <p><img [src]="selected.imageUrl" class="recipeImg" [alt]="selected.name" ></p>
-  <p><b>Prep Time: </b>{{ selected.prepminutes }}</p>
-  <p><b>Cook Time: </b>{{ selected.cookminutes }}</p>
-  <p id="description">{{ selected.description }}</p>
-  <p id="directions">{{ selected.directions }}</p>
-  <p id="comments"></p>
-  <button class="btn btn-danger" (click)="displayTable()">Cancel</button>
-  <button class="btn btn-primary" (click)="updateRecipe(newRecipe)">Save</button>
 
+  <form class="centered" id="editform" centered="form-floating mb-3">
+    <img  src="{{ editSelected.imageUrl }}" class="recipeImg"><br><br>
+    <div class="container-fluid">
+
+
+    <div class="form-floating mb-1">
+    <input id="updatetexturl" class="form-control" type="text" name="imageUrl" placeholder="Image Url" value="{{ editSelected.imageUrl }}" [(ngModel)]="editSelected.imageUrl" /> <br />
+    <label id="updatetexturl" for="imageUrl"><strong>Recipe ImageURL:</strong></label>
+    </div>
+
+    <div class="form-floating mb-1">
+    <input class="form-control" type="text" name="name" placeholder="Recipe Name" value="{{ editSelected.name }}" [(ngModel)]="editSelected.name" /> <br />
+    <label for="name"><strong>Recipe Name:</strong></label>
+  </div>
+
+    <div class="form-floating mb-1">
+    <textarea id="updatetextdesc" class="form-control" type="text" name="description" placeholder="Recipe Description" value="{{ editSelected.description }}" [(ngModel)]="editSelected.description" ></textarea> <br>
+    <label for="description"><strong>Recipe Description:</strong></label>
+  </div>
+
+    <div class="form-floating mb-1">
+    <textarea id="updatetextarea" class="form-control" type="text" name="directions"  placeholder="Recipe Directions" value="{{ editSelected.directions }}" [(ngModel)]="editSelected.directions" ></textarea> <br>
+    <label for="directions"><strong>Recipe Directions:</strong></label>
+  </div>
+
+
+    <div class="form-floating mb-1">
+      <input class="form-control" type="number" name="prepminutes" placeholder="Prep Minutes" value="{{ editSelected.prepminutes }}" [(ngModel)]="editSelected.prepminutes" /> <br>
+      <label for="prepminutes"><strong>Prep Minutes:</strong></label>
+    </div>
+
+    <div class="form-floating mb-1">
+      <input class="form-control" type="number" name="cookminutes" placeholder="Cook Minutes" value="{{ editSelected.cookminutes }}" [(ngModel)]="editSelected.cookminutes" /> <br>
+      <label for="cookminutes"><strong>Cook Minutes:</strong></label>
+  </div>
+    <!-- <label class="form-label" for="directions">Completed</label>
+    <input class="form-control" type="text" name="directions" [(ngModel)]="newRecipe.directions" /> <br> -->
+    <button class="btn btn-danger buttonpad" (click)="displayTable()">Cancel</button>
+    <button class="btn btn-success buttonpad"  (click)="updateRecipe(editSelected)">Update Recipe</button>
+    </div>
+  </form>
+
+</div>
 </div>
 
 
-
 </div>
-
