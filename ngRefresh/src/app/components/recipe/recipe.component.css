@@ -2,31 +2,47 @@ body {
   background-color: #E5E5E5;
 }
 
+#create {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
 #cards {
   width: auto;
   height: auto;
 }
-.topmiddle {
-  position: fixed;
-  top: 25%;
-  left: 50%;
-  margin-top: -50px;
-  margin-left: -100px;
+#editForm{
+  text-align: left;
 }
+.card-img-top{
+  width: auto;
+  height: 40vh;
+}
+
+.card-title {
+  width: auto;
+  height: 24px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.card-text {
+    width:auto;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    font-size: 60%;
+  }
+
   .recipeImg{
     height: auto;
     width: 50vw;
-    border-radius: 8%;
+    border-radius: 3%;
   }
-  .centered {
-    position: static;
-    top: 50%;
-    left: 50%;
-    /* transform: translate(-50%, -50%); */
-    text-align: center;
-    padding-right: 95px;
-    padding-left: 95px;
-  }
+
   #description {
     width: 50vw;
   height: auto;
@@ -39,7 +55,16 @@ body {
   white-space: wrap;
   }
 
+  .centered {
+    margin: auto;
+    width: 50vw;
+  }
+
   #title {
+    text-align: center;
+  }
+
+  h2 {
     text-align: center;
   }
 
