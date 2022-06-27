@@ -1,1 +1,57 @@
-<p>search works!</p>
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Search</title>
+  </head>
+
+  <body>
+    <div class="searchBar">
+      <input type="text" id="searchIput" class="searchTerm" [(ngModel)]="keyword"  placeholder="Search Recipes...">
+      <button type="submit" class="btn btn-success"><fa-icon [icon]="randomIcon()" (click)="search(keyword)" [routerLink]="['/search']"></fa-icon></button>
+    </div><hr>
+    <div>
+      <div class="container-fluid" *ngIf="!selected">
+      <div class="row align-items-center">
+        <div class="col">
+    </div>
+    <div class="col">
+      <h2>Search Results</h2>
+    </div>
+    <div class="col">
+
+    </div>
+    </div>
+
+      <div class="row" >
+        <div *ngFor="let recipe of recipes" class="col-sm-4" >
+      <div class="card mb-3" id="cards" (click)="displayRecipe(recipe)">
+      <img [src]="recipe.imageUrl" class="card-img-top" [alt]="recipe.name" >
+        <div class="card-body border-secondary">
+          <h5 class="card-title" >{{recipe.name}}</h5>
+          <p class="card-text">{{recipe.description}}</p>
+        </div>
+      </div>
+    </div>
+    </div>
+    </div>
+
+
+    <div class="centered" *ngIf="selected" id="recipeDetails">
+      <a class="" (click)="displayTable()">
+      <fa-icon [icon]="faArrowLeft"></fa-icon>
+      </a>
+      <h4 id="title">{{ selected.name }}</h4>
+      <p><img [src]="selected.imageUrl" class="recipeImg" [alt]="selected.name" ></p>
+      <p><b>Prep Time: </b>{{ selected.prepminutes }}</p>
+      <p><b>Cook Time: </b>{{ selected.cookminutes }}</p>
+      <p id="description">{{ selected.description }}</p>
+      <p id="directions">{{ selected.directions }}</p>
+
+
+    </div>
+
+
+    </div>
+  </body>
+</html>
