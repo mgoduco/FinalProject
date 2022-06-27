@@ -1,14 +1,23 @@
 #userIcon {
-  width: 25%;
-   height: 25%;
+  width: 15vw;
+   height: auto;
    border-radius: 50%;
+   display: block;
+   margin-left: auto;
+   margin-right: auto;
+   margin-bottom: 2vh;
 }
+
+#editForm{
+  text-align: left;
+}
+
 
 body {
   background-color: #E5E5E5;
 }
 
-#cards {
+/* #cards {
   width: auto;
   height: auto;
 }
@@ -59,4 +68,4 @@ body {
 
   #title {
     text-align: center;
-  }
+  } */

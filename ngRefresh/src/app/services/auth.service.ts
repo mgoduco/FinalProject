@@ -80,4 +80,12 @@ export class AuthService {
   getCredentials(): string | null {
     return localStorage.getItem('credentials');
   }
+
+  // getUser() {
+  //   console.log(this.getCredentials());
+  //   let user1 = this.getCredentials();
+  //   localStorage.
+  //   let user = JSON.parse(this.getCredentials() || '{}')
+  //   return user;
+  // }
 }

@@ -21,7 +21,7 @@
           <button type="button" class="btn-close" aria-label="Close" (click)="offcanvas.dismiss('Cross click')"></button>
         </div>
         <div class="offcanvas-body">
-          <p>Profile&hellip;</p>
+          <a  class="nav-link"[routerLink]="['/u']"> Profile </a>
           <p>Account Settings&hellip;</p>
           <input type="text" placeholder="User Search..."><br>
           <p><button id="logout" class="btn btn-secondary" (click)="logOut()" (click)="offcanvas.dismiss('Cross click')"><fa-icon [icon]="faArrowRightFromBracket"></fa-icon> Logout </button></p>
