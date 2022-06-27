@@ -12,10 +12,12 @@ import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 })
 export class RecipeComponent implements OnInit {
   recipe: null | Recipe = null;
+  selected: null | Recipe = null;
+  editRecipe: null | Recipe = null;
   newRecipe: Recipe = new Recipe();
   recipes: Recipe[] = [];
-  selected: null | Recipe = null;
   isSelected: boolean = false;
+  isEditSelected: boolean = false;
 
   // Icons
   faArrowLeft = faArrowLeft;
@@ -69,6 +71,22 @@ export class RecipeComponent implements OnInit {
       next: (newRecipe) => {
         this.newRecipe = new Recipe();
         this.reload();
+      },
+      error: (fail) => {
+        console.error('RecipeComponent.addTodo: error creating recipe');
+        console.error(fail);
+      },
+    });
+  }
+  updateRecipe(recipe: Recipe, setSelected: boolean = true):void {
+    this.recipeServ.update(recipe).subscribe({
+      next: (updated) => {
+        this.reload();
+        if (setSelected) {
+          this.selected = updated;
+        }
+        this.selected = null;
+        this.newRecipe = new Recipe();
       },
       error: (fail) => {
         console.error('RecipeComponent.addTodo: error creating recipe');
