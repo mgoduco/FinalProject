@@ -6,13 +6,12 @@
    <button id="create" *ngIf="!isCreateTableSelected && !selected" class="btn btn-success" (click)="displayCreateTable()">Create New Recipe</button>
   </div></div>
    <br><br>
-
-<div class="centered" *ngIf="isCreateTableSelected" id="createRecipe">
+<div class="centeredBorder" *ngIf="isCreateTableSelected" id="createRecipe">
   <a class="" (click)="displayTable()">
   <fa-icon [icon]="faArrowLeft"></fa-icon>
   </a>
 
-  <form id="editform" centered="form-floating mb-3">
+  <form class="centered" id="editform" centered="form-floating mb-3">
     <img ng src="/assets/default_recipe.png" class="recipeImg"><br><br>
     <div class="container-fluid">
 
@@ -45,12 +44,12 @@
 
     <div class="form-floating mb-1">
       <input class="form-control" type="number" name="cookminutes" placeholder="Cook Minutes" [(ngModel)]="newRecipe.cookminutes" /> <br>
-      <label for="prepminutes"><strong>Cook Minutes:</strong></label>
+      <label for="cookminutes"><strong>Cook Minutes:</strong></label>
   </div>
     <!-- <label class="form-label" for="directions">Completed</label>
     <input class="form-control" type="text" name="directions" [(ngModel)]="newRecipe.directions" /> <br> -->
-    <button class="btn btn-danger" (click)="displayTable()">Cancel</button>
-    <button class="btn btn-primary" (click)="createRecipe(newRecipe)">Save</button>
+    <button class="btn btn-danger buttonpad" (click)="displayTable()">Cancel</button>
+    <button class="btn btn-primary buttonpad"  (click)="createRecipe(newRecipe)">Save</button>
     </div>
   </form>
 
