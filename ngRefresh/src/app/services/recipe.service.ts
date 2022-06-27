@@ -59,7 +59,6 @@ export class RecipeService {
   }
 
   recipesByNameandIngredient(keyword: string): Observable<Recipe[]> {
-<<<<<<< HEAD
     return this.http
       .get<Recipe[]>(this.url + '/search/' + keyword, this.getHttpOptions())
       .pipe(
@@ -73,16 +72,6 @@ export class RecipeService {
           );
         })
       );
-=======
-    return this.http.get<Recipe[]>(this.url + "/search/" + keyword).pipe(
-      catchError((err: any) => {
-        console.log(err);
-        return throwError(
-          () => new Error('RecipeService.index(): error retrieving Recipes: ' + err)
-        );
-      })
-    );
->>>>>>> 4bb27c25a220a52f3f7eb128c28217e870bf80b6
   }
 
   create(recipe: Recipe): Observable<Recipe> {
