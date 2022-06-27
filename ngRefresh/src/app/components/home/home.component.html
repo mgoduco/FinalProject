@@ -23,7 +23,7 @@
 
   <div class="row" >
     <div *ngFor="let recipe of recipes" class="col-sm-4" >
-  <div class="card mb-3" id="cards" (click)="displayRecipe(recipe)">
+  <div class="card mb-3" id="cards" (click)="displayRecipe(recipe)" (click)="getRecipeComments(recipe.id)" (click)="getIngredientsByrecipe(recipe.id)">
   <img [src]="recipe.imageUrl" class="card-img-top" [alt]="recipe.name" >
     <div class="card-body border-secondary">
       <h5 class="card-title" >{{recipe.name}}</h5>
@@ -43,11 +43,20 @@
   <p><img [src]="selected.imageUrl" class="recipeImg" [alt]="selected.name" ></p>
   <p><b>Prep Time: </b>{{ selected.prepminutes }}</p>
   <p><b>Cook Time: </b>{{ selected.cookminutes }}</p>
+  <h5>Ingredients</h5>
+  <ul class="ingredients" *ngFor="let ingredient of ingredients">
+    <li>{{ingredient.name}}</li>
+</ul>
   <p id="description">{{ selected.description }}</p>
   <p id="directions">{{ selected.directions }}</p>
-  <h5>Comments</h5>
-  <button class="btn btn-primary" (click)="getRecipeComments(selected)">Show Comments</button>
-  <p id="comments"></p>
+
+
+      <ul class="comments" *ngFor="let comment of comments">
+          <li><strong>{{comment.title}}</strong><br>{{comment.comment}}</li>
+      </ul>
+
+
+
 
 
 </div>
