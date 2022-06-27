@@ -21,13 +21,13 @@ body {
 }
 
 #updatetextarea {
-  height: 400px;
+  height: 300px;
 }
 #updatetextdesc {
   height: 200px;
 }
 #updatetexturl {
-  height: 150px;
+  height: auto;
 }
 
 #createRecipe {

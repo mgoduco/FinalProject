@@ -111,33 +111,33 @@
 
 
     <div class="form-floating mb-1">
-    <input id="updatetexturl" class="form-control" type="text" name="task" placeholder="Image Url" value="{{ editSelected.imageUrl }}" [(ngModel)]="newRecipe.imageUrl" /> <br />
-    <label id="updatetexturl" for="imageUrl"><strong>{{ editSelected.imageUrl }}</strong></label>
+    <input id="updatetexturl" class="form-control" type="text" name="imageUrl" placeholder="Image Url" value="{{ editSelected.imageUrl }}" [(ngModel)]="editSelected.imageUrl" /> <br />
+    <label id="updatetexturl" for="imageUrl"><strong>Recipe ImageURL:</strong></label>
     </div>
 
     <div class="form-floating mb-1">
-    <input class="form-control" type="text" name="task" placeholder="Recipe Name" value="{{ editSelected.name }}" [(ngModel)]="newRecipe.name" /> <br />
-    <label for="name"><strong>{{ editSelected.name }}</strong></label>
+    <input class="form-control" type="text" name="name" placeholder="Recipe Name" value="{{ editSelected.name }}" [(ngModel)]="editSelected.name" /> <br />
+    <label for="name"><strong>Recipe Name:</strong></label>
   </div>
 
     <div class="form-floating mb-1">
-    <textarea id="updatetextdesc" class="form-control" type="text" name="description" placeholder="Recipe Description" value="{{ editSelected.description }}" [(ngModel)]="newRecipe.description" ></textarea> <br>
-    <label for="description"><strong>{{ editSelected.description }}</strong></label>
+    <textarea id="updatetextdesc" class="form-control" type="text" name="description" placeholder="Recipe Description" value="{{ editSelected.description }}" [(ngModel)]="editSelected.description" ></textarea> <br>
+    <label for="description"><strong>Recipe Description:</strong></label>
   </div>
 
     <div class="form-floating mb-1">
-    <textarea id="updatetextarea" class="form-control" type="text" name="directions"  placeholder="Recipe Directions" value="{{ editSelected.directions }}" [(ngModel)]="newRecipe.directions" ></textarea> <br>
-    <label for="directions"><strong>{{ editSelected.directions }}</strong></label>
+    <textarea id="updatetextarea" class="form-control" type="text" name="directions"  placeholder="Recipe Directions" value="{{ editSelected.directions }}" [(ngModel)]="editSelected.directions" ></textarea> <br>
+    <label for="directions"><strong>Recipe Directions:</strong></label>
   </div>
 
 
     <div class="form-floating mb-1">
-      <input class="form-control" type="number" name="prepminutes" placeholder="Prep Minutes" value="{{ editSelected.prepminutes }}" [(ngModel)]="newRecipe.prepminutes" /> <br>
+      <input class="form-control" type="number" name="prepminutes" placeholder="Prep Minutes" value="{{ editSelected.prepminutes }}" [(ngModel)]="editSelected.prepminutes" /> <br>
       <label for="prepminutes"><strong>Prep Minutes:</strong></label>
     </div>
 
     <div class="form-floating mb-1">
-      <input class="form-control" type="number" name="cookminutes" placeholder="Cook Minutes" value="{{ editSelected.cookminutes }}" [(ngModel)]="newRecipe.cookminutes" /> <br>
+      <input class="form-control" type="number" name="cookminutes" placeholder="Cook Minutes" value="{{ editSelected.cookminutes }}" [(ngModel)]="editSelected.cookminutes" /> <br>
       <label for="cookminutes"><strong>Cook Minutes:</strong></label>
   </div>
     <!-- <label class="form-label" for="directions">Completed</label>

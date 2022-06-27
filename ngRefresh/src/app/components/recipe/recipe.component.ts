@@ -119,6 +119,7 @@ export class RecipeComponent implements OnInit {
       next: (newRecipe) => {
         this.newRecipe = new Recipe();
         this.reload();
+        this.displayTable();
       },
       error: (fail) => {
         console.error('RecipeComponent.addTodo: error creating recipe');
