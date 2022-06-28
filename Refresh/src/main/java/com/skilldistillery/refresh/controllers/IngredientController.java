@@ -34,7 +34,7 @@ public class IngredientController {
 		List<Ingredient> ingredients = ingredientService.index();
 		return ingredients;
 	}
-	
+
 	@GetMapping("i/{id}")
 	public Ingredient getIngredientById(@PathVariable int id, HttpServletResponse res, Principal principal) {
 		Ingredient ingredient = ingredientService.getIngredientById(id);

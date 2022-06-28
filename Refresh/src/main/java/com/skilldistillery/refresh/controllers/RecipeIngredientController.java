@@ -49,7 +49,7 @@ public class RecipeIngredientController {
 		return recipeIngredient;
 	}
 	
-	@PostMapping("recipes/{rid}/ingredients/")
+	@PostMapping("recipes/{rid}/ingredients/{iid}")
 	public RecipeIngredient create(HttpServletRequest req, HttpServletResponse res, @RequestBody RecipeIngredient recipeIngredient,
 			Principal principal, @PathVariable int rid, @PathVariable int iid) {
 		recipeIngredient = recipeIngredientService.createForRecipe(principal.getName(), rid, iid, recipeIngredient);
