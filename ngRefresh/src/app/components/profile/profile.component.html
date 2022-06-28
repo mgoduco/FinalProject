@@ -14,7 +14,18 @@
 <div class="row">
   <div class="col-3"></div>
   <div class="col-6">
-  <img ng src={{user.imageUrl}} id="userIcon" alt="User Icon" >
+    <div *ngIf="user.imageUrl" class="userIconContainer">
+      <a class="menuBar">
+        <img [src]="user.imageUrl" id="userIcon" alt="User Icon">
+      </a>
+    </div>
+    <div *ngIf="!user.imageUrl" class="userIconContainer">
+      <a class="menuBar">
+        <img src='../../../assets/userIcon.png' id="userIcon" alt="User Icon" >
+      </a>
+    </div>
+
+  <!-- <img ng src={{user.imageUrl}} id="userIcon" alt="User Icon" > -->
   <form id="editForm">
     <div *ngIf="!editUser">
       <strong>First Name:</strong> {{user.firstname}}
