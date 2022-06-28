@@ -52,12 +52,14 @@
 
     <h4>Comments</h4>
     <div class="form-floating mb" id="addComments">
+
     <input class="form-control" type="text" id="commentTitle" placeholder="Title" [(ngModel)]="newComment.title"><br>
-    <textarea class="form-control" name="addComments" placeholder="Comment" [(ngModel)]="newComment.comment"></textarea><br>
-    <button class="btn btn-secondary" (click)="createComment(newComment, selected.id)">Comment</button>
+    <textarea class="form-control" name="newComment" placeholder="Comment" [(ngModel)]="newComment.comment"></textarea><br>
+
+    <fa-icon id="faComment" (click)="createComment(newComment, selected.id)" [icon]="facomment"></fa-icon>
   </div>
     <ul class="comments" *ngFor="let comment of comments">
-          <li><strong>{{comment.title}}</strong><br>{{comment.comment}}</li>
+          <li *ngIf="comment.active" ><strong>{{comment.title}}</strong><br>{{comment.comment}} <fa-icon id="faMessageSlash" (click)="deleteComment(comment, selected)" [icon]="famessage"></fa-icon></li>
       </ul>
 </div>
 
