@@ -1,6 +1,8 @@
+import { UserService } from 'src/app/services/user.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { Ingredient } from './../../models/ingredient';
 import { CommentService } from './../../services/comment.service';
+
 
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -11,10 +13,13 @@ import {
   faCircleMinus,
   faCommentMedical,
   faCommentSlash,
+  faHeartCircleCheck,
 } from '@fortawesome/free-solid-svg-icons';
 import { Comment } from 'src/app/models/comment';
 import { IngredientService } from 'src/app/services/ingredient.service';
 import { User } from 'src/app/models/user';
+import { faHeart as farHeart} from '@fortawesome/free-regular-svg-icons';
+import { faHeart as fasHeart} from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-home',
@@ -39,12 +44,17 @@ export class HomeComponent implements OnInit {
     null,
     null
   );
+  user: User = new User();
 
   // Icons
   faArrowLeft = faArrowLeft;
   facomment = faCommentMedical;
   faminus = faCircleMinus;
   famessage = faCommentSlash;
+  farHeart = farHeart;
+  fasHeart = fasHeart;
+  fav: boolean = false;
+
 
   constructor(
     private recipeServ: RecipeService,
@@ -52,8 +62,18 @@ export class HomeComponent implements OnInit {
     private commentServ: CommentService,
     private ingredientServ: IngredientService,
     private auth: AuthService,
+    private userServ: UserService,
     private router: Router) {
 
+    }
+
+    hearted(){
+      this.fav = !this.fav;
+    if(this.fav){
+    return farHeart;
+    }else{
+      return fasHeart;
+    }
     }
 
   ngOnInit(): void {
@@ -207,5 +227,30 @@ export class HomeComponent implements OnInit {
  loggedIn(){
   return this.auth.checkLogin();
 }
+
+// setFavorite(recipe: Recipe) {
+//   let userId = this.user.id;
+//   console.log("User ID: " + userId);
+//   console.log("Selected Recipe:");
+//   console.log(this.selected);
+//   if (this.selected !== null){
+//     let recipeId = this.selected.id;
+//     console.log("Recipe ID: " + recipeId);
+//     if (userId !== null && recipeId !== null) {
+//       console.log("Succeessfully created Favorite!");
+//       this.userServ.addFavorite(userId, recipeId).subscribe();
+//     }
+//   }
+// }
+
+// getUser() {
+//   this.auth.getLoggedInUser().subscribe({
+//     next: (data) => {
+//       this.user = data;
+//       this.reload();
+//     },
+//   });
+//   console.log(this.user);
+// }
 
 }
