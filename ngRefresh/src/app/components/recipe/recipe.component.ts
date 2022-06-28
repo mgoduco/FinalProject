@@ -1,10 +1,14 @@
+import { RecipeIngredientService } from './../../services/recipe-ingredient.service';
+import { RecipeIngredient } from './../../models/recipe-ingredient';
+import { IngredientService } from 'src/app/services/ingredient.service';
+import { Ingredient } from './../../models/ingredient';
 import { AuthService } from 'src/app/services/auth.service';
 import { Recipe } from 'src/app/models/recipe';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { RecipeService } from 'src/app/services/recipe.service';
 import { UserService } from 'src/app/services/user.service';
-import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
+import { faArrowLeft, } from '@fortawesome/free-solid-svg-icons';
 import { User } from 'src/app/models/user';
 
 @Component({
@@ -19,15 +23,19 @@ export class RecipeComponent implements OnInit {
   selected: null | Recipe = null;
   editSelected: null | Recipe = null;
   isSelected: boolean = false;
-  isCreateSelected: boolean = false;
   isCreateTableSelected: boolean = false;
   recipeSelected: boolean = false;
   user: User = new User();
+  ingredients: Ingredient [] = [];
+  rIngredients: RecipeIngredient [] = [];
 
   // Icons
   faArrowLeft = faArrowLeft;
+
   constructor(
+    private ingredientServ: IngredientService,
     private recipeServ: RecipeService,
+    private rIngredientServ: RecipeIngredientService,
     private userServ: UserService,
     private route: ActivatedRoute,
     private router: Router,
@@ -37,7 +45,9 @@ export class RecipeComponent implements OnInit {
   ngOnInit(): void {
     this.getUser();
   }
-
+  nArray(n: number): any[] {
+    return Array(n);
+}
   getUser(){
     this.auth.getLoggedInUser().subscribe({
       next: (data) => {
@@ -64,18 +74,6 @@ export class RecipeComponent implements OnInit {
       });
     }
   }
-  // displayUserRecipes() {
-  //   this.recipeServ.recipesByUsername(this.user).subscribe({
-  //     next: (recipes) => {
-  //       this.recipes = recipes;
-  //       console.log(recipes);
-  //     },
-  //     error: (fail: any) => {
-  //       console.error('RecipeComp.reload: error');
-  //       console.error(fail);
-  //     },
-  //   });
-  // }
   displayUpdateTable(recipe: Recipe) {
     this.editSelected = recipe;
   }
@@ -84,6 +82,58 @@ export class RecipeComponent implements OnInit {
   }
   displayCreate() {
     this.isSelected = true;
+  }
+
+  displayRecipe(recipe: Recipe) {
+    this.selected = recipe;
+    this.recipeSelected = true;
+    this.getIngredientsByrecipe(recipe.id);
+  }
+
+  displayTable() {
+    this.selected = null;
+    this.isSelected = false;
+    this.isCreateTableSelected = false;
+    this.editSelected = null;
+  }
+
+  getIngredientsByrecipe(id: number){
+    console.log(id);
+    this.ingredientServ.indexByRecipe(id).subscribe({
+      next: (data) => {this.ingredients = data; console.log(data)},
+      error: (fail: any) => {
+        console.error('getIngredients: error');
+        console.error(fail);
+      }
+    })
+  }
+
+  addIngredient(recipe: Recipe) {
+    this.recipeServ.create(recipe).subscribe({
+      next: (newRecipe) => {
+        this.selected = recipe;
+        this.recipeSelected = true;
+        this.newRecipe = new Recipe();
+        this.reload();
+        this.displayTable();
+      },
+      error: (fail) => {
+        console.error('RecipeComponent.createIngredient: error adding ingredient');
+        console.error(fail);
+      },
+    });
+  }
+
+  removeIngredient(id: number): void {
+
+        this.ingredientServ.destroy(id).subscribe({
+
+          next: () => {
+            this.reload();
+            this.displayTable();
+          },
+        });
+
   }
 
   createRecipe(recipe: Recipe) {
@@ -96,22 +146,10 @@ export class RecipeComponent implements OnInit {
         this.displayTable();
       },
       error: (fail) => {
-        console.error('RecipeComponent.addTodo: error creating recipe');
+        console.error('RecipeComponent.createRecipe: error creating recipe');
         console.error(fail);
       },
     });
-  }
-  displayRecipe(recipe: Recipe) {
-    this.selected = recipe;
-    this.recipeSelected = true;
-  }
-
-  displayTable() {
-    this.selected = null;
-    this.isSelected = false;
-    this.isCreateSelected = false;
-    this.isCreateTableSelected = false;
-    this.editSelected = null;
   }
 
   updateRecipe(recipe: Recipe) {
@@ -137,4 +175,19 @@ export class RecipeComponent implements OnInit {
       },
     });
   }
+
+
 }
+
+// displayUserRecipes() {
+//   this.recipeServ.recipesByUsername(this.user).subscribe({
+//     next: (recipes) => {
+//       this.recipes = recipes;
+//       console.log(recipes);
+//     },
+//     error: (fail: any) => {
+//       console.error('RecipeComp.reload: error');
+//       console.error(fail);
+//     },
+//   });
+// }
