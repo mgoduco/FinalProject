@@ -5,7 +5,7 @@
   <br><br>
   <div class="row">
   <div>
-   <button id="create" *ngIf="!isCreateTableSelected && !selected" class="btn btn-success" (click)="displayCreateTable()">Create New Recipe</button>
+   <button id="create" *ngIf="!isCreateTableSelected && !selected" class="btn btn-success" (click)="displayCreateTable(true)">Create New Recipe</button>
   </div></div>
 
 
@@ -20,47 +20,7 @@
     <img ng src="/assets/default_recipe.png" class="recipeImg"><br><br>
     <div class="container-fluid">
 
-          <div class="row">
-            <div>
-             <button id="addIngredient" class="btn btn-success" (click)="displayAddIngredient(true)">Add Ingredient</button>
-             <button id="addIngredient" class="btn btn-danger" (click)="displayAddIngredient(false)">Cancel</button>
-            </div></div> <br>
 
-    <div *ngIf="addIng">
-      <div class="form-floating mb-1">
-        <input class="form-control" list="allingredients" type="text" name="ingredient">
-        <label for="allingredients"><strong>Ingredient:</strong></label>
-        <datalist id="allingredients">
-          <option *ngFor="let ingredient of allingredients" data-tokens=>{{ingredient.name}}</option>
-        </datalist>
-      </div> <br>
-
-      <div >
-        <label >Ingredient Measure:</label> <br>
-        <input type="radio" name="pinch" id="pinch">
-        <label for="pinch"><strong>Pinch</strong></label>
-        <input type="radio" name="dash" id="dash">
-        <label for="dash"><strong>Dash</strong></label>
-        <input type="radio" name="tsp" id="tsp">
-        <label for="tsp"><strong>Tsp</strong></label>
-        <input type="radio" name="tbsp" id="tbsp">
-        <label for="tbsp"><strong>Tbsp</strong></label>
-        <input type="radio" name="oz" id="oz">
-        <label for="oz"><strong>Oz</strong></label>
-        <input type="radio" name="g" id="g">
-        <label for="g"><strong>Pound</strong></label>
-      </div><br>
-
-
-      <div class="form-floating mb-1">
-        <input class="form-control"  type="number" name="amount" id="amount"><br>
-        <label for="amount"><strong>Ingredient Amount:</strong></label>
-        </div>
-        <div class="form-floating mb-1">
-        <input class="form-control" type="text" name="preparation" id="preparation"><br>
-        <label for="preparation"><strong>Ingredient Preparation:</strong></label>
-      </div>
-    </div>
 
 
 
@@ -163,6 +123,50 @@
   <form class="centered" id="editform" centered="form-floating mb-3">
     <img  src="{{ editSelected.imageUrl }}" class="recipeImg"><br><br>
     <div class="container-fluid">
+
+      <div class="row">
+        <div>
+         <button id="addIngredient" class="btn btn-success" (click)="displayAddIngredient(true)">Add Ingredient</button>
+         <button id="addIngredient" class="btn btn-danger" (click)="displayAddIngredient(false)">Cancel</button>
+        </div></div> <br>
+
+  <div *ngIf="addIng">
+    <form class="centered" action="" centered="form-floating mb-3">
+        <div >
+          <label >Ingredient Measure:</label> <br>
+          <input type="radio" name="pinch" id="pinch">
+          <label for="pinch"><strong>Pinch</strong></label>
+          <input type="radio" name="dash" id="dash">
+          <label for="dash"><strong>Dash</strong></label>
+          <input type="radio" name="tsp" id="tsp">
+          <label for="tsp"><strong>Tsp</strong></label>
+          <input type="radio" name="tbsp" id="tbsp">
+          <label for="tbsp"><strong>Tbsp</strong></label>
+          <input type="radio" name="oz" id="oz">
+          <label for="oz"><strong>Oz</strong></label>
+          <input type="radio" name="g" id="g">
+          <label for="g"><strong>Pound</strong></label>
+        </div><br>
+
+  <div class="form-floating mb-1">
+    <input class="form-control" list="allingredients" type="text" name="ingredient">
+    <label for="allingredients"><strong>Ingredient:</strong></label>
+    <datalist id="allingredients">
+      <option *ngFor="let ingredient of allingredients" data-tokens=>{{ingredient.name}}</option>
+    </datalist>
+  </div> <br>
+
+  <div class="form-floating mb-1">
+    <input class="form-control"  type="number" name="amount" id="amount"><br>
+    <label for="amount"><strong>Ingredient Amount:</strong></label>
+    </div>
+    <div class="form-floating mb-1">
+    <input class="form-control" type="text" name="preparation" id="preparation"><br>
+    <label for="preparation"><strong>Ingredient Preparation:</strong></label>
+  </div>
+  <!-- <button class="btn btn-success buttonpad"  (click)="createRecipeIngredient(rIng ,ingredient.id, editSelected.id)">Add Ingredient</button> -->
+  </form>
+</div>
 
     <ul class="ingredients" *ngFor="let ingredient of ingredients">
         <li>{{ingredient.name}} <button class="btn btn-danger" (click)="removeIngredient(ingredient.id)"  > X</button> </li>

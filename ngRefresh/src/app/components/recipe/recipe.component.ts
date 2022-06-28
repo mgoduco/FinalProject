@@ -30,6 +30,9 @@ export class RecipeComponent implements OnInit {
   ingredients: Ingredient [] = [];
   allingredients: Ingredient [] = [];
   rIngredients: RecipeIngredient [] = [];
+  // rIngredient: RecipeIngredient = new RecipeIngredient(
+
+  // );
 
   // Icons
   faArrowLeft = faArrowLeft;
@@ -84,8 +87,8 @@ export class RecipeComponent implements OnInit {
   displayUpdateTable(recipe: Recipe) {
     this.editSelected = recipe;
   }
-  displayCreateTable() {
-    this.isCreateTableSelected = true;
+  displayCreateTable(string: boolean) {
+    this.isCreateTableSelected = string
   }
   displayCreate() {
     this.isSelected = true;
@@ -137,8 +140,6 @@ export class RecipeComponent implements OnInit {
         this.selected = recipe;
         this.recipeSelected = true;
         this.newRecipe = new Recipe();
-        this.reload();
-        this.displayTable();
       },
       error: (fail) => {
         console.error('RecipeComponent.createIngredient: error adding ingredient');
@@ -158,22 +159,24 @@ export class RecipeComponent implements OnInit {
         });
       }
 
-  }
+    }
 
-  // ???????????????
-  createRecipeWithIngredients() {
+    // ???????????????
+    createRecipeWithIngredients() {
 
-  }
+    }
 
 
-  createRecipe(recipe: Recipe) {
-    this.recipeServ.create(recipe).subscribe({
-      next: (newRecipe) => {
-        this.selected = recipe;
-        this.recipeSelected = true;
-        this.newRecipe = new Recipe();
-        this.reload();
-        this.displayTable();
+    createRecipe(recipe: Recipe) {
+      this.recipeServ.create(recipe).subscribe({
+        next: (newRecipe) => {
+          this.selected = recipe;
+          this.recipeSelected = true;
+          this.newRecipe = new Recipe();
+          this.reload();
+          this.displayCreateTable(false);
+          this.displayUpdateTable(recipe);
+
       },
       error: (fail) => {
         console.error('RecipeComponent.createRecipe: error creating recipe');
