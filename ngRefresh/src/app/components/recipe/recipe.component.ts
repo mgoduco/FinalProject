@@ -27,6 +27,7 @@ export class RecipeComponent implements OnInit {
   recipeSelected: boolean = false;
   user: User = new User();
   ingredients: Ingredient [] = [];
+  allingredients: Ingredient [] = [];
   rIngredients: RecipeIngredient [] = [];
 
   // Icons
@@ -109,12 +110,20 @@ export class RecipeComponent implements OnInit {
       }
     })
   }
+
   // TODO GET ALL INGREDIENTS TO ADD DROP DOWN FOR CREATE RECIPE INGREDIENTS....
   // DO NGFOR TODO EACH INGREDIENT IN DROP DOWN... AND INGREDIENT NAME IS LABEL--
   // ID IS VALUE
   getAllIngredients() {
-    // index ingredients
+    this.ingredientServ.index().subscribe({
+      next: (data) => {this.allingredients = data; console.log(data)},
+      error: (fail: any) => {
+        console.error('getIngredients: error');
+        console.error(fail);
+      }
+    })
   }
+    // index ingredients
 
   addIngredient(recipe: Recipe) {
     this.recipeServ.create(recipe).subscribe({
