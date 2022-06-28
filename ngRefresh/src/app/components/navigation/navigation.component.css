@@ -27,9 +27,46 @@
   margin: 10vw;
 }
 
+.navLinksDiv {
+  border-radius: 5px;
+}
 
 .navLinks {
   padding-right: 10%;
+}
+
+.navBarLink {
+  color: white;
+}
+
+.offCanvasMenu {
+  width: 20px !important;
+}
+
+.canvasHeader {
+  background-color: rgb(4, 100, 36);
+  color: white;
+}
+
+.canvasBody {
+  background-color: #F8FCDA;
+}
+
+.btn-close {
+  outline: none !important;
+}
+
+.canvasLink {
+  background-color: whitesmoke;
+  color: black;
+}
+
+a.canvasLink:hover {
+  background-color: darkgray;
+}
+
+.canvasSearch {
+  margin-top: 10px;
 }
 
 
