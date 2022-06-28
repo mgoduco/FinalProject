@@ -1,5 +1,6 @@
 body {
   background-color: #E5E5E5;
+  padding-bottom: 5%;
 }
 
 #cards {
@@ -60,7 +61,33 @@ body {
     text-align: center;
   }
 
+  #commentTitle {
+    width: 40vw;
+    height: auto;
+  }
 
+  #newComment {
+    width: 40vw;
+    height: 20vw;
+    z-index: 0;
+  }
+
+
+  #faMessageSlash {
+    font-size: 2em;
+    padding-right: 5%;
+    text-align: right;
+  }
+
+  #faComment {
+    font-size: 5vw;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    padding: 0;
+    z-index: 1;
+    padding-bottom: 4%;
+  }
 
 
 
