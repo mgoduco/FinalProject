@@ -51,16 +51,20 @@
   <p id="directions">{{ selected.directions }}</p>
 
     <h4>Comments</h4>
-    <div class="form-floating mb" id="addComments">
-
-    <input class="form-control" type="text" id="commentTitle" placeholder="Title" [(ngModel)]="newComment.title"><br>
-    <textarea class="form-control" name="newComment" placeholder="Comment" [(ngModel)]="newComment.comment"></textarea><br>
-
-    <fa-icon id="faComment" (click)="createComment(newComment, selected.id)" [icon]="facomment"></fa-icon>
+    <div class="input-group input-group-sm mb" id="addComments">
+      <span class="input-group-text" id="inputGroup-sizing-sm">Title</span>
+    <input class="form-control" type="text" id="commentTitle" placeholder="Title" [(ngModel)]="newComment.title">
+        </div>
+        <div class="input-group input-group-sm mb" id="addComments">
+          <span class="input-group-text" id="inputGroup-sizing-sm">Comment</span>
+    <textarea class="form-control" id="newComment" placeholder="Comment" [(ngModel)]="newComment.comment"></textarea><br>
+    <fa-icon id="faComment" (click)="createComment(newComment, selected.id)" [icon]="facomment" class="fa-2x"></fa-icon>
   </div>
+      <div class="commentsDiv">
     <ul class="comments" *ngFor="let comment of comments">
-          <li *ngIf="comment.active" ><strong>{{comment.title}}</strong><br>{{comment.comment}} <fa-icon id="faMessageSlash" (click)="deleteComment(comment, selected)" [icon]="famessage"></fa-icon></li>
+          <p *ngIf="comment.active" > <strong>{{comment.title}}</strong><br>  <fa-icon id="faMessageSlash" (click)="deleteComment(comment, selected)" [icon]="famessage" class="fa-2x"></fa-icon>{{comment.comment}}</p>
       </ul>
+    </div>
 </div>
 
 
