@@ -124,8 +124,8 @@ export class RecipeComponent implements OnInit {
     });
   }
 
-  removeIngredient(id: number): void {
-
+  removeIngredient(id: number | null): void {
+      if (id != null) {
         this.ingredientServ.destroy(id).subscribe({
 
           next: () => {
@@ -133,6 +133,7 @@ export class RecipeComponent implements OnInit {
             this.displayTable();
           },
         });
+      }
 
   }
 
