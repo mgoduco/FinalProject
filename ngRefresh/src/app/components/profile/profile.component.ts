@@ -106,6 +106,9 @@ export class ProfileComponent implements OnInit {
 
   displayProfile() {
     this.editUser = null;
+    this.router.navigateByUrl('/u').then(() => {
+      this.reloadPage();
+      });
   }
 
   getUser(){
@@ -115,6 +118,10 @@ export class ProfileComponent implements OnInit {
       }
     })
     console.log(this.user);
+  }
+
+  reloadPage() {
+    window.location.reload();
   }
 
 }
