@@ -73,18 +73,15 @@ export class UserService {
     );
   }
 
-  // addFavorite(uid: number, rid: number): boolean {
-  //   try{
-  //     this.http.post<>(`${this.url}/${uid}/favorites/${rid}`, this.getHttpOptions()).pipe(
-  //       catchError((err: any) => {
-  //         console.error(err);
-  //         return throwError(
-  //           () => new Error('UserService.addFavorite(): error creating new Favorite: ' + err)
-  //         );
-  //       })
-  //     );
-  //   }
-  //   catch{}
-  // }
+  addFavorite(uid: number, rid: number): Observable<void> {
+      return this.http.post<void>(`${this.url}/${uid}/favorites/${rid}`, null, this.getHttpOptions()).pipe(
+      catchError((err: any) => {
+        console.error(err);
+        return throwError(
+          () => new Error('UserService.addFavorite(): error creating new Favorite: ' + err)
+        );
+      })
+    );
+  }
 
 }
