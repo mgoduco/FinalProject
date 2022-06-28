@@ -1,3 +1,5 @@
+<body>
+
 <div class="container-fluid" >
 
   <br><br>
@@ -95,7 +97,7 @@
 
 
   <ul   *ngFor="let ingredient of ingredients">
-    <!-- <li  >{{ingredient.name}} <button class="btn btn-danger" (click)="removeIngredient(ingredient.id)"  > X</button> </li> -->
+    <li  >{{ingredient.name}} </li>
   </ul>
 
   <p><b>Prep Time: </b>{{ selected.prepminutes }}</p>
@@ -120,7 +122,7 @@
     <div class="container-fluid">
 
     <ul class="ingredients" *ngFor="let ingredient of ingredients">
-        <li>{{ingredient.name}}</li>
+        <li>{{ingredient.name}} <button class="btn btn-danger" (click)="removeIngredient(ingredient.id)"  > X</button> </li>
     </ul>
 
     <div class="form-floating mb-1">
@@ -165,3 +167,4 @@
 
 
 </div>
+</body>

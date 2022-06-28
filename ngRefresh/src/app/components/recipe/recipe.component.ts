@@ -97,6 +97,8 @@ export class RecipeComponent implements OnInit {
     this.editSelected = null;
   }
 
+
+
   getIngredientsByrecipe(id: number){
     console.log(id);
     this.ingredientServ.indexByRecipe(id).subscribe({
@@ -106,6 +108,12 @@ export class RecipeComponent implements OnInit {
         console.error(fail);
       }
     })
+  }
+  // TODO GET ALL INGREDIENTS TO ADD DROP DOWN FOR CREATE RECIPE INGREDIENTS....
+  // DO NGFOR TODO EACH INGREDIENT IN DROP DOWN... AND INGREDIENT NAME IS LABEL--
+  // ID IS VALUE
+  getAllIngredients() {
+    // index ingredients
   }
 
   addIngredient(recipe: Recipe) {
@@ -136,6 +144,8 @@ export class RecipeComponent implements OnInit {
       }
 
   }
+
+
 
   createRecipe(recipe: Recipe) {
     this.recipeServ.create(recipe).subscribe({
@@ -168,6 +178,48 @@ export class RecipeComponent implements OnInit {
   }
 
   deleteRecipe(id: number): void {
+    this.recipeServ.delete(id).subscribe({
+      next: () => {
+        this.reload();
+        this.reload();
+        this.displayTable();
+      },
+    });
+  }
+
+  createRecipeIngredient(rIngredient: RecipeIngredient, recipe: Recipe, ingredient: Ingredient) {
+    if (recipe.id != null && ingredient.id != null) {
+      this.rIngredientServ.create(rIngredient, recipe.id, ingredient.id).subscribe({
+        next: (rIngredient) => {
+          this.selected = recipe;
+          this.recipeSelected = true;
+          this.newRecipe = new Recipe();
+          this.reload();
+          this.displayTable();
+        },
+        error: (fail) => {
+          console.error('RecipeComponent.createRecipe: error creating recipe');
+          console.error(fail);
+        },
+      });
+    }
+  }
+
+  updateRecipeIngredient(recipe: Recipe) {
+    this.recipeServ.update(recipe).subscribe({
+      next: (newRecipe) => {
+        this.newRecipe = new Recipe();
+        this.reload();
+        this.displayTable();
+      },
+      error: (fail) => {
+        console.error('RecipeComponent.addTodo: error creating recipe');
+        console.error(fail);
+      },
+    });
+  }
+
+  deleteRecipeIngredient(id: number): void {
     this.recipeServ.delete(id).subscribe({
       next: () => {
         this.reload();

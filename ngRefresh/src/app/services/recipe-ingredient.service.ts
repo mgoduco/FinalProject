@@ -47,22 +47,39 @@ export class RecipeIngredientService {
       catchError((err: any) => {
         console.error(err);
         return throwError(
-          () => new Error('CommentService.create(): error creating Comment: ' + err)
+          () => new Error('recipeingredient.create(): error creating recipe ingredient: ' + err)
         );
       })
     );
   }
 
-  update(rIngredient: RecipeIngredient, rid: number, iid: number): Observable<RecipeIngredient[]> {
+  update(rIngredient: RecipeIngredient, rid: number, iid: number): Observable<RecipeIngredient> {
     return this.http
-      .get<RecipeIngredient[]>(`${this.url}/${rid}/ingredients`)
+      .put<RecipeIngredient>(`${this.url}/${rid}/ingredients/${iid}`, rIngredient, this.getHttpOptions())
       .pipe(
         catchError((err: any) => {
           console.log(err);
           return throwError(
             () =>
               new Error(
-                'RecipeIngredient.index(): error retrieving RecipeIngredients: ' +
+                'RecipeIngredient.update(): error updating RecipeIngredients: ' +
+                  err
+              )
+          );
+        })
+      );
+  }
+
+  delete(rid: number, iid: number): Observable<void> {
+    return this.http
+      .delete<void>(`${this.url}/${rid}/ingredients`)
+      .pipe(
+        catchError((err: any) => {
+          console.log(err);
+          return throwError(
+            () =>
+              new Error(
+                'RecipeIngredient.delete(): error deleting RecipeIngredients: ' +
                   err
               )
           );
