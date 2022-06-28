@@ -17,8 +17,8 @@ export class CommentService {
   constructor(
     private http: HttpClient,
     private auth: AuthService,
-    private user: UserService
-    ) {}
+    private user: UserService,
+) {}
 
   getHttpOptions() {
     let options = {
@@ -36,7 +36,7 @@ export class CommentService {
         console.log(err);
         return throwError(
           () =>
-            new Error('CommentService.getAllCommentsByRecipe(): error retrieving Comment: ' + err)
+            new Error('CommentService.index(): error retrieving Comment: ' + err)
         );
       })
     );
@@ -66,7 +66,7 @@ export class CommentService {
     );
   }
 
-  create(comment: Comment, id: Number): Observable<Comment> {
+  create(comment: Comment, id: number): Observable<Comment> {
     return this.http.post<Comment>(`${this.url}/recipes/${id}/comments`, comment, this.getHttpOptions()).pipe(
       catchError((err: any) => {
         console.error(err);
