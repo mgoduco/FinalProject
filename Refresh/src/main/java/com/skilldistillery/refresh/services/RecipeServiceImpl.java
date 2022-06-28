@@ -94,7 +94,6 @@ public class RecipeServiceImpl implements RecipeService {
 		System.out.println("getRecipeById: " + id);
 		Optional<Recipe> optRecipe = recipeRepo.findById(id);
 		System.out.println(optRecipe.get().getId());
-		System.out.println(optRecipe.get());
 		if (optRecipe.isPresent()) {
 			return optRecipe.get();
 		}
