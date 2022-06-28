@@ -22,6 +22,7 @@ export class RecipeComponent implements OnInit {
   newRecipe: Recipe = new Recipe();
   selected: null | Recipe = null;
   editSelected: null | Recipe = null;
+  addIng: boolean = false;
   isSelected: boolean = false;
   isCreateTableSelected: boolean = false;
   recipeSelected: boolean = false;
@@ -75,6 +76,10 @@ export class RecipeComponent implements OnInit {
         },
       });
     }
+  }
+
+  displayAddIngredient(string: boolean) {
+    this.addIng = string;
   }
   displayUpdateTable(recipe: Recipe) {
     this.editSelected = recipe;
@@ -155,6 +160,10 @@ export class RecipeComponent implements OnInit {
 
   }
 
+  // ???????????????
+  createRecipeWithIngredients() {
+
+  }
 
 
   createRecipe(recipe: Recipe) {
@@ -214,31 +223,40 @@ export class RecipeComponent implements OnInit {
       });
     }
   }
-
-  updateRecipeIngredient(recipe: Recipe) {
-    this.recipeServ.update(recipe).subscribe({
-      next: (newRecipe) => {
-        this.newRecipe = new Recipe();
-        this.reload();
-        this.displayTable();
-      },
-      error: (fail) => {
-        console.error('RecipeComponent.addTodo: error creating recipe');
-        console.error(fail);
-      },
-    });
+  updateRecipeIngredient(rIngredient: RecipeIngredient, recipe: Recipe, ingredient: Ingredient) {
+    if (recipe.id != null && ingredient.id != null) {
+      this.rIngredientServ.update(rIngredient, recipe.id, ingredient.id).subscribe({
+        next: (rIngredient) => {
+          this.selected = recipe;
+          this.recipeSelected = true;
+          this.newRecipe = new Recipe();
+          this.reload();
+          this.displayTable();
+        },
+        error: (fail) => {
+          console.error('RecipeComponent.updateRecipeIngredient: error updating recipe');
+          console.error(fail);
+        },
+      });
+    }
   }
-
-  deleteRecipeIngredient(id: number): void {
-    this.recipeServ.delete(id).subscribe({
-      next: () => {
-        this.reload();
-        this.reload();
-        this.displayTable();
-      },
-    });
+  removeRecipeIngredient(recipe: Recipe, ingredient: Ingredient) {
+    if (recipe.id != null && ingredient.id != null) {
+      this.rIngredientServ.delete(recipe.id, ingredient.id).subscribe({
+        next: (rIngredient) => {
+          this.selected = recipe;
+          this.recipeSelected = true;
+          this.newRecipe = new Recipe();
+          this.reload();
+          this.displayTable();
+        },
+        error: (fail) => {
+          console.error('RecipeComponent.removeRecipeIngredient: error creating recipe');
+          console.error(fail);
+        },
+      });
+    }
   }
-
 
 }
 
