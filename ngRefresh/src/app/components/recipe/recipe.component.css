@@ -97,6 +97,11 @@ margin-bottom: 100px;
     width: 50vw;
   }
 
+  ul {
+    columns: 2;
+
+  }
+
   #title {
     text-align: center;
   }

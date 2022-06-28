@@ -92,16 +92,19 @@
   <p><img [src]="selected.imageUrl" class="recipeImg" [alt]="selected.name" ></p>
 
 <h4>Ingredients</h4>
-<!-- <table class="table table-bordered">
+<!-- <div class="item active" *ngFor="#data of lengthArray | slice:start[:end]"> -->
+<!-- <div>
+<table class="table table-bordered" >
+  <thead *ngFor="let ingredient of ingredients | slice:0[:5]" ><tr><td></td></tr></thead>
     <tr  *ngFor="let ingredient of ingredients";let i=index >
         <td class="ingredients" *ngFor="let ingredient of ingredients";let i=index></td>
         <td *ngIf="i<5">{{ingredient.name}}</td>
     </tr>
-</table> -->
-
-  <!-- <ul class="ingredients" *ngFor="let ingredient of ingredients">
-    <li>{{ingredient.name}}</li>
-</ul> -->
+</table>
+</div> -->
+  <ul   *ngFor="let ingredient of ingredients">
+    <li  >{{ingredient.name}}</li>
+  </ul>
 
   <p><b>Prep Time: </b>{{ selected.prepminutes }}</p>
   <p><b>Cook Time: </b>{{ selected.cookminutes }}</p>

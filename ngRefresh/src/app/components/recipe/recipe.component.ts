@@ -1,3 +1,5 @@
+import { RecipeIngredientService } from './../../services/recipe-ingredient.service';
+import { RecipeIngredient } from './../../models/recipe-ingredient';
 import { IngredientService } from 'src/app/services/ingredient.service';
 import { Ingredient } from './../../models/ingredient';
 import { AuthService } from 'src/app/services/auth.service';
@@ -6,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { RecipeService } from 'src/app/services/recipe.service';
 import { UserService } from 'src/app/services/user.service';
-import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
+import { faArrowLeft, } from '@fortawesome/free-solid-svg-icons';
 import { User } from 'src/app/models/user';
 
 @Component({
@@ -25,12 +27,15 @@ export class RecipeComponent implements OnInit {
   recipeSelected: boolean = false;
   user: User = new User();
   ingredients: Ingredient [] = [];
+  rIngredients: RecipeIngredient [] = [];
 
   // Icons
   faArrowLeft = faArrowLeft;
+
   constructor(
     private ingredientServ: IngredientService,
     private recipeServ: RecipeService,
+    private rIngredientServ: RecipeIngredientService,
     private userServ: UserService,
     private route: ActivatedRoute,
     private router: Router,
@@ -103,6 +108,31 @@ export class RecipeComponent implements OnInit {
     })
   }
 
+  addIngredient(recipe: Recipe) {
+    this.recipeServ.create(recipe).subscribe({
+      next: (newRecipe) => {
+        this.selected = recipe;
+        this.recipeSelected = true;
+        this.newRecipe = new Recipe();
+        this.reload();
+        this.displayTable();
+      },
+      error: (fail) => {
+        console.error('RecipeComponent.createIngredient: error adding ingredient');
+        console.error(fail);
+      },
+    });
+  }
+
+  removeIngredient(id: number): void {
+    this.ingredientServ.destroy(id).subscribe({
+      next: () => {
+        this.reload();
+        this.displayTable();
+      },
+    });
+  }
+
   createRecipe(recipe: Recipe) {
     this.recipeServ.create(recipe).subscribe({
       next: (newRecipe) => {
@@ -113,7 +143,7 @@ export class RecipeComponent implements OnInit {
         this.displayTable();
       },
       error: (fail) => {
-        console.error('RecipeComponent.addTodo: error creating recipe');
+        console.error('RecipeComponent.createRecipe: error creating recipe');
         console.error(fail);
       },
     });
