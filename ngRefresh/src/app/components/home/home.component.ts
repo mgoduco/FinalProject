@@ -144,6 +144,7 @@ export class HomeComponent implements OnInit {
     console.log(id);
 
     if (id != null && comment != null) {
+      comment.active = true;
       this.commentServ.create(comment, id).subscribe({
         next: (data) => {
           this.comment = data;
