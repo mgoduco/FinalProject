@@ -196,8 +196,10 @@ export class SearchComponent implements OnInit {
   createComment(comment: Comment, id: number) {
     console.log(comment);
     console.log(id);
-
-    if (id != null && comment != null) {
+    if(comment.comment == null){
+      alert('Comment cannot be blank')
+    }
+    if (id != null && comment.comment != null) {
       comment.active = true;
       this.commentServ.create(comment, id).subscribe({
         next: (data) => {
