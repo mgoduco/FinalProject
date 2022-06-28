@@ -80,9 +80,14 @@ export class NavigationComponent implements OnInit {
 
   logOut(){
     this.auth.logout();
-    this.router.navigateByUrl('/home');
+    this.router.navigateByUrl('/home').then(() => {
+    this.reloadPage();
+    });
   }
 
+  reloadPage(){
+  window.location.reload();
+  }
 
   getUser(){
     this.auth.getLoggedInUser().subscribe({
