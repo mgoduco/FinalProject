@@ -40,7 +40,9 @@ export class RecipeComponent implements OnInit {
   ngOnInit(): void {
     this.getUser();
   }
-
+  nArray(n: number): any[] {
+    return Array(n);
+}
   getUser(){
     this.auth.getLoggedInUser().subscribe({
       next: (data) => {

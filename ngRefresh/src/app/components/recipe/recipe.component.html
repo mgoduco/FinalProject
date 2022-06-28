@@ -90,10 +90,19 @@
   </a>
   <h4 id="title">{{ selected.name }}</h4>
   <p><img [src]="selected.imageUrl" class="recipeImg" [alt]="selected.name" ></p>
-  <h5>Ingredients</h5>
-  <ul class="ingredients" *ngFor="let ingredient of ingredients">
+
+<h4>Ingredients</h4>
+<!-- <table class="table table-bordered">
+    <tr  *ngFor="let ingredient of ingredients";let i=index >
+        <td class="ingredients" *ngFor="let ingredient of ingredients";let i=index></td>
+        <td *ngIf="i<5">{{ingredient.name}}</td>
+    </tr>
+</table> -->
+
+  <!-- <ul class="ingredients" *ngFor="let ingredient of ingredients">
     <li>{{ingredient.name}}</li>
-</ul>
+</ul> -->
+
   <p><b>Prep Time: </b>{{ selected.prepminutes }}</p>
   <p><b>Cook Time: </b>{{ selected.cookminutes }}</p>
   <p id="description">{{ selected.description }}</p>
@@ -115,6 +124,9 @@
     <img  src="{{ editSelected.imageUrl }}" class="recipeImg"><br><br>
     <div class="container-fluid">
 
+    <ul class="ingredients" *ngFor="let ingredient of ingredients">
+        <li>{{ingredient.name}}</li>
+    </ul>
 
     <div class="form-floating mb-1">
     <input id="updatetexturl" class="form-control" type="text" name="imageUrl" placeholder="Image Url" value="{{ editSelected.imageUrl }}" [(ngModel)]="editSelected.imageUrl" /> <br />
