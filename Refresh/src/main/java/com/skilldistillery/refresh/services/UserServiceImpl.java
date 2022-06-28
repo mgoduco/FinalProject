@@ -101,6 +101,7 @@ public class UserServiceImpl implements UserService {
 		Recipe recipe = recipeRepo.queryById(recipeId);
 		if (user != null && recipe != null) {
 			user.getFavoriteRecipes().add(recipe);
+			userRepo.saveAndFlush(user);
 			favorited = true;
 		}
 		return favorited;

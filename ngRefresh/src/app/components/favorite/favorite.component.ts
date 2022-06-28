@@ -15,11 +15,9 @@ import { UserService } from 'src/app/services/user.service';
 
 export class FavoriteComponent implements OnInit {
 
-  recipe: null | Recipe = null;
+  //recipe: null | Recipe = null;
   recipes: Recipe[] = [];
-  newRecipe: Recipe = new Recipe();
   selected: null | Recipe = null;
-  editSelected: boolean = false;
   isSelected: boolean = false;
   // isCreateSelected: boolean = false;
   // isCreateTableSelected: boolean = false;
@@ -82,8 +80,12 @@ export class FavoriteComponent implements OnInit {
     // this.isCreateTableSelected = false;
   }
 
-  setFavorite(userId: number, recipeId: number) {
-
-  }
+  // setFavorite(recipe: Recipe) {
+  //   let userId = this.user.id;
+  //   let recipeId = this.selected?.id;
+  //   if (userId !== null && recipeId !== null) {
+  //     this.userServ.
+  //   }
+  // }
 
 }
