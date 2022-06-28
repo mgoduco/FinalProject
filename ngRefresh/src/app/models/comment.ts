@@ -1,3 +1,6 @@
+import { Recipe } from "./recipe";
+import { User } from "./user";
+
 export class Comment {
   id: number | null;
   title: string | null;
@@ -5,7 +8,9 @@ export class Comment {
   created: string | null;
   active: boolean | false;
   inReplyTo: number | null;
-  replies: Comment[] | any;
+  // replies: Comment[] | any;
+  user: User | null;
+  recipe: Recipe | null;
 
   constructor(
     id: number | null = 0,
@@ -14,7 +19,9 @@ export class Comment {
     created: string | null = '',
     active: boolean = false,
     inReplyTo: number | null = 0,
-    replies: Comment[] = [],
+    // replies: Comment[] = [],
+    user: User | null,
+    recipe: Recipe | null
 
   ) {
     this.id = id;
@@ -23,7 +30,8 @@ export class Comment {
     this.created = created;
     this.active = active;
     this.inReplyTo = inReplyTo;
-    this.replies = replies;
-
+    // this.replies = replies;
+    this.user = user;
+    this.recipe = recipe;
   }
 }

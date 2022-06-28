@@ -33,7 +33,7 @@ import { FavoriteComponent } from './components/favorite/favorite.component';
     NotFoundComponent,
     RecipeComponent,
     SearchComponent,
-    FavoriteComponent
+    FavoriteComponent,
     LogoutComponent,
     ProfileComponent
   ],

@@ -65,8 +65,9 @@ body {
     height: auto;
   }
 
-  #commentTitle{
-
+  #faComment{
+  width: 50%;
+  height: auto;
   }
 
 
