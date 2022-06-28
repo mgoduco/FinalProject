@@ -1,0 +1,35 @@
+.centered {
+  margin: auto;
+  width: 50vw;
+}
+
+.image-group {
+  position: relative;
+  /* overflow: auto; */
+}
+
+.clear {
+  clear: both;
+}
+
+.recipeImg {
+  /* position: absolute; */
+  height: auto;
+  width: 50vw;
+  /* max-height: fit-content;
+  max-width: fit-content; */
+  border-radius: 3%;
+  z-index: 0;
+}
+
+#favorite {
+  /* font-size: 5vw; */
+  position: absolute;
+  right: 5px;
+  top: 5px;
+  padding: 0;
+  z-index: 1;
+  /* padding-right: 2%; */
+  /* margin-top: 10px;
+  margin-right: 10px; */
+}
