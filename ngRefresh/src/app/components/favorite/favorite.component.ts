@@ -80,8 +80,12 @@ export class FavoriteComponent implements OnInit {
     // this.isCreateTableSelected = false;
   }
 
-  setFavorite(userId: number, recipeId: number) {
-
-  }
+  // setFavorite(recipe: Recipe) {
+  //   let userId = this.user.id;
+  //   let recipeId = this.selected?.id;
+  //   if (userId !== null && recipeId !== null) {
+  //     this.userServ.
+  //   }
+  // }
 
 }
