@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.skilldistillery.refresh.entities.Comment;
 import com.skilldistillery.refresh.entities.Recipe;
 import com.skilldistillery.refresh.entities.User;
 import com.skilldistillery.refresh.repositories.UserRepository;
@@ -71,6 +70,24 @@ public class UserController {
 		}
 		return favorites;
 	}
+	
+	@GetMapping("u/favorites/{rid}")
+	public boolean getFavorite(HttpServletRequest req, HttpServletResponse res, Principal principal, @PathVariable int rid) {
+		boolean favorite = false;
+		User user = userService.getUserByUsername(principal.getName());
+		Recipe recipe = recipeService.getRecipeById(rid);
+		if (user != null && recipe != null) {
+			Recipe favRecipe = recipeService.getFavoriteRecipeByUsernameAndId(principal.getName(), rid);
+			if (favRecipe != null) {
+				favorite = true;
+				res.setStatus(200);
+			}
+			else {
+				res.setStatus(404);
+			}
+		}
+		return favorite;
+	}
 
 	@PostMapping("u/{uid}/favorites/{rid}")
 	public boolean addFavorite(HttpServletRequest req, HttpServletResponse res, Principal principal,
@@ -120,5 +137,20 @@ public class UserController {
 			res.setStatus(400);
 		}
 	}
-
+	
+	@DeleteMapping("u/{uid}/favorites/{rid}")
+	public void removeFavorite(HttpServletRequest req, HttpServletResponse res, @PathVariable int uid, @PathVariable int rid, Principal principal) {
+		try {
+			User user = userService.getUserByUsername(principal.getName());
+			if (userService.removeFavorite(user.getId(),rid)) {
+				res.setStatus(204);
+			} else {
+				res.setStatus(404);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			res.setStatus(400);
+		}
+	}
+	
 }

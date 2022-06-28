@@ -73,12 +73,34 @@ export class UserService {
     );
   }
 
+  getFavorite(rid: number): Observable<boolean> {
+    return this.http.get<boolean>(`${this.url}/favorites/${rid}`, this.getHttpOptions()).pipe(
+      catchError((err: any) => {
+        console.error(err);
+        return throwError(
+          () => new Error('UserService.getFavorite(): error getting new Favorite: ')
+        );
+      })
+    );
+  }
+
   addFavorite(uid: number, rid: number): Observable<void> {
       return this.http.post<void>(`${this.url}/${uid}/favorites/${rid}`, null, this.getHttpOptions()).pipe(
       catchError((err: any) => {
         console.error(err);
         return throwError(
           () => new Error('UserService.addFavorite(): error creating new Favorite: ' + err)
+        );
+      })
+    );
+  }
+
+  removeFavorite(uid: number, rid: number): Observable<void> {
+      return this.http.delete<void>(`${this.url}/${uid}/favorites/${rid}`, this.getHttpOptions()).pipe(
+      catchError((err: any) => {
+        console.error(err);
+        return throwError(
+          () => new Error('UserService.removeFavorite(): error removing new Favorite: ' + err)
         );
       })
     );

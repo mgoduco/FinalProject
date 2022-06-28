@@ -106,4 +106,29 @@ public class UserServiceImpl implements UserService {
 		}
 		return favorited;
 	}
+	
+	@Override
+	public boolean removeFavorite(int userId, int recipeId) {
+		boolean removed = false;
+		User user = userRepo.findUserById(userId);
+		Recipe recipe = recipeRepo.queryById(recipeId);
+		if (user != null && recipe != null) {
+			user.getFavoriteRecipes().remove(recipeId);
+			userRepo.saveAndFlush(user);
+			removed = true;
+		}
+		return removed;
+	}
+
+//	@Override
+//	public boolean getFavorite(int userId, int recipeId) {
+//		boolean found = false;
+//		User user = userRepo.findUserById(userId);
+//		Recipe recipe = recipeRepo.queryById(userId);
+//		if (user != null && recipe != null) {
+//			userRepo.findFavoriteRecipeByIdAndRecipe_Id(userId, recipeId);
+//			found = true;
+//		}
+//		return found;
+//	}
 }
