@@ -31,6 +31,8 @@ public interface RecipeService {
 	
 	List<Recipe> getRecipeByNameAndIngredients(String keyword, String ingredient);
 
+	Recipe getFavoriteRecipeByUsernameAndId(String username, int recipeId);
+
 	
 	
 }

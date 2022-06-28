@@ -12,9 +12,7 @@ import { UserService } from 'src/app/services/user.service';
   templateUrl: './favorite.component.html',
   styleUrls: ['./favorite.component.css'],
 })
-
 export class FavoriteComponent implements OnInit {
-
   //recipe: null | Recipe = null;
   recipes: Recipe[] = [];
   selected: null | Recipe = null;
@@ -82,27 +80,47 @@ export class FavoriteComponent implements OnInit {
     // this.isCreateTableSelected = false;
   }
 
+  isFavorite(rid: number) {
+    this.userServ.getFavorite(rid).subscribe({
+      next: (favorite) => {
+        this.favorited = true;
+        console.log("Favorite get success!")
+      },
+      error: (fail: any) => {
+        this.favorited = false;
+      },
+    });
+  }
+
   setFavorite(recipe: Recipe) {
     let userId = this.user.id;
-    console.log("User ID: " + userId);
-    console.log("Selected Recipe:");
+    console.log('User ID: ' + userId);
+    console.log('Selected Recipe:');
     console.log(this.selected);
-    if (this.selected !== null){
+    if (this.selected !== null) {
       let recipeId = this.selected.id;
-      console.log("Recipe ID: " + recipeId);
+      console.log('Recipe ID: ' + recipeId);
       if (userId !== null && recipeId !== null) {
-        console.log("Succeessfully created Favorite!");
+        console.log('Succeessfully created Favorite!');
         this.userServ.addFavorite(userId, recipeId).subscribe();
+        this.favorited = true;
       }
     }
   }
 
   removeFavorite(recipe: Recipe) {
     let userId = this.user.id;
-    console.log("User ID: " + userId);
-    console.log("Selected Recipe:");
+    console.log('User ID: ' + userId);
+    console.log('Selected Recipe:');
     console.log(this.selected);
-
+    if (this.selected !== null) {
+      let recipeId = this.selected.id;
+      console.log('Recipe ID: ' + recipeId);
+      if (userId !== null && recipeId !== null) {
+        console.log('Succeessfully removed Favorite!');
+        this.userServ.removeFavorite(userId, recipeId).subscribe();
+        this.favorited = false;
+      }
+    }
   }
-
 }
