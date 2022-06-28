@@ -6,6 +6,7 @@ body {
 #cards {
   width: auto;
   height: auto;
+  box-shadow: 0 0 5px #888888;
 }
 
 .card-img-top {
@@ -34,6 +35,7 @@ body {
   height: auto;
   width: 50vw;
   border-radius: 3%;
+  z-index: 0;
 }
 
 #description {
@@ -87,4 +89,15 @@ h2 {
   padding: 0;
   z-index: 1;
   padding-right: 2%;
+}
+
+#faHeart {
+  font-size: 5vw;
+  position: absolute;
+  padding: 0;
+  z-index: 1;
+  padding-right: 0.5%;
+  right: 26vw;
+  color: rgba(255, 0, 0, 0.557);
+  border-color: black;
 }

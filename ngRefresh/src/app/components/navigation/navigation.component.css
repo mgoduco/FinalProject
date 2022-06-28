@@ -78,6 +78,21 @@ a.canvasLink:hover {
   margin-top: 10px;
 }
 
+.searchTerm {
+  border: 5px solid #198754;
+  border-radius: 25px;
+  border-color: #198754;
+  z-index: 0;
+  padding: 4px;
+  margin: 3px;
+}
+
+#randIcon{
+  z-index: 1;
+  position: static;
+  font-size: 2vw;
+  color: #198754;
+}
 /* .nav-link {
   width: auto;
   height: fit-auto;

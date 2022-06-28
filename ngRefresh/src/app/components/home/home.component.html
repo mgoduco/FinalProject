@@ -40,7 +40,11 @@
         <fa-icon [icon]="faArrowLeft" (click)="reloadPage()"></fa-icon>
       </a>
       <h4 id="title">{{ selected.name }}</h4>
-      <p><img [src]="selected.imageUrl" class="recipeImg" [alt]="selected.name"></p>
+      <div class="">
+      <img [src]="selected.imageUrl" class="recipeImg" [alt]="selected.name">
+
+      <fa-icon id="faHeart" (click)="hearted()" [icon]="hearted()" class="fa-2x"></fa-icon>
+    </div>
       <p><b>Prep Time: </b>{{ selected.prepminutes }}</p>
       <p><b>Cook Time: </b>{{ selected.cookminutes }}</p>
       <h5>Ingredients</h5>
