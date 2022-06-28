@@ -44,7 +44,7 @@
       <input type="password" class="form-control" name="password" id="password" placeholder="Password" value="{{editUser.password}}" [(ngModel)]="editUser.password">
       <label for="password"><strong>Password:</strong></label>
     </div> -->
-    <div *ngIf="!editUser">
+    <div *ngIf="!editUser" id="imgURL">
       <strong>Image URL:</strong> {{user.imageUrl}}
     </div>
     <div class="form-floating mb-1" *ngIf="editUser">
