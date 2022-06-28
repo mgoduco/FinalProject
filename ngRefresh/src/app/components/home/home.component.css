@@ -8,7 +8,7 @@ body {
   height: auto;
 }
 
-.card-img-top{
+.card-img-top {
   width: auto;
   height: 40vh;
 }
@@ -22,77 +22,69 @@ body {
 }
 
 .card-text {
-    width:auto;
-    overflow: hidden;
-    display: -webkit-box;
-    -webkit-line-clamp: 3;
-    -webkit-box-orient: vertical;
-    font-size: 60%;
-  }
+  width: auto;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  font-size: 60%;
+}
 
-  .recipeImg{
-    height: auto;
-    width: 50vw;
-    border-radius: 3%;
-  }
+.recipeImg {
+  height: auto;
+  width: 50vw;
+  border-radius: 3%;
+}
 
-  #description {
-    width: 50vw;
+#description {
+  width: 50vw;
   height: auto;
   white-space: wrap;
-  }
+}
 
-  #directions {
-    width: 50vw;
+#directions {
+  width: 50vw;
   height: auto;
   white-space: wrap;
-  }
+}
 
-  .centered {
-    margin: auto;
-    width: 50vw;
-  }
+.centered {
+  margin: auto;
+  width: 50vw;
+}
 
-  #title {
-    text-align: center;
-  }
+#title {
+  text-align: center;
+}
 
-  h2 {
-    text-align: center;
-  }
+h2 {
+  text-align: center;
+}
 
-  #commentTitle {
-    width: 40vw;
-    height: auto;
-  }
+#commentTitle {
+  width: 40vw;
+  height: auto;
+}
 
-  #newComment{
-    width: 40vw;
-    height: 20vw;
-    z-index: 0;
-  }
-
-
-  #faMessageSlash {
-    font-size: 2em;
-    padding-right: 5%;
-    text-align: right;
-  }
-
-  #faComment {
-    font-size: 5vw;
-    position: absolute;
-    right: 0;
-    bottom: 0;
-    padding: 0;
-    z-index: 1;
-  }
-
-  .commentsDiv {
-    padding-top: 4%;
-  }
+#newComment {
+  width: 40vw;
+  height: 20vw;
+  z-index: 0;
+}
 
 
+#faMessageSlash {
+  font-size: 2em;
+  padding-right: 5%;
+  text-align: right;
+}
 
-
-
+#faComment {
+  font-size: 5vw;
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  padding: 0;
+  z-index: 1;
+  padding-bottom: 4%;
+}

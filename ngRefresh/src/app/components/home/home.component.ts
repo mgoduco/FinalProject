@@ -3,19 +3,18 @@ import { Ingredient } from './../../models/ingredient';
 import { CommentService } from './../../services/comment.service';
 
 import { Component, OnInit, ViewChild } from '@angular/core';
-import {
-  NgbCarousel,
-  NgbCollapse,
-  NgbSlideEvent,
-  NgbSlideEventSource,
-} from '@ng-bootstrap/ng-bootstrap';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Recipe } from 'src/app/models/recipe';
 import { RecipeService } from 'src/app/services/recipe.service';
-import { UserService } from 'src/app/services/user.service';
-import { faArrowLeft, faCircleMinus, faComment, faCommentMedical, faCommentSlash } from '@fortawesome/free-solid-svg-icons';
+import {
+  faArrowLeft,
+  faCircleMinus,
+  faCommentMedical,
+  faCommentSlash,
+} from '@fortawesome/free-solid-svg-icons';
 import { Comment } from 'src/app/models/comment';
 import { IngredientService } from 'src/app/services/ingredient.service';
+import { User } from 'src/app/models/user';
 
 @Component({
   selector: 'app-home',
@@ -30,14 +29,22 @@ export class HomeComponent implements OnInit {
   comments: Comment[] = [];
   ingredients: Ingredient[] = [];
   comment: null | Comment = null;
-  newComment: Comment = new Comment(null, null, null, null, false, null, null , null);
-
+  newComment: Comment = new Comment(
+    null,
+    null,
+    null,
+    null,
+    false,
+    null,
+    null,
+    null
+  );
 
   // Icons
   faArrowLeft = faArrowLeft;
   facomment = faCommentMedical;
   faminus = faCircleMinus;
-  famessage = faCommentSlash
+  famessage = faCommentSlash;
 
   constructor(
     private recipeServ: RecipeService,
@@ -45,10 +52,12 @@ export class HomeComponent implements OnInit {
     private commentServ: CommentService,
     private ingredientServ: IngredientService,
     private auth: AuthService,
-    private router: Router
-  ) {}
+    private router: Router) {
+
+    }
 
   ngOnInit(): void {
+
     let idStr = this.route.snapshot.paramMap.get('id');
     if (!this.selected && idStr) {
       let idNum = Number.parseInt(idStr);
@@ -159,7 +168,7 @@ export class HomeComponent implements OnInit {
     }
   }
 
-  deleteComment(comment: Comment, recipe: Recipe){
+  deleteComment(comment: Comment, recipe: Recipe) {
     console.log(comment);
     console.log(recipe);
     let id = recipe.id;
@@ -168,18 +177,33 @@ export class HomeComponent implements OnInit {
         next: (data) => {
           this.comment = data;
           console.log(data);
-          if(id !=null){
+          if (id != null) {
             this.getRecipeComments(id);
           }
-      },
-      error: (fail: any) => {
-        console.error('HomeComponent.reload: error');
-        console.error(fail);
-      },
-    });
-  }
+        },
+        error: (fail: any) => {
+          console.error('HomeComponent.reload: error');
+          console.error(fail);
+        },
+      });
+    }
   }
 
+  @ViewChild('title') commentTitle: any; // accessing the reference element
+  @ViewChild('commmentArea') commentSpace: any;
 
+  handleClear(){
+      // clearing the value
+    this.commentTitle.nativeElement.value = ' ';
+    this.commentSpace.nativeElement.value = ' ';
+  }
+
+  reloadPage() {
+    window.location.reload();
+ }
+
+ loggedIn(){
+  return this.auth.checkLogin();
 }
 
+}
