@@ -31,6 +31,8 @@ public class UserController {
 
 	@Autowired
 	private UserService userService;
+	
+	@Autowired
 	private RecipeService recipeService;
 
 	@Autowired
