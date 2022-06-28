@@ -1,6 +1,7 @@
 package com.skilldistillery.refresh.services;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -35,11 +36,16 @@ public class RecipeServiceImpl implements RecipeService {
 		return recipeRepo.findByUser_Username(username);
 	}
 
-	@Override
-	public Recipe show(String username, int recipeId) {
-		return recipeRepo.findByIdAndUser_Username(recipeId, username);
-	}
+//	@Override
+//	public Recipe show(int recipeId) {
+//		return recipeRepo.findByIdAndUser_Username(recipeId, username);
+//	}
 
+	@Override
+	public Recipe show(int recipeId) {
+		return recipeRepo.queryById(recipeId);
+	}
+	
 	@Override
 	public Recipe create(String username, Recipe recipe) {
 		User user = userRepo.findByUsername(username);
@@ -84,7 +90,17 @@ public class RecipeServiceImpl implements RecipeService {
 
 	@Override
 	public Recipe getRecipeById(int id) {
-		return recipeRepo.queryById(id);
+//		return recipeRepo.queryById(id);
+		System.out.println("getRecipeById: " + id);
+		Optional<Recipe> optRecipe = recipeRepo.findById(id);
+		System.out.println(optRecipe.get().getId());
+		System.out.println(optRecipe.get());
+		if (optRecipe.isPresent()) {
+			return optRecipe.get();
+		}
+		else {
+			return null;
+		}
 	}
 
 	@Override
