@@ -10,7 +10,8 @@ public interface RecipeService {
 	
 	public List<Recipe> getRecipesByUser(String username);
 
-	public Recipe show(String username, int recipeId);
+//	public Recipe show(String username, int recipeId);
+	public Recipe show(int recipeId);
 
 	public Recipe create(String username, Recipe recipe);
 
@@ -29,6 +30,7 @@ public interface RecipeService {
 	List<Recipe> getRecipeByIngredients(String ingredient);
 	
 	List<Recipe> getRecipeByNameAndIngredients(String keyword, String ingredient);
+
 	
 	
 }

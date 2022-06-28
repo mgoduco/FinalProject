@@ -1,6 +1,7 @@
 package com.skilldistillery.refresh.controllers;
 
 import java.security.Principal;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -10,13 +11,17 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.skilldistillery.refresh.entities.Comment;
+import com.skilldistillery.refresh.entities.Recipe;
 import com.skilldistillery.refresh.entities.User;
 import com.skilldistillery.refresh.repositories.UserRepository;
+import com.skilldistillery.refresh.services.RecipeService;
 import com.skilldistillery.refresh.services.UserService;
 
 @RestController
@@ -25,11 +30,12 @@ import com.skilldistillery.refresh.services.UserService;
 public class UserController {
 
 	@Autowired
-	  private UserService userService;
-	
+	private UserService userService;
+	private RecipeService recipeService;
+
 	@Autowired
 	private UserRepository userRepo;
-	
+
 	// SMOKE TEST ONLY, DELETE/COMMENT OUT LATER
 //	@GetMapping("test/users/{userId}")
 //	public User getUserForTest(
@@ -42,22 +48,53 @@ public class UserController {
 //	  }
 //	  return user;
 //	}
-	
+
 	@GetMapping("u/{id}")
 	public User getUserById(@PathVariable int id, HttpServletResponse res) {
 		User user = userService.getUserById(id);
-		if(user == null) {
+		if (user == null) {
 			res.setStatus(404);
 		}
 		return user;
 	}
-	
+
+	@GetMapping("u/{id}/favorites")
+	public List<Recipe> getFavorites(@PathVariable int id, HttpServletResponse res, Principal principal) {
+		User user = userService.getUserByUsername(principal.getName());
+		List<Recipe> favorites = null;
+		if (user == null) {
+			res.setStatus(404);
+		} else {
+			favorites = userService.getFavoritesById(user.getId());
+		}
+		return favorites;
+	}
+
+	@PostMapping("u/{uid}/favorites/{rid}")
+	public boolean addFavorite(HttpServletRequest req, HttpServletResponse res, Principal principal,
+			@PathVariable int uid, @PathVariable int rid) {
+		System.out.println("User ID: " + uid);
+		System.out.println("Recipe ID: " + rid);
+		boolean favorite = false;
+		User user = userService.getUserByUsername(principal.getName());
+		System.out.println(user);
+		Recipe recipe = recipeService.getRecipeById(rid);
+		System.out.println(recipe);
+		if (user.getId() == uid && recipe != null) {
+			favorite = userService.setFavorite(uid, rid);
+			res.setStatus(200);
+		} else {
+			res.setStatus(404);
+		}
+		return favorite;
+	}
+
 	@PutMapping("u/{id}")
-	public User update(@RequestBody User user, @PathVariable int id, HttpServletRequest req, 
-			HttpServletResponse res, Principal principal) {
+	public User update(@RequestBody User user, @PathVariable int id, HttpServletRequest req, HttpServletResponse res,
+			Principal principal) {
 		try {
 			user = userService.updateUser(principal.getName(), id, user);
-			if(user == null) {
+			if (user == null) {
 				res.setStatus(404);
 			}
 		} catch (Exception e) {
@@ -67,7 +104,7 @@ public class UserController {
 		}
 		return user;
 	}
-	
+
 	@DeleteMapping("u/{id}")
 	public void destroy(HttpServletRequest req, HttpServletResponse res, @PathVariable int id, Principal principal) {
 		try {
@@ -81,7 +118,5 @@ public class UserController {
 			res.setStatus(400);
 		}
 	}
-	
-	
-	
+
 }
