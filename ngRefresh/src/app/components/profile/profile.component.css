@@ -21,6 +21,14 @@ body {
   background-color: #E5E5E5;
 }
 
+#imgURL {
+  width: auto;
+  height: 24px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
 /* #cards {
   width: auto;
   height: auto;
