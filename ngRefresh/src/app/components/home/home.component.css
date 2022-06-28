@@ -34,6 +34,7 @@ body {
   height: auto;
   width: 50vw;
   border-radius: 3%;
+  z-index: 0;
 }
 
 #description {
@@ -87,4 +88,13 @@ h2 {
   padding: 0;
   z-index: 1;
   padding-right: 2%;
+}
+
+#faHeart {
+  font-size: 5vw;
+  position: absolute;
+  padding: 0;
+  z-index: 1;
+  padding-right: 0.5%;
+  right: 26vw;
 }

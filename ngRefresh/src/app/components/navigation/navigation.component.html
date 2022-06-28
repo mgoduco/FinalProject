@@ -8,8 +8,10 @@
     <div class="navLinksDiv bg-success"><a class="nav-link navBarLink"[routerLink]="['/about']" > About </a></div>
     <div class="navLinksDiv bg-success"><a class="nav-link navBarLink"[routerLink]="['/contact']"> Contact </a></div>
     <div class="navLinksDiv bg-success"><a *ngIf="loggedIn()" class="nav-link navBarLink"[routerLink]="['/recipe']"> Recipes </a></div>
+    <div class="searchInputGroup">
     <input type="text" id="searchIput" class="searchTerm" [(ngModel)]="keyword"  placeholder="Search Recipes...">
-      <button type="submit" class="btn btn-success"><fa-icon [icon]="randomIcon()" [routerLink]="['/search/' + keyword]"></fa-icon></button>
+      <fa-icon id="randIcon" [icon]="randomIcon()" [routerLink]="['/search/' + keyword]"></fa-icon>
+    </div>
       <div class="navLinksDiv bg-success"><a *ngIf="!loggedIn()" class="nav-link navBarLink"[routerLink]="['/login']"> Login </a></div>
         <div class="navLinksDiv bg-success"><a *ngIf="!loggedIn()" class="nav-link navBarLink"[routerLink]="['/register']"> Register </a></div>
 
