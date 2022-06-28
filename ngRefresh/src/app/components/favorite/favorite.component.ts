@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
+import { faArrowLeft, faHeart } from '@fortawesome/free-solid-svg-icons';
 import { Recipe } from 'src/app/models/recipe';
 import { User } from 'src/app/models/user';
 import { AuthService } from 'src/app/services/auth.service';
@@ -27,6 +27,8 @@ export class FavoriteComponent implements OnInit {
 
   // Icons
   faArrowLeft = faArrowLeft;
+  faHeart = faHeart;
+
   constructor(
     private recipeServ: RecipeService,
     private userServ: UserService,
@@ -80,12 +82,27 @@ export class FavoriteComponent implements OnInit {
     // this.isCreateTableSelected = false;
   }
 
-  // setFavorite(recipe: Recipe) {
-  //   let userId = this.user.id;
-  //   let recipeId = this.selected?.id;
-  //   if (userId !== null && recipeId !== null) {
-  //     this.userServ.
-  //   }
-  // }
+  setFavorite(recipe: Recipe) {
+    let userId = this.user.id;
+    console.log("User ID: " + userId);
+    console.log("Selected Recipe:");
+    console.log(this.selected);
+    if (this.selected !== null){
+      let recipeId = this.selected.id;
+      console.log("Recipe ID: " + recipeId);
+      if (userId !== null && recipeId !== null) {
+        console.log("Succeessfully created Favorite!");
+        this.userServ.addFavorite(userId, recipeId).subscribe();
+      }
+    }
+  }
+
+  removeFavorite(recipe: Recipe) {
+    let userId = this.user.id;
+    console.log("User ID: " + userId);
+    console.log("Selected Recipe:");
+    console.log(this.selected);
+
+  }
 
 }
