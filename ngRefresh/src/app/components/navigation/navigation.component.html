@@ -30,9 +30,16 @@
           <button id="logout" class="btn btn-secondary" (click)="logOut()" (click)="offcanvas.dismiss('Cross click')"><fa-icon [icon]="faArrowRightFromBracket"></fa-icon> Logout </button>
         </div>
       </ng-template>
-      <a class="menuBar" (click)="openEnd(content)">
-        <img src={{user.imageUrl}} id="userIcon" alt="User Icon" >
-      </a>
+      <div *ngIf="user.imageUrl" class="userIconContainer">
+        <a class="menuBar" (click)="openEnd(content)">
+          <img [src]="user.imageUrl" id="userIcon" alt="User Icon">
+        </a>
+      </div>
+      <div *ngIf="!user.imageUrl" class="userIconContainer">
+        <a class="menuBar" (click)="openEnd(content)">
+          <img src='../../../assets/userIcon.png' id="userIcon" alt="User Icon" >
+        </a>
+      </div>
     </span>
   </div>
 
