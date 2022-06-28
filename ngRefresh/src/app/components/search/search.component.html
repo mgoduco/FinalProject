@@ -1,8 +1,8 @@
 
-    <div class="searchBar">
+    <!-- <div class="searchBar">
       <input type="text" id="searchIput" class="searchTerm" [(ngModel)]="keyword"  placeholder="Search Recipes...">
       <button type="submit" class="btn btn-success"><fa-icon [icon]="randomIcon()" (click)="search(keyword)" [routerLink]="['/search']"></fa-icon></button>
-    </div><hr>
+    </div><hr> -->
     <div>
       <div class="container-fluid" *ngIf="!selected">
       <div class="row align-items-center">
@@ -38,10 +38,36 @@
       <p><img [src]="selected.imageUrl" class="recipeImg" [alt]="selected.name" ></p>
       <p><b>Prep Time: </b>{{ selected.prepminutes }}</p>
       <p><b>Cook Time: </b>{{ selected.cookminutes }}</p>
+      <h5>Ingredients</h5>
+      <ul class="ingredients" *ngFor="let ingredient of ingredients">
+        <li>{{ingredient.name}}</li>
+      </ul>
       <p id="description">{{ selected.description }}</p>
       <p id="directions">{{ selected.directions }}</p>
 
+      <h4>Comments</h4>
+      <div class="commentsDiv">
+        <ul class="comments" *ngFor="let comment of comments">
+          <p *ngIf="comment.active"> <strong>{{comment.title}}</strong><br>
+            <fa-icon *ngIf="loggedIn()" id="faMessageSlash" (click)="deleteComment(comment, selected)" [icon]="famessage" class="fa-2x">
+            </fa-icon>{{comment.comment}}
+          </p>
+        </ul>
+      </div>
+      <div *ngIf="loggedIn()">
+      <div class="input-group input-group-sm mb" id="addComment">
+        <span class="input-group-text" id="inputGroup-sizing-sm">Title</span>
+        <input class="form-control" type="text" id="commentTitle"  #title name="title" placeholder="Title" [(ngModel)]="newComment.title">
+      </div>
 
+        <div class="input-group input-group-sm mb" id="addComments">
+          <span class="input-group-text" id="inputGroup-sizing-sm">Comment</span>
+          <textarea class="form-control" id="newComment" #commmentArea name="commmentArea" placeholder="Comment"
+            [(ngModel)]="newComment.comment"></textarea><br>
+          <fa-icon id="faComment" (click)="createComment(newComment, selected.id)"  (click)="handleClear()" [icon]="facomment" class="fa-2x">
+          </fa-icon>
+        </div>
+      </div>
     </div>
 
 
