@@ -125,12 +125,15 @@ export class RecipeComponent implements OnInit {
   }
 
   removeIngredient(id: number): void {
-    this.ingredientServ.destroy(id).subscribe({
-      next: () => {
-        this.reload();
-        this.displayTable();
-      },
-    });
+
+        this.ingredientServ.destroy(id).subscribe({
+
+          next: () => {
+            this.reload();
+            this.displayTable();
+          },
+        });
+
   }
 
   createRecipe(recipe: Recipe) {
