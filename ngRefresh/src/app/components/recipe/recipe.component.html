@@ -20,6 +20,11 @@
     <img ng src="/assets/default_recipe.png" class="recipeImg"><br><br>
     <div class="container-fluid">
 
+      <div>
+        <select  class="selectpicker" data-live-search="true">
+          <option *ngFor="let ingredient of allingredients" data-tokens=>{{ingredient.name}}</option>
+        </select>
+      </div>
 
     <div class="form-floating mb-1">
     <input  class="form-control" type="text" name="task" placeholder="Image Url" [(ngModel)]="newRecipe.imageUrl" /> <br />

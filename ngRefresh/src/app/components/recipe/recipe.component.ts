@@ -44,6 +44,7 @@ export class RecipeComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.getAllIngredients();
     this.getUser();
   }
   nArray(n: number): any[] {
