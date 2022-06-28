@@ -17,4 +17,8 @@ public interface UserService {
 	List<Recipe> getFavoritesById (int userId);
 	
 	boolean setFavorite(int userId, int recipeId);
+
+	boolean removeFavorite(int userId, int recipeId);
+
+//	boolean getFavorite(int uid, int rid);
 }

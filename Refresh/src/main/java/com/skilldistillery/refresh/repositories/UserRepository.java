@@ -15,4 +15,5 @@ public interface UserRepository extends JpaRepository<User, Integer> {
 	
 	List<Recipe> findFavoriteRecipesById(int userId);
 	
+	
 }
