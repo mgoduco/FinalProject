@@ -1,22 +1,30 @@
 #logo {
   width: 40%;
-   height: 40%;
-   display: flex;
+  height: 40%;
+  display: flex;
   /* position: static; */
 }
 
 #userIcon {
   width: 25%;
-   height: 25%;
-   border-radius: 50%;
-   position: static;
-        top: 0px;
-        right: 0px;
+  height: 25%;
+  max-width: 30vw;
+  max-height: 30vh;
+  border-radius: 50%;
+  position: static;
+  top: 0px;
+  right: 0px;
+}
+
+.userIconContainer {
+  width: 100%;
+  text-align: right;
 }
 
 .navbar {
   width: 100vw;
   height: fit-content;
+  padding: 5px;
 }
 .container-fluid {
   overflow: hidden;
@@ -29,6 +37,7 @@
 
 .navLinksDiv {
   border-radius: 5px;
+  /* margin: 1px; */
 }
 
 .navLinks {
@@ -49,7 +58,7 @@
 }
 
 .canvasBody {
-  background-color: #F8FCDA;
+  background-color: #f8fcda;
 }
 
 .btn-close {
@@ -68,8 +77,6 @@ a.canvasLink:hover {
 .canvasSearch {
   margin-top: 10px;
 }
-
-
 
 /* .nav-link {
   width: auto;
