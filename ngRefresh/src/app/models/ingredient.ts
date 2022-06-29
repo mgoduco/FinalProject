@@ -5,7 +5,7 @@ export class Ingredient {
   description: string | null;
   imageUrl: string | null;
   kcals: number | null;
-  // recipeIngredients: RecipeIngredient[] | any;
+  recipeIngredients: RecipeIngredient[] | any;
 
 
   constructor(
@@ -14,7 +14,7 @@ export class Ingredient {
     description: string | null = '',
     imageUrl: string | null = '',
     kcals: number | null = 0,
-    // recipeIngredients: RecipeIngredient[] | []
+    recipeIngredients: RecipeIngredient[] | []
 
   ) {
     this.id = id;
@@ -22,6 +22,6 @@ export class Ingredient {
     this.description = description;
     this.imageUrl = imageUrl;
     this.kcals = kcals;
-    // this.recipeIngredients = recipeIngredients
+    this.recipeIngredients = recipeIngredients
   }
 }

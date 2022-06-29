@@ -98,10 +98,34 @@
 
 <h4>Ingredients</h4>
 
-
-  <ul   *ngFor="let ingredient of ingredients">
-    <li  >{{ingredient.name}} </li>
+<!-- <ul>
+  <li *ngFor="let group of hueGroups">
+  {{group.name}}
+  <ul>
+      <li *ngFor="let light of group.lights">
+      {{light.name}}
+      </li>
   </ul>
+  </li>
+</ul> -->
+
+    <ul id="ulfor" *ngFor="let rIngredient of rIngredients">
+      <li> {{rIngredient.ingredient.name}} </li>
+      <ul>
+      <li> {{rIngredient.amount}} </li>
+      <li> {{rIngredient.preparation}} </li>
+      <li> {{rIngredient.measure}} </li>
+      </ul>
+    </ul>
+
+  <!-- <ul   *ngFor="let ingredient of ingredients">
+    <li  >{{ingredient.name}} </li>
+    <ul *ngFor="let rIngredient of recipe.recipeIngredients">
+      <li> {{rIngredient.amount}} </li>
+      <li> {{rIngredient.preparation}} </li>
+      <li> {{rIngredient.measure}} </li>
+
+       </ul> -->
 
   <p><b>Prep Time: </b>{{ selected.prepminutes }}</p>
   <p><b>Cook Time: </b>{{ selected.cookminutes }}</p>

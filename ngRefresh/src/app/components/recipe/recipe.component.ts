@@ -17,21 +17,33 @@ import { User } from 'src/app/models/user';
   styleUrls: ['./recipe.component.css'],
 })
 export class RecipeComponent implements OnInit {
-  recipe: null | Recipe = null;
   recipes: Recipe[] = [];
-  newRecipe: Recipe = new Recipe();
   selected: null | Recipe = null;
   editSelected: null | Recipe = null;
   addIng: boolean = false;
   isSelected: boolean = false;
   isCreateTableSelected: boolean = false;
   recipeSelected: boolean = false;
-  user: User = new User();
   ingredients: Ingredient [] = [];
   allingredients: Ingredient [] = [];
   rIngredients: RecipeIngredient [] = [];
+  newRecipe: Recipe = new Recipe();
+  recipe: Recipe = new Recipe();
+  user: User = new User();
+  // ingredient: Ingredient = new Ingredient(
+  //   null,
+  //   null,
+  //   null,
+  //   null,
+  //   null,
+  //   this.rIngredients
+  // );
   // rIngredient: RecipeIngredient = new RecipeIngredient(
-
+  //   this.recipe,
+  //   this.ingredient,
+  //   null,
+  //   null,
+  //   null
   // );
 
   // Icons
@@ -98,6 +110,7 @@ export class RecipeComponent implements OnInit {
     this.selected = recipe;
     this.recipeSelected = true;
     this.getIngredientsByrecipe(recipe.id);
+    this.getRIngredientsByRecipe(recipe.id);
   }
 
   displayTable() {
@@ -112,7 +125,13 @@ export class RecipeComponent implements OnInit {
   getIngredientsByrecipe(id: number){
     console.log(id);
     this.ingredientServ.indexByRecipe(id).subscribe({
-      next: (data) => {this.ingredients = data; console.log(data)},
+      next: (data) => {this.ingredients = data;
+        console.log(data)
+        this.ingredients.forEach(element => {
+          console.log(element.recipeIngredients)
+
+        });
+      },
       error: (fail: any) => {
         console.error('getIngredients: error');
         console.error(fail);
@@ -209,6 +228,18 @@ export class RecipeComponent implements OnInit {
     });
   }
 
+  getRIngredientsByRecipe(id: number) {
+    console.log(id);
+    this.rIngredientServ.getForRecipe(id).subscribe({
+      next: (data) => {this.rIngredients = data; console.log(data)},
+      error: (fail: any) => {
+        console.error('getRIngredientsByRecipe: error');
+        console.error(fail);
+      }
+    })
+  }
+
+
   createRecipeIngredient(rIngredient: RecipeIngredient, recipe: Recipe, ingredient: Ingredient) {
     if (recipe.id != null && ingredient.id != null) {
       this.rIngredientServ.create(rIngredient, recipe.id, ingredient.id).subscribe({
@@ -260,6 +291,7 @@ export class RecipeComponent implements OnInit {
       });
     }
   }
+
 
 }
 

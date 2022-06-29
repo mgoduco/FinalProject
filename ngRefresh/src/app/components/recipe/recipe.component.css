@@ -98,11 +98,14 @@ margin-bottom: 100px;
     width: 50vw;
   }
 
-  ul {
-    columns: 2;
-    -webkit-columns: 2;
-    -moz-columns: 2;
-  }
+  .ulfor {
+    -moz-column-count: 2;
+    -moz-column-gap: 20px;
+    -webkit-column-count: 2;
+    -webkit-column-gap: 20px;
+    column-count: 2;
+    column-gap: 20px;
+}
 
   #title {
     text-align: center;
