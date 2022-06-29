@@ -55,9 +55,9 @@ export class FavoriteComponent implements OnInit {
 
   reload() {
     console.log(this.user.username);
-    let username = this.user.username;
-    if (username != null) {
-      this.recipeServ.recipesByUsername(username).subscribe({
+    let uid = this.user.id;
+    if (uid != null) {
+      this.userServ.getAllFavorites(uid).subscribe({
         next: (recipes) => {
           this.recipes = recipes;
           console.log(recipes);
@@ -97,10 +97,12 @@ export class FavoriteComponent implements OnInit {
     if (!this.favorited) {
       if (this.selected) {
         this.setFavorite(this.selected);
+        this.reload();
       }
     } else {
       if (this.selected) {
         this.removeFavorite(this.selected);
+        this.reload();
       }
     }
   }
