@@ -137,6 +137,7 @@ export class HomeComponent implements OnInit {
     this.recipeServ.index().subscribe({
       next: (dbRecipes) => {
         this.recipes = dbRecipes;
+        this.shuffleArray(this.recipes);
         console.log(dbRecipes);
       },
       error: (fail: any) => {
@@ -145,6 +146,19 @@ export class HomeComponent implements OnInit {
       },
     });
   }
+
+  shuffleArray(recipes: Recipe[]) {
+    var m = recipes.length, t, i;
+
+    while (m) {
+     i = Math.floor(Math.random() * m--);
+     t = recipes[m];
+     recipes[m] = recipes[i];
+     recipes[i] = t;
+    }
+
+   return recipes;
+ }
 
   displayRecipe(recipe: Recipe) {
     this.selected = recipe;
@@ -161,6 +175,8 @@ export class HomeComponent implements OnInit {
   displayTable() {
     this.selected = null;
   }
+
+
 
   getRecipeComments(id: number) {
     console.log(id);
