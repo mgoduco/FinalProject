@@ -14,7 +14,7 @@ export class Ingredient {
     description: string | null = '',
     imageUrl: string | null = '',
     kcals: number | null = 0,
-    recipeIngredients: RecipeIngredient[] | []
+    recipeIngredients: RecipeIngredient[] = []
 
   ) {
     this.id = id;
