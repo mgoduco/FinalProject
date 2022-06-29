@@ -27,23 +27,23 @@ Week 12 Homework for Skill Distillery
 </h2>
 
 
-<p> <h1>Matthew Elmore 
-<a href="https://www.linkedin.com/in/matthew-elmore/" target="_blank"> <img src='https://github.com/mgoduco/FinalProject/blob/main/ngRefresh/src/assets/LI-In-Bug.png?raw=true' id="LinkedIn" alt="LinkedIn" width="30" height="26" ></a> 
+<p> <h3>Matthew Elmore 
+<a href="https://www.linkedin.com/in/matthew-elmore/" target="_blank"> <img src='https://github.com/mgoduco/FinalProject/blob/main/ngRefresh/src/assets/LinkedIn.png?raw=true' id="LinkedIn" alt="LinkedIn" width="30" height="26" ></a> 
 <a href="https://github.com/dawabar" target="_blank"> 
-<img src='https://github.com/mgoduco/FinalProject/blob/main/ngRefresh/src/assets/GitHub-Mark-32px.png?raw=true' id="gitHub" alt="gitHub" width="26" height="26"></a></h1>
+<img src='https://github.com/mgoduco/FinalProject/blob/main/ngRefresh/src/assets/GitHub.png?raw=true' id="gitHub" alt="gitHub" width="26" height="26"></a></h3>
         <ul>
           <li>Developer, DBA</li>
         </ul>
        
-<p><h1>Max Goduco
-<a href="https://www.linkedin.com/in/max-goduco/" target="_blank"> <img src='https://github.com/mgoduco/FinalProject/blob/main/ngRefresh/src/assets/LI-In-Bug.png?raw=true' id="LinkedIn" alt="LinkedIn" width="30" height="26" ></a> 
-<a href="https://github.com/mgoduco" target="_blank"><img src='https://github.com/mgoduco/FinalProject/blob/main/ngRefresh/src/assets/GitHub-Mark-32px.png?raw=true' id="gitHub" alt="gitHub" width="26" height="26"></a></h1>
+<p><h3>Max Goduco
+<a href="https://www.linkedin.com/in/max-goduco/" target="_blank"> <img src='https://github.com/mgoduco/FinalProject/blob/main/ngRefresh/src/assets/LinkedIn.png?raw=true' id="LinkedIn" alt="LinkedIn" width="30" height="26" ></a> 
+<a href="https://github.com/mgoduco" target="_blank"><img src='https://github.com/mgoduco/FinalProject/blob/main/ngRefresh/src/assets/GitHub.png?raw=true' id="gitHub" alt="gitHub" width="26" height="26"></a></h3>
         <ul>
           <li>Developer, Rep Owner</li>
         </ul>
-<p><h1>Christopher Brite
-<a href="https://www.linkedin.com/in/christopher-brite/" target="_blank"> <img src='https://github.com/mgoduco/FinalProject/blob/main/ngRefresh/src/assets/LI-In-Bug.png?raw=true' id="LinkedIn" alt="LinkedIn" width="30" height="26" ></a>
-<a href="https://github.com/cmbrite" target="_blank"><img src='https://github.com/mgoduco/FinalProject/blob/main/ngRefresh/src/assets/GitHub-Mark-32px.png?raw=true' id="gitHub" alt="gitHub" width="26" height="26"></a></h1>
+<p><h3>Christopher Brite
+<a href="https://www.linkedin.com/in/christopher-brite/" target="_blank"> <img src='https://github.com/mgoduco/FinalProject/blob/main/ngRefresh/src/assets/LinkedIn.png?raw=true' id="LinkedIn" alt="LinkedIn" width="30" height="26" ></a>
+<a href="https://github.com/cmbrite" target="_blank"><img src='https://github.com/mgoduco/FinalProject/blob/main/ngRefresh/src/assets/GitHub.png?raw=true' id="gitHub" alt="gitHub" width="26" height="26"></a></h3>
         <ul>
           <li>Developer, Scrum Master</li>
         </ul>
