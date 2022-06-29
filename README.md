@@ -5,7 +5,7 @@
 </link>
 </head>
 <h1 align="center" style="font-size: 50px;">
-<img src="https://github.com/mgoduco/FinalProject/blob/main/ngRefresh/src/assets/refresh_logo.png?raw=true">
+<img src="https://github.com/mgoduco/FinalProject/blob/main/ngRefresh/src/assets/refresh_logo.png?raw=true" width="485" height="150">
 
 </h1>
 <h3 align="center">
@@ -13,7 +13,7 @@ Week 12 Homework for Skill Distillery
 </h3>
 
 # Table of Contents
-* <a href="#team"> Creator</a>
+* <a href="#team"> Team</a>
 * <a href="#overview"> Overview</a>
 * <a href="#features"> Features</a>
 * <a href="#implementation"> Implementation</a>
@@ -26,25 +26,26 @@ Week 12 Homework for Skill Distillery
 # Team
 </h2>
 
-d
 
-<p>Matthew Elmore 
-<a href="https://www.linkedin.com/in/matthew-elmore/" target="_blank"> <i class="fab fa-linkedin"></a> 
-<a href="https://github.com/dawabar" target="_blank"> <i class="fa-brands fa-github"></i></a>
+<p> <h1>Matthew Elmore 
+<a href="https://www.linkedin.com/in/matthew-elmore/" target="_blank"> <img src='https://github.com/mgoduco/FinalProject/blob/main/ngRefresh/src/assets/LI-In-Bug.png?raw=true' id="LinkedIn" alt="LinkedIn" width="30" height="26" ></a> 
+<a href="https://github.com/dawabar" target="_blank"> 
+<img src='https://github.com/mgoduco/FinalProject/blob/main/ngRefresh/src/assets/GitHub-Mark-32px.png?raw=true' id="gitHub" alt="gitHub" width="26" height="26"></a></h1>
         <ul>
-          <li>DBA Scientist</li>
+          <li>Developer, DBA</li>
         </ul>
-<p>Max Goduco 
-<a href="https://www.linkedin.com/in/max-goduco/" target="_blank"> <i class="fab fa-linkedin"></a> 
-<a href="https://github.com/mgoduco" target="_blank"><i class="fab fa-github"></i></a>
+       
+<p><h1>Max Goduco
+<a href="https://www.linkedin.com/in/max-goduco/" target="_blank"> <img src='https://github.com/mgoduco/FinalProject/blob/main/ngRefresh/src/assets/LI-In-Bug.png?raw=true' id="LinkedIn" alt="LinkedIn" width="30" height="26" ></a> 
+<a href="https://github.com/mgoduco" target="_blank"><img src='https://github.com/mgoduco/FinalProject/blob/main/ngRefresh/src/assets/GitHub-Mark-32px.png?raw=true' id="gitHub" alt="gitHub" width="26" height="26"></a></h1>
         <ul>
-          <li>Master of everything Git </li>
+          <li>Developer, Rep Owner</li>
         </ul>
-<p>Christopher Brite 
-<a href="https://www.linkedin.com/in/christopher-brite/" target="_blank"> <i class="fab fa-linkedin"></a>
-<a href="https://github.com/cmbrite" target="_blank"><i class="fab fa-github"></i></a>
+<p><h1>Christopher Brite
+<a href="https://www.linkedin.com/in/christopher-brite/" target="_blank"> <img src='https://github.com/mgoduco/FinalProject/blob/main/ngRefresh/src/assets/LI-In-Bug.png?raw=true' id="LinkedIn" alt="LinkedIn" width="30" height="26" ></a>
+<a href="https://github.com/cmbrite" target="_blank"><img src='https://github.com/mgoduco/FinalProject/blob/main/ngRefresh/src/assets/GitHub-Mark-32px.png?raw=true' id="gitHub" alt="gitHub" width="26" height="26"></a></h1>
         <ul>
-          <li>Scrum Lord </li>
+          <li>Developer, Scrum Master</li>
         </ul>
 
 
@@ -54,7 +55,7 @@ d
 # Overview
 </h2>
 
-Study Your Class Off is an all purpose journal for tracking daily study sessions.  Users are able to create, read, edit and delete study session entries to keep track of their learning progress. Users are also able to see their total study time and average study session length.
+Our vision is to give you the ease of finding and sharing recipes that use the ingredients you already have. We strive to reduce the barrier to entry for saving money and time while producing memorable meals.
 
 
 <h2 dir="auto">
@@ -64,19 +65,20 @@ Study Your Class Off is an all purpose journal for tracking daily study sessions
 </h2>
 
 
-* Create new study session entries
-* Edit existing study sessions
-* Delete existing study sessions
-* List all existing study session entries
-* See average study session length
-* See total time studied
-* Web Interface
+* Register a new user account
+* Customizable Profile pictures and details
+* List all existing recipes
+* Search by recipe name or included ingredients
+* Choose recipes to add to favorite recipes list
+* Create new recipes
+* Create custom ingredients
+* Sleek user friendly Web Interface
 
  <b><em>Future Implementations</em></b>
 
-* User account creation
-* User created study goals
-* Achievements
+* Calorie tracker
+* Recipe categories
+* Achievements based on recipes cooked or dollars saved
 
 
 <h2 dir="auto">
@@ -85,42 +87,9 @@ Study Your Class Off is an all purpose journal for tracking daily study sessions
 # Implementation
 </h2>
 
-The backend of this application is implemented using Java while the front end is a dynamic webpage using JavaScript and HTMl. Full functionality of this application takes place on one page which changes based on user input. <br> The paths to execute the various available features are as follows:<hr>
+The backend of this application is implemented using Java while the front end is a dynamic webpage using Angular, JavaScript and HTMl. Full functionality of this application takes place on page which changes based on user input. <br> The paths to execute the various available features are as follows:<hr>
 
-<table>
-  <tr>
-    <th>Description</th>
-    <th>HTTP method</th>
-    <th>REST route URI</th>
-  </tr>
-  <tr>
-    <td>List all existing study session entries</td>
-    <td><b>GET</b></td>
-    <td>http://54.215.123.44:8080/StudyTrackerRest/api/studies</td>
-  </tr>
-  <tr>
-    <td>List a specific session entry by its id</td>
-    <td><b>GET</b></td>
-    <td>http://54.215.123.44:8080/StudyTrackerRest/api/studies/{id}</td>
-  </tr>
-  <tr>
-    <td>Create new study session entry</td>
-    <td><b>POST</b></td>
-    <td>http://54.215.123.44:8080/StudyTrackerRest/api/studies</td>
-  </tr>
-  <tr>
-    <td>Edit an existing study session entry by its id</td>
-    <td><b>PATCH</b></td>
-    <td>http://54.215.123.44:8080/StudyTrackerRest/api/studies/{id}</td>
-  </tr>
-  <tr>
-    <td>Delete existing study session entry by its id</td>
-    <td><b>DELETE</b></td>
-    <td>http://54.215.123.44:8080/StudyTrackerRest/api/studies/{id}</td>
-  </tr>
-</table><br>
-
-<em> {id} in URIs will be replaced by the corresponding session entry's id.</em> 
+ 
 
 <h2 dir="auto">
 <a id="technologies-used" class="anchor" aria-hidden="true" href="#technologies-used"></a>
@@ -142,6 +111,7 @@ The backend of this application is implemented using Java while the front end is
 * Gradle
 * Postman
 * JavaScript
+* Angular
 
 
 <h2 dir="auto">
@@ -153,7 +123,7 @@ The backend of this application is implemented using Java while the front end is
 * Services like Spring Boot and REST really simplify the implementation of CRUD. 
 * Planning out or being familiar with the database you are working with before writing any code 
 * The initial setup of a project is crucial and troubleshooting time can be minimized by being attentive during that process. 
-* JavaScript can simplify web page manipulation.
+* Angular can simplify web page manipulation.
 
 
 
