@@ -173,9 +173,9 @@
   <div class="form-floating mb-1">
     <input class="form-control" list="allingredients" type="text" name="ingredient"  >
     <label for="allingredients"><strong>Ingredient:</strong></label>
-    <datalist id="allingredients">
-      <option name="ingredient"  *ngFor="let ingredient of allingredients" >{{ingredient.name}}</option>
-    </datalist>
+    <select [(ngModel)]="ingredient"  name="ingredient" id="">
+        <option  *ngFor="let ingredient of allingredients" [ngValue]="ingredient">{{ingredient.name}}</option>
+      </select>
   </div> <br>
 
   <div class="form-floating mb-1">
