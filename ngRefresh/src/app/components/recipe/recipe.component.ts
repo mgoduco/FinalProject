@@ -4,13 +4,17 @@ import { IngredientService } from 'src/app/services/ingredient.service';
 import { Ingredient } from './../../models/ingredient';
 import { AuthService } from 'src/app/services/auth.service';
 import { Recipe } from 'src/app/models/recipe';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { RecipeService } from 'src/app/services/recipe.service';
 import { UserService } from 'src/app/services/user.service';
-import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
+import { faArrowLeft, faBowlFood, faCommentMedical, faCommentSlash, faPenToSquare, faTrash } from '@fortawesome/free-solid-svg-icons';
+import { faHeart as farHeart} from '@fortawesome/free-regular-svg-icons';
+import { faHeart as fasHeart} from '@fortawesome/free-solid-svg-icons';
 import { User } from 'src/app/models/user';
 import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { Comment } from 'src/app/models/comment';
+import { CommentService } from './../../services/comment.service';
 
 @Component({
   selector: 'app-recipe',
@@ -31,6 +35,19 @@ export class RecipeComponent implements OnInit {
   newRecipe: Recipe = new Recipe();
   recipe: Recipe = new Recipe();
   user: User = new User();
+  comments: Comment[] = [];
+  comment: null | Comment = null;
+  selectedComment: null | Recipe = null;
+  newComment: Comment= new Comment(
+    null,
+    null,
+    null,
+    null,
+    false,
+    null,
+    null,
+    null
+  );
   ingredient: Ingredient = new Ingredient(null, null, null, null, null, []);
   newRecipeIngredient: RecipeIngredient = new RecipeIngredient(
     this.recipe,
@@ -39,6 +56,18 @@ export class RecipeComponent implements OnInit {
     null,
     null
   );
+
+
+  // Icons
+  faArrowLeft = faArrowLeft;
+  faTrash = faTrash;
+  faPen = faPenToSquare;
+  faPotFood = faBowlFood;
+  famessage = faCommentSlash;
+  farHeart = farHeart;
+  fasHeart = fasHeart;
+  facomment = faCommentMedical;
+  faPenToSquare = faPenToSquare;
 
   // rIngredient: RecipeIngredient = new RecipeIngredient(
   //   this.recipe,
@@ -49,8 +78,6 @@ export class RecipeComponent implements OnInit {
   // );
 
   closeResult = '';
-  // Icons
-  faArrowLeft = faArrowLeft;
 
   constructor(
     private ingredientServ: IngredientService,
@@ -60,6 +87,7 @@ export class RecipeComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private modalService: NgbModal,
+    private commentServ: CommentService,
     private auth: AuthService
   ) {}
 
@@ -116,7 +144,11 @@ export class RecipeComponent implements OnInit {
     this.recipeSelected = true;
     this.getIngredientsByrecipe(recipe.id);
     this.getRIngredientsByRecipe(recipe.id);
+    if (recipe.id != null) {
+      this.getRecipeComments(recipe.id);
+    }
   }
+
 
   displayTable() {
     this.selected = null;
@@ -358,6 +390,106 @@ export class RecipeComponent implements OnInit {
   }
 
   // ________________________________________________________________
+
+  createComment(comment: Comment, id: number) {
+    console.log(comment);
+    console.log(id);
+    if(comment.comment == null){
+      alert('Comment cannot be blank')
+    }
+    if (id != null && comment.comment != null) {
+      comment.active = true;
+      this.commentServ.create(comment, id).subscribe({
+        next: (data) => {
+          this.comment = data;
+          console.log(data);
+          this.getRecipeComments(id);
+        },
+        error: (fail: any) => {
+          console.error('HomeComponent.reload: error');
+          console.error(fail);
+        },
+      });
+    }
+  }
+
+  deleteComment(comment: Comment, recipe: Recipe) {
+    console.log(comment);
+    console.log(recipe);
+    let id = recipe.id;
+    if (comment != null && recipe != null) {
+      this.commentServ.delete(comment, recipe).subscribe({
+        next: (data) => {
+          this.comment = data;
+          console.log(data);
+          if (id != null) {
+            this.getRecipeComments(id);
+          }
+        },
+        error: (fail: any) => {
+          console.error('HomeComponent.reload: error');
+          console.error(fail);
+        },
+      });
+    }
+  }
+
+  editComment(comment: Comment, recipe: Recipe){
+    console.log(comment);
+    console.log(recipe);
+    // this.comment = comment;
+    let id = recipe.id;
+    if (comment != null && recipe != null) {
+      this.commentServ.update(comment, recipe).subscribe({
+        next: (data) => {
+          this.comment = data;
+          console.log(data);
+          if (id != null) {
+            this.getRecipeComments(id);
+          }
+        },
+        error: (fail: any) => {
+          console.error('HomeComponent.reload: error');
+          console.error(fail);
+        },
+      });
+    }
+  }
+
+  @ViewChild('title') commentTitle: any; // accessing the reference element
+  @ViewChild('commmentArea') commentSpace: any;
+
+  handleClear(){
+      // clearing the value
+    this.commentTitle.nativeElement.value = ' ';
+    this.commentSpace.nativeElement.value = ' ';
+  }
+
+  reloadPage() {
+    window.location.reload();
+ }
+
+ loggedIn(){
+  return this.auth.checkLogin();
+}
+
+getRecipeComments(id: number) {
+  console.log(id);
+  this.commentServ.getAllCommentsByRecipe(id).subscribe({
+    next: (data) => {
+      this.comments = data;
+      console.log(data);
+    },
+    error: (fail: any) => {
+      console.error('HomeComponent.reload: error');
+      console.error(fail);
+    },
+  });
+}
+
+
+
+
 }
 
 // displayUserRecipes() {

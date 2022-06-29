@@ -84,8 +84,8 @@
       <h5 class="card-title" >{{recipe.name}}</h5>
       <p class="card-text">{{recipe.description}}</p>
     </div>
-    <button class="btn btn-success" (click)="displayUpdateTable(recipe)">Update Recipe</button>
-    <button class="btn btn-danger" (click)="deleteRecipe(recipe.id)">Delete Recipe</button>
+  <fa-icon [icon]="faPen" id="updateButton" (click)="displayUpdateTable(recipe)"></fa-icon>
+  <fa-icon [icon]="faTrash" id="deleteButton" (click)="deleteRecipe(recipe.id)"></fa-icon>
   </div>
 </div>
 </div>
@@ -114,7 +114,54 @@
   <p id="description">{{ selected.description }}</p>
   <p id="directions">{{ selected.directions }}</p>
 
-  <p id="comments"></p>
+  <h4>Comments</h4>
+  <div class="commentsDiv" >
+    <ul class="comments" *ngFor="let comment of comments">
+      <p *ngIf="comment.active"> <strong>{{comment.title}}</strong><br>
+        <fa-icon *ngIf="loggedIn()" id="faMessageSlash" (click)="deleteComment(comment, selected)" [icon]="famessage" class="fa-2x">
+        </fa-icon>{{comment.comment}} <fa-icon *ngIf="loggedIn()" id="faPenToSquare" (click)="open(content)" [icon]="faPenToSquare"></fa-icon>
+        <!-- __________________________Modal______________________ -->
+        <ng-template #content let-modal>
+          <div class="modal-header">
+            <h4 class="modal-title" id="modal-basic-title">Edit Comment</h4>
+            <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+          </div>
+          <div class="modal-body">
+            <form>
+              <div class="input-group">
+                <div class="form-floating mb-1">
+                  <input id="text" class="form-control" placeholder="Title" name="editTitle" value="{{comment.title}}" [(ngModel)]="comment.title" >
+                  <label for="editTitle">Title</label>
+                  <div class="form-floating mb-1">
+                    <input id="textarea" class="form-control" placeholder="Comment" name="editComment" value="{{comment.comment}}" [(ngModel)]="comment.comment">
+                    <label for="editComment">Comment</label>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-outline-dark"  (click)="editComment(comment, selected)" (click)="modal.close('Save click')">Save</button>
+          </div>
+        </ng-template>
+        <!-- __________________________Modal______________________ -->
+      </p>
+    </ul>
+  </div>
+        <div *ngIf="loggedIn()">
+  <div class="input-group input-group-sm mb" id="addComment">
+    <span class="input-group-text" id="inputGroup-sizing-sm">Title</span>
+    <input class="form-control" type="text" id="commentTitle"  #title name="title" placeholder="Title" [(ngModel)]="newComment.title">
+  </div>
+
+    <div class="input-group input-group-sm mb" id="addComments">
+      <span class="input-group-text" id="inputGroup-sizing-sm">Comment</span>
+      <textarea class="form-control" id="newComment" #commmentArea name="commmentArea" placeholder="Comment"
+        [(ngModel)]="newComment.comment"></textarea><br>
+      <fa-icon id="faComment" (click)="createComment(newComment, selected.id)"  (click)="handleClear()" [icon]="facomment" class="fa-2x">
+      </fa-icon>
+    </div>
+  </div>
 
 </div>
 </div>

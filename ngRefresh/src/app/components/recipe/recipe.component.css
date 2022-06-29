@@ -13,6 +13,7 @@ body {
   width: auto;
   height: auto;
   box-shadow: 0 0 5px #888888;
+  z-index: 0;
 }
 #editForm{
   text-align: left;
@@ -103,7 +104,7 @@ padding: 10px;
   .recipeImg{
     position: relative;
     display: block;
-    height: auto;
+    height: 35vw;
     width: 50vw;
     border-radius: 3%;
   }
@@ -150,6 +151,24 @@ padding: 10px;
   h2 {
     text-align: center;
   }
+#updateButton{
+  font-size: 2vw;
+  position: absolute;
+  padding: 0;
+  z-index: 1;
+  padding-left: 0.5%;
+  right: 26vw;
+  color: #2e8754;
+}
+#deleteButton{
+  font-size: 2vw;
+  position: absolute;
+  padding: 0;
+  z-index: 1;
+  padding-right: 0.5%;
+  left: 26vw;
+  color: rgba(255, 0, 0, 0.744);
+}
 
 
 
