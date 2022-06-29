@@ -9,6 +9,7 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrls: ['./register.component.css'],
 })
 export class RegisterComponent implements OnInit {
+  user: User = new User();
   newUser: User = new User();
 
   constructor(
@@ -20,14 +21,28 @@ export class RegisterComponent implements OnInit {
   ngOnInit(): void {}
 
   register(user: User) {
-    this.auth.register(this.newUser).subscribe({
-      next: (user) => {
-        console.log(user);
-        console.log(this.newUser);
-        this.newUser = new User();
+    console.log('Registering user: ');
+    console.log(user);
+    this.auth.register(user).subscribe({
+      next: (registeredUser) => {
+        if (user.username && user.password) {
+          this.auth.login(user.username, user.password).subscribe({
+            next: (loggedInUser) => {
+              this.router.navigateByUrl('/home');
+            },
+            error: (fail) => {
+              console.error(
+                'RegisterComponent.register: error registering new user'
+              );
+              console.error(fail);
+            },
+          });
+        }
       },
       error: (fail) => {
-        console.error('RegisterComponent.register: error registering new user');
+        console.error(
+          'RegisterComponent.register(): Error registering account'
+        );
         console.error(fail);
       },
     });

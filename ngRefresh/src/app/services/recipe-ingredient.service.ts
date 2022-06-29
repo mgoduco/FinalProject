@@ -73,7 +73,7 @@ export class RecipeIngredientService {
 
   delete(rid: number, iid: number): Observable<void> {
     return this.http
-      .delete<void>(`${this.url}/${rid}/ingredients`)
+      .delete<void>(`${this.url}/${rid}/ingredients/${iid}`, this.getHttpOptions())
       .pipe(
         catchError((err: any) => {
           console.log(err);
