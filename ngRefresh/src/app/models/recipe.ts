@@ -18,7 +18,7 @@ export class Recipe {
   // comments: Comment[];
   // photos: RecipePhoto[];
   // madeThisList: MadeThis[];
-  // recipeIngredients: RecipeIngredient[];
+  recipeIngredients: RecipeIngredient[];
   // userFavorites: User[];
   //keywords
 
@@ -35,7 +35,7 @@ export class Recipe {
     // comments: Comment[] | [],
     // photos: RecipePhoto[] | [],
     // madeThisList: MadeThis[] | [],
-    // recipeIngredients: RecipeIngredient[] | [],
+    recipeIngredients: RecipeIngredient[] = [],
     // userFavorites: User[] | [],
   ) {
     this.id = id;
@@ -50,7 +50,7 @@ export class Recipe {
     // this.comments = comments;
     // this.photos = photos;
     // this.madeThisList = madeThisList;
-    // this.recipeIngredients = recipeIngredients;
+    this.recipeIngredients = recipeIngredients;
     // this.userFavorites = userFavorites;
 
   }
