@@ -12,7 +12,7 @@
         </div>
       </div>
 
-      <div class="row">
+      <div class="row align-items-center">
         <div *ngFor="let recipe of recipes" class="col-sm-4">
           <div class="card mb-3" id="cards" (click)="displayRecipe(recipe)" (click)="getRecipeComments(recipe.id)"
             (click)="getIngredientsByrecipe(recipe.id)">
