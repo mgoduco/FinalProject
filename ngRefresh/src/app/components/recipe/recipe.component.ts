@@ -30,14 +30,22 @@ export class RecipeComponent implements OnInit {
   newRecipe: Recipe = new Recipe();
   recipe: Recipe = new Recipe();
   user: User = new User();
-  // ingredient: Ingredient = new Ingredient(
-  //   null,
-  //   null,
-  //   null,
-  //   null,
-  //   null,
-  //   this.rIngredients
-  // );
+  ingredient: Ingredient = new Ingredient(
+    null,
+    null,
+    null,
+    null,
+    null,
+    this.rIngredients
+  );
+  newRecipeIngredient: RecipeIngredient = new RecipeIngredient(
+    this.recipe,
+    this.ingredient,
+    null,
+    null,
+    null
+  );
+
   // rIngredient: RecipeIngredient = new RecipeIngredient(
   //   this.recipe,
   //   this.ingredient,
@@ -244,6 +252,9 @@ export class RecipeComponent implements OnInit {
     if (recipe.id != null && ingredient.id != null) {
       this.rIngredientServ.create(rIngredient, recipe.id, ingredient.id).subscribe({
         next: (rIngredient) => {
+          console.log(rIngredient);
+          console.log(recipe.id);
+          console.log(ingredient.id);
           this.selected = recipe;
           this.recipeSelected = true;
           this.newRecipe = new Recipe();
