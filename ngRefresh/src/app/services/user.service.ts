@@ -1,10 +1,10 @@
-import { RecipeService } from 'src/app/services/recipe.service';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { catchError, Observable, throwError } from 'rxjs';
+import { environment } from 'src/environments/environment';
+import { Recipe } from '../models/recipe';
 import { User } from '../models/user';
 import { AuthService } from './auth.service';
-import { Observable, catchError, throwError } from 'rxjs';
-import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root',
@@ -38,21 +38,8 @@ export class UserService {
       );
   }
 
-  // *** THIS IS BECAUSE I DON'T KNOW HOW TO FETCH A USER FOR THE PROFILE PAGE ***
-  // getUserByUsername(username: string): Observable<User> {
-  //   return this.http.get<User>(`${this.url}/${username}`, this.getHttpOptions()).pipe(
-  //       catchError((err: any) => {
-  //         console.log(err);
-  //         return throwError(
-  //           () => new Error('UserService.index(): error retrieving User: ' + err)
-  //         );
-  //       })
-  //     );
-  // }
-
   update(user: User): Observable<User> {
     return this.http.put<User>(`${this.url}/${user.id}`, user, this.getHttpOptions()).pipe(
-      // return this.http.put<Todo>(`{this.url}/${todo.id}`, todo).pipe(
       catchError((err: any) => {
         console.error(err);
         return throwError(
@@ -78,7 +65,18 @@ export class UserService {
       catchError((err: any) => {
         console.error(err);
         return throwError(
-          () => new Error('UserService.getFavorite(): error getting new Favorite: ')
+          () => new Error('UserService.getFavorite(): error getting new Favorite: ' + err)
+        );
+      })
+    );
+  }
+
+  getAllFavorites (uid: number): Observable<Recipe[]> {
+    return this.http.get<Recipe[]>(`${this.url}/${uid}/favorites`, this.getHttpOptions()).pipe(
+      catchError((err: any) => {
+        console.error(err);
+        return throwError(
+          () => new Error('UserService.getAllFavorites(): error fetching list of favorite recipes.' + err)
         );
       })
     );
