@@ -138,6 +138,11 @@ h2 {
   box-shadow: black 0 0 5px;
 }
 
+#recipeName{
+  text-align: center;
+  font-family: "M PLUS Rounded 1c", sans-serif;
+  font-weight: bold;
+}
 
 h1{
   text-align: center;
