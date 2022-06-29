@@ -1,6 +1,12 @@
-body {
+.body-div {
   background-color: #E5E5E5;
+  height: 100vh;
   padding-bottom: 5%;
+}
+
+.col {
+  padding-left: 0%;
+  padding-right: 0%;
 }
 
 #cards {

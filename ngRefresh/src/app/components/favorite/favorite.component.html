@@ -1,51 +1,71 @@
+<div class="container-fluid body-div">
+  <br /><br />
+  <div class="container-fluid" *ngIf="!selected">
+    <div class="row align-items-center">
+      <div class="col"></div>
+      <div class="col">
+        <h2>Favorite Recipes</h2>
+      </div>
+      <div class="col"></div>
+    </div>
+    <div class="row align-items-center">
+      <div class="col"></div>
+      <div class="col">
+        <h2>Welcome</h2>
+      </div>
+      <div class="col"></div>
+    </div>
 
-<div class="container-fluid" >
+    <div class="row">
+      <div *ngFor="let recipe of recipes" class="col-sm-4">
+        <div class="card mb-3" id="cards" (click)="displayRecipe(recipe)">
+          <img
+            [src]="recipe.imageUrl"
+            class="card-img-top"
+            [alt]="recipe.name"
+          />
+          <div class="card-body border-secondary">
+            <h5 class="card-title">{{ recipe.name }}</h5>
+            <p class="card-text">{{ recipe.description }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 
-  <br><br>
-<div class="container-fluid" *ngIf="!selected">
-  <div class="row align-items-center">
-    <div class="col">
-</div>
-<div class="col">
-  <h2>Favorite Recipes</h2>
-</div>
-<div class="col">
-
-</div>
-</div>
-
-  <div class="row" >
-    <div *ngFor="let recipe of recipes" class="col-sm-4" >
-  <div class="card mb-3" id="cards" (click)="displayRecipe(recipe)">
-    <img [src]="recipe.imageUrl" class="card-img-top" [alt]="recipe.name" >
-    <div class="card-body border-secondary">
-      <h5 class="card-title" >{{recipe.name}}</h5>
-      <p class="card-text">{{recipe.description}}</p>
+  <div class="centered" *ngIf="selected" id="recipeDetails">
+    <a class="" (click)="displayTable()">
+      <fa-icon [icon]="faCircleArrowLeft"></fa-icon>
+    </a>
+    <h4 id="title">{{ selected.name }}</h4>
+    <div class="image-group">
+      <img [src]="selected.imageUrl" class="recipeImg" [alt]="selected.name" />
+      <fa-icon
+        id="faHeart"
+        (click)="toggleFavorite()"
+        [icon]="hearted()"
+        class="fa-2x"
+      ></fa-icon>
+      <!-- <fa-icon *ngIf="favorited" [icon]="faHeart" (click)="setFavorite(selected)" id="favorite"></fa-icon> -->
+      <!-- <fa-icon *ngIf="!favorited" [icon]="fasHeart" (click)="removeFavorite(selected)" id="favorite"></fa-icon>   -->
+      <!-- <fa-icon
+        id="faHeart"
+        (click)="hearted()"
+        [icon]="favorited ? fasHeart : farHeart"
+        [icon]="favorited ? fasHeart : farHeart"
+        class="fa-2x"
+      ></fa-icon> -->
+      <!-- <fa-icon *ngIf="favorited" [icon]="faHeart" (click)="setFavorite(selected)" id="favorite"></fa-icon>
+    <fa-icon *ngIf="!favorited" [icon]="faHeart" (click)="removeFavorite(selected)" id="favorite"></fa-icon> -->
+    </div>
+    <div class="clear"></div>
+    <br />
+    <div>
+      <p><b>Prep Time: </b>{{ selected.prepminutes }}</p>
+      <p><b>Cook Time: </b>{{ selected.cookminutes }}</p>
+      <p id="description">{{ selected.description }}</p>
+      <p id="directions">{{ selected.directions }}</p>
+      <p id="comments"></p>
     </div>
   </div>
 </div>
-</div>
-</div>
-
-<div class="centered" *ngIf="selected" id="recipeDetails">
-  <a class="" (click)="displayTable()">
-    <fa-icon [icon]="faArrowLeft"></fa-icon>
-  </a>
-  <h4 id="title">{{ selected.name }}</h4>
-  <div class="image-group">
-    <img [src]="selected.imageUrl" class="recipeImg" [alt]="selected.name" >
-    <fa-icon *ngIf="favorited" [icon]="faHeart" (click)="setFavorite(selected)" id="favorite"></fa-icon>
-    <fa-icon *ngIf="!favorited" [icon]="faHeart" (click)="removeFavorite(selected)" id="favorite"></fa-icon>
-  </div><div class="clear"></div><br>
-  <div>
-  <p><b>Prep Time: </b>{{ selected.prepminutes }}</p>
-  <p><b>Cook Time: </b>{{ selected.cookminutes }}</p>
-  <p id="description">{{ selected.description }}</p>
-  <p id="directions">{{ selected.directions }}</p>
-  <p id="comments"></p>
-  </div>
-
-</div>
-
-</div>
-

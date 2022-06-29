@@ -1,11 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { faArrowLeft, faHeart } from '@fortawesome/free-solid-svg-icons';
+import { faCircleArrowLeft } from '@fortawesome/free-solid-svg-icons';
 import { Recipe } from 'src/app/models/recipe';
 import { User } from 'src/app/models/user';
 import { AuthService } from 'src/app/services/auth.service';
 import { RecipeService } from 'src/app/services/recipe.service';
 import { UserService } from 'src/app/services/user.service';
+import { faHeart as farHeart } from '@fortawesome/free-regular-svg-icons';
+import { faHeart as fasHeart } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-favorite',
@@ -15,6 +17,7 @@ import { UserService } from 'src/app/services/user.service';
 export class FavoriteComponent implements OnInit {
   //recipe: null | Recipe = null;
   recipes: Recipe[] = [];
+  favoriteRecipes: Recipe[] = [];
   selected: null | Recipe = null;
   isSelected: boolean = false;
   // isCreateSelected: boolean = false;
@@ -24,8 +27,9 @@ export class FavoriteComponent implements OnInit {
   favorited: boolean = false;
 
   // Icons
-  faArrowLeft = faArrowLeft;
-  faHeart = faHeart;
+  faCircleArrowLeft = faCircleArrowLeft;
+  farHeart = farHeart;
+  fasHeart = fasHeart;
 
   constructor(
     private recipeServ: RecipeService,
@@ -51,9 +55,9 @@ export class FavoriteComponent implements OnInit {
 
   reload() {
     console.log(this.user.username);
-    let username = this.user.username;
-    if (username != null) {
-      this.recipeServ.recipesByUsername(username).subscribe({
+    let uid = this.user.id;
+    if (uid != null) {
+      this.userServ.getAllFavorites(uid).subscribe({
         next: (recipes) => {
           this.recipes = recipes;
           console.log(recipes);
@@ -69,6 +73,7 @@ export class FavoriteComponent implements OnInit {
   displayRecipe(recipe: Recipe) {
     this.selected = recipe;
     this.recipeSelected = true;
+    this.isFavorite(this.selected.id);
     console.log(recipe);
     console.log(this.selected);
   }
@@ -80,14 +85,39 @@ export class FavoriteComponent implements OnInit {
     // this.isCreateTableSelected = false;
   }
 
+  hearted() {
+    if (this.favorited) {
+      return fasHeart;
+    } else {
+      return farHeart;
+    }
+  }
+
+  toggleFavorite() {
+    if (!this.favorited) {
+      if (this.selected) {
+        this.setFavorite(this.selected);
+        this.reload();
+      }
+    } else {
+      if (this.selected) {
+        this.removeFavorite(this.selected);
+        this.reload();
+      }
+    }
+  }
+
   isFavorite(rid: number) {
     this.userServ.getFavorite(rid).subscribe({
       next: (favorite) => {
+        console.log('Favorite get success!');
         this.favorited = true;
-        console.log("Favorite get success!")
+        return true;
       },
       error: (fail: any) => {
+        console.log('Favorite is false.')
         this.favorited = false;
+        return false;
       },
     });
   }
@@ -102,8 +132,15 @@ export class FavoriteComponent implements OnInit {
       console.log('Recipe ID: ' + recipeId);
       if (userId !== null && recipeId !== null) {
         console.log('Succeessfully created Favorite!');
-        this.userServ.addFavorite(userId, recipeId).subscribe();
-        this.favorited = true;
+        this.userServ.addFavorite(userId, recipeId).subscribe({
+          next: (added) => {
+            this.favorited = true;
+          },
+          error: (fail: any) => {
+            console.error('FavoriteComponent.setFavorite: error');
+            console.error(fail);
+          },
+        });
       }
     }
   }
@@ -118,8 +155,15 @@ export class FavoriteComponent implements OnInit {
       console.log('Recipe ID: ' + recipeId);
       if (userId !== null && recipeId !== null) {
         console.log('Succeessfully removed Favorite!');
-        this.userServ.removeFavorite(userId, recipeId).subscribe();
-        this.favorited = false;
+        this.userServ.removeFavorite(userId, recipeId).subscribe({
+          next: (removed) => {
+            this.favorited = false;
+          },
+          error: (fail: any) => {
+            console.error('FavoriteComponent.removeFavorite: error');
+            console.error(fail);
+          },
+        });
       }
     }
   }

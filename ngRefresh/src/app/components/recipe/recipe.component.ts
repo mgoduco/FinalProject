@@ -8,8 +8,9 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { RecipeService } from 'src/app/services/recipe.service';
 import { UserService } from 'src/app/services/user.service';
-import { faArrowLeft, } from '@fortawesome/free-solid-svg-icons';
+import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 import { User } from 'src/app/models/user';
+import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-recipe',
@@ -24,20 +25,13 @@ export class RecipeComponent implements OnInit {
   isSelected: boolean = false;
   isCreateTableSelected: boolean = false;
   recipeSelected: boolean = false;
-  ingredients: Ingredient [] = [];
-  allingredients: Ingredient [] = [];
-  rIngredients: RecipeIngredient [] = [];
+  ingredients: Ingredient[] = [];
+  allingredients: Ingredient[] = [];
+  rIngredients: RecipeIngredient[] = [];
   newRecipe: Recipe = new Recipe();
   recipe: Recipe = new Recipe();
   user: User = new User();
-  ingredient: Ingredient = new Ingredient(
-    null,
-    null,
-    null,
-    null,
-    null,
-    []
-  );
+  ingredient: Ingredient = new Ingredient(null, null, null, null, null, []);
   newRecipeIngredient: RecipeIngredient = new RecipeIngredient(
     this.recipe,
     this.ingredient,
@@ -54,6 +48,7 @@ export class RecipeComponent implements OnInit {
   //   null
   // );
 
+  closeResult = '';
   // Icons
   faArrowLeft = faArrowLeft;
 
@@ -64,6 +59,7 @@ export class RecipeComponent implements OnInit {
     private userServ: UserService,
     private route: ActivatedRoute,
     private router: Router,
+    private modalService: NgbModal,
     private auth: AuthService
   ) {}
 
@@ -73,14 +69,14 @@ export class RecipeComponent implements OnInit {
   }
   nArray(n: number): any[] {
     return Array(n);
-}
-  getUser(){
+  }
+  getUser() {
     this.auth.getLoggedInUser().subscribe({
       next: (data) => {
         this.user = data;
         this.reload();
-      }
-    })
+      },
+    });
     console.log(this.user);
   }
 
@@ -105,11 +101,11 @@ export class RecipeComponent implements OnInit {
     this.addIng = string;
   }
   displayUpdateTable(recipe: Recipe) {
-    console.log(recipe)
+    console.log(recipe);
     this.editSelected = recipe;
   }
   displayCreateTable(string: boolean) {
-    this.isCreateTableSelected = string
+    this.isCreateTableSelected = string;
   }
   displayCreate() {
     this.isSelected = true;
@@ -129,23 +125,21 @@ export class RecipeComponent implements OnInit {
     this.editSelected = null;
   }
 
-
-
-  getIngredientsByrecipe(id: number){
+  getIngredientsByrecipe(id: number) {
     console.log(id);
     this.ingredientServ.indexByRecipe(id).subscribe({
-      next: (data) => {this.ingredients = data;
-        console.log(data)
-        this.ingredients.forEach(element => {
-          console.log(element.recipeIngredients)
-
+      next: (data) => {
+        this.ingredients = data;
+        console.log(data);
+        this.ingredients.forEach((element) => {
+          console.log(element.recipeIngredients);
         });
       },
       error: (fail: any) => {
         console.error('getIngredients: error');
         console.error(fail);
-      }
-    })
+      },
+    });
   }
 
   // TODO GET ALL INGREDIENTS TO ADD DROP DOWN FOR CREATE RECIPE INGREDIENTS....
@@ -153,14 +147,17 @@ export class RecipeComponent implements OnInit {
   // ID IS VALUE
   getAllIngredients() {
     this.ingredientServ.index().subscribe({
-      next: (data) => {this.allingredients = data; console.log(data)},
+      next: (data) => {
+        this.allingredients = data;
+        console.log(data);
+      },
       error: (fail: any) => {
         console.error('getIngredients: error');
         console.error(fail);
-      }
-    })
+      },
+    });
   }
-    // index ingredients
+  // index ingredients
 
   addIngredient(recipe: Recipe) {
     this.recipeServ.create(recipe).subscribe({
@@ -170,41 +167,37 @@ export class RecipeComponent implements OnInit {
         this.newRecipe = new Recipe();
       },
       error: (fail) => {
-        console.error('RecipeComponent.createIngredient: error adding ingredient');
+        console.error(
+          'RecipeComponent.createIngredient: error adding ingredient'
+        );
         console.error(fail);
       },
     });
   }
 
   removeIngredient(id: number | null): void {
-      if (id != null) {
-        this.ingredientServ.destroy(id).subscribe({
-
-          next: () => {
-            this.reload();
-            this.displayTable();
-          },
-        });
-      }
-
-    }
-
-    // ???????????????
-    createRecipeWithIngredients() {
-
-    }
-
-
-    createRecipe(recipe: Recipe) {
-      this.recipeServ.create(recipe).subscribe({
-        next: (newRecipe) => {
-          this.selected = recipe;
-          this.recipeSelected = true;
-          this.newRecipe = new Recipe();
+    if (id != null) {
+      this.ingredientServ.destroy(id).subscribe({
+        next: () => {
           this.reload();
-          this.displayCreateTable(false);
-          this.displayUpdateTable(recipe);
+          this.displayTable();
+        },
+      });
+    }
+  }
 
+  // ???????????????
+  createRecipeWithIngredients() {}
+
+  createRecipe(recipe: Recipe) {
+    this.recipeServ.create(recipe).subscribe({
+      next: (newRecipe) => {
+        this.selected = recipe;
+        this.recipeSelected = true;
+        this.newRecipe = new Recipe();
+        this.reload();
+        this.displayCreateTable(false);
+        this.displayUpdateTable(recipe);
       },
       error: (fail) => {
         console.error('RecipeComponent.createRecipe: error creating recipe');
@@ -240,58 +233,74 @@ export class RecipeComponent implements OnInit {
   getRIngredientsByRecipe(id: number) {
     console.log(id);
     this.rIngredientServ.getForRecipe(id).subscribe({
-      next: (data) => {this.rIngredients = data; console.log(data)},
+      next: (data) => {
+        this.rIngredients = data;
+        console.log(data);
+      },
       error: (fail: any) => {
         console.error('getRIngredientsByRecipe: error');
         console.error(fail);
-      }
-    })
+      },
+    });
   }
 
-
-  createRecipeIngredient(rIngredient: RecipeIngredient, recipe: Recipe, ingredient: Ingredient) {
+  createRecipeIngredient(
+    rIngredient: RecipeIngredient,
+    recipe: Recipe,
+    ingredient: Ingredient
+  ) {
     ingredient = this.ingredient;
-    console.log(this.allingredients)
-    console.log(this.ingredient)
+    console.log(this.allingredients);
+    console.log(this.ingredient);
     console.log(rIngredient);
     console.log(recipe.id);
     console.log('ingredient id' + ingredient.id);
-
     delete rIngredient.ingredient;
     delete rIngredient.recipe;
-
     if (recipe.id != null && ingredient.id != null) {
-      this.rIngredientServ.create(rIngredient, recipe.id, ingredient.id).subscribe({
-        next: (newRecipeIngredient) => {
-          this.newRecipeIngredient = new RecipeIngredient();
-          console.log('R INGREDIENT' + rIngredient);
-          console.log('recipe id' + recipe.id);
-          console.log('ingredient id' + ingredient.id);
-          this.reload();
-        },
-        error: (fail) => {
-          console.error('RecipeComponent.createRecipeIngredient: error creating recipe Ingredient');
-          console.error(fail);
-        },
-      });
+      this.rIngredientServ
+        .create(rIngredient, recipe.id, ingredient.id)
+        .subscribe({
+          next: (newRecipeIngredient) => {
+            this.newRecipeIngredient = new RecipeIngredient();
+            console.log('R INGREDIENT' + rIngredient);
+            console.log('recipe id' + recipe.id);
+            console.log('ingredient id' + ingredient.id);
+            this.reload();
+          },
+          error: (fail) => {
+            console.error(
+              'RecipeComponent.createRecipeIngredient: error creating recipe Ingredient'
+            );
+            console.error(fail);
+          },
+        });
     }
   }
 
-  updateRecipeIngredient(rIngredient: RecipeIngredient, recipe: Recipe, ingredient: Ingredient) {
+  updateRecipeIngredient(
+    rIngredient: RecipeIngredient,
+    recipe: Recipe,
+    ingredient: Ingredient
+  ) {
     if (recipe.id != null && ingredient.id != null) {
-      this.rIngredientServ.update(rIngredient, recipe.id, ingredient.id).subscribe({
-        next: (rIngredient) => {
-          this.selected = recipe;
-          this.recipeSelected = true;
-          this.newRecipe = new Recipe();
-          this.reload();
-          this.displayTable();
-        },
-        error: (fail) => {
-          console.error('RecipeComponent.updateRecipeIngredient: error updating recipe');
-          console.error(fail);
-        },
-      });
+      this.rIngredientServ
+        .update(rIngredient, recipe.id, ingredient.id)
+        .subscribe({
+          next: (rIngredient) => {
+            this.selected = recipe;
+            this.recipeSelected = true;
+            this.newRecipe = new Recipe();
+            this.reload();
+            this.displayTable();
+          },
+          error: (fail) => {
+            console.error(
+              'RecipeComponent.updateRecipeIngredient: error updating recipe'
+            );
+            console.error(fail);
+          },
+        });
     }
   }
   removeRecipeIngredient(recipe: Recipe, ingredient: Ingredient) {
@@ -305,14 +314,40 @@ export class RecipeComponent implements OnInit {
           this.displayTable();
         },
         error: (fail) => {
-          console.error('RecipeComponent.removeRecipeIngredient: error creating recipe');
+          console.error(
+            'RecipeComponent.removeRecipeIngredient: error creating recipe'
+          );
           console.error(fail);
         },
       });
     }
   }
 
+  // ________________________________Modal________________________________
+  open(content: any) {
+    this.modalService
+      .open(content, { ariaLabelledBy: 'modal-basic-title' })
+      .result.then(
+        (result) => {
+          this.closeResult = `Closed with: ${result}`;
+        },
+        (reason) => {
+          this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+        }
+      );
+  }
 
+  private getDismissReason(reason: any): string {
+    if (reason === ModalDismissReasons.ESC) {
+      return 'by pressing ESC';
+    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
+      return 'by clicking on a backdrop';
+    } else {
+      return `with: ${reason}`;
+    }
+  }
+
+  // ________________________________________________________________
 }
 
 // displayUserRecipes() {
