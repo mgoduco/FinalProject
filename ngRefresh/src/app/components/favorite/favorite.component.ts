@@ -98,11 +98,13 @@ export class FavoriteComponent implements OnInit {
       if (this.selected) {
         this.setFavorite(this.selected);
         this.reload();
+        this.displayTable();
       }
     } else {
       if (this.selected) {
         this.removeFavorite(this.selected);
         this.reload();
+        this.displayTable();
       }
     }
   }
@@ -158,6 +160,7 @@ export class FavoriteComponent implements OnInit {
         this.userServ.removeFavorite(userId, recipeId).subscribe({
           next: (removed) => {
             this.favorited = false;
+            this.reload();
           },
           error: (fail: any) => {
             console.error('FavoriteComponent.removeFavorite: error');
