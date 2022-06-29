@@ -196,6 +196,7 @@ export class RecipeComponent implements OnInit {
         this.recipeSelected = true;
         this.newRecipe = new Recipe();
         this.reload();
+        this.getIngredientsByrecipe(recipe.id)
         this.displayCreateTable(false);
         this.displayUpdateTable(recipe);
       },
@@ -220,6 +221,7 @@ export class RecipeComponent implements OnInit {
     });
   }
 
+  //TODO CANNOT DELETE RECIPE WITH ANY RECIPE INGREDIENTS, NEED METHOD FOR DELETING ALL RECIPE INGREDIENTS PUT INSIDE OF THIS
   deleteRecipe(id: number): void {
     this.recipeServ.delete(id).subscribe({
       next: () => {
@@ -267,6 +269,8 @@ export class RecipeComponent implements OnInit {
             console.log('recipe id' + recipe.id);
             console.log('ingredient id' + ingredient.id);
             this.reload();
+            this.getRIngredientsByRecipe(recipe.id);
+            this.displayUpdateTable(recipe);
           },
           error: (fail) => {
             console.error(
@@ -304,23 +308,29 @@ export class RecipeComponent implements OnInit {
     }
   }
   removeRecipeIngredient(recipe: Recipe, ingredient: Ingredient) {
-    if (recipe.id != null && ingredient.id != null) {
+    // if (recipe.id != null && ingredient.id != null) {
+    console.log(ingredient);
+    console.log(recipe);
+    console.log(recipe.id);
+    console.log('ingredient id' + ingredient.id);
+
+    if (recipe && ingredient.id) {
+      console.log('deleting ingredient')
       this.rIngredientServ.delete(recipe.id, ingredient.id).subscribe({
         next: (rIngredient) => {
-          this.selected = recipe;
-          this.recipeSelected = true;
-          this.newRecipe = new Recipe();
-          this.reload();
-          this.displayTable();
+        this.reload();
+        this.getRIngredientsByRecipe(recipe.id);
+        this.displayUpdateTable(recipe);
         },
         error: (fail) => {
           console.error(
             'RecipeComponent.removeRecipeIngredient: error creating recipe'
-          );
-          console.error(fail);
-        },
-      });
-    }
+            );
+            console.error(fail);
+          },
+        });
+      }
+    // }
   }
 
   // ________________________________Modal________________________________

@@ -22,7 +22,6 @@ import com.skilldistillery.refresh.services.RecipeIngredientService;
 
 //THIS NEEDS TA ADVICE BEFORE CONTINUING WITH COMPOUND-KEY TABLE
 
-
 @RestController
 @RequestMapping("api")
 @CrossOrigin({ "*", "http://localhost:4200" })
@@ -39,19 +38,21 @@ public class RecipeIngredientController {
 		}
 		return recipeIngredients;
 	}
-	
+
 	@GetMapping("recipes/{rid}/ingredients/{iid}")
-	public RecipeIngredient getIngredientForRecipe(HttpServletResponse res, @PathVariable int rid, @PathVariable int iid) {
+	public RecipeIngredient getIngredientForRecipe(HttpServletResponse res, @PathVariable int rid,
+			@PathVariable int iid) {
 		RecipeIngredient recipeIngredient = recipeIngredientService.getByRecipeIdAndIngredientId(rid, iid);
 		if (recipeIngredient == null) {
 			res.setStatus(404);
 		}
 		return recipeIngredient;
 	}
-	
+
 	@PostMapping("recipes/{rid}/ingredients/{iid}")
-	public RecipeIngredient create(HttpServletRequest req, HttpServletResponse res, @RequestBody RecipeIngredient recipeIngredient,
-			Principal principal, @PathVariable int rid, @PathVariable int iid) {
+	public RecipeIngredient create(HttpServletRequest req, HttpServletResponse res,
+			@RequestBody RecipeIngredient recipeIngredient, Principal principal, @PathVariable int rid,
+			@PathVariable int iid) {
 		System.out.println(recipeIngredient);
 		recipeIngredient = recipeIngredientService.createForRecipe(principal.getName(), rid, iid, recipeIngredient);
 		if (recipeIngredient == null) {
@@ -67,10 +68,12 @@ public class RecipeIngredientController {
 
 //  PUT todos/{tid}
 	@PutMapping("recipes/{rid}/ingredients/{iid}")
-	public RecipeIngredient update(HttpServletRequest req, HttpServletResponse res, @RequestBody RecipeIngredient recipeIngredient, Principal principal,
-			@PathVariable int rid, @PathVariable int iid) {
+	public RecipeIngredient update(HttpServletRequest req, HttpServletResponse res,
+			@RequestBody RecipeIngredient recipeIngredient, Principal principal, @PathVariable int rid,
+			@PathVariable int iid) {
 		try {
-			recipeIngredient = recipeIngredientService.editRecipeIngredient(principal.getName(), iid, rid, recipeIngredient);
+			recipeIngredient = recipeIngredientService.editRecipeIngredient(principal.getName(), iid, rid,
+					recipeIngredient);
 			if (recipeIngredient == null) {
 				res.setStatus(404);
 			}
@@ -81,9 +84,10 @@ public class RecipeIngredientController {
 		}
 		return recipeIngredient;
 	}
-	
+
 	@DeleteMapping("recipes/{rid}/ingredients/{iid}")
-	public void destroy(HttpServletRequest req, HttpServletResponse res, @PathVariable int rid, @PathVariable int iid, Principal principal) {
+	public void destroy(HttpServletRequest req, HttpServletResponse res, @PathVariable int rid, @PathVariable int iid,
+			Principal principal) {
 		try {
 			if (recipeIngredientService.deleteRecipeIngredient(principal.getName(), rid, iid)) {
 				res.setStatus(204);
@@ -96,5 +100,4 @@ public class RecipeIngredientController {
 		}
 	}
 
-	
 }
