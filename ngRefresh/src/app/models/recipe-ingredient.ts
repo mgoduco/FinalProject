@@ -1,16 +1,16 @@
 import { Ingredient } from './ingredient';
 import { Recipe } from './recipe';
 export class RecipeIngredient {
-  recipe: Recipe;
-  ingredient: Ingredient;
+  recipe: Recipe | null | undefined;
+  ingredient: Ingredient | null | undefined;
   amount: number | null;
   measure: string | null;
   preparation: string | null;
 
   constructor(
-    recipe: Recipe,
+    recipe: Recipe = new Recipe(),
     // TODO ?????????????????
-    ingredient: Ingredient,
+    ingredient: Ingredient = new Ingredient(),
     amount: number | null = 0,
     measure: string | null = '',
     preparation: string | null = ''

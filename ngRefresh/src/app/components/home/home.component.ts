@@ -1,3 +1,4 @@
+import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { UserService } from 'src/app/services/user.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { Ingredient } from './../../models/ingredient';
@@ -18,7 +19,7 @@ import {
 import { Comment } from 'src/app/models/comment';
 import { IngredientService } from 'src/app/services/ingredient.service';
 import { User } from 'src/app/models/user';
-import { faHeart as farHeart} from '@fortawesome/free-regular-svg-icons';
+import { faHeart as farHeart, faPenToSquare} from '@fortawesome/free-regular-svg-icons';
 import { faHeart as fasHeart} from '@fortawesome/free-solid-svg-icons';
 
 @Component({
@@ -34,8 +35,21 @@ export class HomeComponent implements OnInit {
   comments: Comment[] = [];
   ingredients: Ingredient[] = [];
   comment: null | Comment = null;
-  newComment: Comment = new Comment();
+  selectedComment: null | Recipe = null;
+  newComment: Comment = new Comment(
+    null,
+    null,
+    null,
+    null,
+    false,
+    null,
+    null,
+    null
+  );
   user: User = new User();
+  fav: boolean = false;
+  closeResult = '';
+
 
   // Icons
   faArrowLeft = faArrowLeft;
@@ -44,7 +58,10 @@ export class HomeComponent implements OnInit {
   famessage = faCommentSlash;
   farHeart = farHeart;
   fasHeart = fasHeart;
-  fav: boolean = false;
+  faPenToSquare = faPenToSquare;
+
+
+
 
 
   constructor(
@@ -54,9 +71,33 @@ export class HomeComponent implements OnInit {
     private ingredientServ: IngredientService,
     private auth: AuthService,
     private userServ: UserService,
+    private modalService: NgbModal,
     private router: Router) {
-
     }
+
+
+    // ________________________________Modal________________________________
+    open(content: any) {
+      this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
+        this.closeResult = `Closed with: ${result}`;
+      }, (reason) => {
+        this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+      });
+    }
+
+    private getDismissReason(reason: any): string {
+      if (reason === ModalDismissReasons.ESC) {
+        return 'by pressing ESC';
+      } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
+        return 'by clicking on a backdrop';
+      } else {
+        return `with: ${reason}`;
+      }
+    }
+
+
+// ________________________________________________________________
+
 
     hearted(){
       this.fav = !this.fav;
@@ -187,6 +228,28 @@ export class HomeComponent implements OnInit {
     let id = recipe.id;
     if (comment != null && recipe != null) {
       this.commentServ.delete(comment, recipe).subscribe({
+        next: (data) => {
+          this.comment = data;
+          console.log(data);
+          if (id != null) {
+            this.getRecipeComments(id);
+          }
+        },
+        error: (fail: any) => {
+          console.error('HomeComponent.reload: error');
+          console.error(fail);
+        },
+      });
+    }
+  }
+
+  editComment(comment: Comment, recipe: Recipe){
+    console.log(comment);
+    console.log(recipe);
+    // this.comment = comment;
+    let id = recipe.id;
+    if (comment != null && recipe != null) {
+      this.commentServ.update(comment, recipe).subscribe({
         next: (data) => {
           this.comment = data;
           console.log(data);

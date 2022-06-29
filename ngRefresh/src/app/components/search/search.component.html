@@ -50,7 +50,32 @@
         <ul class="comments" *ngFor="let comment of comments">
           <p *ngIf="comment.active"> <strong>{{comment.title}}</strong><br>
             <fa-icon *ngIf="loggedIn()" id="faMessageSlash" (click)="deleteComment(comment, selected)" [icon]="famessage" class="fa-2x">
-            </fa-icon>{{comment.comment}}
+            </fa-icon>{{comment.comment}} <fa-icon *ngIf="loggedIn()" id="faPenToSquare" (click)="open(content)" [icon]="faPenToSquare"></fa-icon>
+            <!-- __________________________Modal______________________ -->
+            <ng-template #content let-modal>
+              <div class="modal-header">
+                <h4 class="modal-title" id="modal-basic-title">Edit Comment</h4>
+                <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+              </div>
+              <div class="modal-body">
+                <form>
+                  <div class="input-group">
+                    <div class="form-floating mb-1">
+                      <input id="text" class="form-control" placeholder="Title" name="editTitle" value="{{comment.title}}" [(ngModel)]="comment.title" >
+                      <label for="editTitle">Title</label>
+                      <div class="form-floating mb-1">
+                        <input id="textarea" class="form-control" placeholder="Comment" name="editComment" value="{{comment.comment}}" [(ngModel)]="comment.comment">
+                        <label for="editComment">Comment</label>
+                      </div>
+                    </div>
+                  </div>
+                </form>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-outline-dark"  (click)="editComment(comment, selected)" (click)="modal.close('Save click')">Save</button>
+              </div>
+            </ng-template>
+            <!-- __________________________Modal______________________ -->
           </p>
         </ul>
       </div>
