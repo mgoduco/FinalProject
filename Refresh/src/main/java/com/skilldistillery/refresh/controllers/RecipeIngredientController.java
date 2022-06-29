@@ -39,7 +39,7 @@ public class RecipeIngredientController {
 		}
 		return recipeIngredients;
 	}
-
+	
 	@GetMapping("recipes/{rid}/ingredients/{iid}")
 	public RecipeIngredient getIngredientForRecipe(HttpServletResponse res, @PathVariable int rid, @PathVariable int iid) {
 		RecipeIngredient recipeIngredient = recipeIngredientService.getByRecipeIdAndIngredientId(rid, iid);
@@ -52,6 +52,7 @@ public class RecipeIngredientController {
 	@PostMapping("recipes/{rid}/ingredients/{iid}")
 	public RecipeIngredient create(HttpServletRequest req, HttpServletResponse res, @RequestBody RecipeIngredient recipeIngredient,
 			Principal principal, @PathVariable int rid, @PathVariable int iid) {
+		System.out.println(recipeIngredient);
 		recipeIngredient = recipeIngredientService.createForRecipe(principal.getName(), rid, iid, recipeIngredient);
 		if (recipeIngredient == null) {
 			res.setStatus(404);

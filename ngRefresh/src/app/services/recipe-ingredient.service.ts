@@ -43,6 +43,7 @@ export class RecipeIngredientService {
   }
 
   create(rIngredient: RecipeIngredient, rid: number, iid: number): Observable<RecipeIngredient> {
+    console.log(rIngredient);
     return this.http.post<RecipeIngredient>(`${this.url}/${rid}/ingredients/${iid}`, rIngredient, this.getHttpOptions()).pipe(
       catchError((err: any) => {
         console.error(err);

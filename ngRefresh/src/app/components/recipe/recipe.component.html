@@ -105,7 +105,7 @@
 <h4>Ingredients</h4>
 
 <ul class="list-group list-group-horizontal-sm" *ngFor="let rIngredient of rIngredients">
-  <li class="list-group-item">{{rIngredient.amount}} {{rIngredient.measure}} <strong> {{rIngredient.ingredient.name}} </strong> {{rIngredient.preparation}} </li>
+  <li *ngIf="rIngredient.ingredient" class="list-group-item">{{rIngredient.amount}} {{rIngredient.measure}} <strong> {{rIngredient.ingredient.name}} </strong> {{rIngredient.preparation}} </li>
 </ul> <br>
 
   <p><b>Prep Time: </b>{{ selected.prepminutes }}</p>
@@ -194,7 +194,7 @@
 
 
 <ul class="list-group list-group-horizontal-sm" *ngFor="let rIngredient of rIngredients">
-  <li class="list-group-item">{{rIngredient.amount}} {{rIngredient.measure}} <strong> {{rIngredient.ingredient.name}} </strong> {{rIngredient.preparation}} </li>
+  <li *ngIf="rIngredient.ingredient" class="list-group-item">{{rIngredient.amount}} {{rIngredient.measure}} <strong> {{rIngredient.ingredient.name}} </strong> {{rIngredient.preparation}} </li>
 </ul> <br>
 
 <div class="form-floating mb-1">
