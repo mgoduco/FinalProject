@@ -89,6 +89,7 @@
 </div>
 </div>
 
+<div id="recipeBox">
 <div class="centered" *ngIf="selected && !editSelected" id="recipeDetails">
   <a class="" (click)="displayTable()">
   <fa-icon [icon]="faArrowLeft"></fa-icon>
@@ -108,24 +109,26 @@
   </ul>
   </li>
 </ul> -->
+<ul class="list-group list-group-horizontal-sm" *ngFor="let rIngredient of rIngredients">
+  <li class="list-group-item">{{rIngredient.amount}} {{rIngredient.measure}} <strong> {{rIngredient.ingredient.name}} </strong> {{rIngredient.preparation}} </li>
+</ul> <br>
 
-    <ul id="ulfor" *ngFor="let rIngredient of rIngredients">
+<!-- <ul class="list-group list-group-horizontal-sm" *ngFor="let rIngredient of rIngredients">
+  <li class="list-group-item"><span class="badge badge-danger badge-pill">{{rIngredient.amount}}</span></li>
+  <li class="list-group-item"><span class="badge badge-danger badge-pill">{{rIngredient.amount}}</span>{{rIngredient.measure}}</li>
+  <li class="list-group-item"><strong>{{rIngredient.ingredient.name}}</strong></li>
+  <li class="list-group-item">{{rIngredient.preparation}}</li>
+</ul> <br> -->
+
+    <!-- <ul id="ulfor" *ngFor="let rIngredient of rIngredients">
       <li> {{rIngredient.ingredient.name}} </li>
       <ul>
       <li> {{rIngredient.amount}} </li>
       <li> {{rIngredient.preparation}} </li>
       <li> {{rIngredient.measure}} </li>
       </ul>
-    </ul>
+    </ul> -->
 
-  <!-- <ul   *ngFor="let ingredient of ingredients">
-    <li  >{{ingredient.name}} </li>
-    <ul *ngFor="let rIngredient of recipe.recipeIngredients">
-      <li> {{rIngredient.amount}} </li>
-      <li> {{rIngredient.preparation}} </li>
-      <li> {{rIngredient.measure}} </li>
-
-       </ul> -->
 
   <p><b>Prep Time: </b>{{ selected.prepminutes }}</p>
   <p><b>Cook Time: </b>{{ selected.cookminutes }}</p>
@@ -134,6 +137,7 @@
 
   <p id="comments"></p>
 
+</div>
 </div>
 
 
@@ -192,35 +196,36 @@
   </form>
 </div>
 
-    <ul class="ingredients" *ngFor="let ingredient of ingredients">
-        <li>{{ingredient.name}} <button class="btn btn-danger" (click)="removeIngredient(ingredient.id)"  > X</button> </li>
-    </ul>
+<ul class="list-group list-group-horizontal-sm" *ngFor="let rIngredient of rIngredients">
+  <li class="list-group-item">{{rIngredient.amount}} {{rIngredient.measure}} <strong> {{rIngredient.ingredient.name}} </strong> {{rIngredient.preparation}} </li>
+</ul> <br>
 
-    <div class="form-floating mb-1">
-    <input id="updatetexturl" class="form-control" type="text" name="imageUrl" placeholder="Image Url" value="{{ editSelected.imageUrl }}" [(ngModel)]="editSelected.imageUrl" /> <br />
-    <label id="updatetexturl" for="imageUrl"><strong>Recipe ImageURL:</strong></label>
+<div class="form-floating mb-1">
+  <input id="updatetexturl" class="form-control" type="text" name="imageUrl" placeholder="Image Url" value="{{ editSelected.imageUrl }}" [(ngModel)]="editSelected.imageUrl" /> <br />
+  <label id="updatetexturl" for="imageUrl"><strong>Recipe ImageURL:</strong></label>
     </div>
 
     <div class="form-floating mb-1">
-    <input class="form-control" type="text" name="name" placeholder="Recipe Name" value="{{ editSelected.name }}" [(ngModel)]="editSelected.name" /> <br />
-    <label for="name"><strong>Recipe Name:</strong></label>
-  </div>
+      <input class="form-control" type="text" name="name" placeholder="Recipe Name" value="{{ editSelected.name }}" [(ngModel)]="editSelected.name" /> <br />
+      <label for="name"><strong>Recipe Name:</strong></label>
+    </div>
 
     <div class="form-floating mb-1">
-    <textarea id="updatetextdesc" class="form-control" type="text" name="description" placeholder="Recipe Description" value="{{ editSelected.description }}" [(ngModel)]="editSelected.description" ></textarea> <br>
-    <label for="description"><strong>Recipe Description:</strong></label>
-  </div>
+      <textarea id="updatetextdesc" class="form-control" type="text" name="description" placeholder="Recipe Description" value="{{ editSelected.description }}" [(ngModel)]="editSelected.description" ></textarea> <br>
+      <label for="description"><strong>Recipe Description:</strong></label>
+    </div>
 
     <div class="form-floating mb-1">
-    <textarea id="updatetextarea" class="form-control" type="text" name="directions"  placeholder="Recipe Directions" value="{{ editSelected.directions }}" [(ngModel)]="editSelected.directions" ></textarea> <br>
+      <textarea id="updatetextarea" class="form-control" type="text" name="directions"  placeholder="Recipe Directions" value="{{ editSelected.directions }}" [(ngModel)]="editSelected.directions" ></textarea> <br>
     <label for="directions"><strong>Recipe Directions:</strong></label>
   </div>
 
 
-    <div class="form-floating mb-1">
-      <input class="form-control" type="number" name="prepminutes" placeholder="Prep Minutes" value="{{ editSelected.prepminutes }}" [(ngModel)]="editSelected.prepminutes" /> <br>
-      <label for="prepminutes"><strong>Prep Minutes:</strong></label>
-    </div>
+  <div class="form-floating mb-1">
+    <input class="form-control" type="number" name="prepminutes" placeholder="Prep Minutes" value="{{ editSelected.prepminutes }}" [(ngModel)]="editSelected.prepminutes" /> <br>
+    <label for="prepminutes"><strong>Prep Minutes:</strong></label>
+  </div>
+
 
     <div class="form-floating mb-1">
       <input class="form-control" type="number" name="cookminutes" placeholder="Cook Minutes" value="{{ editSelected.cookminutes }}" [(ngModel)]="editSelected.cookminutes" /> <br>
