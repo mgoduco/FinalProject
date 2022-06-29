@@ -37,6 +37,10 @@ body {
   font-family: "M PLUS Rounded 1c", sans-serif;
 }
 
+#faLinkedin {
+  padding: 1%;
+}
+
 /* .logo_section {
   position: relative;
 }
