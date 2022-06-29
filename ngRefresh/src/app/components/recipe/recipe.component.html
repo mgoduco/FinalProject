@@ -123,7 +123,7 @@
 
 
 
-
+<div id="recipeBox">
 <div id="updateRecipe">
   <div class="centered" *ngIf="editSelected " id="recipeDetails">
 
@@ -136,11 +136,10 @@
       <div class="container-fluid">
 
         <div class="row">
-          <div>
             <!-- <button id="addIngredient" class="btn btn-success" (click)="displayAddIngredient(true)"(click)="open(content)">Add Ingredient</button> -->
             <button id="addIngredient" class="btn btn-success" (click)="open(content)">Add Ingredient</button>
-            <button id="addIngredient" class="btn btn-danger" (click)="displayAddIngredient(false)">Cancel</button>
-          </div></div> <br>
+            <!-- <button id="addIngredient" class="btn btn-danger" (click)="displayAddIngredient(false)">Cancel</button> -->
+         </div> <br>
 
 
           <!-- ====================================================================       MODAL      ==================================================================== -->
@@ -151,7 +150,7 @@
             </div>
             <div class="modal-body">
               <!-- FORM GOES HERE -->
-              <form class="centered" action="" centered="form-floating mb-3">
+              <form class="mcentered" action="" centered="form-floating mb-3">
                 <div class="btn-group" >
 
                   <label class="btn btn-secondary" >Ingredient Measure:</label> <br>
@@ -189,12 +188,12 @@
                 <input class="form-control" type="text" name="preparation" id="preparation" [(ngModel)]="newRecipeIngredient.preparation"><br>
                 <label for="preparation"><strong>Ingredient Preparation:</strong></label>
               </div>
-              <button class="btn btn-success buttonpad"  (click)="createRecipeIngredient(newRecipeIngredient, editSelected, ingredient)">+</button>
             </form >
-              <!-- FORM GOES HERE -->
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-outline-dark"   (click)="modal.close('Save click')">Save</button>
+            <!-- FORM GOES HERE -->
+          </div>
+          <div class="modal-footer">
+              <button class="btn btn-success buttonpad"  (click)="createRecipeIngredient(newRecipeIngredient, editSelected, ingredient)">+</button>
+              <!-- <button type="button" class="btn btn-outline-dark"   (click)="modal.close('Save click')">Save</button> -->
             </div>
           </ng-template>
           <!-- ====================================================================       MODAL      ==================================================================== -->
@@ -296,8 +295,8 @@
 
 
 </div>
+</div>
 </body>
-
           <!-- ====================================================================       GRAVEYARD      ==================================================================== -->
 
 

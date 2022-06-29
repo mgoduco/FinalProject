@@ -196,7 +196,8 @@ export class RecipeComponent implements OnInit {
         this.recipeSelected = true;
         this.newRecipe = new Recipe();
         this.reload();
-        this.getIngredientsByrecipe(recipe.id)
+        this.getIngredientsByrecipe(recipe.id);
+        this.getRIngredientsByRecipe(recipe.id);
         this.displayCreateTable(false);
         this.displayUpdateTable(recipe);
       },
