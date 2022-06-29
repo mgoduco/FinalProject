@@ -64,7 +64,9 @@ padding: 10px;
 }
 .btn-outline-secondary {
   color: #f5f5f5 !important;
-  border-color: #2e8754
+  border-color: #2e8754;
+  transition: #2e8754 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+
 }
 
 .list-group-item {
