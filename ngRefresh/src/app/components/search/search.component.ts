@@ -9,7 +9,7 @@ import {
   ViewChild,
 } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { NgbOffcanvas } from '@ng-bootstrap/ng-bootstrap';
+import { ModalDismissReasons, NgbModal, NgbOffcanvas } from '@ng-bootstrap/ng-bootstrap';
 import { Recipe } from 'src/app/models/recipe';
 import { RecipeService } from 'src/app/services/recipe.service';
 import {
@@ -29,9 +29,12 @@ import {
   faCircleMinus,
   faCommentMedical,
   faCommentSlash,
+  faPenToSquare,
 } from '@fortawesome/free-solid-svg-icons';
 import { CommentService } from 'src/app/services/comment.service';
 import { Comment } from 'src/app/models/comment';
+import { faHeart as farHeart} from '@fortawesome/free-regular-svg-icons';
+import { faHeart as fasHeart} from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-search',
@@ -57,6 +60,7 @@ export class SearchComponent implements OnInit {
     null
   );
   comments: Comment[] = [];
+  closeResult = '';
 
   // Icons
   faArrowLeft = faArrowLeft;
@@ -74,6 +78,9 @@ export class SearchComponent implements OnInit {
   facomment = faCommentMedical;
   faminus = faCircleMinus;
   famessage = faCommentSlash;
+  farHeart = farHeart;
+  fasHeart = fasHeart;
+  faPenToSquare = faPenToSquare;
 
   icons: IconDefinition[] = [
     faEgg,
@@ -96,6 +103,7 @@ export class SearchComponent implements OnInit {
     private commentServ: CommentService,
     private ingredientServ: IngredientService,
     private auth: AuthService,
+    private modalService: NgbModal,
     private router: Router
   ) {}
 
@@ -252,4 +260,50 @@ export class SearchComponent implements OnInit {
   loggedIn() {
     return this.auth.checkLogin();
   }
+
+  editComment(comment: Comment, recipe: Recipe){
+    console.log(comment);
+    console.log(recipe);
+    // this.comment = comment;
+    let id = recipe.id;
+    if (comment != null && recipe != null) {
+      this.commentServ.update(comment, recipe).subscribe({
+        next: (data) => {
+          this.comment = data;
+          console.log(data);
+          if (id != null) {
+            this.getRecipeComments(id);
+          }
+        },
+        error: (fail: any) => {
+          console.error('HomeComponent.reload: error');
+          console.error(fail);
+        },
+      });
+    }
+  }
+
+  // ________________________________Modal________________________________
+  open(content: any) {
+    this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
+      this.closeResult = `Closed with: ${result}`;
+    }, (reason) => {
+      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+    });
+  }
+
+  private getDismissReason(reason: any): string {
+    if (reason === ModalDismissReasons.ESC) {
+      return 'by pressing ESC';
+    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
+      return 'by clicking on a backdrop';
+    } else {
+      return `with: ${reason}`;
+    }
+  }
+
+
+// ________________________________________________________________
+
+
 }
