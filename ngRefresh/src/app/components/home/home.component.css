@@ -134,6 +134,13 @@ h2 {
   font-family: "M PLUS Rounded 1c", sans-serif;
   /* text-shadow: black 0 4 10px; */
 }
+.carouselBox {
+  box-shadow: black 0 0 5px;
+}
+
+ng-template{
+  box-shadow: black 0 0 5px;
+}
 
 h1{
   text-align: center;
