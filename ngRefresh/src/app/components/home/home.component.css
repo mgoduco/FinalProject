@@ -104,14 +104,13 @@ h2 {
 
 #carousel{
   margin: auto;
-  width: 70vw;
-  height: 50px;
-
+  width: 55vw;
+  height: 60vh;
 }
 
 #slideImg {
-  width: 70vw;
-  height: 44vw;
+  width: 60vw;
+  height: 75vh;
 }
 
 .carousel-inner > .item {
