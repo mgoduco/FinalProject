@@ -1,18 +1,42 @@
-
-  <div>
-    <div class="container-fluid" *ngIf="!selected">
+<head>
+<link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@400;800&display=swap" rel="stylesheet">
+</head>
+<div>
+    <div class="container" *ngIf="!selected">
       <div class="row align-items-center">
-        <div class="col">
+        <div class="col-2">
         </div>
-        <div class="col">
-          <h2>Welcome</h2>
+        <div class="col-8">
+          <h1>Welcome to <span class="re">re</span><span class="fresh">fresh</span></h1>
         </div>
-        <div class="col">
+        <div class="col-2">
 
         </div>
       </div>
+    </div>
 
-      <div class="row align-items-center">
+    <div class="row align-items-center" *ngIf="!selected">
+      <!-- __________________________Carousel______________________ -->
+      <ngb-carousel class="col-10" id="carousel">
+        <ng-template ngbSlide *ngFor="let recipe of recipes" >
+          <div class="picsum-img-wrapper" *ngIf="recipe.imageUrl" (click)="displayRecipe(recipe)" (click)="getRecipeComments(recipe.id)">
+            <img [src]="recipe.imageUrl" alt="Slides" id="slideImg">
+          </div>
+          <div class="carousel-caption">
+            <h2 id="recipeName">{{recipe.name}}</h2>
+
+          </div>
+        </ng-template>
+
+      </ngb-carousel>
+
+      <!-- __________________________Carousel________________________________ -->
+  </div>
+
+
+
+      <!-- <div class="row align-items-center">
         <div *ngFor="let recipe of recipes" class="col-sm-4">
           <div class="card mb-3" id="cards" (click)="displayRecipe(recipe)" (click)="getRecipeComments(recipe.id)"
             (click)="getIngredientsByrecipe(recipe.id)">
@@ -23,8 +47,7 @@
             </div>
           </div>
         </div>
-      </div>
-    </div>
+      </div> -->
 
 
     <div class="centered" *ngIf="selected" id="recipeDetails">
