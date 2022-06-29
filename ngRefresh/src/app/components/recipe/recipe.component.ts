@@ -256,10 +256,14 @@ export class RecipeComponent implements OnInit {
     console.log(rIngredient);
     console.log(recipe.id);
     console.log('ingredient id' + ingredient.id);
+
+    delete rIngredient.ingredient;
+    delete rIngredient.recipe;
+
     if (recipe.id != null && ingredient.id != null) {
       this.rIngredientServ.create(rIngredient, recipe.id, ingredient.id).subscribe({
-        next: (rIngredient) => {
-
+        next: (newRecipeIngredient) => {
+          this.newRecipeIngredient = new RecipeIngredient();
           console.log('R INGREDIENT' + rIngredient);
           console.log('recipe id' + recipe.id);
           console.log('ingredient id' + ingredient.id);

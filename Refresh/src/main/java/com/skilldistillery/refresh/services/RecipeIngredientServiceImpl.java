@@ -48,6 +48,7 @@ public class RecipeIngredientServiceImpl implements RecipeIngredientService {
 	@Override
 	public RecipeIngredient createForRecipe(String username, int recipeId, int ingredientId,
 			RecipeIngredient recipeIngredient) {
+		
 		Recipe recipe = recipeRepo.findByIdAndUser_Username(recipeId, username);
 		Ingredient ingredient = ingredientRepo.queryById(ingredientId);
 		if (recipe != null && ingredient != null) {
@@ -55,6 +56,7 @@ public class RecipeIngredientServiceImpl implements RecipeIngredientService {
 			recipeIngredient.setId(recipeIngredientId);
 			recipeIngredient.setRecipe(recipe);
 			recipeIngredient.setIngredient(ingredient);
+			System.out.println(recipeIngredient);
 			recipeIngredientRepo.saveAndFlush(recipeIngredient);
 			return recipeIngredient;
 		}
