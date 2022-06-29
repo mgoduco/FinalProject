@@ -168,22 +168,22 @@
 
               <input class="btn-check"type="radio" name="measure" id="g" value="Pound(s)"[(ngModel)]="newRecipeIngredient.measure">
               <label class="btn btn-outline-secondary" for="g"><strong>Pound</strong></label>
-            </div><br>
+            </div><br> <br>
 
   <div class="form-floating mb-1">
-    <input class="form-control" list="allingredients" type="text" name="ingredient">
+    <input class="form-control" list="allingredients" type="text" name="ingredient"  >
     <label for="allingredients"><strong>Ingredient:</strong></label>
     <datalist id="allingredients">
-      <option *ngFor="let ingredient of allingredients" data-tokens=>{{ingredient.name}}</option>
+      <option name="ingredient"  *ngFor="let ingredient of allingredients" >{{ingredient.name}}</option>
     </datalist>
   </div> <br>
 
   <div class="form-floating mb-1">
-    <input class="form-control"  type="number" name="amount" id="amount"><br>
+    <input class="form-control"  type="number" name="amount" id="amount" [(ngModel)]="newRecipeIngredient.amount"><br>
     <label for="amount"><strong>Ingredient Amount:</strong></label>
   </div>
   <div class="form-floating mb-1">
-    <input class="form-control" type="text" name="preparation" id="preparation"><br>
+    <input class="form-control" type="text" name="preparation" id="preparation" [(ngModel)]="newRecipeIngredient.preparation"><br>
     <label for="preparation"><strong>Ingredient Preparation:</strong></label>
   </div>
   <!-- <button class="btn btn-success buttonpad"  (click)="createRecipeIngredient(rIng ,ingredient.id, editSelected.id)">Add Ingredient</button> -->
