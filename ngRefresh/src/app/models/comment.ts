@@ -20,8 +20,8 @@ export class Comment {
     active: boolean = false,
     inReplyTo: number | null = 0,
     // replies: Comment[] = [],
-    user: User | null,
-    recipe: Recipe | null
+    user: User | null = null,
+    recipe: Recipe | null = null
 
   ) {
     this.id = id;
