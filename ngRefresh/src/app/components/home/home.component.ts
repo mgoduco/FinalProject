@@ -246,7 +246,7 @@ export class HomeComponent implements OnInit {
   editComment(comment: Comment, recipe: Recipe){
     console.log(comment);
     console.log(recipe);
-    this.comment = comment;
+    // this.comment = comment;
     let id = recipe.id;
     if (comment != null && recipe != null) {
       this.commentServ.update(comment, recipe).subscribe({
