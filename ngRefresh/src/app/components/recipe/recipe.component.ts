@@ -30,14 +30,22 @@ export class RecipeComponent implements OnInit {
   newRecipe: Recipe = new Recipe();
   recipe: Recipe = new Recipe();
   user: User = new User();
-  // ingredient: Ingredient = new Ingredient(
-  //   null,
-  //   null,
-  //   null,
-  //   null,
-  //   null,
-  //   this.rIngredients
-  // );
+  ingredient: Ingredient = new Ingredient(
+    null,
+    null,
+    null,
+    null,
+    null,
+    []
+  );
+  newRecipeIngredient: RecipeIngredient = new RecipeIngredient(
+    this.recipe,
+    this.ingredient,
+    null,
+    null,
+    null
+  );
+
   // rIngredient: RecipeIngredient = new RecipeIngredient(
   //   this.recipe,
   //   this.ingredient,
@@ -97,6 +105,7 @@ export class RecipeComponent implements OnInit {
     this.addIng = string;
   }
   displayUpdateTable(recipe: Recipe) {
+    console.log(recipe)
     this.editSelected = recipe;
   }
   displayCreateTable(string: boolean) {
@@ -241,22 +250,29 @@ export class RecipeComponent implements OnInit {
 
 
   createRecipeIngredient(rIngredient: RecipeIngredient, recipe: Recipe, ingredient: Ingredient) {
+    ingredient = this.ingredient;
+    console.log(this.allingredients)
+    console.log(this.ingredient)
+    console.log(rIngredient);
+    console.log(recipe.id);
+    console.log('ingredient id' + ingredient.id);
     if (recipe.id != null && ingredient.id != null) {
       this.rIngredientServ.create(rIngredient, recipe.id, ingredient.id).subscribe({
         next: (rIngredient) => {
-          this.selected = recipe;
-          this.recipeSelected = true;
-          this.newRecipe = new Recipe();
+
+          console.log('R INGREDIENT' + rIngredient);
+          console.log('recipe id' + recipe.id);
+          console.log('ingredient id' + ingredient.id);
           this.reload();
-          this.displayTable();
         },
         error: (fail) => {
-          console.error('RecipeComponent.createRecipe: error creating recipe');
+          console.error('RecipeComponent.createRecipeIngredient: error creating recipe Ingredient');
           console.error(fail);
         },
       });
     }
   }
+
   updateRecipeIngredient(rIngredient: RecipeIngredient, recipe: Recipe, ingredient: Ingredient) {
     if (recipe.id != null && ingredient.id != null) {
       this.rIngredientServ.update(rIngredient, recipe.id, ingredient.id).subscribe({

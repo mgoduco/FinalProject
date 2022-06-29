@@ -11,6 +11,9 @@
 
 <br><br>
 
+          <!-- ====================================================================       CREATE      ==================================================================== -->
+
+
 <div class="centeredBorder" *ngIf="isCreateTableSelected" id="createRecipe">
   <a class="" (click)="displayTable()">
   <fa-icon [icon]="faArrowLeft"></fa-icon>
@@ -19,10 +22,6 @@
   <form class="centered" id="editform" centered="form-floating mb-3">
     <img ng src="/assets/default_recipe.png" class="recipeImg"><br><br>
     <div class="container-fluid">
-
-
-
-
 
     <div class="form-floating mb-1">
       <input  class="form-control" type="text" name="task" placeholder="Image Url" [(ngModel)]="newRecipe.imageUrl" /> <br />
@@ -63,6 +62,9 @@
 
 </div>
 
+          <!-- ====================================================================       CARDS      ==================================================================== -->
+
+
 <div class="container-fluid" *ngIf="!selected && !isCreateTableSelected">
   <div class="row align-items-center">
     <div class="col">
@@ -89,6 +91,10 @@
 </div>
 </div>
 
+          <!-- ====================================================================       DISPLAY      ==================================================================== -->
+
+
+<div >
 <div class="centered" *ngIf="selected && !editSelected" id="recipeDetails">
   <a class="" (click)="displayTable()">
   <fa-icon [icon]="faArrowLeft"></fa-icon>
@@ -98,34 +104,9 @@
 
 <h4>Ingredients</h4>
 
-<!-- <ul>
-  <li *ngFor="let group of hueGroups">
-  {{group.name}}
-  <ul>
-      <li *ngFor="let light of group.lights">
-      {{light.name}}
-      </li>
-  </ul>
-  </li>
-</ul> -->
-
-    <ul id="ulfor" *ngFor="let rIngredient of rIngredients">
-      <li> {{rIngredient.ingredient.name}} </li>
-      <ul>
-      <li> {{rIngredient.amount}} </li>
-      <li> {{rIngredient.preparation}} </li>
-      <li> {{rIngredient.measure}} </li>
-      </ul>
-    </ul>
-
-  <!-- <ul   *ngFor="let ingredient of ingredients">
-    <li  >{{ingredient.name}} </li>
-    <ul *ngFor="let rIngredient of recipe.recipeIngredients">
-      <li> {{rIngredient.amount}} </li>
-      <li> {{rIngredient.preparation}} </li>
-      <li> {{rIngredient.measure}} </li>
-
-       </ul> -->
+<ul class="list-group list-group-horizontal-sm" *ngFor="let rIngredient of rIngredients">
+  <li class="list-group-item">{{rIngredient.amount}} {{rIngredient.measure}} <strong> {{rIngredient.ingredient.name}} </strong> {{rIngredient.preparation}} </li>
+</ul> <br>
 
   <p><b>Prep Time: </b>{{ selected.prepminutes }}</p>
   <p><b>Cook Time: </b>{{ selected.cookminutes }}</p>
@@ -135,92 +116,113 @@
   <p id="comments"></p>
 
 </div>
+</div>
+
+          <!-- ====================================================================       DISPLAY      ==================================================================== -->
+
+
 
 
 <div id="updateRecipe">
-<div class="centered" *ngIf="editSelected " id="recipeDetails">
+  <div class="centered" *ngIf="editSelected " id="recipeDetails">
 
-  <a class="" (click)="displayTable()">
-  <fa-icon [icon]="faArrowLeft"></fa-icon>
-  </a>
+    <a class="" (click)="displayTable()">
+      <fa-icon [icon]="faArrowLeft"></fa-icon>
+    </a>
 
-  <form class="centered" id="editform" centered="form-floating mb-3">
-    <img  src="{{ editSelected.imageUrl }}" class="recipeImg"><br><br>
-    <div class="container-fluid">
+    <form class="centered" id="editform" centered="form-floating mb-3">
+      <img  src="{{ editSelected.imageUrl }}" class="recipeImg"><br><br>
+      <div class="container-fluid">
 
-      <div class="row">
-        <div>
-         <button id="addIngredient" class="btn btn-success" (click)="displayAddIngredient(true)">Add Ingredient</button>
-         <button id="addIngredient" class="btn btn-danger" (click)="displayAddIngredient(false)">Cancel</button>
-        </div></div> <br>
+        <div class="row">
+          <div>
+            <button id="addIngredient" class="btn btn-success" (click)="displayAddIngredient(true)">Add Ingredient</button>
+            <button id="addIngredient" class="btn btn-danger" (click)="displayAddIngredient(false)">Cancel</button>
+          </div></div> <br>
 
-  <div *ngIf="addIng">
-    <form class="centered" action="" centered="form-floating mb-3">
-        <div >
-          <label >Ingredient Measure:</label> <br>
-          <input type="radio" name="pinch" id="pinch">
-          <label for="pinch"><strong>Pinch</strong></label>
-          <input type="radio" name="dash" id="dash">
-          <label for="dash"><strong>Dash</strong></label>
-          <input type="radio" name="tsp" id="tsp">
-          <label for="tsp"><strong>Tsp</strong></label>
-          <input type="radio" name="tbsp" id="tbsp">
-          <label for="tbsp"><strong>Tbsp</strong></label>
-          <input type="radio" name="oz" id="oz">
-          <label for="oz"><strong>Oz</strong></label>
-          <input type="radio" name="g" id="g">
-          <label for="g"><strong>Pound</strong></label>
-        </div><br>
+
+          <!-- ====================================================================       MODAL      ==================================================================== -->
+
+          <!-- ====================================================================       MODAL      ==================================================================== -->
+
+        <div *ngIf="addIng">
+          <form class="centered" action="" centered="form-floating mb-3">
+            <div class="btn-group" >
+
+              <label class="btn btn-secondary" >Ingredient Measure:</label> <br>
+
+              <input class="btn-check" type="radio" name="measure" id="pinch" value="pinch" [(ngModel)]="newRecipeIngredient.measure">
+              <label class="btn btn-outline-secondary" for="pinch"><strong>Pinch</strong></label>
+              <!-- <label class="btn btn-secondary" for="option1">Checked</label> -->
+              <input class="btn-check"type="radio" name="measure" id="dash" value="dash"[(ngModel)]="newRecipeIngredient.measure">
+              <label class="btn btn-outline-secondary" for="dash"><strong>Dash</strong></label>
+
+              <input class="btn-check"type="radio" name="measure" id="tsp" value="Tsp"[(ngModel)]="newRecipeIngredient.measure">
+              <label class="btn btn-outline-secondary" for="tsp"><strong>Tsp</strong></label>
+
+              <input class="btn-check" type="radio" name="measure" id="tbsp"  value="Tbsp"[(ngModel)]="newRecipeIngredient.measure">
+              <label class="btn btn-outline-secondary" for="tbsp"><strong>Tbsp</strong></label>
+
+              <input class="btn-check"type="radio" name="measure" id="oz"  value="oz"[(ngModel)]="newRecipeIngredient.measure">
+              <label class="btn btn-outline-secondary" for="oz"><strong>Oz</strong></label>
+
+              <input class="btn-check"type="radio" name="measure" id="g" value="Pound(s)"[(ngModel)]="newRecipeIngredient.measure">
+              <label class="btn btn-outline-secondary" for="g"><strong>Pound</strong></label>
+            </div><br> <br>
 
   <div class="form-floating mb-1">
-    <input class="form-control" list="allingredients" type="text" name="ingredient">
+    <input class="form-control" list="allingredients" type="text" name="ingredient"  >
     <label for="allingredients"><strong>Ingredient:</strong></label>
-    <datalist id="allingredients">
-      <option *ngFor="let ingredient of allingredients" data-tokens=>{{ingredient.name}}</option>
-    </datalist>
+    <select [(ngModel)]="ingredient"  name="ingredient" id="">
+        <option  *ngFor="let ingredient of allingredients" [ngValue]="ingredient">{{ingredient.name}}</option>
+      </select>
   </div> <br>
 
   <div class="form-floating mb-1">
-    <input class="form-control"  type="number" name="amount" id="amount"><br>
+    <input class="form-control"  type="number" name="amount" id="amount" [(ngModel)]="newRecipeIngredient.amount"><br>
     <label for="amount"><strong>Ingredient Amount:</strong></label>
-    </div>
-    <div class="form-floating mb-1">
-    <input class="form-control" type="text" name="preparation" id="preparation"><br>
+  </div>
+  <div class="form-floating mb-1">
+    <input class="form-control" type="text" name="preparation" id="preparation" [(ngModel)]="newRecipeIngredient.preparation"><br>
     <label for="preparation"><strong>Ingredient Preparation:</strong></label>
   </div>
   <!-- <button class="btn btn-success buttonpad"  (click)="createRecipeIngredient(rIng ,ingredient.id, editSelected.id)">Add Ingredient</button> -->
-  </form>
+  <button class="btn btn-success buttonpad"  (click)="createRecipeIngredient(newRecipeIngredient, editSelected, ingredient)">+</button>
+</form >
 </div>
 
-    <ul class="ingredients" *ngFor="let ingredient of ingredients">
-        <li>{{ingredient.name}} <button class="btn btn-danger" (click)="removeIngredient(ingredient.id)"  > X</button> </li>
-    </ul>
 
-    <div class="form-floating mb-1">
-    <input id="updatetexturl" class="form-control" type="text" name="imageUrl" placeholder="Image Url" value="{{ editSelected.imageUrl }}" [(ngModel)]="editSelected.imageUrl" /> <br />
-    <label id="updatetexturl" for="imageUrl"><strong>Recipe ImageURL:</strong></label>
+
+<ul class="list-group list-group-horizontal-sm" *ngFor="let rIngredient of rIngredients">
+  <li class="list-group-item">{{rIngredient.amount}} {{rIngredient.measure}} <strong> {{rIngredient.ingredient.name}} </strong> {{rIngredient.preparation}} </li>
+</ul> <br>
+
+<div class="form-floating mb-1">
+  <input id="updatetexturl" class="form-control" type="text" name="imageUrl" placeholder="Image Url" value="{{ editSelected.imageUrl }}" [(ngModel)]="editSelected.imageUrl" /> <br />
+  <label id="updatetexturl" for="imageUrl"><strong>Recipe ImageURL:</strong></label>
     </div>
 
     <div class="form-floating mb-1">
-    <input class="form-control" type="text" name="name" placeholder="Recipe Name" value="{{ editSelected.name }}" [(ngModel)]="editSelected.name" /> <br />
-    <label for="name"><strong>Recipe Name:</strong></label>
-  </div>
+      <input class="form-control" type="text" name="name" placeholder="Recipe Name" value="{{ editSelected.name }}" [(ngModel)]="editSelected.name" /> <br />
+      <label for="name"><strong>Recipe Name:</strong></label>
+    </div>
 
     <div class="form-floating mb-1">
-    <textarea id="updatetextdesc" class="form-control" type="text" name="description" placeholder="Recipe Description" value="{{ editSelected.description }}" [(ngModel)]="editSelected.description" ></textarea> <br>
-    <label for="description"><strong>Recipe Description:</strong></label>
-  </div>
+      <textarea id="updatetextdesc" class="form-control" type="text" name="description" placeholder="Recipe Description" value="{{ editSelected.description }}" [(ngModel)]="editSelected.description" ></textarea> <br>
+      <label for="description"><strong>Recipe Description:</strong></label>
+    </div>
 
     <div class="form-floating mb-1">
-    <textarea id="updatetextarea" class="form-control" type="text" name="directions"  placeholder="Recipe Directions" value="{{ editSelected.directions }}" [(ngModel)]="editSelected.directions" ></textarea> <br>
+      <textarea id="updatetextarea" class="form-control" type="text" name="directions"  placeholder="Recipe Directions" value="{{ editSelected.directions }}" [(ngModel)]="editSelected.directions" ></textarea> <br>
     <label for="directions"><strong>Recipe Directions:</strong></label>
   </div>
 
 
-    <div class="form-floating mb-1">
-      <input class="form-control" type="number" name="prepminutes" placeholder="Prep Minutes" value="{{ editSelected.prepminutes }}" [(ngModel)]="editSelected.prepminutes" /> <br>
-      <label for="prepminutes"><strong>Prep Minutes:</strong></label>
-    </div>
+  <div class="form-floating mb-1">
+    <input class="form-control" type="number" name="prepminutes" placeholder="Prep Minutes" value="{{ editSelected.prepminutes }}" [(ngModel)]="editSelected.prepminutes" /> <br>
+    <label for="prepminutes"><strong>Prep Minutes:</strong></label>
+  </div>
+
 
     <div class="form-floating mb-1">
       <input class="form-control" type="number" name="cookminutes" placeholder="Cook Minutes" value="{{ editSelected.cookminutes }}" [(ngModel)]="editSelected.cookminutes" /> <br>
@@ -239,3 +241,33 @@
 
 </div>
 </body>
+
+
+
+<!-- <ul>
+  <li *ngFor="let group of hueGroups">
+  {{group.name}}
+  <ul>
+      <li *ngFor="let light of group.lights">
+      {{light.name}}
+      </li>
+  </ul>
+  </li>
+</ul> -->
+
+
+<!-- <ul class="list-group list-group-horizontal-sm" *ngFor="let rIngredient of rIngredients">
+  <li class="list-group-item"><span class="badge badge-danger badge-pill">{{rIngredient.amount}}</span></li>
+  <li class="list-group-item"><span class="badge badge-danger badge-pill">{{rIngredient.amount}}</span>{{rIngredient.measure}}</li>
+  <li class="list-group-item"><strong>{{rIngredient.ingredient.name}}</strong></li>
+  <li class="list-group-item">{{rIngredient.preparation}}</li>
+</ul> <br> -->
+
+    <!-- <ul id="ulfor" *ngFor="let rIngredient of rIngredients">
+      <li> {{rIngredient.ingredient.name}} </li>
+      <ul>
+      <li> {{rIngredient.amount}} </li>
+      <li> {{rIngredient.preparation}} </li>
+      <li> {{rIngredient.measure}} </li>
+      </ul>
+    </ul> -->
