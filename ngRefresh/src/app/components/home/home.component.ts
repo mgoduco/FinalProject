@@ -1,4 +1,4 @@
-import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { ModalDismissReasons, NgbCarousel, NgbModal, NgbSlideEvent, NgbSlideEventSource } from '@ng-bootstrap/ng-bootstrap';
 import { UserService } from 'src/app/services/user.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { Ingredient } from './../../models/ingredient';
@@ -75,7 +75,11 @@ export class HomeComponent implements OnInit {
     private router: Router) {
     }
 
+   // ________________________________Carousel________________________________
 
+
+
+   // ________________________________________________________________
     // ________________________________Modal________________________________
     open(content: any) {
       this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
