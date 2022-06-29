@@ -34,7 +34,8 @@
   <h4 id="title">{{ selected.name }}</h4>
   <div class="image-group">
     <img [src]="selected.imageUrl" class="recipeImg" [alt]="selected.name" >
-    <fa-icon [icon]="faHeart" (click)="setFavorite(selected)" id="favorite"></fa-icon>
+    <fa-icon *ngIf="favorited" [icon]="faHeart" (click)="setFavorite(selected)" id="favorite"></fa-icon>
+    <fa-icon *ngIf="!favorited" [icon]="faHeart" (click)="removeFavorite(selected)" id="favorite"></fa-icon>
   </div><div class="clear"></div><br>
   <div>
   <p><b>Prep Time: </b>{{ selected.prepminutes }}</p>

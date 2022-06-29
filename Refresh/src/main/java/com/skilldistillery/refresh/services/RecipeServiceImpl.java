@@ -127,8 +127,9 @@ public class RecipeServiceImpl implements RecipeService {
 		return null;
 	}
 
-//	RECIPE: Find recipe by String/Keyword
 
-//	RECIPE: Add Recipe to User’s Recipe List (???)
-
+	@Override
+	public Recipe getFavoriteRecipeByUsernameAndId(String username, int recipeId) {
+		return recipeRepo.findByUserFavorites_UsernameAndId(username, recipeId);
+	}
 }
