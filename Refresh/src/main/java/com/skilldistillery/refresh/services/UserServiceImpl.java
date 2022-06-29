@@ -113,7 +113,7 @@ public class UserServiceImpl implements UserService {
 		User user = userRepo.findUserById(userId);
 		Recipe recipe = recipeRepo.queryById(recipeId);
 		if (user != null && recipe != null) {
-			user.getFavoriteRecipes().remove(recipeId);
+			user.getFavoriteRecipes().remove(recipe);
 			userRepo.saveAndFlush(user);
 			removed = true;
 		}

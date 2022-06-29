@@ -1,3 +1,8 @@
+.body-div {
+  background-color: #E5E5E5;
+  padding-bottom: 5%;
+}
+
 .centered {
   margin: auto;
   width: 50vw;
@@ -22,14 +27,23 @@
   z-index: 0;
 }
 
-#favorite {
-  /* font-size: 5vw; */
+/* #favorite {
   position: absolute;
   right: 5px;
   top: 5px;
   padding: 0;
   z-index: 1;
-  /* padding-right: 2%; */
-  /* margin-top: 10px;
-  margin-right: 10px; */
+
+} */
+
+#faHeart {
+  font-size: 5vw;
+  position: absolute;
+  padding: 0;
+  z-index: 1;
+  padding-right: 0.5%;
+  right: 5px;
+  color: rgba(255, 0, 0, 0.557);
+  border-color: black;
 }
+

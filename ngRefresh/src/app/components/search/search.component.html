@@ -3,7 +3,7 @@
       <input type="text" id="searchIput" class="searchTerm" [(ngModel)]="keyword"  placeholder="Search Recipes...">
       <button type="submit" class="btn btn-success"><fa-icon [icon]="randomIcon()" (click)="search(keyword)" [routerLink]="['/search']"></fa-icon></button>
     </div><hr> -->
-    <div>
+    <div class="body-div">
       <div class="container-fluid" *ngIf="!selected">
       <div class="row align-items-center">
         <div class="col">

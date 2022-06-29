@@ -34,16 +34,7 @@ export class HomeComponent implements OnInit {
   comments: Comment[] = [];
   ingredients: Ingredient[] = [];
   comment: null | Comment = null;
-  newComment: Comment = new Comment(
-    null,
-    null,
-    null,
-    null,
-    false,
-    null,
-    null,
-    null
-  );
+  newComment: Comment = new Comment();
   user: User = new User();
 
   // Icons
