@@ -94,7 +94,7 @@
           <!-- ====================================================================       DISPLAY      ==================================================================== -->
 
 
-<div >
+<div id="recipeBox">
 <div class="centered" *ngIf="selected && !editSelected" id="recipeDetails">
   <a class="" (click)="displayTable()">
   <fa-icon [icon]="faArrowLeft"></fa-icon>
@@ -120,6 +120,7 @@
       <p *ngIf="comment.active"> <strong>{{comment.title}}</strong><br>
         <fa-icon *ngIf="loggedIn()" id="faMessageSlash" (click)="deleteComment(comment, selected)" [icon]="famessage" class="fa-2x">
         </fa-icon>{{comment.comment}} <fa-icon *ngIf="loggedIn()" id="faPenToSquare" (click)="open(content)" [icon]="faPenToSquare"></fa-icon>
+
         <!-- __________________________Modal______________________ -->
         <ng-template #content let-modal>
           <div class="modal-header">
@@ -222,8 +223,9 @@
                 </div><br> <br>
 
               <div class="form-floating mb-1">
+                <label for="ingredient"><strong>Ingredient</strong></label>
                 <select [(ngModel)]="ingredient" class="form-select" aria-label="Default select example" name="ingredient" id="">
-                    <option selected *ngFor="let ingredient of allingredients" [ngValue]="ingredient">{{ingredient.name}}</option>
+                    <option  *ngFor="let ingredient of allingredients" [ngValue]="ingredient">{{ingredient.name}}</option>
                   </select>
               </div> <br>
 

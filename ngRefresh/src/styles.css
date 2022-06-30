@@ -17,3 +17,9 @@
   box-shadow: black 0 0 10px;
 }
 
+.btn-group {
+  width: fit-content !important;
+  color: #2e8754;
+
+
+}
