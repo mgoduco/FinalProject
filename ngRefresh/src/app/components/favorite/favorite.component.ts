@@ -78,6 +78,7 @@ export class FavoriteComponent implements OnInit {
   }
 
   displayTable() {
+    window.location.reload();
     this.selected = null;
     this.isSelected = false;
     // this.isCreateSelected = false;
@@ -96,14 +97,10 @@ export class FavoriteComponent implements OnInit {
     if (!this.favorited) {
       if (this.selected) {
         this.setFavorite(this.selected);
-        this.reload();
-        this.displayTable();
       }
     } else {
       if (this.selected) {
         this.removeFavorite(this.selected);
-        this.reload();
-        this.displayTable();
       }
     }
   }
@@ -159,7 +156,7 @@ export class FavoriteComponent implements OnInit {
         this.userServ.removeFavorite(userId, recipeId).subscribe({
           next: (removed) => {
             this.favorited = false;
-            this.reload();
+
           },
           error: (fail: any) => {
             console.error('FavoriteComponent.removeFavorite: error');
