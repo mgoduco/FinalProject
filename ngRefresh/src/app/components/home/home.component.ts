@@ -320,8 +320,9 @@ export class HomeComponent implements OnInit {
   return this.auth.checkLogin();
 }
 
+
+// _____________________________FAVORITES_____________________
 hearted() {
-  this.favorited = !this.favorited;
   if (this.favorited) {
     return fasHeart;
   } else {
@@ -329,25 +330,14 @@ hearted() {
   }
 }
 
-// hearted(){
-  //   this.fav = !this.fav;
-  // if(this.fav){
-  // return farHeart;
-  // }else{
-  //   return fasHeart;
-  // }
-  // }
-
 toggleFavorite() {
   if (!this.favorited) {
     if (this.selected) {
       this.setFavorite(this.selected);
-      this.reload();
     }
   } else {
     if (this.selected) {
       this.removeFavorite(this.selected);
-      this.reload();
     }
   }
 }
@@ -360,7 +350,7 @@ isFavorite(rid: number) {
       return true;
     },
     error: (fail: any) => {
-      console.log('Favorite is false.')
+      console.log('Favorite is false.');
       this.favorited = false;
       return false;
     },
@@ -368,6 +358,7 @@ isFavorite(rid: number) {
 }
 
 setFavorite(recipe: Recipe) {
+  this.getUser();
   let userId = this.user.id;
   console.log('User ID: ' + userId);
   console.log('Selected Recipe:');
@@ -403,6 +394,7 @@ removeFavorite(recipe: Recipe) {
       this.userServ.removeFavorite(userId, recipeId).subscribe({
         next: (removed) => {
           this.favorited = false;
+
         },
         error: (fail: any) => {
           console.error('FavoriteComponent.removeFavorite: error');
@@ -412,5 +404,17 @@ removeFavorite(recipe: Recipe) {
     }
   }
 }
+
+getUser() {
+  this.auth.getLoggedInUser().subscribe({
+    next: (data) => {
+      this.user = data;
+      this.reload();
+    },
+  });
+  console.log(this.user);
+}
+
+// __________________________FAVORITE_______________________________
 
 }

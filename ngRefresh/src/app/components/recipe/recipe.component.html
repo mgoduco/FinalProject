@@ -94,7 +94,7 @@
           <!-- ====================================================================       DISPLAY      ==================================================================== -->
 
 
-<div id="recipeBox">
+<div id="recipeBox" *ngIf="selected">
 <div class="centered" *ngIf="selected && !editSelected" id="recipeDetails">
   <a class="" (click)="displayTable()">
   <fa-icon [icon]="faArrowLeft"></fa-icon>
@@ -171,7 +171,7 @@
 
 
 
-<div id="recipeBox">
+<div id="recipeBox" *ngIf="selected">
 <div id="updateRecipe">
   <div class="centered" *ngIf="editSelected " id="recipeDetails">
 
@@ -201,7 +201,7 @@
               <form class="mcentered" action="" centered="form-floating mb-3">
                 <div class="btn-group" >
 
-                  <label class="btn btn-secondary" >Ingredient Measure:</label> <br>
+                  <!-- <label class="btn btn-secondary" >Ingredient Measure:</label> -->
 
                   <input class="btn-check" type="radio" name="measure" id="pinch" value="pinch" [(ngModel)]="newRecipeIngredient.measure">
                   <label class="btn btn-outline-secondary" for="pinch"><strong>Pinch</strong></label>
@@ -219,7 +219,7 @@
                   <label class="btn btn-outline-secondary" for="oz"><strong>Oz</strong></label>
 
                   <input class="btn-check"type="radio" name="measure" id="g" value="Pound(s)"[(ngModel)]="newRecipeIngredient.measure">
-                  <label class="btn btn-outline-secondary" for="g"><strong>Pound</strong></label>
+                  <label class="btn btn-outline-secondary" for="g"><strong>lbs</strong></label>
                 </div><br> <br>
 
               <div class="form-floating mb-1">

@@ -330,6 +330,7 @@ export class SearchComponent implements OnInit {
   }
 
   setFavorite(recipe: Recipe) {
+    this.getUser();
     let userId = this.user.id;
     console.log('User ID: ' + userId);
     console.log('Selected Recipe:');
