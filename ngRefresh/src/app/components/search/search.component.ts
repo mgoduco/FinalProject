@@ -1,3 +1,5 @@
+import { User } from 'src/app/models/user';
+import { UserService } from 'src/app/services/user.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { Ingredient } from './../../models/ingredient';
 import { IngredientService } from 'src/app/services/ingredient.service';
@@ -104,7 +106,8 @@ export class SearchComponent implements OnInit {
     private ingredientServ: IngredientService,
     private auth: AuthService,
     private modalService: NgbModal,
-    private router: Router
+    private router: Router,
+    private userServ: UserService
   ) {}
 
   ngOnInit(): void {
@@ -282,6 +285,124 @@ export class SearchComponent implements OnInit {
       });
     }
   }
+
+  // ______________________________FAVORITES______________________________
+
+  favorited: boolean = false;
+  user: User = new User();
+
+
+  hearted() {
+    if (this.favorited) {
+      return fasHeart;
+    } else {
+      return farHeart;
+    }
+  }
+
+  toggleFavorite() {
+    if (!this.favorited) {
+      if (this.selected) {
+        this.setFavorite(this.selected);
+        this.reload();
+      }
+    } else {
+      if (this.selected) {
+        this.removeFavorite(this.selected);
+        this.reload();
+      }
+    }
+  }
+
+  isFavorite(rid: number) {
+    this.userServ.getFavorite(rid).subscribe({
+      next: (favorite) => {
+        console.log('Favorite get success!');
+        this.favorited = true;
+        return true;
+      },
+      error: (fail: any) => {
+        console.log('Favorite is false.')
+        this.favorited = false;
+        return false;
+      },
+    });
+  }
+
+  setFavorite(recipe: Recipe) {
+    let userId = this.user.id;
+    console.log('User ID: ' + userId);
+    console.log('Selected Recipe:');
+    console.log(this.selected);
+    if (this.selected !== null) {
+      let recipeId = this.selected.id;
+      console.log('Recipe ID: ' + recipeId);
+      if (userId !== null && recipeId !== null) {
+        console.log('Succeessfully created Favorite!');
+        this.userServ.addFavorite(userId, recipeId).subscribe({
+          next: (added) => {
+            this.favorited = true;
+          },
+          error: (fail: any) => {
+            console.error('FavoriteComponent.setFavorite: error');
+            console.error(fail);
+          },
+        });
+      }
+    }
+  }
+
+  removeFavorite(recipe: Recipe) {
+    let userId = this.user.id;
+    console.log('User ID: ' + userId);
+    console.log('Selected Recipe:');
+    console.log(this.selected);
+    if (this.selected !== null) {
+      let recipeId = this.selected.id;
+      console.log('Recipe ID: ' + recipeId);
+      if (userId !== null && recipeId !== null) {
+        console.log('Succeessfully removed Favorite!');
+        this.userServ.removeFavorite(userId, recipeId).subscribe({
+          next: (removed) => {
+            this.favorited = false;
+          },
+          error: (fail: any) => {
+            console.error('FavoriteComponent.removeFavorite: error');
+            console.error(fail);
+          },
+        });
+      }
+    }
+  }
+
+  getUser() {
+    this.auth.getLoggedInUser().subscribe({
+      next: (data) => {
+        this.user = data;
+        this.reload();
+      },
+    });
+    console.log(this.user);
+  }
+
+  reload() {
+    console.log(this.user.username);
+    let uid = this.user.id;
+    if (uid != null) {
+      this.userServ.getAllFavorites(uid).subscribe({
+        next: (recipes) => {
+          this.recipes = recipes;
+          console.log(recipes);
+        },
+        error: (fail: any) => {
+          console.error('FavoriteComponent.reload: error');
+          console.error(fail);
+        },
+      });
+    }
+  }
+
+  // _____________________________________________________________________
 
   // ________________________________Modal________________________________
   open(content: any) {
