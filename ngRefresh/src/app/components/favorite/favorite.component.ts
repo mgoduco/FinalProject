@@ -1,13 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { faCircleArrowLeft } from '@fortawesome/free-solid-svg-icons';
+import { faHeart as farHeart } from '@fortawesome/free-regular-svg-icons';
+import { faCircleArrowLeft, faHeart as fasHeart } from '@fortawesome/free-solid-svg-icons';
 import { Recipe } from 'src/app/models/recipe';
 import { User } from 'src/app/models/user';
 import { AuthService } from 'src/app/services/auth.service';
 import { RecipeService } from 'src/app/services/recipe.service';
 import { UserService } from 'src/app/services/user.service';
-import { faHeart as farHeart } from '@fortawesome/free-regular-svg-icons';
-import { faHeart as fasHeart } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-favorite',
@@ -115,7 +114,7 @@ export class FavoriteComponent implements OnInit {
         return true;
       },
       error: (fail: any) => {
-        console.log('Favorite is false.')
+        console.log('Favorite is false.');
         this.favorited = false;
         return false;
       },
