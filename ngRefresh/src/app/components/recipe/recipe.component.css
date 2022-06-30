@@ -62,30 +62,30 @@ border-spacing: 75px;
 }
 
 .btn-group {
-  width: fit-content !important;
-  color: #2e8754 !important;
+  width: fit-content;
+  color: #2e8754;
   background-color: #2e8754;
 
 }
 .btn-secondary {
-  background-color: #2e8754 !important;
-  transition: #2e8754 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out !important;
+  background-color: #2e8754;
+  transition: #2e8754 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 
 }
 .btn-outline-secondary {
-  color: #f5f5f5 !important;
-  border-color: #2e8754 !important;
-  transition: #2e8754 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out !important;
+  color: #f5f5f5;
+  border-color: #2e8754;
+  transition: #2e8754 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 
 }
 
 .list-group-item {
   background-color:#f5f5f5;
-  border: none !important;
+  border: none;
 }
 
 .badge {
-  color: black !important;
+  color: black;
 }
 
 .card-img-top{
@@ -182,6 +182,32 @@ border-spacing: 75px;
   color: rgba(255, 0, 0, 0.744);
 }
 
+#commentTitle {
+  width: 40vw;
+  height: auto;
+}
 
+#newComment {
+  width: 40vw;
+  height: 20vw;
+  z-index: 0;
+}
+
+
+#faMessageSlash {
+  font-size: 2em;
+  padding-right: 5%;
+  text-align: right;
+}
+
+#faComment {
+  font-size: 5vw;
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  padding: 0;
+  z-index: 1;
+  padding-right: 2%;
+}
 
 

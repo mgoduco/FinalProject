@@ -96,6 +96,16 @@
     padding-right: 2%;
   }
 
+  #faHeart {
+    font-size: 5vw;
+    position: absolute;
+    padding: 0;
+    z-index: 1;
+    padding-right: 0.5%;
+    right: 26vw;
+    color: rgba(255, 0, 0, 0.557);
+    border-color: black;
+  }
 
 
 
