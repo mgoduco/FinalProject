@@ -9,7 +9,7 @@
     <div class="navLinksDiv bg-success"><a class="nav-link navBarLink"[routerLink]="['/contact']"> Contact </a></div>
     <div class="navLinksDiv bg-success"><a *ngIf="loggedIn()" class="nav-link navBarLink"[routerLink]="['/recipe']"> Recipes </a></div>
     <div class="searchInputGroup">
-    <input type="text" id="searchIput" class="searchTerm" [(ngModel)]="keyword"  placeholder="Search Recipes...">
+    <input type="text" id="searchIput" class="searchTerm" [(ngModel)]="keyword" placeholder="Search Recipes...">
       <fa-icon id="randIcon" [icon]="randomIcon()" [routerLink]="['/search/' + keyword]"></fa-icon>
     </div>
       <div class="navLinksDiv bg-success"><a *ngIf="!loggedIn()" class="nav-link navBarLink"[routerLink]="['/login']"> Login </a></div>
