@@ -3,7 +3,7 @@
 <div id="" class="container-fluid">
 
     <a class="navbar-brand" [routerLink]="['/home']" >
-      <img src="/assets/refreshicon.png" id="logo" alt="Refresh Logo"  >
+      <img src="./assets/refreshicon.png" id="logo" alt="Refresh Logo"  >
     </a>
     <div class="navLinksDiv "><a class="nav-link navBarLink"[routerLink]="['/about']" > About </a></div>
     <div class="navLinksDiv "><a class="nav-link navBarLink"[routerLink]="['/contact']"> Contact </a></div>
@@ -39,7 +39,7 @@
       </div>
       <div *ngIf="!user.imageUrl" class="userIconContainer">
         <a class="menuBar" (click)="openEnd(content)">
-          <img src='../../../assets/userIcon.png' id="userIcon" alt="User Icon" >
+          <img src='./assets/userIcon.png' id="userIcon" alt="User Icon" >
         </a>
       </div>
     </span>

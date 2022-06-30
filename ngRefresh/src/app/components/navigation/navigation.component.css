@@ -89,7 +89,7 @@ a.canvasLink:hover {
 
 .searchTerm {
   box-shadow: black 0 0 5px;
-  height: 7vh;
+  /* height: 7vh; */
   background-color: white !important;
   border: 6px solid #198754;
   border-radius: 25px;

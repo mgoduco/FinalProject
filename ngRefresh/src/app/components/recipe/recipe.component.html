@@ -20,7 +20,7 @@
   </a>
 
   <form class="centered" id="editform" centered="form-floating mb-3">
-    <img ng src="/assets/default_recipe.png" class="recipeImg"><br><br>
+    <img ng src="./assets/default_recipe.png" class="recipeImg"><br><br>
     <div class="container-fluid">
 
     <div class="form-floating mb-1">
@@ -221,22 +221,23 @@
                   <input class="btn-check"type="radio" name="measure" id="g" value="Pound(s)"[(ngModel)]="newRecipeIngredient.measure">
                   <label class="btn btn-outline-secondary" for="g"><strong>lbs</strong></label>
                 </div><br> <br>
-
+                <div class="ingredientForm">
               <div class="form-floating mb-1">
                 <label for="ingredient"><strong>Ingredient</strong></label>
-                <select [(ngModel)]="ingredient" class="form-select" aria-label="Default select example" name="ingredient" id="">
+                <select [(ngModel)]="ingredient" class="form-select ingredientForm" aria-label="Default select example" name="ingredient" id="">
                     <option  *ngFor="let ingredient of allingredients" [ngValue]="ingredient">{{ingredient.name}}</option>
                   </select>
               </div> <br>
 
               <div class="form-floating mb-1">
-                <input class="form-control"  type="number" name="amount" id="amount" [(ngModel)]="newRecipeIngredient.amount"><br>
+                <input class="form-control ingredientForm"  type="number" name="amount" id="amount" [(ngModel)]="newRecipeIngredient.amount"><br>
                 <label for="amount"><strong>Ingredient Amount:</strong></label>
               </div>
               <div class="form-floating mb-1">
-                <input class="form-control" type="text" name="preparation" id="preparation" [(ngModel)]="newRecipeIngredient.preparation"><br>
+                <input class="form-control ingredientForm" type="text" name="preparation" id="preparation" [(ngModel)]="newRecipeIngredient.preparation"><br>
                 <label for="preparation"><strong>Ingredient Preparation:</strong></label>
               </div>
+            </div>
             </form >
             <!-- FORM GOES HERE -->
           </div>
