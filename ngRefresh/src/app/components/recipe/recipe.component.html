@@ -84,8 +84,8 @@
       <h5 class="card-title" >{{recipe.name}}</h5>
       <p class="card-text">{{recipe.description}}</p>
     </div>
-    <button class="btn btn-success" (click)="displayUpdateTable(recipe)">Update Recipe</button>
-    <button class="btn btn-danger" (click)="deleteRecipe(recipe.id)">Delete Recipe</button>
+  <fa-icon [icon]="faPen" id="updateButton" (click)="displayUpdateTable(recipe)"></fa-icon>
+  <fa-icon [icon]="faTrash" id="deleteButton" (click)="deleteRecipe(recipe.id)"></fa-icon>
   </div>
 </div>
 </div>
@@ -94,7 +94,7 @@
           <!-- ====================================================================       DISPLAY      ==================================================================== -->
 
 
-<div >
+<div id="recipeBox">
 <div class="centered" *ngIf="selected && !editSelected" id="recipeDetails">
   <a class="" (click)="displayTable()">
   <fa-icon [icon]="faArrowLeft"></fa-icon>
@@ -105,7 +105,8 @@
 <h4>Ingredients</h4>
 
 <ul class="list-group list-group-horizontal-sm" *ngFor="let rIngredient of rIngredients">
-  <li *ngIf="rIngredient.ingredient" class="list-group-item">{{rIngredient.amount}} {{rIngredient.measure}} <strong> {{rIngredient.ingredient.name}} </strong> {{rIngredient.preparation}} </li>
+  <li *ngIf="rIngredient.ingredient" class="list-group-item">{{rIngredient.amount}} {{rIngredient.measure}} <strong> {{rIngredient.ingredient.name}} </strong> {{rIngredient.preparation}}
+  </li>
 </ul> <br>
 
   <p><b>Prep Time: </b>{{ selected.prepminutes }}</p>
@@ -113,7 +114,55 @@
   <p id="description">{{ selected.description }}</p>
   <p id="directions">{{ selected.directions }}</p>
 
-  <p id="comments"></p>
+  <h4>Comments</h4>
+  <div class="commentsDiv" >
+    <ul class="comments" *ngFor="let comment of comments">
+      <p *ngIf="comment.active"> <strong>{{comment.title}}</strong><br>
+        <fa-icon *ngIf="loggedIn()" id="faMessageSlash" (click)="deleteComment(comment, selected)" [icon]="famessage" class="fa-2x">
+        </fa-icon>{{comment.comment}} <fa-icon *ngIf="loggedIn()" id="faPenToSquare" (click)="open(content)" [icon]="faPenToSquare"></fa-icon>
+
+        <!-- __________________________Modal______________________ -->
+        <ng-template #content let-modal>
+          <div class="modal-header">
+            <h4 class="modal-title" id="modal-basic-title">Edit Comment</h4>
+            <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+          </div>
+          <div class="modal-body">
+            <form>
+              <div class="input-group">
+                <div class="form-floating mb-1">
+                  <input id="text" class="form-control" placeholder="Title" name="editTitle" value="{{comment.title}}" [(ngModel)]="comment.title" >
+                  <label for="editTitle">Title</label>
+                  <div class="form-floating mb-1">
+                    <input id="textarea" class="form-control" placeholder="Comment" name="editComment" value="{{comment.comment}}" [(ngModel)]="comment.comment">
+                    <label for="editComment">Comment</label>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-outline-dark"  (click)="editComment(comment, selected)" (click)="modal.close('Save click')">Save</button>
+          </div>
+        </ng-template>
+        <!-- __________________________Modal______________________ -->
+      </p>
+    </ul>
+  </div>
+        <div *ngIf="loggedIn()">
+  <div class="input-group input-group-sm mb" id="addComment">
+    <span class="input-group-text" id="inputGroup-sizing-sm">Title</span>
+    <input class="form-control" type="text" id="commentTitle"  #title name="title" placeholder="Title" [(ngModel)]="newComment.title">
+  </div>
+
+    <div class="input-group input-group-sm mb" id="addComments">
+      <span class="input-group-text" id="inputGroup-sizing-sm">Comment</span>
+      <textarea class="form-control" id="newComment" #commmentArea name="commmentArea" placeholder="Comment"
+        [(ngModel)]="newComment.comment"></textarea><br>
+      <fa-icon id="faComment" (click)="createComment(newComment, selected.id)"  (click)="handleClear()" [icon]="facomment" class="fa-2x">
+      </fa-icon>
+    </div>
+  </div>
 
 </div>
 </div>
@@ -122,7 +171,7 @@
 
 
 
-
+<div id="recipeBox">
 <div id="updateRecipe">
   <div class="centered" *ngIf="editSelected " id="recipeDetails">
 
@@ -135,17 +184,70 @@
       <div class="container-fluid">
 
         <div class="row">
-          <div>
-            <button id="addIngredient" class="btn btn-success" (click)="displayAddIngredient(true)">Add Ingredient</button>
-            <button id="addIngredient" class="btn btn-danger" (click)="displayAddIngredient(false)">Cancel</button>
-          </div></div> <br>
+            <!-- <button id="addIngredient" class="btn btn-success" (click)="displayAddIngredient(true)"(click)="open(content)">Add Ingredient</button> -->
+            <button id="addIngredient" class="btn btn-success" (click)="open(content)">Add Ingredient</button>
+            <!-- <button id="addIngredient" class="btn btn-danger" (click)="displayAddIngredient(false)">Cancel</button> -->
+         </div> <br>
 
 
           <!-- ====================================================================       MODAL      ==================================================================== -->
+          <ng-template #content let-modal>
+            <div class="modal-header">
+              <h4 class="modal-title" id="modal-basic-title">Add New Ingredient</h4>
+              <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+            </div>
+            <div class="modal-body">
+              <!-- FORM GOES HERE -->
+              <form class="mcentered" action="" centered="form-floating mb-3">
+                <div class="btn-group" >
 
+                  <label class="btn btn-secondary" >Ingredient Measure:</label> <br>
+
+                  <input class="btn-check" type="radio" name="measure" id="pinch" value="pinch" [(ngModel)]="newRecipeIngredient.measure">
+                  <label class="btn btn-outline-secondary" for="pinch"><strong>Pinch</strong></label>
+                  <!-- <label class="btn btn-secondary" for="option1">Checked</label> -->
+                  <input class="btn-check"type="radio" name="measure" id="dash" value="dash"[(ngModel)]="newRecipeIngredient.measure">
+                  <label class="btn btn-outline-secondary" for="dash"><strong>Dash</strong></label>
+
+                  <input class="btn-check"type="radio" name="measure" id="tsp" value="Tsp"[(ngModel)]="newRecipeIngredient.measure">
+                  <label class="btn btn-outline-secondary" for="tsp"><strong>Tsp</strong></label>
+
+                  <input class="btn-check" type="radio" name="measure" id="tbsp"  value="Tbsp"[(ngModel)]="newRecipeIngredient.measure">
+                  <label class="btn btn-outline-secondary" for="tbsp"><strong>Tbsp</strong></label>
+
+                  <input class="btn-check"type="radio" name="measure" id="oz"  value="oz"[(ngModel)]="newRecipeIngredient.measure">
+                  <label class="btn btn-outline-secondary" for="oz"><strong>Oz</strong></label>
+
+                  <input class="btn-check"type="radio" name="measure" id="g" value="Pound(s)"[(ngModel)]="newRecipeIngredient.measure">
+                  <label class="btn btn-outline-secondary" for="g"><strong>Pound</strong></label>
+                </div><br> <br>
+
+              <div class="form-floating mb-1">
+                <label for="ingredient"><strong>Ingredient</strong></label>
+                <select [(ngModel)]="ingredient" class="form-select" aria-label="Default select example" name="ingredient" id="">
+                    <option  *ngFor="let ingredient of allingredients" [ngValue]="ingredient">{{ingredient.name}}</option>
+                  </select>
+              </div> <br>
+
+              <div class="form-floating mb-1">
+                <input class="form-control"  type="number" name="amount" id="amount" [(ngModel)]="newRecipeIngredient.amount"><br>
+                <label for="amount"><strong>Ingredient Amount:</strong></label>
+              </div>
+              <div class="form-floating mb-1">
+                <input class="form-control" type="text" name="preparation" id="preparation" [(ngModel)]="newRecipeIngredient.preparation"><br>
+                <label for="preparation"><strong>Ingredient Preparation:</strong></label>
+              </div>
+            </form >
+            <!-- FORM GOES HERE -->
+          </div>
+          <div class="modal-footer">
+              <button class="btn btn-success buttonpad"  (click)="createRecipeIngredient(newRecipeIngredient, editSelected, ingredient)">+</button>
+              <!-- <button type="button" class="btn btn-outline-dark"   (click)="modal.close('Save click')">Save</button> -->
+            </div>
+          </ng-template>
           <!-- ====================================================================       MODAL      ==================================================================== -->
 
-        <div *ngIf="addIng">
+        <!-- <div *ngIf="addIng">
           <form class="centered" action="" centered="form-floating mb-3">
             <div class="btn-group" >
 
@@ -153,7 +255,7 @@
 
               <input class="btn-check" type="radio" name="measure" id="pinch" value="pinch" [(ngModel)]="newRecipeIngredient.measure">
               <label class="btn btn-outline-secondary" for="pinch"><strong>Pinch</strong></label>
-              <!-- <label class="btn btn-secondary" for="option1">Checked</label> -->
+
               <input class="btn-check"type="radio" name="measure" id="dash" value="dash"[(ngModel)]="newRecipeIngredient.measure">
               <label class="btn btn-outline-secondary" for="dash"><strong>Dash</strong></label>
 
@@ -171,10 +273,8 @@
             </div><br> <br>
 
   <div class="form-floating mb-1">
-    <input class="form-control" list="allingredients" type="text" name="ingredient"  >
-    <label for="allingredients"><strong>Ingredient:</strong></label>
-    <select [(ngModel)]="ingredient"  name="ingredient" id="">
-        <option  *ngFor="let ingredient of allingredients" [ngValue]="ingredient">{{ingredient.name}}</option>
+    <select [(ngModel)]="ingredient" class="form-select" aria-label="Default select example" name="ingredient" id="">
+        <option selected *ngFor="let ingredient of allingredients" [ngValue]="ingredient">{{ingredient.name}}</option>
       </select>
   </div> <br>
 
@@ -186,15 +286,19 @@
     <input class="form-control" type="text" name="preparation" id="preparation" [(ngModel)]="newRecipeIngredient.preparation"><br>
     <label for="preparation"><strong>Ingredient Preparation:</strong></label>
   </div>
-  <!-- <button class="btn btn-success buttonpad"  (click)="createRecipeIngredient(rIng ,ingredient.id, editSelected.id)">Add Ingredient</button> -->
+
   <button class="btn btn-success buttonpad"  (click)="createRecipeIngredient(newRecipeIngredient, editSelected, ingredient)">+</button>
 </form >
-</div>
+</div> -->
 
+          <!-- ====================================================================       ADD INGREDIENT END      ==================================================================== -->
 
 
 <ul class="list-group list-group-horizontal-sm" *ngFor="let rIngredient of rIngredients">
-  <li *ngIf="rIngredient.ingredient" class="list-group-item">{{rIngredient.amount}} {{rIngredient.measure}} <strong> {{rIngredient.ingredient.name}} </strong> {{rIngredient.preparation}} </li>
+  <li   *ngIf="rIngredient.ingredient" class="list-group-item"> {{rIngredient.amount}} {{rIngredient.measure}} <strong> {{rIngredient.ingredient.name}} </strong> {{rIngredient.preparation}}
+   <button class="btn btn-danger" (click)="removeRecipeIngredient(editSelected, rIngredient.ingredient)">X</button>
+  </li>
+
 </ul> <br>
 
 <div class="form-floating mb-1">
@@ -240,8 +344,20 @@
 
 
 </div>
+</div>
 </body>
+          <!-- ====================================================================       GRAVEYARD      ==================================================================== -->
 
+
+      <!-- <input type="text" class="form-control" list="datalist1" [(ngModel)]='currentUser' (change)="selected(currentUser)"/>
+
+   <div class="form-floating mb-1">
+      <input class="form-control" list="allingredients" type="text" [(ngModel)]="ingredient" name="ingredient" >
+      <datalist id="allingredients">
+        <option  *ngFor="let ingredient of allingredients" [value]="ingredient.name">
+          {{ingredient.name}}</option>
+        </datalist>
+   </div> <br> -->
 
 
 <!-- <ul>

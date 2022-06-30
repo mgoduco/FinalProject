@@ -1,18 +1,42 @@
+<head>
+<link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@400;800&display=swap" rel="stylesheet">
+</head>
 
-  <div>
-    <div class="container-fluid" *ngIf="!selected">
+<div>
+    <div class="container" *ngIf="!selected">
       <div class="row align-items-center">
-        <div class="col">
+        <div class="col-2">
         </div>
-        <div class="col">
-          <h2>Welcome</h2>
+        <div class="col-8">
+          <h1>Welcome to <span class="re">re</span><span class="fresh">fresh</span></h1>
         </div>
-        <div class="col">
+        <div class="col-2">
 
         </div>
       </div>
+    </div>
 
-      <div class="row align-items-center">
+    <div class="row align-items-center" id="carouselBox" *ngIf="!selected">
+      <!-- __________________________Carousel______________________ -->
+      <ngb-carousel class="col-10" id="carousel">
+        <ng-template ngbSlide *ngFor="let recipe of recipes" >
+          <div class="picsum-img-wrapper" *ngIf="recipe.imageUrl" (click)="displayRecipe(recipe)" (click)="getRecipeComments(recipe.id)">
+            <img [src]="recipe.imageUrl" alt="Slides" id="slideImg">
+          </div>
+          <div class="carousel-caption">
+            <h3 id="recipeName">{{recipe.name}}</h3>
+
+          </div>
+        </ng-template>
+
+      </ngb-carousel>
+
+      <!-- __________________________Carousel________________________________ -->
+  </div>
+
+
+      <!-- <div class="row align-items-center">
         <div *ngFor="let recipe of recipes" class="col-sm-4">
           <div class="card mb-3" id="cards" (click)="displayRecipe(recipe)" (click)="getRecipeComments(recipe.id)"
             (click)="getIngredientsByrecipe(recipe.id)">
@@ -23,8 +47,7 @@
             </div>
           </div>
         </div>
-      </div>
-    </div>
+      </div> -->
 
 
     <div class="centered" *ngIf="selected" id="recipeDetails">
@@ -35,14 +58,16 @@
       <div class="">
       <img [src]="selected.imageUrl" class="recipeImg" [alt]="selected.name">
 
-      <fa-icon id="faHeart" (click)="hearted()" [icon]="hearted()" class="fa-2x"></fa-icon>
+      <fa-icon id="faHeart" (click)="toggleFavorite()" [icon]="hearted()" class="fa-2x"></fa-icon>
     </div>
       <p><b>Prep Time: </b>{{ selected.prepminutes }}</p>
       <p><b>Cook Time: </b>{{ selected.cookminutes }}</p>
-      <h5>Ingredients</h5>
-      <ul class="ingredients" *ngFor="let ingredient of ingredients">
-        <li>{{ingredient.name}}</li>
-      </ul>
+      <h4>Ingredients</h4>
+
+<ul class="list-group list-group-horizontal-sm" *ngFor="let rIngredient of rIngredients">
+  <li *ngIf="rIngredient.ingredient" class="list-group-item">{{rIngredient.amount}} {{rIngredient.measure}} <strong> {{rIngredient.ingredient.name}} </strong> {{rIngredient.preparation}}
+  </li>
+</ul> <br>
       <p id="description">{{ selected.description }}</p>
       <p id="directions">{{ selected.directions }}</p>
 
@@ -99,6 +124,5 @@
 
 
   </div>
-
 
 

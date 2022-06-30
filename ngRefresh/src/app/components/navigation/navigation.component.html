@@ -1,16 +1,16 @@
 
 <nav class="navbar" style="background-color: #C4C4C4;">
-<div class="container-fluid">
+<div id="" class="container-fluid">
 
     <a class="navbar-brand" [routerLink]="['/home']" >
       <img src="/assets/refreshicon.png" id="logo" alt="Refresh Logo"  >
     </a>
-    <div class="navLinksDiv bg-success"><a class="nav-link navBarLink"[routerLink]="['/about']" > About </a></div>
-    <div class="navLinksDiv bg-success"><a class="nav-link navBarLink"[routerLink]="['/contact']"> Contact </a></div>
-    <div class="navLinksDiv bg-success"><a *ngIf="loggedIn()" class="nav-link navBarLink"[routerLink]="['/recipe']"> Recipes </a></div>
-    <div class="searchInputGroup">
-    <input type="text" id="searchIput" class="searchTerm" [(ngModel)]="keyword" placeholder="Search Recipes...">
-      <fa-icon id="randIcon" [icon]="randomIcon()" [routerLink]="['/search/' + keyword]"></fa-icon>
+    <div class="navLinksDiv "><a class="nav-link navBarLink"[routerLink]="['/about']" > About </a></div>
+    <div class="navLinksDiv "><a class="nav-link navBarLink"[routerLink]="['/contact']"> Contact </a></div>
+    <div class="navLinksDiv "><a *ngIf="loggedIn()" class="nav-link navBarLink"[routerLink]="['/recipe']"> Recipes </a></div>
+    <div class="searchTerm ">
+      <input type="text" id="searchIput"  [(ngModel)]="keyword"  placeholder="Search Recipes...">
+     <fa-icon id="iconLeft" [icon]="randomIcon()" [routerLink]="['/search/' + keyword]"></fa-icon>
     </div>
       <div class="navLinksDiv bg-success"><a *ngIf="!loggedIn()" class="nav-link navBarLink"[routerLink]="['/login']"> Login </a></div>
         <div class="navLinksDiv bg-success"><a *ngIf="!loggedIn()" class="nav-link navBarLink"[routerLink]="['/register']"> Register </a></div>
@@ -27,7 +27,7 @@
           <a  class="nav-link canvasLink"[routerLink]="['/u/{{user.id}}/favorites']" (click)="offcanvas.dismiss('Cross click')"> Favorites </a>
           <!-- <p>Favorites &hellip;</p> -->
           <div class="canvasSearch">
-          <input type="text" placeholder="User Search...">
+          <!-- <input type="text" placeholder="User Search..."> -->
           </div>
           <button id="logout" class="btn btn-secondary" (click)="logOut()" (click)="offcanvas.dismiss('Cross click')"><fa-icon [icon]="faArrowRightFromBracket"></fa-icon> Logout </button>
         </div>

@@ -8,12 +8,14 @@
 #userIcon {
   width: 25%;
   height: 25%;
+  margin-right: 10px;
   max-width: 30vw;
   max-height: 30vh;
   border-radius: 50%;
   position: static;
   top: 0px;
   right: 0px;
+  box-shadow: black 0 0 4px;
 }
 
 .userIconContainer {
@@ -25,17 +27,21 @@
   width: 100vw;
   height: fit-content;
   padding: 5px;
+  box-shadow: black 0 0 10px;
 }
 .container-fluid {
   overflow: hidden;
 }
 
 #logout {
-  margin: 30vh;
-  margin: 10vw;
+  margin: 10vh;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .navLinksDiv {
+  /* box-shadow: black 0 0 4px; */
+  text-shadow: black 0 0 4px;
   border-radius: 5px;
   /* margin: 1px; */
 }
@@ -49,16 +55,19 @@
 }
 
 .offCanvasMenu {
-  width: 20px !important;
+  /* width: 20vw !important; */
+  box-shadow: black 0 0 10px;
 }
 
 .canvasHeader {
-  background-color: rgb(4, 100, 36);
+  background-color: #198754;
+  background-image: linear-gradient(90deg, #198754, #C4C4C4);
   color: white;
 }
 
 .canvasBody {
-  background-color: #f8fcda;
+  background-color: rgb(0 0 0 / 15%);
+  width: auto;
 }
 
 .btn-close {
@@ -79,12 +88,26 @@ a.canvasLink:hover {
 }
 
 .searchTerm {
-  border: 5px solid #198754;
+  box-shadow: black 0 0 5px;
+  height: 7vh;
+  background-color: white !important;
+  border: 6px solid #198754;
   border-radius: 25px;
   border-color: #198754;
   z-index: 0;
   padding: 4px;
-  margin: 3px;
+  margin: 7px;
+}
+.searchIput {
+  margin-left: 50px;
+}
+input {
+  background-color: rgb(0, 0, 0, 0);
+  border: none !important;
+}
+input:focus{
+  border: none !important;
+
 }
 
 #randIcon{
@@ -93,6 +116,7 @@ a.canvasLink:hover {
   font-size: 2vw;
   color: #198754;
 }
+
 /* .nav-link {
   width: auto;
   height: fit-auto;

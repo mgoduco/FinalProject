@@ -1,4 +1,5 @@
-import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { RecipeIngredientService } from './../../services/recipe-ingredient.service';
+import { ModalDismissReasons, NgbCarousel, NgbModal, NgbSlideEvent, NgbSlideEventSource } from '@ng-bootstrap/ng-bootstrap';
 import { UserService } from 'src/app/services/user.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { Ingredient } from './../../models/ingredient';
@@ -21,6 +22,7 @@ import { IngredientService } from 'src/app/services/ingredient.service';
 import { User } from 'src/app/models/user';
 import { faHeart as farHeart, faPenToSquare} from '@fortawesome/free-regular-svg-icons';
 import { faHeart as fasHeart} from '@fortawesome/free-solid-svg-icons';
+import { RecipeIngredient } from 'src/app/models/recipe-ingredient';
 
 @Component({
   selector: 'app-home',
@@ -49,6 +51,10 @@ export class HomeComponent implements OnInit {
   user: User = new User();
   fav: boolean = false;
   closeResult = '';
+  recipeSelected: boolean = false;
+  favorited: boolean = false;
+  favoriteRecipes: Recipe[] = [];
+  rIngredients: RecipeIngredient[] = [];
 
 
   // Icons
@@ -60,10 +66,6 @@ export class HomeComponent implements OnInit {
   fasHeart = fasHeart;
   faPenToSquare = faPenToSquare;
 
-
-
-
-
   constructor(
     private recipeServ: RecipeService,
     private route: ActivatedRoute,
@@ -72,10 +74,15 @@ export class HomeComponent implements OnInit {
     private auth: AuthService,
     private userServ: UserService,
     private modalService: NgbModal,
+    private rIngredientServ: RecipeIngredientService,
     private router: Router) {
     }
 
+   // ________________________________Carousel________________________________
 
+
+
+   // ________________________________________________________________
     // ________________________________Modal________________________________
     open(content: any) {
       this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
@@ -99,14 +106,14 @@ export class HomeComponent implements OnInit {
 // ________________________________________________________________
 
 
-    hearted(){
-      this.fav = !this.fav;
-    if(this.fav){
-    return farHeart;
-    }else{
-      return fasHeart;
-    }
-    }
+    // hearted(){
+    //   this.fav = !this.fav;
+    // if(this.fav){
+    // return farHeart;
+    // }else{
+    //   return fasHeart;
+    // }
+    // }
 
   ngOnInit(): void {
 
@@ -133,6 +140,7 @@ export class HomeComponent implements OnInit {
     this.recipeServ.index().subscribe({
       next: (dbRecipes) => {
         this.recipes = dbRecipes;
+        this.shuffleArray(this.recipes);
         console.log(dbRecipes);
       },
       error: (fail: any) => {
@@ -142,6 +150,19 @@ export class HomeComponent implements OnInit {
     });
   }
 
+  shuffleArray(recipes: Recipe[]) {
+    var m = recipes.length, t, i;
+
+    while (m) {
+     i = Math.floor(Math.random() * m--);
+     t = recipes[m];
+     recipes[m] = recipes[i];
+     recipes[i] = t;
+    }
+
+   return recipes;
+ }
+
   displayRecipe(recipe: Recipe) {
     this.selected = recipe;
     this.isSelected = true;
@@ -150,6 +171,7 @@ export class HomeComponent implements OnInit {
     let id = this.selected.id;
     if (id != null) {
       this.getIngredientsByrecipe(id);
+      this.getRIngredientsByRecipe(recipe.id);
       this.getRecipeComments(id);
     }
   }
@@ -157,6 +179,8 @@ export class HomeComponent implements OnInit {
   displayTable() {
     this.selected = null;
   }
+
+
 
   getRecipeComments(id: number) {
     console.log(id);
@@ -181,6 +205,20 @@ export class HomeComponent implements OnInit {
       },
       error: (fail: any) => {
         console.error('HomeComponent.reload: error');
+        console.error(fail);
+      },
+    });
+  }
+
+  getRIngredientsByRecipe(id: number) {
+    console.log(id);
+    this.rIngredientServ.getForRecipe(id).subscribe({
+      next: (data) => {
+        this.rIngredients = data;
+        console.log(data);
+      },
+      error: (fail: any) => {
+        console.error('getRIngredientsByRecipe: error');
         console.error(fail);
       },
     });
@@ -282,29 +320,97 @@ export class HomeComponent implements OnInit {
   return this.auth.checkLogin();
 }
 
-// setFavorite(recipe: Recipe) {
-//   let userId = this.user.id;
-//   console.log("User ID: " + userId);
-//   console.log("Selected Recipe:");
-//   console.log(this.selected);
-//   if (this.selected !== null){
-//     let recipeId = this.selected.id;
-//     console.log("Recipe ID: " + recipeId);
-//     if (userId !== null && recipeId !== null) {
-//       console.log("Succeessfully created Favorite!");
-//       this.userServ.addFavorite(userId, recipeId).subscribe();
-//     }
-//   }
-// }
+hearted() {
+  this.favorited = !this.favorited;
+  if (this.favorited) {
+    return fasHeart;
+  } else {
+    return farHeart;
+  }
+}
 
-// getUser() {
-//   this.auth.getLoggedInUser().subscribe({
-//     next: (data) => {
-//       this.user = data;
-//       this.reload();
-//     },
-//   });
-//   console.log(this.user);
-// }
+// hearted(){
+  //   this.fav = !this.fav;
+  // if(this.fav){
+  // return farHeart;
+  // }else{
+  //   return fasHeart;
+  // }
+  // }
+
+toggleFavorite() {
+  if (!this.favorited) {
+    if (this.selected) {
+      this.setFavorite(this.selected);
+      this.reload();
+    }
+  } else {
+    if (this.selected) {
+      this.removeFavorite(this.selected);
+      this.reload();
+    }
+  }
+}
+
+isFavorite(rid: number) {
+  this.userServ.getFavorite(rid).subscribe({
+    next: (favorite) => {
+      console.log('Favorite get success!');
+      this.favorited = true;
+      return true;
+    },
+    error: (fail: any) => {
+      console.log('Favorite is false.')
+      this.favorited = false;
+      return false;
+    },
+  });
+}
+
+setFavorite(recipe: Recipe) {
+  let userId = this.user.id;
+  console.log('User ID: ' + userId);
+  console.log('Selected Recipe:');
+  console.log(this.selected);
+  if (this.selected !== null) {
+    let recipeId = this.selected.id;
+    console.log('Recipe ID: ' + recipeId);
+    if (userId !== null && recipeId !== null) {
+      console.log('Succeessfully created Favorite!');
+      this.userServ.addFavorite(userId, recipeId).subscribe({
+        next: (added) => {
+          this.favorited = true;
+        },
+        error: (fail: any) => {
+          console.error('FavoriteComponent.setFavorite: error');
+          console.error(fail);
+        },
+      });
+    }
+  }
+}
+
+removeFavorite(recipe: Recipe) {
+  let userId = this.user.id;
+  console.log('User ID: ' + userId);
+  console.log('Selected Recipe:');
+  console.log(this.selected);
+  if (this.selected !== null) {
+    let recipeId = this.selected.id;
+    console.log('Recipe ID: ' + recipeId);
+    if (userId !== null && recipeId !== null) {
+      console.log('Succeessfully removed Favorite!');
+      this.userServ.removeFavorite(userId, recipeId).subscribe({
+        next: (removed) => {
+          this.favorited = false;
+        },
+        error: (fail: any) => {
+          console.error('FavoriteComponent.removeFavorite: error');
+          console.error(fail);
+        },
+      });
+    }
+  }
+}
 
 }
